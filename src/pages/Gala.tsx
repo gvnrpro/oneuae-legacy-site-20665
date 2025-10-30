@@ -10,26 +10,26 @@ const Gala = () => {
       <main className="pt-32 pb-24">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16 fade-in">
-            <h1 className="font-playfair text-5xl md:text-6xl font-bold text-foreground mb-6">
+            <h1 className="font-serif text-5xl md:text-6xl font-semibold text-foreground mb-6">
               Awards Gala Night
             </h1>
             <div className="gold-divider mb-8 max-w-md mx-auto" />
-            <p className="font-lato text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+            <p className="font-sans text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed font-light">
               An evening of elegance, celebration, and national pride
             </p>
           </div>
 
           <div className="max-w-4xl mx-auto space-y-12 fade-in-up">
             <section className="bg-card p-8 rounded-lg border border-border">
-              <h2 className="font-playfair text-3xl font-bold text-primary mb-6">
+              <h2 className="font-serif text-3xl font-semibold text-primary mb-6">
                 The Evening
               </h2>
-              <p className="font-lato text-lg text-muted-foreground leading-relaxed mb-6">
+              <p className="font-sans text-lg text-muted-foreground leading-relaxed mb-6 font-light">
                 The OneUAE Awards Gala is an exclusive black-tie ceremony bringing together distinguished leaders, 
-                innovators, and visionaries from across the Emirates. This prestigious evening celebrates the 
+                innovators, and visionaries from across the Emirates. This prestigious evening on <strong className="text-foreground">January 4th, 2026</strong> celebrates the 
                 extraordinary achievements of individuals and organizations who embody the spirit of excellence.
               </p>
-              <p className="font-lato text-lg text-muted-foreground leading-relaxed">
+              <p className="font-sans text-lg text-muted-foreground leading-relaxed font-light">
                 Guests will experience a sophisticated evening featuring award presentations, inspiring speeches, 
                 cultural performances, and networking opportunities with the nation's most influential figures.
               </p>
@@ -39,9 +39,9 @@ const Gala = () => {
               <div className="bg-secondary p-6 rounded-lg">
                 <div className="flex items-center gap-3 mb-3">
                   <MapPin className="w-6 h-6 text-primary" />
-                  <h3 className="font-playfair text-xl font-bold text-foreground">Venue</h3>
+                  <h3 className="font-serif text-xl font-semibold text-foreground">Venue</h3>
                 </div>
-                <p className="font-lato text-muted-foreground">
+                <p className="font-sans text-muted-foreground">
                   Zabeel Ladies Club<br />
                   Dubai, United Arab Emirates
                 </p>
@@ -50,19 +50,19 @@ const Gala = () => {
               <div className="bg-secondary p-6 rounded-lg">
                 <div className="flex items-center gap-3 mb-3">
                   <Calendar className="w-6 h-6 text-primary" />
-                  <h3 className="font-playfair text-xl font-bold text-foreground">Date</h3>
+                  <h3 className="font-serif text-xl font-semibold text-foreground">Date</h3>
                 </div>
-                <p className="font-lato text-muted-foreground">
-                  To be announced
+                <p className="font-sans text-muted-foreground">
+                  <strong className="text-foreground">January 4th, 2026</strong>
                 </p>
               </div>
 
               <div className="bg-secondary p-6 rounded-lg">
                 <div className="flex items-center gap-3 mb-3">
                   <Clock className="w-6 h-6 text-primary" />
-                  <h3 className="font-playfair text-xl font-bold text-foreground">Timing</h3>
+                  <h3 className="font-serif text-xl font-semibold text-foreground">Timing</h3>
                 </div>
-                <p className="font-lato text-muted-foreground">
+                <p className="font-sans text-muted-foreground">
                   Evening Reception & Awards Ceremony
                 </p>
               </div>
@@ -70,39 +70,39 @@ const Gala = () => {
               <div className="bg-secondary p-6 rounded-lg">
                 <div className="flex items-center gap-3 mb-3">
                   <Users className="w-6 h-6 text-primary" />
-                  <h3 className="font-playfair text-xl font-bold text-foreground">Dress Code</h3>
+                  <h3 className="font-serif text-xl font-semibold text-foreground">Dress Code</h3>
                 </div>
-                <p className="font-lato text-muted-foreground">
+                <p className="font-sans text-muted-foreground">
                   Black Tie / National Dress
                 </p>
               </div>
             </div>
 
             <section className="bg-card p-8 rounded-lg border border-primary/20">
-              <h2 className="font-playfair text-3xl font-bold text-primary mb-6 text-center">
+              <h2 className="font-serif text-3xl font-semibold text-primary mb-6 text-center">
                 Experience Excellence
               </h2>
               <div className="grid md:grid-cols-3 gap-6 text-center">
                 <div className="p-4">
                   <div className="w-24 h-24 bg-secondary rounded-full mx-auto mb-4 flex items-center justify-center">
-                    <span className="font-lato text-xs text-muted-foreground">Gallery</span>
+                    <span className="font-sans text-xs text-muted-foreground">Gallery</span>
                   </div>
-                  <h4 className="font-playfair text-lg font-semibold text-foreground mb-2">Red Carpet</h4>
-                  <p className="font-lato text-sm text-muted-foreground">Exclusive photography and media coverage</p>
+                  <h4 className="font-serif text-lg font-semibold text-foreground mb-2">Red Carpet</h4>
+                  <p className="font-sans text-sm text-muted-foreground">Exclusive photography and media coverage</p>
                 </div>
                 <div className="p-4">
                   <div className="w-24 h-24 bg-secondary rounded-full mx-auto mb-4 flex items-center justify-center">
-                    <span className="font-lato text-xs text-muted-foreground">Gallery</span>
+                    <span className="font-sans text-xs text-muted-foreground">Gallery</span>
                   </div>
-                  <h4 className="font-playfair text-lg font-semibold text-foreground mb-2">Award Ceremony</h4>
-                  <p className="font-lato text-sm text-muted-foreground">Honouring exceptional achievements</p>
+                  <h4 className="font-serif text-lg font-semibold text-foreground mb-2">Award Ceremony</h4>
+                  <p className="font-sans text-sm text-muted-foreground">Honouring exceptional achievements</p>
                 </div>
                 <div className="p-4">
                   <div className="w-24 h-24 bg-secondary rounded-full mx-auto mb-4 flex items-center justify-center">
-                    <span className="font-lato text-xs text-muted-foreground">Gallery</span>
+                    <span className="font-sans text-xs text-muted-foreground">Gallery</span>
                   </div>
-                  <h4 className="font-playfair text-lg font-semibold text-foreground mb-2">Networking</h4>
-                  <p className="font-lato text-sm text-muted-foreground">Connect with UAE's finest leaders</p>
+                  <h4 className="font-serif text-lg font-semibold text-foreground mb-2">Networking</h4>
+                  <p className="font-sans text-sm text-muted-foreground">Connect with UAE's finest leaders</p>
                 </div>
               </div>
             </section>

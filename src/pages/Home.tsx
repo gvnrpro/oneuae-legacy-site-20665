@@ -22,28 +22,35 @@ const Home = () => {
         <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
         
         {/* Hero Content */}
-        <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 text-center py-20">
-          <div className="max-w-5xl mx-auto">
+        <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 text-center py-24 md:py-32">
+          <div className="max-w-6xl mx-auto">
+            <div className="mb-8 md:mb-10 opacity-0 animate-fade-in-up" style={{ animationDelay: '0.1s', animationFillMode: 'forwards' }}>
+              <div className="inline-block px-6 py-2 border border-white/30 rounded-full backdrop-blur-sm">
+                <p className="font-sans text-sm md:text-base text-white/90 font-light tracking-widest uppercase">
+                  January 4th, 2026 • Zabeel Ladies Club
+                </p>
+              </div>
+            </div>
             <h1 
-              className="font-serif text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-semibold text-white mb-6 md:mb-8 leading-[1.15] tracking-tight opacity-0 animate-fade-in-up" 
-              style={{ animationDelay: '0.2s', animationFillMode: 'forwards' }}
+              className="font-serif text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-semibold text-white mb-8 md:mb-10 leading-[1.1] tracking-tight opacity-0 animate-fade-in-up" 
+              style={{ animationDelay: '0.3s', animationFillMode: 'forwards' }}
             >
               Celebrating Unity, Vision,<br className="hidden sm:block" /> and Excellence
             </h1>
             <p 
-              className="font-sans text-lg sm:text-xl md:text-2xl text-white/95 mb-10 md:mb-14 max-w-3xl mx-auto leading-relaxed font-light tracking-wide opacity-0 animate-fade-in-up" 
-              style={{ animationDelay: '0.4s', animationFillMode: 'forwards' }}
+              className="font-sans text-xl sm:text-2xl md:text-3xl text-white/90 mb-12 md:mb-16 max-w-4xl mx-auto leading-relaxed font-light tracking-wide opacity-0 animate-fade-in-up" 
+              style={{ animationDelay: '0.5s', animationFillMode: 'forwards' }}
             >
-              Honouring the leaders, innovators, and changemakers shaping the legacy of the Emirates
+              Honouring the leaders, innovators, and changemakers<br className="hidden md:block" /> shaping the legacy of the Emirates
             </p>
             <div 
-              className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-center opacity-0 animate-fade-in-up max-w-xl mx-auto" 
-              style={{ animationDelay: '0.6s', animationFillMode: 'forwards' }}
+              className="flex flex-col sm:flex-row gap-5 sm:gap-6 justify-center items-center opacity-0 animate-fade-in-up max-w-2xl mx-auto" 
+              style={{ animationDelay: '0.7s', animationFillMode: 'forwards' }}
             >
               <Link to="/nominate" className="w-full sm:w-auto">
                 <Button 
                   size="lg" 
-                  className="w-full sm:w-auto bg-primary hover:bg-primary/90 text-white font-sans text-base md:text-lg px-8 md:px-10 py-5 md:py-6 transition-all duration-300 hover:scale-[1.02] hover:shadow-2xl hover:shadow-primary/20 font-medium tracking-wide"
+                  className="w-full sm:w-auto bg-primary hover:bg-primary/90 text-white font-sans text-base md:text-lg px-10 md:px-12 py-6 md:py-7 transition-all duration-300 hover:scale-[1.03] hover:shadow-2xl hover:shadow-primary/30 font-medium tracking-wide"
                 >
                   Nominate Now
                 </Button>
@@ -52,7 +59,7 @@ const Home = () => {
                 <Button 
                   size="lg" 
                   variant="outline" 
-                  className="w-full sm:w-auto border-2 border-white/80 text-white hover:bg-white/10 hover:border-white backdrop-blur-sm font-sans text-base md:text-lg px-8 md:px-10 py-5 md:py-6 transition-all duration-300 hover:scale-[1.02] font-medium tracking-wide"
+                  className="w-full sm:w-auto border-2 border-white/90 text-white hover:bg-white/15 hover:border-white backdrop-blur-md font-sans text-base md:text-lg px-10 md:px-12 py-6 md:py-7 transition-all duration-300 hover:scale-[1.03] font-medium tracking-wide"
                 >
                   Become a Partner
                 </Button>

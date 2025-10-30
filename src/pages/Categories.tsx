@@ -55,11 +55,11 @@ const Categories = () => {
       <main className="pt-32 pb-24">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16 fade-in">
-            <h1 className="font-playfair text-5xl md:text-6xl font-bold text-foreground mb-6">
+            <h1 className="font-serif text-5xl md:text-6xl font-semibold text-foreground mb-6">
               Award Categories
             </h1>
             <div className="gold-divider mb-8 max-w-md mx-auto" />
-            <p className="font-lato text-lg text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+            <p className="font-sans text-lg text-muted-foreground max-w-3xl mx-auto leading-relaxed font-light">
               Excellence takes many forms. Our categories honour the diverse contributions that shape the Emirates.
             </p>
           </div>
@@ -73,10 +73,10 @@ const Categories = () => {
                 <div className="text-primary mb-4 group-hover:scale-110 transition-transform duration-300">
                   {category.icon}
                 </div>
-                <h3 className="font-playfair text-2xl font-bold text-foreground mb-3">
+                <h3 className="font-serif text-2xl font-semibold text-foreground mb-3">
                   {category.title}
                 </h3>
-                <p className="font-lato text-muted-foreground leading-relaxed">
+                <p className="font-sans text-muted-foreground leading-relaxed font-light">
                   {category.description}
                 </p>
                 <div className="h-0.5 w-0 bg-primary mt-6 group-hover:w-full transition-all duration-300" />
@@ -86,7 +86,7 @@ const Categories = () => {
 
           <div className="text-center mt-16">
             <Link to="/nominate">
-              <Button size="lg" className="bg-primary hover:bg-primary/90 text-white font-lato text-lg px-8 py-6">
+              <Button size="lg" className="bg-primary hover:bg-primary/90 text-white font-sans text-lg px-8 py-6 font-medium">
                 Nominate a Candidate
               </Button>
             </Link>

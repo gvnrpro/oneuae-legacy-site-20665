@@ -10,18 +10,18 @@ const Contact = () => {
       <main className="pt-32 pb-24">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16 fade-in">
-            <h1 className="font-playfair text-5xl md:text-6xl font-bold text-foreground mb-6">
+            <h1 className="font-serif text-5xl md:text-6xl font-semibold text-foreground mb-6">
               Contact Us
             </h1>
             <div className="gold-divider mb-8 max-w-md mx-auto" />
-            <p className="font-lato text-lg text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+            <p className="font-sans text-lg text-muted-foreground max-w-3xl mx-auto leading-relaxed font-light">
               We welcome your inquiries about nominations, partnerships, and the awards ceremony.
             </p>
           </div>
 
           <div className="max-w-3xl mx-auto fade-in-up">
             <div className="bg-card p-12 rounded-lg border border-border text-center">
-              <h2 className="font-playfair text-3xl font-bold text-primary mb-8">
+              <h2 className="font-serif text-3xl font-semibold text-primary mb-8">
                 OneUAE Awards
               </h2>
               
@@ -29,8 +29,8 @@ const Contact = () => {
                 <div className="flex flex-col items-center gap-3">
                   <MapPin className="w-8 h-8 text-primary" />
                   <div>
-                    <h3 className="font-playfair text-xl font-semibold text-foreground mb-2">Location</h3>
-                    <p className="font-lato text-muted-foreground leading-relaxed">
+                    <h3 className="font-serif text-xl font-semibold text-foreground mb-2">Location</h3>
+                    <p className="font-sans text-muted-foreground leading-relaxed font-light">
                       Zabeel Ladies Club<br />
                       Dubai, United Arab Emirates
                     </p>
@@ -42,10 +42,10 @@ const Contact = () => {
                 <div className="flex flex-col items-center gap-3">
                   <Mail className="w-8 h-8 text-primary" />
                   <div>
-                    <h3 className="font-playfair text-xl font-semibold text-foreground mb-2">Email</h3>
+                    <h3 className="font-serif text-xl font-semibold text-foreground mb-2">Email</h3>
                     <a 
                       href="mailto:info@oneuaeaward.ae" 
-                      className="font-lato text-lg text-primary hover:text-primary/80 transition-colors"
+                      className="font-sans text-lg text-primary hover:text-primary/80 transition-colors"
                     >
                       info@oneuaeaward.ae
                     </a>
@@ -57,10 +57,10 @@ const Contact = () => {
                 <div className="flex flex-col items-center gap-3">
                   <Phone className="w-8 h-8 text-primary" />
                   <div>
-                    <h3 className="font-playfair text-xl font-semibold text-foreground mb-2">Phone</h3>
+                    <h3 className="font-serif text-xl font-semibold text-foreground mb-2">Phone</h3>
                     <a 
                       href="tel:+971562555100" 
-                      className="font-lato text-lg text-primary hover:text-primary/80 transition-colors"
+                      className="font-sans text-lg text-primary hover:text-primary/80 transition-colors"
                     >
                       +971 56 255 5100
                     </a>
@@ -69,7 +69,7 @@ const Contact = () => {
               </div>
 
               <div className="mt-12 pt-8 border-t border-border">
-                <p className="font-lato text-sm text-muted-foreground">
+                <p className="font-sans text-sm text-muted-foreground font-light">
                   For partnership inquiries and sponsorship opportunities, please contact us directly via email or phone.
                 </p>
               </div>
