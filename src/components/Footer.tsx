@@ -4,7 +4,7 @@ const Footer = () => {
       <div className="container mx-auto px-4 py-8">
         <div className="gold-divider mb-6" />
         <div className="text-center">
-          <p className="font-lato text-sm text-muted-foreground">
+          <p className="font-sans text-sm text-muted-foreground font-light tracking-wide">
             © 2025 OneUAE Awards. Celebrating Unity, Vision, and Excellence.
           </p>
         </div>

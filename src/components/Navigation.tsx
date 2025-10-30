@@ -34,7 +34,7 @@ const Navigation = () => {
       <div className="container mx-auto px-4">
         <div className={`flex items-center justify-between transition-all duration-300 ${isScrolled ? 'h-16' : 'h-20'}`}>
           <Link to="/" className="flex items-center space-x-2">
-            <h1 className={`font-playfair font-bold text-primary transition-all duration-300 ${isScrolled ? 'text-xl' : 'text-2xl'}`}>
+            <h1 className={`font-serif font-semibold text-primary transition-all duration-300 tracking-tight ${isScrolled ? 'text-xl' : 'text-2xl'}`}>
               OneUAE Awards
             </h1>
           </Link>
@@ -45,10 +45,10 @@ const Navigation = () => {
               <Link
                 key={link.path}
                 to={link.path}
-                className={`font-lato text-sm transition-colors relative group ${
+                className={`font-sans text-sm transition-colors relative group tracking-wide ${
                   isActive(link.path)
-                    ? "text-primary font-medium"
-                    : "text-foreground hover:text-primary"
+                    ? "text-primary font-semibold"
+                    : "text-foreground hover:text-primary font-medium"
                 }`}
               >
                 {link.label}
@@ -77,10 +77,10 @@ const Navigation = () => {
                   key={link.path}
                   to={link.path}
                   onClick={() => setIsOpen(false)}
-                  className={`font-lato text-sm transition-colors ${
+                  className={`font-sans text-sm transition-colors tracking-wide ${
                     isActive(link.path)
-                      ? "text-primary font-medium"
-                      : "text-foreground hover:text-primary"
+                      ? "text-primary font-semibold"
+                      : "text-foreground hover:text-primary font-medium"
                   }`}
                 >
                   {link.label}
