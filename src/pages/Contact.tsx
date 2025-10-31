@@ -1,10 +1,8 @@
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { Mail, Phone, MapPin } from "lucide-react";
-
 const Contact = () => {
-  return (
-    <div className="min-h-screen">
+  return <div className="min-h-screen">
       <Navigation />
       
       <main className="pt-32 pb-24">
@@ -43,12 +41,7 @@ const Contact = () => {
                   <Mail className="w-8 h-8 text-primary" />
                   <div>
                     <h3 className="font-serif text-xl font-semibold text-foreground mb-2">Email</h3>
-                    <a 
-                      href="mailto:info@oneuaeaward.ae" 
-                      className="font-sans text-lg text-primary hover:text-primary/80 transition-colors"
-                    >
-                      info@oneuaeaward.ae
-                    </a>
+                    <a href="mailto:info@oneuaeaward.ae" className="font-sans text-lg text-primary hover:text-primary/80 transition-colors">info@oneuaeawards.ae</a>
                   </div>
                 </div>
 
@@ -58,10 +51,7 @@ const Contact = () => {
                   <Phone className="w-8 h-8 text-primary" />
                   <div>
                     <h3 className="font-serif text-xl font-semibold text-foreground mb-2">Phone</h3>
-                    <a 
-                      href="tel:+971562555100" 
-                      className="font-sans text-lg text-primary hover:text-primary/80 transition-colors"
-                    >
+                    <a href="tel:+971562555100" className="font-sans text-lg text-primary hover:text-primary/80 transition-colors">
                       +971 56 255 5100
                     </a>
                   </div>
@@ -79,8 +69,6 @@ const Contact = () => {
       </main>
 
       <Footer />
-    </div>
-  );
+    </div>;
 };
-
 export default Contact;
