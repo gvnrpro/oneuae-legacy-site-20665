@@ -3,15 +3,19 @@ import { Button } from "@/components/ui/button";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import CountdownTimer from "@/components/CountdownTimer";
+import SocialProof from "@/components/SocialProof";
+import SEOHead from "@/components/SEOHead";
 import heroBg from "@/assets/hero-bg.jpg";
 
 const Home = () => {
   return (
     <div className="min-h-screen">
+      <SEOHead />
       <Navigation />
       
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+        <a href="#main-content" className="sr-only focus:not-sr-only">Skip to main content</a>
         {/* Video Background with Fallback */}
         <video
           autoPlay
@@ -108,8 +112,10 @@ const Home = () => {
         </div>
       </section>
 
+      <SocialProof />
+
       {/* About Preview */}
-      <section className="py-20 md:py-32 bg-secondary relative overflow-hidden">
+      <section id="main-content" className="py-20 md:py-32 bg-secondary relative overflow-hidden">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-4xl mx-auto text-center">
             <div className="gold-divider mb-12 md:mb-16" />

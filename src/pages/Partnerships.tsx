@@ -1,6 +1,7 @@
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
-import { Button } from "@/components/ui/button";
+import PartnershipForm from "@/components/PartnershipForm";
+import SEOHead from "@/components/SEOHead";
 import { Star, Award, Trophy, Sparkles } from "lucide-react";
 
 const Partnerships = () => {
@@ -58,9 +59,15 @@ const Partnerships = () => {
 
   return (
     <div className="min-h-screen">
+      <SEOHead
+        title="Partnership Opportunities - OneUAE Awards 2026"
+        description="Partner with OneUAE Awards and align your brand with excellence. Explore sponsorship opportunities for the UAE's most prestigious awards ceremony."
+        keywords="UAE sponsorship, awards partnership, brand partnership, UAE corporate sponsorship"
+        path="/partnerships"
+      />
       <Navigation />
       
-      <main className="pt-32 pb-24">
+      <main className="pt-32 pb-24" id="main-content">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16 fade-in">
             <h1 className="font-serif text-5xl md:text-6xl font-semibold text-foreground mb-6">
@@ -97,21 +104,15 @@ const Partnerships = () => {
             ))}
           </div>
 
-          <div className="bg-secondary p-12 rounded-lg text-center fade-in">
-            <h2 className="font-serif text-3xl font-semibold text-foreground mb-4">
-              National Exposure & Impact
+          <div className="bg-secondary p-12 rounded-lg fade-in">
+            <h2 className="font-serif text-3xl font-semibold text-foreground mb-4 text-center">
+              Partnership Inquiry Form
             </h2>
-            <p className="font-sans text-lg text-muted-foreground mb-8 max-w-2xl mx-auto leading-relaxed font-light">
-              Partner with the most prestigious awards platform in the UAE. Gain unparalleled visibility 
-              and demonstrate your commitment to celebrating excellence across the Emirates.
+            <p className="font-sans text-lg text-muted-foreground mb-8 max-w-2xl mx-auto leading-relaxed font-light text-center">
+              Complete the form below to discuss partnership opportunities and how we can work together 
+              to celebrate excellence across the Emirates.
             </p>
-            <Button
-              size="lg"
-              className="bg-primary hover:bg-primary/90 text-white font-sans text-lg px-8 py-6 font-medium"
-              onClick={() => window.location.href = "mailto:info@oneuaeawards.ae"}
-            >
-              Become a Partner
-            </Button>
+            <PartnershipForm />
           </div>
         </div>
       </main>

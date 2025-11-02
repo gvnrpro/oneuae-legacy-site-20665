@@ -1,13 +1,20 @@
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
+import SEOHead from "@/components/SEOHead";
 import sheikhPortrait from "@/assets/sheikh-sultan.jpeg";
 
 const About = () => {
   return (
     <div className="min-h-screen">
+      <SEOHead
+        title="About - OneUAE Awards 2026"
+        description="Learn about OneUAE Awards' mission to celebrate unity, vision, and excellence across the Emirates. Honoring leaders and changemakers shaping the UAE's future."
+        keywords="about OneUAE, UAE awards mission, Sheikh Sultan Al Nuaimi, UAE excellence platform"
+        path="/about"
+      />
       <Navigation />
       
-      <main className="pt-32 pb-24">
+      <main className="pt-32 pb-24" id="main-content">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
             <div className="text-center mb-16 fade-in">

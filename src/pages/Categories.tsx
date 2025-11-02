@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
+import SEOHead from "@/components/SEOHead";
 import { Button } from "@/components/ui/button";
 import { Award, Users, Palette, GraduationCap, Heart, Building, Lightbulb, Globe } from "lucide-react";
 
@@ -50,9 +51,15 @@ const Categories = () => {
 
   return (
     <div className="min-h-screen">
+      <SEOHead
+        title="Award Categories - OneUAE Awards 2026"
+        description="Explore 8 award categories celebrating excellence across entrepreneurship, healthcare, education, culture, sustainability, youth, and more in the UAE."
+        keywords="UAE award categories, entrepreneurship awards, healthcare excellence, education awards, cultural awards"
+        path="/categories"
+      />
       <Navigation />
       
-      <main className="pt-32 pb-24">
+      <main className="pt-32 pb-24" id="main-content">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16 fade-in">
             <h1 className="font-serif text-5xl md:text-6xl font-semibold text-foreground mb-6">

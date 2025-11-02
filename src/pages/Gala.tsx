@@ -1,14 +1,21 @@
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import CountdownTimer from "@/components/CountdownTimer";
+import SEOHead from "@/components/SEOHead";
 import { Calendar, MapPin, Clock, Users } from "lucide-react";
 
 const Gala = () => {
   return (
     <div className="min-h-screen">
+      <SEOHead
+        title="Gala Night - OneUAE Awards 2026"
+        description="Join us for an exclusive black-tie awards ceremony on January 4th, 2026 at Zabeel Ladies Club. An evening celebrating excellence and national pride."
+        keywords="UAE gala night, awards ceremony Dubai, black tie event, OneUAE gala 2026"
+        path="/gala"
+      />
       <Navigation />
       
-      <main className="pt-32 pb-24">
+      <main className="pt-32 pb-24" id="main-content">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16 fade-in">
             <h1 className="font-serif text-5xl md:text-6xl font-semibold text-foreground mb-6">

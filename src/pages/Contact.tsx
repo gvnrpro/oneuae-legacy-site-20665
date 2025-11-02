@@ -1,11 +1,18 @@
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
+import SEOHead from "@/components/SEOHead";
 import { Mail, Phone, MapPin } from "lucide-react";
 const Contact = () => {
   return <div className="min-h-screen">
+      <SEOHead
+        title="Contact Us - OneUAE Awards 2026"
+        description="Get in touch with OneUAE Awards for nominations, partnerships, and inquiries. Located at Zabeel Ladies Club, Dubai."
+        keywords="contact OneUAE, awards inquiry, Dubai contact, partnership inquiry"
+        path="/contact"
+      />
       <Navigation />
       
-      <main className="pt-32 pb-24">
+      <main className="pt-32 pb-24" id="main-content">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16 fade-in">
             <h1 className="font-serif text-5xl md:text-6xl font-semibold text-foreground mb-6">
