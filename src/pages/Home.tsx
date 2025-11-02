@@ -11,11 +11,16 @@ const Home = () => {
       
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-        {/* Background Image with Overlay */}
-        <div
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-          style={{ backgroundImage: `url(${heroBg})` }}
-        />
+        {/* Video Background */}
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="absolute inset-0 w-full h-full object-cover"
+        >
+          <source src="/hero-video.mov" type="video/mp4" />
+        </video>
         
         {/* Sophisticated Gradient Overlay */}
         <div className="absolute inset-0 bg-gradient-to-br from-black/80 via-black/60 to-black/75" />
