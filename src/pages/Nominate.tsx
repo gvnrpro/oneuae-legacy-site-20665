@@ -1,5 +1,6 @@
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
+import CountdownTimer from "@/components/CountdownTimer";
 import { Button } from "@/components/ui/button";
 import { FileText, Mail } from "lucide-react";
 
@@ -18,6 +19,15 @@ const Nominate = () => {
             <p className="font-sans text-lg text-muted-foreground max-w-3xl mx-auto leading-relaxed font-light">
               Recognize excellence. Nominate an individual or organization making extraordinary contributions to the Emirates.
             </p>
+          </div>
+
+          <div className="mb-16 fade-in-up">
+            <div className="text-center mb-8">
+              <h2 className="font-serif text-2xl md:text-3xl font-semibold text-foreground mb-2">
+                Time Until Awards
+              </h2>
+            </div>
+            <CountdownTimer />
           </div>
 
           <div className="max-w-4xl mx-auto space-y-12 fade-in-up">
@@ -96,7 +106,7 @@ const Nominate = () => {
                 <Button
                   size="lg"
                   className="bg-primary hover:bg-primary/90 text-white font-sans"
-                  onClick={() => window.location.href = "mailto:info@oneuaeaward.ae"}
+                  onClick={() => window.location.href = "mailto:info@oneuaeawards.ae"}
                 >
                   Email Nomination
                 </Button>

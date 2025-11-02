@@ -69,26 +69,33 @@ const Navigation = () => {
         </div>
 
         {/* Mobile Navigation */}
-        {isOpen && (
-          <div className="lg:hidden py-4 border-t border-border">
+        <div 
+          className={`lg:hidden overflow-hidden transition-all duration-300 ease-in-out ${
+            isOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
+          }`}
+        >
+          <div className="py-4 border-t border-border">
             <div className="flex flex-col space-y-4">
-              {navLinks.map((link) => (
+              {navLinks.map((link, index) => (
                 <Link
                   key={link.path}
                   to={link.path}
                   onClick={() => setIsOpen(false)}
-                  className={`font-sans text-sm transition-colors tracking-wide ${
+                  className={`font-sans text-sm transition-all duration-300 tracking-wide transform ${
                     isActive(link.path)
                       ? "text-primary font-semibold"
                       : "text-foreground hover:text-primary font-medium"
-                  }`}
+                  } ${isOpen ? 'translate-x-0' : '-translate-x-4'}`}
+                  style={{
+                    transitionDelay: isOpen ? `${index * 50}ms` : '0ms',
+                  }}
                 >
                   {link.label}
                 </Link>
               ))}
             </div>
           </div>
-        )}
+        </div>
       </div>
     </nav>
   );

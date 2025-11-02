@@ -1,5 +1,6 @@
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
+import CountdownTimer from "@/components/CountdownTimer";
 import { Calendar, MapPin, Clock, Users } from "lucide-react";
 
 const Gala = () => {
@@ -17,6 +18,18 @@ const Gala = () => {
             <p className="font-sans text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed font-light">
               An evening of elegance, celebration, and national pride
             </p>
+          </div>
+
+          <div className="mb-16 fade-in-up">
+            <div className="text-center mb-8">
+              <h2 className="font-serif text-2xl md:text-3xl font-semibold text-foreground mb-2">
+                Event Countdown
+              </h2>
+              <p className="font-sans text-muted-foreground">
+                Join us on January 4th, 2026
+              </p>
+            </div>
+            <CountdownTimer />
           </div>
 
           <div className="max-w-4xl mx-auto space-y-12 fade-in-up">

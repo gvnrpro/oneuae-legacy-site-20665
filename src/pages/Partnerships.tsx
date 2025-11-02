@@ -108,7 +108,7 @@ const Partnerships = () => {
             <Button
               size="lg"
               className="bg-primary hover:bg-primary/90 text-white font-sans text-lg px-8 py-6 font-medium"
-              onClick={() => window.location.href = "mailto:info@oneuaeaward.ae"}
+              onClick={() => window.location.href = "mailto:info@oneuaeawards.ae"}
             >
               Become a Partner
             </Button>

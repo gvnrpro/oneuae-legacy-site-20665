@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
+import CountdownTimer from "@/components/CountdownTimer";
 import heroBg from "@/assets/hero-bg.jpg";
 
 const Home = () => {
@@ -11,16 +12,27 @@ const Home = () => {
       
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-        {/* Video Background */}
+        {/* Video Background with Fallback */}
         <video
           autoPlay
           loop
           muted
           playsInline
+          poster={heroBg}
           className="absolute inset-0 w-full h-full object-cover"
+          onError={(e) => {
+            // Fallback to background image if video fails
+            e.currentTarget.style.display = 'none';
+          }}
         >
+          <source src="/hero-video.mov" type="video/quicktime" />
           <source src="/hero-video.mov" type="video/mp4" />
         </video>
+        {/* Fallback Background Image */}
+        <div
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat -z-10"
+          style={{ backgroundImage: `url(${heroBg})` }}
+        />
         
         {/* Sophisticated Gradient Overlay */}
         <div className="absolute inset-0 bg-gradient-to-br from-black/80 via-black/60 to-black/75" />
@@ -78,6 +90,21 @@ const Home = () => {
           <div className="w-6 h-10 border-2 border-white/40 rounded-full flex items-start justify-center p-2">
             <div className="w-1 h-2 bg-white/60 rounded-full animate-bounce" />
           </div>
+        </div>
+      </section>
+
+      {/* Countdown Section */}
+      <section className="py-16 md:py-24 bg-gradient-to-b from-background to-secondary">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-10">
+            <h2 className="font-serif text-3xl md:text-4xl font-semibold text-foreground mb-4">
+              The Celebration Begins In
+            </h2>
+            <p className="font-sans text-muted-foreground">
+              January 4th, 2026 • Zabeel Ladies Club, Dubai
+            </p>
+          </div>
+          <CountdownTimer />
         </div>
       </section>
 

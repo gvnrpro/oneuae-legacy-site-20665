@@ -41,7 +41,7 @@ const Contact = () => {
                   <Mail className="w-8 h-8 text-primary" />
                   <div>
                     <h3 className="font-serif text-xl font-semibold text-foreground mb-2">Email</h3>
-                    <a href="mailto:info@oneuaeaward.ae" className="font-sans text-lg text-primary hover:text-primary/80 transition-colors">info@oneuaeawards.ae</a>
+                    <a href="mailto:info@oneuaeawards.ae" className="font-sans text-lg text-primary hover:text-primary/80 transition-colors">info@oneuaeawards.ae</a>
                   </div>
                 </div>
 
