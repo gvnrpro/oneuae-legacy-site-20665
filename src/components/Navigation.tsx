@@ -7,11 +7,18 @@ import SkipToContent from "./SkipToContent";
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [scrollProgress, setScrollProgress] = useState(0);
   const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
+      const scrolled = window.scrollY > 50;
+      setIsScrolled(scrolled);
+      
+      // Calculate scroll progress
+      const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = (window.scrollY / totalHeight) * 100;
+      setScrollProgress(progress);
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -33,14 +40,33 @@ const Navigation = () => {
   return (
     <>
       <SkipToContent />
+      {/* Scroll Progress Bar */}
+      <div 
+        className="scroll-progress transition-transform duration-200"
+        style={{ width: `${scrollProgress}%` }}
+      />
+      
       <nav 
-        className={`fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-md border-b border-border transition-all duration-300 ${isScrolled ? 'shadow-lg' : ''}`}
+        className={`fixed top-0 left-0 right-0 z-50 backdrop-blur-premium border-b transition-all duration-300 ${
+          isScrolled 
+            ? 'shadow-lg border-primary/10 bg-background/95' 
+            : 'border-border/50 bg-background/90'
+        }`}
         role="navigation"
         aria-label="Main navigation"
       >
         <div className="container mx-auto px-4">
         <div className={`flex items-center justify-between transition-all duration-300 ${isScrolled ? 'h-16' : 'h-20'}`}>
-          <Link to="/" className="flex items-center space-x-2">
+          <Link to="/" className="flex items-center space-x-3 group">
+            {/* Logo with Gold Accent */}
+            <div className="relative">
+              <div className={`absolute inset-0 bg-gradient-to-br from-gold-light to-gold-dark rounded-lg blur-sm opacity-0 group-hover:opacity-50 transition-opacity duration-300`} />
+              <div className={`relative bg-gradient-to-br from-gold via-gold-light to-gold p-2 rounded-lg transition-all duration-300 ${isScrolled ? 'scale-90' : 'scale-100'}`}>
+                <div className="w-8 h-8 bg-white/10 backdrop-blur-sm rounded flex items-center justify-center">
+                  <span className="text-white font-bold text-lg">1</span>
+                </div>
+              </div>
+            </div>
             <h1 className={`font-serif font-semibold text-primary transition-all duration-300 tracking-tight ${isScrolled ? 'text-xl' : 'text-2xl'}`}>
               OneUAE Awards
             </h1>
@@ -52,14 +78,17 @@ const Navigation = () => {
               <Link
                 key={link.path}
                 to={link.path}
-                className={`font-sans text-sm transition-colors relative group tracking-wide ${
+                className={`font-sans text-sm transition-all duration-300 relative group tracking-wide ${
                   isActive(link.path)
                     ? "text-primary font-semibold"
                     : "text-foreground hover:text-primary font-medium"
                 }`}
               >
                 {link.label}
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all group-hover:w-full" />
+                {/* Animated Underline */}
+                <span className={`absolute -bottom-1 left-0 h-0.5 bg-gradient-to-r from-gold-light via-gold to-gold-dark transition-all duration-300 ${
+                  isActive(link.path) ? 'w-full' : 'w-0 group-hover:w-full'
+                }`} />
               </Link>
             ))}
           </div>
@@ -68,13 +97,13 @@ const Navigation = () => {
           <Button
             variant="ghost"
             size="icon"
-            className="lg:hidden"
+            className="lg:hidden hover:bg-primary/10"
             onClick={() => setIsOpen(!isOpen)}
             aria-label={isOpen ? "Close menu" : "Open menu"}
             aria-expanded={isOpen}
             aria-controls="mobile-menu"
           >
-            {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+            {isOpen ? <X className="h-6 w-6 text-primary" /> : <Menu className="h-6 w-6" />}
           </Button>
         </div>
 
@@ -86,17 +115,17 @@ const Navigation = () => {
           }`}
           role="menu"
         >
-          <div className="py-4 border-t border-border">
-            <div className="flex flex-col space-y-4">
+          <div className="py-6 border-t border-primary/10 bg-gradient-to-b from-background/50 to-secondary/30 backdrop-blur-sm">
+            <div className="flex flex-col space-y-5">
               {navLinks.map((link, index) => (
                 <Link
                   key={link.path}
                   to={link.path}
                   onClick={() => setIsOpen(false)}
-                  className={`font-sans text-sm transition-all duration-300 tracking-wide transform ${
+                  className={`font-sans text-sm transition-all duration-300 tracking-wide transform px-2 py-1 rounded-md ${
                     isActive(link.path)
-                      ? "text-primary font-semibold"
-                      : "text-foreground hover:text-primary font-medium"
+                      ? "text-primary font-semibold bg-primary/5"
+                      : "text-foreground hover:text-primary hover:bg-primary/5 font-medium"
                   } ${isOpen ? 'translate-x-0' : '-translate-x-4'}`}
                   style={{
                     transitionDelay: isOpen ? `${index * 50}ms` : '0ms',

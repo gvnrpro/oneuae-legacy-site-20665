@@ -26,6 +26,9 @@ export default {
         primary: {
           DEFAULT: "hsl(var(--primary))",
           foreground: "hsl(var(--primary-foreground))",
+          light: "hsl(var(--primary-light))",
+          dark: "hsl(var(--primary-dark))",
+          glow: "hsl(var(--primary-glow))",
         },
         secondary: {
           DEFAULT: "hsl(var(--secondary))",
@@ -51,9 +54,19 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        gold: "hsl(var(--gold))",
+        gold: {
+          DEFAULT: "hsl(var(--gold))",
+          light: "hsl(var(--gold-light))",
+          dark: "hsl(var(--gold-dark))",
+        },
         beige: "hsl(var(--beige))",
         charcoal: "hsl(var(--charcoal))",
+        uae: {
+          red: "hsl(var(--uae-red))",
+          green: "hsl(var(--uae-green))",
+          black: "hsl(var(--uae-black))",
+          white: "hsl(var(--uae-white))",
+        },
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -91,6 +104,9 @@ export default {
         "accordion-up": "accordion-up 0.2s ease-out",
         fadeIn: "fadeIn 0.8s ease-out",
         fadeInUp: "fadeInUp 1s ease-out",
+        shimmer: "shimmer 3s linear infinite",
+        glow: "glow 2s ease-in-out infinite",
+        float: "float 3s ease-in-out infinite",
       },
     },
   },

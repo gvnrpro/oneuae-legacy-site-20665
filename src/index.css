@@ -17,8 +17,13 @@ All colors MUST be HSL.
     --popover: 0 0% 100%;
     --popover-foreground: 0 0% 20%;
 
-    --primary: 41 48% 54%;
+    /* Enhanced Premium Gold Palette */
+    --primary: 42 78% 48%;
     --primary-foreground: 0 0% 100%;
+    
+    --primary-light: 42 90% 65%;
+    --primary-dark: 42 70% 35%;
+    --primary-glow: 42 85% 60%;
 
     --secondary: 40 33% 97%;
     --secondary-foreground: 0 0% 20%;
@@ -26,7 +31,7 @@ All colors MUST be HSL.
     --muted: 40 20% 90%;
     --muted-foreground: 0 0% 40%;
 
-    --accent: 41 48% 54%;
+    --accent: 42 78% 48%;
     --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84.2% 60.2%;
@@ -34,13 +39,22 @@ All colors MUST be HSL.
 
     --border: 41 30% 85%;
     --input: 41 30% 85%;
-    --ring: 41 48% 54%;
+    --ring: 42 78% 48%;
 
     --radius: 0.25rem;
     
-    --gold: 41 48% 54%;
+    /* Premium Gold System */
+    --gold: 42 78% 48%;
+    --gold-light: 42 90% 65%;
+    --gold-dark: 42 70% 35%;
     --beige: 40 33% 97%;
     --charcoal: 0 0% 20%;
+    
+    /* UAE Flag Colors (Accents) */
+    --uae-red: 0 75% 45%;
+    --uae-green: 142 45% 35%;
+    --uae-black: 0 0% 10%;
+    --uae-white: 0 0% 98%;
 
     --sidebar-background: 0 0% 98%;
 
@@ -69,8 +83,13 @@ All colors MUST be HSL.
     --popover: 0 0% 12%;
     --popover-foreground: 0 0% 95%;
 
-    --primary: 41 48% 54%;
+    /* Enhanced Premium Gold Palette - Dark Mode */
+    --primary: 42 78% 48%;
     --primary-foreground: 0 0% 100%;
+    
+    --primary-light: 42 90% 65%;
+    --primary-dark: 42 70% 35%;
+    --primary-glow: 42 85% 60%;
 
     --secondary: 0 0% 18%;
     --secondary-foreground: 0 0% 95%;
@@ -78,7 +97,7 @@ All colors MUST be HSL.
     --muted: 0 0% 18%;
     --muted-foreground: 0 0% 60%;
 
-    --accent: 41 48% 54%;
+    --accent: 42 78% 48%;
     --accent-foreground: 0 0% 100%;
 
     --destructive: 0 62.8% 30.6%;
@@ -86,11 +105,20 @@ All colors MUST be HSL.
 
     --border: 0 0% 25%;
     --input: 0 0% 25%;
-    --ring: 41 48% 54%;
+    --ring: 42 78% 48%;
     
-    --gold: 41 48% 54%;
+    /* Premium Gold System - Dark Mode */
+    --gold: 42 78% 48%;
+    --gold-light: 42 90% 65%;
+    --gold-dark: 42 70% 35%;
     --beige: 0 0% 18%;
     --charcoal: 0 0% 95%;
+    
+    /* UAE Flag Colors (Accents) */
+    --uae-red: 0 75% 45%;
+    --uae-green: 142 45% 35%;
+    --uae-black: 0 0% 10%;
+    --uae-white: 0 0% 98%;
   }
 }
 
@@ -104,11 +132,28 @@ All colors MUST be HSL.
     font-feature-settings: "kern" 1, "liga" 1;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    line-height: 1.7;
   }
   
   h1, h2, h3, h4, h5, h6 {
     @apply font-serif;
     font-feature-settings: "kern" 1, "liga" 1, "dlig" 1;
+    letter-spacing: 0.02em;
+  }
+  
+  h1 {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    letter-spacing: 0.03em;
+    text-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+  }
+  
+  h2 {
+    font-size: clamp(2rem, 4vw, 3rem);
+    letter-spacing: 0.025em;
+  }
+  
+  h3 {
+    font-size: clamp(1.5rem, 3vw, 2rem);
   }
   
   html {
@@ -138,6 +183,46 @@ All colors MUST be HSL.
     transform: scaleX(0);
     animation: expandWidth 1s ease-out forwards;
   }
+  
+  /* Premium Typography Effects */
+  .text-gradient-gold {
+    background: linear-gradient(135deg, hsl(var(--gold-light)) 0%, hsl(var(--gold)) 50%, hsl(var(--gold-dark)) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  
+  .text-shadow-gold {
+    text-shadow: 0 0 30px hsla(var(--gold), 0.4), 0 2px 10px hsla(var(--gold), 0.3);
+  }
+  
+  /* Premium Button Effects */
+  .btn-glow {
+    box-shadow: 0 0 30px hsla(var(--gold), 0.5), 0 0 60px hsla(var(--gold), 0.3);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .btn-glow:hover {
+    box-shadow: 0 0 40px hsla(var(--gold), 0.7), 0 0 80px hsla(var(--gold), 0.5);
+    transform: translateY(-2px) scale(1.02);
+  }
+  
+  /* Scroll Progress Indicator */
+  .scroll-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 3px;
+    background: linear-gradient(90deg, hsl(var(--gold)) 0%, hsl(var(--gold-light)) 100%);
+    transform-origin: left;
+    z-index: 100;
+  }
+  
+  /* Premium Backdrop Blur */
+  .backdrop-blur-premium {
+    backdrop-filter: blur(12px) saturate(180%);
+    background: hsla(var(--background), 0.85);
+  }
 }
 
 @keyframes fadeIn {
@@ -166,5 +251,32 @@ All colors MUST be HSL.
   }
   to {
     transform: scaleX(1);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+@keyframes glow {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
   }
 }
