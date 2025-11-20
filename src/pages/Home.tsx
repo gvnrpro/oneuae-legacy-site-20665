@@ -38,40 +38,58 @@ const Home = () => {
           style={{ backgroundImage: `url(${heroBg})` }}
         />
         
-        {/* Sophisticated Gradient Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-br from-black/80 via-black/60 to-black/75" />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
+        {/* Sophisticated Gradient Overlays */}
+        <div className="absolute inset-0 bg-gradient-to-br from-black/85 via-black/70 to-black/80" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+        
+        {/* Subtle Pattern Overlay */}
+        <div className="absolute inset-0 opacity-5" style={{
+          backgroundImage: `repeating-linear-gradient(45deg, transparent, transparent 35px, rgba(212, 175, 55, 0.1) 35px, rgba(212, 175, 55, 0.1) 70px)`
+        }} />
         
         {/* Hero Content */}
         <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 text-center py-24 md:py-32">
           <div className="max-w-6xl mx-auto">
-            <div className="mb-8 md:mb-10 opacity-0 animate-fade-in-up" style={{ animationDelay: '0.1s', animationFillMode: 'forwards' }}>
-              <div className="inline-block px-6 py-2 border border-white/30 rounded-full backdrop-blur-sm">
-                <p className="font-sans text-sm md:text-base text-white/90 font-light tracking-widest uppercase">
+            {/* Premium Date Badge with Glow */}
+            <div className="mb-8 md:mb-12 opacity-0 animate-fade-in-up" style={{ animationDelay: '0.1s', animationFillMode: 'forwards' }}>
+              <div className="inline-block px-8 py-3 border-2 border-gold-light/40 rounded-full backdrop-blur-md bg-gradient-to-r from-gold-dark/20 via-gold/10 to-gold-dark/20 shadow-[0_0_30px_rgba(212,175,55,0.3)]">
+                <p className="font-sans text-sm md:text-base text-gold-light font-medium tracking-[0.15em] uppercase">
                   January 4th, 2026 • Zabeel Ladies Club
                 </p>
               </div>
             </div>
+            
+            {/* Headline with Gradient Text */}
             <h1 
-              className="font-serif text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-semibold text-white mb-8 md:mb-10 leading-[1.1] tracking-tight opacity-0 animate-fade-in-up" 
-              style={{ animationDelay: '0.3s', animationFillMode: 'forwards' }}
+              className="font-serif font-bold text-white mb-8 md:mb-10 leading-[1.05] tracking-tight opacity-0 animate-fade-in-up text-shadow-gold" 
+              style={{ 
+                animationDelay: '0.3s', 
+                animationFillMode: 'forwards',
+                fontSize: 'clamp(2.5rem, 8vw, 6rem)'
+              }}
             >
-              Celebrating Unity, Vision,<br className="hidden sm:block" /> and Excellence
+              Celebrating Unity, Vision,<br className="hidden sm:block" /> 
+              <span className="text-gradient-gold">and Excellence</span>
             </h1>
+            
+            {/* Enhanced Subheadline */}
             <p 
-              className="font-sans text-xl sm:text-2xl md:text-3xl text-white/90 mb-12 md:mb-16 max-w-4xl mx-auto leading-relaxed font-light tracking-wide opacity-0 animate-fade-in-up" 
+              className="font-sans text-xl sm:text-2xl md:text-3xl text-white/95 mb-12 md:mb-16 max-w-4xl mx-auto leading-relaxed font-light tracking-wide opacity-0 animate-fade-in-up" 
               style={{ animationDelay: '0.5s', animationFillMode: 'forwards' }}
             >
-              Honouring the leaders, innovators, and changemakers<br className="hidden md:block" /> shaping the legacy of the Emirates
+              Honouring the leaders, innovators, and changemakers<br className="hidden md:block" /> 
+              shaping the legacy of the <span className="text-gold-light font-medium">Emirates</span>
             </p>
+            
+            {/* Premium Buttons with Glow Effects */}
             <div 
-              className="flex flex-col sm:flex-row gap-5 sm:gap-6 justify-center items-center opacity-0 animate-fade-in-up max-w-2xl mx-auto" 
+              className="flex flex-col sm:flex-row gap-6 justify-center items-center opacity-0 animate-fade-in-up max-w-2xl mx-auto" 
               style={{ animationDelay: '0.7s', animationFillMode: 'forwards' }}
             >
               <Link to="/nominate" className="w-full sm:w-auto">
                 <Button 
                   size="lg" 
-                  className="w-full sm:w-auto bg-primary hover:bg-primary/90 text-white font-sans text-base md:text-lg px-10 md:px-12 py-6 md:py-7 transition-all duration-300 hover:scale-[1.03] hover:shadow-2xl hover:shadow-primary/30 font-medium tracking-wide"
+                  className="w-full sm:w-auto bg-gradient-to-r from-gold via-gold-light to-gold hover:from-gold-dark hover:via-gold hover:to-gold-dark text-white font-sans text-base md:text-lg px-12 md:px-14 py-7 md:py-8 transition-all duration-500 hover:scale-105 btn-glow font-semibold tracking-wide shadow-2xl"
                 >
                   Nominate Now
                 </Button>
@@ -80,7 +98,7 @@ const Home = () => {
                 <Button 
                   size="lg" 
                   variant="outline" 
-                  className="w-full sm:w-auto border-2 border-white/90 text-white hover:bg-white/15 hover:border-white backdrop-blur-md font-sans text-base md:text-lg px-10 md:px-12 py-6 md:py-7 transition-all duration-300 hover:scale-[1.03] font-medium tracking-wide"
+                  className="w-full sm:w-auto border-2 border-gold-light/60 bg-white/5 backdrop-blur-sm text-white hover:bg-gold/20 hover:border-gold-light hover:text-white font-sans text-base md:text-lg px-12 md:px-14 py-7 md:py-8 transition-all duration-500 hover:scale-105 hover:shadow-[0_0_30px_rgba(212,175,55,0.4)] font-semibold tracking-wide"
                 >
                   Become a Partner
                 </Button>
@@ -89,10 +107,10 @@ const Home = () => {
           </div>
         </div>
         
-        {/* Subtle scroll indicator */}
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 opacity-0 animate-fade-in-up" style={{ animationDelay: '1s', animationFillMode: 'forwards' }}>
-          <div className="w-6 h-10 border-2 border-white/40 rounded-full flex items-start justify-center p-2">
-            <div className="w-1 h-2 bg-white/60 rounded-full animate-bounce" />
+        {/* Enhanced Scroll Indicator */}
+        <div className="absolute bottom-10 left-1/2 -translate-x-1/2 opacity-0 animate-fade-in-up" style={{ animationDelay: '1.2s', animationFillMode: 'forwards' }}>
+          <div className="w-7 h-12 border-2 border-gold-light/50 rounded-full flex items-start justify-center p-2 shadow-[0_0_20px_rgba(212,175,55,0.2)]">
+            <div className="w-1.5 h-3 bg-gold-light rounded-full animate-bounce" />
           </div>
         </div>
       </section>
