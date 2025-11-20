@@ -25,50 +25,65 @@ const Contact = () => {
           </div>
 
           <div className="max-w-3xl mx-auto fade-in-up">
-            <div className="bg-card p-12 rounded-lg border border-border text-center">
-              <h2 className="font-serif text-3xl font-semibold text-primary mb-8">
-                OneUAE Awards
-              </h2>
+            <div className="relative overflow-hidden bg-gradient-to-br from-card via-secondary to-card p-12 md:p-16 rounded-2xl border-2 border-primary/30 shadow-2xl text-center">
+              {/* Decorative Elements */}
+              <div className="absolute top-0 right-0 w-48 h-48 bg-gold/10 rounded-full blur-3xl" />
+              <div className="absolute bottom-0 left-0 w-48 h-48 bg-gold-light/10 rounded-full blur-3xl" />
               
-              <div className="space-y-8">
-                <div className="flex flex-col items-center gap-3">
-                  <MapPin className="w-8 h-8 text-primary" />
-                  <div>
-                    <h3 className="font-serif text-xl font-semibold text-foreground mb-2">Location</h3>
-                    <p className="font-sans text-muted-foreground leading-relaxed font-light">
+              <div className="relative">
+                <h2 className="font-serif text-4xl font-semibold text-gradient-gold mb-12">
+                  Get in Touch
+                </h2>
+                
+                <div className="space-y-10">
+                  <div className="group">
+                    <div className="w-16 h-16 bg-gradient-to-br from-gold to-gold-light rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 group-hover:rotate-6 transition-all duration-500 shadow-lg shadow-gold/30">
+                      <MapPin className="w-8 h-8 text-white" />
+                    </div>
+                    <h3 className="font-serif text-2xl font-semibold text-foreground mb-3">Location</h3>
+                    <p className="font-sans text-lg text-muted-foreground leading-relaxed">
                       Zabeel Ladies Club<br />
                       Dubai, United Arab Emirates
                     </p>
                   </div>
-                </div>
 
-                <div className="gold-divider my-8" />
+                  <div className="gold-divider my-10" />
 
-                <div className="flex flex-col items-center gap-3">
-                  <Mail className="w-8 h-8 text-primary" />
-                  <div>
-                    <h3 className="font-serif text-xl font-semibold text-foreground mb-2">Email</h3>
-                    <a href="mailto:info@oneuaeawards.ae" className="font-sans text-lg text-primary hover:text-primary/80 transition-colors">info@oneuaeawards.ae</a>
+                  <div className="group">
+                    <div className="w-16 h-16 bg-gradient-to-br from-gold to-gold-light rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 group-hover:rotate-6 transition-all duration-500 shadow-lg shadow-gold/30">
+                      <Mail className="w-8 h-8 text-white" />
+                    </div>
+                    <h3 className="font-serif text-2xl font-semibold text-foreground mb-3">Email</h3>
+                    <a 
+                      href="mailto:info@oneuaeawards.ae" 
+                      className="inline-block font-sans text-xl text-primary hover:text-primary-light transition-colors duration-300 px-6 py-3 bg-gold/5 rounded-lg hover:bg-gold/10"
+                    >
+                      info@oneuaeawards.ae
+                    </a>
                   </div>
-                </div>
 
-                <div className="gold-divider my-8" />
+                  <div className="gold-divider my-10" />
 
-                <div className="flex flex-col items-center gap-3">
-                  <Phone className="w-8 h-8 text-primary" />
-                  <div>
-                    <h3 className="font-serif text-xl font-semibold text-foreground mb-2">Phone</h3>
-                    <a href="tel:+971562555100" className="font-sans text-lg text-primary hover:text-primary/80 transition-colors">
+                  <div className="group">
+                    <div className="w-16 h-16 bg-gradient-to-br from-gold to-gold-light rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 group-hover:rotate-6 transition-all duration-500 shadow-lg shadow-gold/30">
+                      <Phone className="w-8 h-8 text-white" />
+                    </div>
+                    <h3 className="font-serif text-2xl font-semibold text-foreground mb-3">Phone</h3>
+                    <a 
+                      href="tel:+971562555100" 
+                      className="inline-block font-sans text-xl text-primary hover:text-primary-light transition-colors duration-300 px-6 py-3 bg-gold/5 rounded-lg hover:bg-gold/10"
+                    >
                       +971 56 255 5100
                     </a>
                   </div>
                 </div>
-              </div>
 
-              <div className="mt-12 pt-8 border-t border-border">
-                <p className="font-sans text-sm text-muted-foreground font-light">
-                  For partnership inquiries and sponsorship opportunities, please contact us directly via email or phone.
-                </p>
+                <div className="mt-14 pt-10 border-t border-primary/20">
+                  <p className="font-sans text-muted-foreground leading-relaxed">
+                    For partnership inquiries and sponsorship opportunities,<br className="hidden md:block" />
+                    please contact us directly via email or phone.
+                  </p>
+                </div>
               </div>
             </div>
           </div>

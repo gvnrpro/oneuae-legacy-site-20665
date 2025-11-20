@@ -81,27 +81,86 @@ const Partnerships = () => {
           </div>
 
           <div className="grid md:grid-cols-2 gap-8 mb-16 fade-in-up">
-            {tiers.map((tier, index) => (
-              <div
-                key={index}
-                className="bg-card p-8 rounded-lg border border-border hover:border-primary/50 transition-all duration-300"
-              >
-                <div className="text-primary mb-4">{tier.icon}</div>
-                <h3 className="font-serif text-3xl font-semibold text-foreground mb-2">
-                  {tier.name}
-                </h3>
-                <div className="font-serif text-2xl text-primary mb-6">{tier.amount}</div>
-                <div className="h-px bg-primary/20 mb-6" />
-                <ul className="space-y-3">
-                  {tier.benefits.map((benefit, idx) => (
-                    <li key={idx} className="font-sans text-muted-foreground flex items-start font-light">
-                      <span className="text-primary mr-2 mt-1">•</span>
-                      <span>{benefit}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
+            {tiers.map((tier, index) => {
+              const tierStyles = [
+                {
+                  gradient: 'from-gold via-gold-light to-gold',
+                  border: 'border-gold',
+                  shadow: 'shadow-[0_20px_60px_rgba(212,175,55,0.4)]',
+                  badge: 'Premium Choice',
+                  scale: 'md:scale-105'
+                },
+                {
+                  gradient: 'from-gray-300 via-gray-100 to-gray-300',
+                  border: 'border-gray-300',
+                  shadow: 'shadow-[0_15px_40px_rgba(0,0,0,0.15)]',
+                  badge: null,
+                  scale: ''
+                },
+                {
+                  gradient: 'from-amber-700 via-amber-500 to-amber-700',
+                  border: 'border-amber-500',
+                  shadow: 'shadow-[0_15px_40px_rgba(217,119,6,0.3)]',
+                  badge: null,
+                  scale: ''
+                },
+                {
+                  gradient: 'from-uae-red via-red-500 to-uae-red',
+                  border: 'border-uae-red/50',
+                  shadow: 'shadow-[0_15px_40px_rgba(220,38,38,0.25)]',
+                  badge: 'Entry Level',
+                  scale: ''
+                },
+              ];
+              
+              const style = tierStyles[index];
+              
+              return (
+                <div
+                  key={index}
+                  className={`relative group bg-gradient-to-br from-card to-secondary p-10 rounded-2xl border-2 ${style.border} hover:${style.border} transition-all duration-500 ${style.shadow} hover:scale-105 ${style.scale}`}
+                >
+                  {/* Badge if applicable */}
+                  {style.badge && (
+                    <div className="absolute -top-4 left-1/2 -translate-x-1/2">
+                      <div className={`px-6 py-2 bg-gradient-to-r ${style.gradient} rounded-full text-white font-sans text-sm font-semibold shadow-lg`}>
+                        {style.badge}
+                      </div>
+                    </div>
+                  )}
+                  
+                  {/* Decorative Corner */}
+                  <div className={`absolute top-0 right-0 w-32 h-32 bg-gradient-to-br ${style.gradient} opacity-10 rounded-bl-full blur-2xl`} />
+                  
+                  {/* Icon with Gradient */}
+                  <div className={`relative w-20 h-20 bg-gradient-to-br ${style.gradient} rounded-2xl flex items-center justify-center text-white mb-6 group-hover:rotate-6 group-hover:scale-110 transition-all duration-500 shadow-xl mx-auto`}>
+                    {tier.icon}
+                  </div>
+                  
+                  <h3 className="font-serif text-3xl md:text-4xl font-bold text-foreground mb-3 text-center">
+                    {tier.name}
+                  </h3>
+                  
+                  <div className="font-serif text-3xl text-primary mb-8 text-center font-bold">{tier.amount}</div>
+                  
+                  <div className={`h-1 bg-gradient-to-r ${style.gradient} mb-8 rounded-full`} />
+                  
+                  <ul className="space-y-4">
+                    {tier.benefits.map((benefit, idx) => (
+                      <li key={idx} className="font-sans text-muted-foreground flex items-start gap-3">
+                        <span className={`flex-shrink-0 w-6 h-6 bg-gradient-to-br ${style.gradient} rounded-full flex items-center justify-center text-white text-xs font-bold mt-0.5`}>
+                          ✓
+                        </span>
+                        <span className="leading-relaxed">{benefit}</span>
+                      </li>
+                    ))}
+                  </ul>
+                  
+                  {/* Hover Glow Effect */}
+                  <div className={`absolute inset-0 bg-gradient-to-t ${style.gradient} opacity-0 group-hover:opacity-5 transition-opacity duration-500 rounded-2xl pointer-events-none`} />
+                </div>
+              );
+            })}
           </div>
 
           <div className="bg-secondary p-12 rounded-lg fade-in">
