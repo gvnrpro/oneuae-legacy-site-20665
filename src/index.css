@@ -2,123 +2,98 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
+/* Minimal Institutional Design System - Following SKGEP & MIITE Awards
+   All colors MUST be HSL. No gradients, no shadows, no glow effects.
 */
 
 @layer base {
   :root {
+    /* Base Colors - Minimal & Flat */
     --background: 0 0% 100%;
-    --foreground: 0 0% 20%;
-
-    --card: 40 33% 97%;
-    --card-foreground: 0 0% 20%;
-
+    --foreground: 0 0% 5%;
+    
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 5%;
+    
     --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 20%;
-
-    /* Enhanced Premium Gold Palette */
-    --primary: 42 78% 48%;
+    --popover-foreground: 0 0% 5%;
+    
+    /* Muted Gold - Used ONLY for thin lines and minimal highlights */
+    --primary: 40 30% 58%;
     --primary-foreground: 0 0% 100%;
     
-    --primary-light: 42 90% 65%;
-    --primary-dark: 42 70% 35%;
-    --primary-glow: 42 85% 60%;
-
-    --secondary: 40 33% 97%;
-    --secondary-foreground: 0 0% 20%;
-
-    --muted: 40 20% 90%;
+    /* Cool Gray for alternating sections */
+    --secondary: 0 0% 96%;
+    --secondary-foreground: 0 0% 5%;
+    
+    --muted: 0 0% 96%;
     --muted-foreground: 0 0% 40%;
-
-    --accent: 42 78% 48%;
+    
+    /* Accent - Muted Gold */
+    --accent: 40 30% 58%;
     --accent-foreground: 0 0% 100%;
-
-    --destructive: 0 84.2% 60.2%;
+    
+    --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
-
-    --border: 41 30% 85%;
-    --input: 41 30% 85%;
-    --ring: 42 78% 48%;
-
+    
+    /* Borders - Very subtle */
+    --border: 0 0% 90%;
+    --input: 0 0% 90%;
+    --ring: 40 30% 58%;
+    
     --radius: 0.25rem;
     
-    /* Premium Gold System */
-    --gold: 42 78% 48%;
-    --gold-light: 42 90% 65%;
-    --gold-dark: 42 70% 35%;
-    --beige: 40 33% 97%;
-    --charcoal: 0 0% 20%;
+    /* Institutional Color Palette */
+    --gold: 40 30% 58%;
+    --cool-gray: 0 0% 96%;
+    --deep-charcoal: 0 0% 5%;
+    --slate-gray: 0 0% 17%;
     
-    /* UAE Flag Colors (Accents) */
-    --uae-red: 0 75% 45%;
-    --uae-green: 142 45% 35%;
-    --uae-black: 0 0% 10%;
-    --uae-white: 0 0% 98%;
-
-    --sidebar-background: 0 0% 98%;
-
-    --sidebar-foreground: 240 5.3% 26.1%;
-
-    --sidebar-primary: 240 5.9% 10%;
-
-    --sidebar-primary-foreground: 0 0% 98%;
-
-    --sidebar-accent: 240 4.8% 95.9%;
-
-    --sidebar-accent-foreground: 240 5.9% 10%;
-
-    --sidebar-border: 220 13% 91%;
-
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    /* UAE Flag Colors - Used ONLY as 1-2px accent lines */
+    --uae-red: 349 86% 47%;
+    --uae-green: 159 100% 24%;
+    --uae-black: 0 0% 0%;
+    --uae-white: 0 0% 100%;
   }
 
   .dark {
     --background: 0 0% 12%;
     --foreground: 0 0% 95%;
-
+    
     --card: 0 0% 15%;
     --card-foreground: 0 0% 95%;
-
+    
     --popover: 0 0% 12%;
     --popover-foreground: 0 0% 95%;
-
-    /* Enhanced Premium Gold Palette - Dark Mode */
-    --primary: 42 78% 48%;
+    
+    --primary: 40 30% 58%;
     --primary-foreground: 0 0% 100%;
     
-    --primary-light: 42 90% 65%;
-    --primary-dark: 42 70% 35%;
-    --primary-glow: 42 85% 60%;
-
     --secondary: 0 0% 18%;
     --secondary-foreground: 0 0% 95%;
-
+    
     --muted: 0 0% 18%;
     --muted-foreground: 0 0% 60%;
-
-    --accent: 42 78% 48%;
+    
+    --accent: 40 30% 58%;
     --accent-foreground: 0 0% 100%;
-
-    --destructive: 0 62.8% 30.6%;
+    
+    --destructive: 0 63% 31%;
     --destructive-foreground: 0 0% 100%;
-
+    
     --border: 0 0% 25%;
     --input: 0 0% 25%;
-    --ring: 42 78% 48%;
+    --ring: 40 30% 58%;
     
-    /* Premium Gold System - Dark Mode */
-    --gold: 42 78% 48%;
-    --gold-light: 42 90% 65%;
-    --gold-dark: 42 70% 35%;
-    --beige: 0 0% 18%;
-    --charcoal: 0 0% 95%;
+    --gold: 40 30% 58%;
+    --cool-gray: 0 0% 18%;
+    --deep-charcoal: 0 0% 95%;
+    --slate-gray: 0 0% 70%;
     
-    /* UAE Flag Colors (Accents) */
-    --uae-red: 0 75% 45%;
-    --uae-green: 142 45% 35%;
-    --uae-black: 0 0% 10%;
-    --uae-white: 0 0% 98%;
+    --uae-red: 349 86% 47%;
+    --uae-green: 159 100% 24%;
+    --uae-black: 0 0% 0%;
+    --uae-white: 0 0% 100%;
   }
 }
 
@@ -129,31 +104,34 @@ All colors MUST be HSL.
 
   body {
     @apply bg-background text-foreground font-sans;
-    font-feature-settings: "kern" 1, "liga" 1;
+    font-feature-settings: "kern" 1;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    line-height: 1.7;
+    line-height: 1.8;
+    font-weight: 300;
   }
   
+  /* Institutional Typography - Minimal & Clean */
   h1, h2, h3, h4, h5, h6 {
     @apply font-serif;
-    font-feature-settings: "kern" 1, "liga" 1, "dlig" 1;
-    letter-spacing: 0.02em;
+    font-feature-settings: "kern" 1, "liga" 1;
+    letter-spacing: 0.05em;
+    font-weight: 500;
   }
   
   h1 {
     font-size: clamp(2.5rem, 5vw, 4rem);
-    letter-spacing: 0.03em;
-    text-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+    letter-spacing: 0.05em;
   }
   
   h2 {
     font-size: clamp(2rem, 4vw, 3rem);
-    letter-spacing: 0.025em;
+    letter-spacing: 0.05em;
   }
   
   h3 {
     font-size: clamp(1.5rem, 3vw, 2rem);
+    letter-spacing: 0.03em;
   }
   
   html {
@@ -162,66 +140,26 @@ All colors MUST be HSL.
 }
 
 @layer utilities {
+  /* Minimal fade-in animation only */
   .fade-in {
-    animation: fadeIn 0.8s ease-out;
+    animation: fadeIn 1s ease-out;
   }
   
-  .fade-in-up {
-    animation: fadeInUp 1s ease-out;
-  }
-  
-  .scroll-reveal {
-    opacity: 0;
-    animation: fadeInUp 0.8s ease-out forwards;
-  }
-  
+  /* Thin gold divider - 1px line */
   .gold-divider {
-    @apply h-px bg-gradient-to-r from-transparent via-primary to-transparent;
+    @apply h-px w-16 bg-gold mx-auto;
   }
   
-  .animate-expand {
-    transform: scaleX(0);
-    animation: expandWidth 1s ease-out forwards;
-  }
-  
-  /* Premium Typography Effects */
-  .text-gradient-gold {
-    background: linear-gradient(135deg, hsl(var(--gold-light)) 0%, hsl(var(--gold)) 50%, hsl(var(--gold-dark)) 100%);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-  }
-  
-  .text-shadow-gold {
-    text-shadow: 0 0 30px hsla(var(--gold), 0.4), 0 2px 10px hsla(var(--gold), 0.3);
-  }
-  
-  /* Premium Button Effects */
-  .btn-glow {
-    box-shadow: 0 0 30px hsla(var(--gold), 0.5), 0 0 60px hsla(var(--gold), 0.3);
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-  
-  .btn-glow:hover {
-    box-shadow: 0 0 40px hsla(var(--gold), 0.7), 0 0 80px hsla(var(--gold), 0.5);
-    transform: translateY(-2px) scale(1.02);
-  }
-  
-  /* Scroll Progress Indicator */
-  .scroll-progress {
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 3px;
-    background: linear-gradient(90deg, hsl(var(--gold)) 0%, hsl(var(--gold-light)) 100%);
-    transform-origin: left;
-    z-index: 100;
-  }
-  
-  /* Premium Backdrop Blur */
-  .backdrop-blur-premium {
-    backdrop-filter: blur(12px) saturate(180%);
-    background: hsla(var(--background), 0.85);
+  /* UAE Flag Accent Line - Used sparingly */
+  .uae-accent-line {
+    height: 2px;
+    width: 80px;
+    background: linear-gradient(to right, 
+      hsl(var(--uae-green)) 0% 25%, 
+      hsl(var(--uae-white)) 25% 50%, 
+      hsl(var(--uae-black)) 50% 75%, 
+      hsl(var(--uae-red)) 75% 100%
+    );
   }
 }
 
@@ -231,52 +169,5 @@ All colors MUST be HSL.
   }
   to {
     opacity: 1;
-  }
-}
-
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes expandWidth {
-  from {
-    transform: scaleX(0);
-  }
-  to {
-    transform: scaleX(1);
-  }
-}
-
-@keyframes shimmer {
-  0% {
-    background-position: -1000px 0;
-  }
-  100% {
-    background-position: 1000px 0;
-  }
-}
-
-@keyframes glow {
-  0%, 100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.8;
-  }
-}
-
-@keyframes float {
-  0%, 100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-10px);
   }
 }

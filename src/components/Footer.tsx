@@ -1,13 +1,30 @@
+import { Link } from "react-router-dom";
+
 const Footer = () => {
   return (
-    <footer className="bg-secondary border-t border-primary/20">
-      <div className="container mx-auto px-4 py-8">
-        <div className="gold-divider mb-6" />
-        <div className="text-center">
-          <p className="font-sans text-sm text-muted-foreground font-light tracking-wide">
-            © 2025 OneUAE Awards. Celebrating Unity, Vision, and Excellence.
-          </p>
+    <footer className="bg-deep-charcoal text-white py-16">
+      <div className="container mx-auto px-4 text-center max-w-3xl">
+        <p className="font-serif text-lg mb-3" style={{ fontWeight: 500, opacity: 0.9 }}>
+          OneUAE Awards 2026
+        </p>
+        
+        <p className="font-sans text-sm mb-8" style={{ fontWeight: 300, opacity: 0.7, lineHeight: 1.6 }}>
+          Under the Patronage of H.E. Sheikh Sultan Bin Nasser Bin Humaid Al Nuaimi
+        </p>
+        
+        <div className="flex justify-center gap-8 mb-8 font-sans text-sm" style={{ fontWeight: 300 }}>
+          <Link to="/about" className="hover:text-gold transition-colors duration-300" style={{ opacity: 0.8 }}>
+            About
+          </Link>
+          <Link to="/categories" className="hover:text-gold transition-colors duration-300" style={{ opacity: 0.8 }}>
+            Categories
+          </Link>
+          <Link to="/contact" className="hover:text-gold transition-colors duration-300" style={{ opacity: 0.8 }}>
+            Contact
+          </Link>
         </div>
+        
+        <div className="uae-accent-line mx-auto" />
       </div>
     </footer>
   );
