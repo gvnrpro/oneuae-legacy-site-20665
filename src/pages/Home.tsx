@@ -2,8 +2,6 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
-import CountdownTimer from "@/components/CountdownTimer";
-import SocialProof from "@/components/SocialProof";
 import SEOHead from "@/components/SEOHead";
 import heroBg from "@/assets/hero-bg.jpg";
 
@@ -13,10 +11,11 @@ const Home = () => {
       <SEOHead />
       <Navigation />
       
-      {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+      {/* Hero Section - SKGEP Style */}
+      <section className="relative h-screen flex items-center justify-center overflow-hidden">
         <a href="#main-content" className="sr-only focus:not-sr-only">Skip to main content</a>
-        {/* Video Background with Fallback */}
+        
+        {/* Video Background */}
         <video
           autoPlay
           loop
@@ -25,136 +24,298 @@ const Home = () => {
           poster={heroBg}
           className="absolute inset-0 w-full h-full object-cover"
           onError={(e) => {
-            // Fallback to background image if video fails
             e.currentTarget.style.display = 'none';
           }}
         >
           <source src="/hero-video.mov" type="video/quicktime" />
           <source src="/hero-video.mov" type="video/mp4" />
         </video>
+        
         {/* Fallback Background Image */}
         <div
           className="absolute inset-0 bg-cover bg-center bg-no-repeat -z-10"
           style={{ backgroundImage: `url(${heroBg})` }}
         />
         
-        {/* Sophisticated Gradient Overlays */}
-        <div className="absolute inset-0 bg-gradient-to-br from-black/85 via-black/70 to-black/80" />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+        {/* Minimal Overlay - Only for text legibility */}
+        <div className="absolute inset-0 bg-black/30" />
         
-        {/* Subtle Pattern Overlay */}
-        <div className="absolute inset-0 opacity-5" style={{
-          backgroundImage: `repeating-linear-gradient(45deg, transparent, transparent 35px, rgba(212, 175, 55, 0.1) 35px, rgba(212, 175, 55, 0.1) 70px)`
-        }} />
+        {/* Hero Content - Minimal & Centered */}
+        <div className="relative z-10 container mx-auto px-4 text-center fade-in">
+          <div className="max-w-5xl mx-auto">
+            <h1 className="font-serif text-white mb-6 tracking-wide" style={{ fontSize: 'clamp(2.5rem, 5vw, 4rem)', fontWeight: 500, letterSpacing: '0.05em' }}>
+              ONEUAE AWARDS 2026
+            </h1>
+            
+            <div className="font-sans text-lg md:text-xl text-white/90 mb-4 font-light" style={{ letterSpacing: '0.03em' }}>
+              Under the Patronage of<br />
+              H.E. Sheikh Sultan Bin Nasser Bin Humaid Al Nuaimi
+            </div>
+            
+            <p className="font-sans text-base md:text-lg text-white/80 font-light" style={{ letterSpacing: '0.1em', marginTop: '1rem' }}>
+              Celebrating Growth · Development · Sustainability
+            </p>
+          </div>
+        </div>
         
-        {/* Hero Content */}
-        <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 text-center py-24 md:py-32">
-          <div className="max-w-6xl mx-auto">
-            {/* Premium Date Badge with Glow */}
-            <div className="mb-8 md:mb-12 opacity-0 animate-fade-in-up" style={{ animationDelay: '0.1s', animationFillMode: 'forwards' }}>
-              <div className="inline-block px-8 py-3 border-2 border-gold-light/40 rounded-full backdrop-blur-md bg-gradient-to-r from-gold-dark/20 via-gold/10 to-gold-dark/20 shadow-[0_0_30px_rgba(212,175,55,0.3)]">
-                <p className="font-sans text-sm md:text-base text-gold-light font-medium tracking-[0.15em] uppercase">
-                  January 4th, 2026 • Zabeel Ladies Club
-                </p>
+        {/* Simple Scroll Indicator */}
+        <div className="absolute bottom-10 left-1/2 -translate-x-1/2">
+          <div className="w-6 h-10 border border-white/40 rounded-full flex items-start justify-center p-2">
+            <div className="w-1 h-2 bg-white/60 rounded-full animate-bounce" />
+          </div>
+        </div>
+      </section>
+
+      {/* About OneUAE Awards - Two Column Layout */}
+      <section id="main-content" className="py-32 bg-white">
+        <div className="container mx-auto px-4 max-w-6xl">
+          <div className="grid md:grid-cols-5 gap-16 items-start">
+            {/* Left Column - Content */}
+            <div className="md:col-span-3">
+              <h2 className="font-serif text-3xl md:text-4xl text-deep-charcoal mb-8" style={{ fontWeight: 500, letterSpacing: '0.05em' }}>
+                About OneUAE Awards
+              </h2>
+              
+              <p className="font-sans text-base md:text-lg text-slate-gray mb-12 leading-relaxed" style={{ fontWeight: 300, lineHeight: 1.8 }}>
+                The OneUAE Awards is a national platform honoring individuals and establishments driving the UAE's journey of growth, development, and sustainability. Under the patronage of H.E. Sheikh Sultan Bin Nasser Bin Humaid Al Nuaimi, the Awards celebrate excellence across vital sectors shaping the future of the nation.
+              </p>
+              
+              <div className="space-y-8">
+                <div>
+                  <div className="w-10 h-px bg-gold mb-4" />
+                  <h3 className="font-serif text-xl text-deep-charcoal mb-3" style={{ fontWeight: 500 }}>Mission</h3>
+                  <p className="font-sans text-base text-slate-gray leading-relaxed" style={{ fontWeight: 300, lineHeight: 1.8 }}>
+                    To recognize leaders and institutions contributing to national progress and UAE Vision 2071.
+                  </p>
+                </div>
+                
+                <div>
+                  <div className="w-10 h-px bg-gold mb-4" />
+                  <h3 className="font-serif text-xl text-deep-charcoal mb-3" style={{ fontWeight: 500 }}>Vision</h3>
+                  <p className="font-sans text-base text-slate-gray leading-relaxed" style={{ fontWeight: 300, lineHeight: 1.8 }}>
+                    To build a prestigious tradition of honoring excellence, unity, and sustainable advancement.
+                  </p>
+                </div>
               </div>
             </div>
             
-            {/* Headline with Gradient Text */}
-            <h1 
-              className="font-serif font-bold text-white mb-8 md:mb-10 leading-[1.05] tracking-tight opacity-0 animate-fade-in-up text-shadow-gold" 
-              style={{ 
-                animationDelay: '0.3s', 
-                animationFillMode: 'forwards',
-                fontSize: 'clamp(2.5rem, 8vw, 6rem)'
-              }}
-            >
-              Celebrating Unity, Vision,<br className="hidden sm:block" /> 
-              <span className="text-gradient-gold">and Excellence</span>
-            </h1>
-            
-            {/* Enhanced Subheadline */}
-            <p 
-              className="font-sans text-xl sm:text-2xl md:text-3xl text-white/95 mb-12 md:mb-16 max-w-4xl mx-auto leading-relaxed font-light tracking-wide opacity-0 animate-fade-in-up" 
-              style={{ animationDelay: '0.5s', animationFillMode: 'forwards' }}
-            >
-              Honouring the leaders, innovators, and changemakers<br className="hidden md:block" /> 
-              shaping the legacy of the <span className="text-gold-light font-medium">Emirates</span>
-            </p>
-            
-            {/* Premium Buttons with Glow Effects */}
-            <div 
-              className="flex flex-col sm:flex-row gap-6 justify-center items-center opacity-0 animate-fade-in-up max-w-2xl mx-auto" 
-              style={{ animationDelay: '0.7s', animationFillMode: 'forwards' }}
-            >
-              <Link to="/nominate" className="w-full sm:w-auto">
-                <Button 
-                  size="lg" 
-                  className="w-full sm:w-auto bg-gradient-to-r from-gold via-gold-light to-gold hover:from-gold-dark hover:via-gold hover:to-gold-dark text-white font-sans text-base md:text-lg px-12 md:px-14 py-7 md:py-8 transition-all duration-500 hover:scale-105 btn-glow font-semibold tracking-wide shadow-2xl"
-                >
-                  Nominate Now
-                </Button>
-              </Link>
-              <Link to="/partnerships" className="w-full sm:w-auto">
-                <Button 
-                  size="lg" 
-                  variant="outline" 
-                  className="w-full sm:w-auto border-2 border-gold-light/60 bg-white/5 backdrop-blur-sm text-white hover:bg-gold/20 hover:border-gold-light hover:text-white font-sans text-base md:text-lg px-12 md:px-14 py-7 md:py-8 transition-all duration-500 hover:scale-105 hover:shadow-[0_0_30px_rgba(212,175,55,0.4)] font-semibold tracking-wide"
-                >
-                  Become a Partner
-                </Button>
-              </Link>
+            {/* Right Column - Subtle Accent */}
+            <div className="md:col-span-2 flex items-center justify-center">
+              <div className="w-px h-64 bg-gradient-to-b from-transparent via-gold to-transparent" />
             </div>
           </div>
         </div>
-        
-        {/* Enhanced Scroll Indicator */}
-        <div className="absolute bottom-10 left-1/2 -translate-x-1/2 opacity-0 animate-fade-in-up" style={{ animationDelay: '1.2s', animationFillMode: 'forwards' }}>
-          <div className="w-7 h-12 border-2 border-gold-light/50 rounded-full flex items-start justify-center p-2 shadow-[0_0_20px_rgba(212,175,55,0.2)]">
-            <div className="w-1.5 h-3 bg-gold-light rounded-full animate-bounce" />
+      </section>
+
+      {/* The Three Pillars */}
+      <section className="py-32 bg-cool-gray">
+        <div className="container mx-auto px-4 max-w-5xl">
+          <h2 className="font-serif text-3xl md:text-4xl text-center text-deep-charcoal mb-20" style={{ fontWeight: 500, letterSpacing: '0.05em' }}>
+            The Three Pillars
+          </h2>
+          
+          <div className="space-y-20">
+            <div className="text-center max-w-3xl mx-auto">
+              <h3 className="font-serif text-2xl text-deep-charcoal mb-4" style={{ fontWeight: 500 }}>
+                Growth & Economic Excellence
+              </h3>
+              <div className="w-16 h-px bg-gold mx-auto mb-6" />
+              <p className="font-sans text-base text-slate-gray leading-relaxed" style={{ fontWeight: 300, lineHeight: 1.8 }}>
+                Honoring achievements in entrepreneurship, innovation, corporate leadership, finance, retail, hospitality, technology, and digital transformation.
+              </p>
+            </div>
+            
+            <div className="text-center max-w-3xl mx-auto">
+              <h3 className="font-serif text-2xl text-deep-charcoal mb-4" style={{ fontWeight: 500 }}>
+                Development & Human Progress
+              </h3>
+              <div className="w-16 h-px bg-gold mx-auto mb-6" />
+              <p className="font-sans text-base text-slate-gray leading-relaxed" style={{ fontWeight: 300, lineHeight: 1.8 }}>
+                Recognizing contributions in education, healthcare, community service, culture, arts, and youth excellence.
+              </p>
+            </div>
+            
+            <div className="text-center max-w-3xl mx-auto">
+              <h3 className="font-serif text-2xl text-deep-charcoal mb-4" style={{ fontWeight: 500 }}>
+                Sustainability & Global Leadership
+              </h3>
+              <div className="w-16 h-px bg-gold mx-auto mb-6" />
+              <p className="font-sans text-base text-slate-gray leading-relaxed" style={{ fontWeight: 300, lineHeight: 1.8 }}>
+                Celebrating environmental stewardship, infrastructure innovation, international diplomacy, media excellence, and lifetime achievement.
+              </p>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Countdown Section */}
-      <section className="py-16 md:py-24 bg-gradient-to-b from-background to-secondary">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-10">
-            <h2 className="font-serif text-3xl md:text-4xl font-semibold text-foreground mb-4">
-              The Celebration Begins In
-            </h2>
-            <p className="font-sans text-muted-foreground">
-              January 4th, 2026 • Zabeel Ladies Club, Dubai
-            </p>
-          </div>
-          <CountdownTimer />
-        </div>
-      </section>
-
-      <SocialProof />
-
-      {/* About Preview */}
-      <section id="main-content" className="py-20 md:py-32 bg-secondary relative overflow-hidden">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-4xl mx-auto text-center">
-            <div className="gold-divider mb-12 md:mb-16" />
-            <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-semibold text-foreground mb-6 md:mb-8 tracking-tight">
-              A National Platform for Excellence
-            </h2>
-            <p className="font-sans text-base sm:text-lg md:text-xl text-muted-foreground mb-8 md:mb-10 leading-relaxed max-w-3xl mx-auto font-light">
-              OneUAE Awards celebrates the remarkable individuals and organizations who embody the spirit of the Emirates. 
-              Through unity, vision, and excellence, we honour those who inspire progress and shape our nation's legacy.
-            </p>
-            <Link to="/about">
-              <Button 
-                variant="ghost" 
-                className="text-primary hover:text-primary/80 hover:bg-transparent font-sans text-base md:text-lg transition-all duration-300 group font-medium"
+      {/* Award Categories - MIITE Style */}
+      <section className="py-32 bg-white">
+        <div className="container mx-auto px-4 max-w-6xl">
+          <h2 className="font-serif text-3xl md:text-4xl text-center text-deep-charcoal mb-20" style={{ fontWeight: 500, letterSpacing: '0.05em' }}>
+            Award Categories
+          </h2>
+          
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            {[
+              'Growth & Economic Excellence',
+              'Entrepreneurship & Innovation',
+              'Corporate Leadership',
+              'Finance & Banking',
+              'Retail & Hospitality',
+              'Technology & Digital Transformation',
+              'Development & Human Progress',
+              'Education',
+              'Healthcare',
+              'Community Service',
+              'Culture & Arts',
+              'Youth Excellence',
+              'Sustainability & Global Leadership',
+              'Sustainability & Environment',
+              'Infrastructure & Construction',
+              'International Relations & Diplomacy',
+              'Media & Communication',
+              'Lifetime Achievement & Legacy',
+            ].map((category) => (
+              <div
+                key={category}
+                className="border border-border bg-white p-10 text-center transition-colors duration-300 hover:border-gold"
+                style={{ borderRadius: '4px' }}
               >
-                Learn More About Our Mission 
-                <span className="inline-block transition-transform duration-300 group-hover:translate-x-2 ml-2">→</span>
+                <h3 className="font-serif text-lg text-deep-charcoal mb-4" style={{ fontWeight: 500 }}>
+                  {category}
+                </h3>
+                <div className="w-10 h-px bg-gold mx-auto" />
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Event Details - Two Column */}
+      <section className="py-32 bg-cool-gray">
+        <div className="container mx-auto px-4 max-w-5xl">
+          <h2 className="font-serif text-3xl md:text-4xl text-center text-deep-charcoal mb-20" style={{ fontWeight: 500, letterSpacing: '0.05em' }}>
+            Event Details
+          </h2>
+          
+          <div className="grid md:grid-cols-2 gap-16">
+            {/* Left - Event Facts */}
+            <div className="space-y-6">
+              <h3 className="font-serif text-xl text-deep-charcoal mb-6" style={{ fontWeight: 500 }}>Event Facts</h3>
+              <div className="space-y-4 font-sans text-base text-slate-gray" style={{ fontWeight: 300 }}>
+                <p><span className="text-deep-charcoal" style={{ fontWeight: 400 }}>Date:</span> January 4, 2026</p>
+                <p><span className="text-deep-charcoal" style={{ fontWeight: 400 }}>Venue:</span> Main Ballroom, Zabeel Ladies Club, Dubai</p>
+                <p><span className="text-deep-charcoal" style={{ fontWeight: 400 }}>Format:</span> Ceremony + Gala Dinner</p>
+                <p><span className="text-deep-charcoal" style={{ fontWeight: 400 }}>Attendees:</span> 750</p>
+                <p><span className="text-deep-charcoal" style={{ fontWeight: 400 }}>VIP Dignitaries:</span> 5–6</p>
+              </div>
+            </div>
+            
+            {/* Right - Program Flow */}
+            <div className="space-y-6 md:border-l md:border-gold/30 md:pl-16">
+              <h3 className="font-serif text-xl text-deep-charcoal mb-6" style={{ fontWeight: 500 }}>Program Flow</h3>
+              <div className="space-y-4 font-sans text-base text-slate-gray" style={{ fontWeight: 300 }}>
+                <p>6:00 PM – Reception</p>
+                <p>6:45 PM – Opening</p>
+                <p>7:15 PM – Award Ceremony</p>
+                <p>8:45 PM – Dinner</p>
+                <p>10:00 PM – Closing</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Audience Profile */}
+      <section className="py-32 bg-white">
+        <div className="container mx-auto px-4 max-w-6xl">
+          <h2 className="font-serif text-3xl md:text-4xl text-center text-deep-charcoal mb-20" style={{ fontWeight: 500, letterSpacing: '0.05em' }}>
+            Audience Profile
+          </h2>
+          
+          <div className="grid grid-cols-2 md:grid-cols-5 gap-12">
+            {[
+              'Government Representatives',
+              'Business & Corporate Leaders',
+              'Entrepreneurs & Innovators',
+              'Healthcare & Education Professionals',
+              'Media & Cultural Figures',
+            ].map((audience) => (
+              <div key={audience} className="text-center">
+                <div className="w-10 h-10 border border-gold rounded-full mx-auto mb-4 flex items-center justify-center">
+                  <div className="w-1 h-1 bg-gold rounded-full" />
+                </div>
+                <p className="font-sans text-sm text-slate-gray" style={{ fontWeight: 400 }}>
+                  {audience}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Sponsorship Tiers - Minimal Equal Treatment */}
+      <section className="py-32 bg-cool-gray">
+        <div className="container mx-auto px-4 max-w-6xl">
+          <h2 className="font-serif text-3xl md:text-4xl text-center text-deep-charcoal mb-20" style={{ fontWeight: 500, letterSpacing: '0.05em' }}>
+            Sponsorship Tiers
+          </h2>
+          
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+            {[
+              { name: 'Gold Partner', amount: 'AED 100,000' },
+              { name: 'Silver Partner', amount: 'AED 75,000' },
+              { name: 'Bronze Partner', amount: 'AED 50,000' },
+              { name: 'Red-Carpet Partner', amount: 'AED 25,000' },
+            ].map((tier) => (
+              <div
+                key={tier.name}
+                className="border border-gold bg-white p-12 text-center transition-all duration-300 hover:border-2"
+                style={{ borderRadius: '4px' }}
+              >
+                <h3 className="font-serif text-lg text-deep-charcoal mb-4" style={{ fontWeight: 500 }}>
+                  {tier.name}
+                </h3>
+                <div className="w-16 h-px bg-gold mx-auto mb-4" />
+                <p className="font-sans text-base text-slate-gray" style={{ fontWeight: 300 }}>
+                  {tier.amount}
+                </p>
+              </div>
+            ))}
+          </div>
+          
+          <div className="text-center mt-16">
+            <Link to="/partnerships">
+              <Button
+                variant="outline"
+                className="border border-gold bg-transparent text-deep-charcoal hover:bg-gold hover:text-white transition-colors duration-300"
+                style={{ fontWeight: 400, letterSpacing: '0.05em' }}
+              >
+                Learn More About Partnerships
               </Button>
             </Link>
-            <div className="gold-divider mt-12 md:mt-16" />
           </div>
+        </div>
+      </section>
+
+      {/* Contact Section - Minimal & Centered */}
+      <section className="py-32 bg-white">
+        <div className="container mx-auto px-4 max-w-2xl text-center">
+          <h2 className="font-serif text-3xl md:text-4xl text-deep-charcoal mb-12" style={{ fontWeight: 500, letterSpacing: '0.05em' }}>
+            Contact
+          </h2>
+          
+          <div className="space-y-4 font-sans text-base text-slate-gray" style={{ fontWeight: 300 }}>
+            <p className="text-deep-charcoal" style={{ fontWeight: 400 }}>OneUAE Awards Secretariat</p>
+            <a href="mailto:info@oneuaeaward.ae" className="block hover:text-gold transition-colors duration-300">
+              info@oneuaeaward.ae
+            </a>
+            <a href="tel:+971562555100" className="block hover:text-gold transition-colors duration-300">
+              +971 56 255 5100
+            </a>
+          </div>
+          
+          <div className="uae-accent-line mx-auto mt-12" />
         </div>
       </section>
 
