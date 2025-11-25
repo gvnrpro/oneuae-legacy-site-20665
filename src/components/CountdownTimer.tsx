@@ -16,7 +16,7 @@ const CountdownTimer = () => {
   });
 
   useEffect(() => {
-    const targetDate = new Date("2026-01-04T18:00:00+04:00").getTime(); // 6 PM UAE time
+    const targetDate = new Date("2026-01-04T18:00:00+04:00").getTime();
 
     const calculateTimeLeft = () => {
       const now = new Date().getTime();
@@ -47,21 +47,16 @@ const CountdownTimer = () => {
 
   return (
     <div className="w-full max-w-4xl mx-auto">
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
-        {timeUnits.map((unit, index) => (
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+        {timeUnits.map((unit) => (
           <div
             key={unit.label}
-            className="bg-card/50 backdrop-blur-sm border border-primary/20 rounded-lg p-4 md:p-6 text-center transition-all duration-300 hover:border-primary/40 hover:shadow-lg hover:shadow-primary/10"
-            style={{
-              animation: "fade-in 0.5s ease-out forwards",
-              animationDelay: `${index * 0.1}s`,
-              opacity: 0,
-            }}
+            className="bg-background border border-border p-6 text-center transition-colors duration-300 hover:border-gold"
           >
-            <div className="font-serif text-3xl md:text-5xl font-bold text-primary mb-2">
+            <div className="font-serif text-4xl md:text-5xl font-medium text-gold mb-2">
               {unit.value.toString().padStart(2, "0")}
             </div>
-            <div className="font-sans text-xs md:text-sm text-muted-foreground uppercase tracking-wider font-medium">
+            <div className="font-sans text-xs text-muted-foreground uppercase tracking-wider font-light">
               {unit.label}
             </div>
           </div>

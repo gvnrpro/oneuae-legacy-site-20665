@@ -1,7 +1,7 @@
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
-import { Mail, Phone, MapPin } from "lucide-react";
+
 const Contact = () => {
   return <div className="min-h-screen">
       <SEOHead
@@ -13,77 +13,64 @@ const Contact = () => {
       <Navigation />
       
       <main className="pt-32 pb-24" id="main-content">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-16 fade-in">
-            <h1 className="font-serif text-5xl md:text-6xl font-semibold text-foreground mb-6">
-              Contact Us
+        <div className="container mx-auto px-4 max-w-6xl">
+          <div className="text-center mb-20 fade-in">
+            <h1 className="font-serif text-5xl md:text-6xl font-medium text-foreground mb-6">
+              Contact
             </h1>
-            <div className="gold-divider mb-8 max-w-md mx-auto" />
+            <div className="gold-divider mb-8" />
             <p className="font-sans text-lg text-muted-foreground max-w-3xl mx-auto leading-relaxed font-light">
-              We welcome your inquiries about nominations, partnerships, and the awards ceremony.
+              For inquiries about nominations, partnerships, or general information
             </p>
           </div>
 
-          <div className="max-w-3xl mx-auto fade-in-up">
-            <div className="relative overflow-hidden bg-gradient-to-br from-card via-secondary to-card p-12 md:p-16 rounded-2xl border-2 border-primary/30 shadow-2xl text-center">
-              {/* Decorative Elements */}
-              <div className="absolute top-0 right-0 w-48 h-48 bg-gold/10 rounded-full blur-3xl" />
-              <div className="absolute bottom-0 left-0 w-48 h-48 bg-gold-light/10 rounded-full blur-3xl" />
-              
-              <div className="relative">
-                <h2 className="font-serif text-4xl font-semibold text-gradient-gold mb-12">
-                  Get in Touch
+          <div className="max-w-2xl mx-auto text-center fade-in">
+            <div className="space-y-12">
+              <div>
+                <h2 className="font-serif text-2xl font-medium text-foreground mb-6">
+                  OneUAE Awards Secretariat
                 </h2>
-                
-                <div className="space-y-10">
-                  <div className="group">
-                    <div className="w-16 h-16 bg-gradient-to-br from-gold to-gold-light rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 group-hover:rotate-6 transition-all duration-500 shadow-lg shadow-gold/30">
-                      <MapPin className="w-8 h-8 text-white" />
-                    </div>
-                    <h3 className="font-serif text-2xl font-semibold text-foreground mb-3">Location</h3>
-                    <p className="font-sans text-lg text-muted-foreground leading-relaxed">
-                      Zabeel Ladies Club<br />
-                      Dubai, United Arab Emirates
-                    </p>
-                  </div>
+                <div className="w-16 h-px bg-gold mx-auto mb-8" />
+              </div>
 
-                  <div className="gold-divider my-10" />
-
-                  <div className="group">
-                    <div className="w-16 h-16 bg-gradient-to-br from-gold to-gold-light rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 group-hover:rotate-6 transition-all duration-500 shadow-lg shadow-gold/30">
-                      <Mail className="w-8 h-8 text-white" />
-                    </div>
-                    <h3 className="font-serif text-2xl font-semibold text-foreground mb-3">Email</h3>
-                    <a 
-                      href="mailto:info@oneuaeawards.ae" 
-                      className="inline-block font-sans text-xl text-primary hover:text-primary-light transition-colors duration-300 px-6 py-3 bg-gold/5 rounded-lg hover:bg-gold/10"
-                    >
-                      info@oneuaeawards.ae
-                    </a>
-                  </div>
-
-                  <div className="gold-divider my-10" />
-
-                  <div className="group">
-                    <div className="w-16 h-16 bg-gradient-to-br from-gold to-gold-light rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 group-hover:rotate-6 transition-all duration-500 shadow-lg shadow-gold/30">
-                      <Phone className="w-8 h-8 text-white" />
-                    </div>
-                    <h3 className="font-serif text-2xl font-semibold text-foreground mb-3">Phone</h3>
-                    <a 
-                      href="tel:+971562555100" 
-                      className="inline-block font-sans text-xl text-primary hover:text-primary-light transition-colors duration-300 px-6 py-3 bg-gold/5 rounded-lg hover:bg-gold/10"
-                    >
-                      +971 56 255 5100
-                    </a>
-                  </div>
-                </div>
-
-                <div className="mt-14 pt-10 border-t border-primary/20">
-                  <p className="font-sans text-muted-foreground leading-relaxed">
-                    For partnership inquiries and sponsorship opportunities,<br className="hidden md:block" />
-                    please contact us directly via email or phone.
+              <div className="space-y-6">
+                <div>
+                  <h3 className="font-sans text-sm text-muted-foreground uppercase tracking-wider mb-2 font-light">
+                    Location
+                  </h3>
+                  <p className="font-sans text-base text-foreground font-light">
+                    Zabeel Ladies Club<br />
+                    Dubai, United Arab Emirates
                   </p>
                 </div>
+
+                <div>
+                  <h3 className="font-sans text-sm text-muted-foreground uppercase tracking-wider mb-2 font-light">
+                    Email
+                  </h3>
+                  <a 
+                    href="mailto:info@oneuaeaward.ae" 
+                    className="font-sans text-base text-gold hover:text-gold/80 transition-colors font-light"
+                  >
+                    info@oneuaeaward.ae
+                  </a>
+                </div>
+
+                <div>
+                  <h3 className="font-sans text-sm text-muted-foreground uppercase tracking-wider mb-2 font-light">
+                    Phone
+                  </h3>
+                  <a 
+                    href="tel:+971562555100" 
+                    className="font-sans text-base text-gold hover:text-gold/80 transition-colors font-light"
+                  >
+                    +971 56 255 5100
+                  </a>
+                </div>
+              </div>
+
+              <div className="pt-12">
+                <div className="uae-accent-line mx-auto" />
               </div>
             </div>
           </div>

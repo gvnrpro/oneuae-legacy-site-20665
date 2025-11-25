@@ -2,7 +2,6 @@ import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import CountdownTimer from "@/components/CountdownTimer";
 import SEOHead from "@/components/SEOHead";
-import { Calendar, MapPin, Clock, Users } from "lucide-react";
 
 const Gala = () => {
   return (
@@ -16,113 +15,108 @@ const Gala = () => {
       <Navigation />
       
       <main className="pt-32 pb-24" id="main-content">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-16 fade-in">
-            <h1 className="font-serif text-5xl md:text-6xl font-semibold text-foreground mb-6">
+        <div className="container mx-auto px-4 max-w-6xl">
+          <div className="text-center mb-20 fade-in">
+            <h1 className="font-serif text-5xl md:text-6xl font-medium text-foreground mb-6">
               Awards Gala Night
             </h1>
-            <div className="gold-divider mb-8 max-w-md mx-auto" />
+            <div className="gold-divider mb-8" />
             <p className="font-sans text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed font-light">
               An evening of elegance, celebration, and national pride
             </p>
           </div>
 
-          <div className="mb-16 fade-in-up">
-            <div className="text-center mb-8">
-              <h2 className="font-serif text-2xl md:text-3xl font-semibold text-foreground mb-2">
-                Event Countdown
+          <div className="mb-20 fade-in">
+            <div className="text-center mb-12">
+              <h2 className="font-serif text-2xl font-medium text-foreground mb-2">
+                Event countdown
               </h2>
-              <p className="font-sans text-muted-foreground">
-                Join us on January 4th, 2026
+              <p className="font-sans text-muted-foreground font-light">
+                January 4, 2026
               </p>
             </div>
             <CountdownTimer />
           </div>
 
-          <div className="max-w-4xl mx-auto space-y-12 fade-in-up">
-            <section className="bg-card p-8 rounded-lg border border-border">
-              <h2 className="font-serif text-3xl font-semibold text-primary mb-6">
-                The Evening
+          <div className="max-w-4xl mx-auto space-y-20 fade-in">
+            <section>
+              <h2 className="font-serif text-3xl font-medium text-foreground mb-8">
+                The evening
               </h2>
-              <p className="font-sans text-lg text-muted-foreground leading-relaxed mb-6 font-light">
+              <p className="font-sans text-base text-muted-foreground leading-relaxed font-light mb-6">
                 The OneUAE Awards Gala is an exclusive black-tie ceremony bringing together distinguished leaders, 
-                innovators, and visionaries from across the Emirates. This prestigious evening on <strong className="text-foreground">January 4th, 2026</strong> celebrates the 
+                innovators, and visionaries from across the Emirates. This prestigious evening celebrates the 
                 extraordinary achievements of individuals and organizations who embody the spirit of excellence.
               </p>
-              <p className="font-sans text-lg text-muted-foreground leading-relaxed font-light">
+              <p className="font-sans text-base text-muted-foreground leading-relaxed font-light">
                 Guests will experience a sophisticated evening featuring award presentations, inspiring speeches, 
-                cultural performances, and networking opportunities with the nation's most influential figures.
+                and networking opportunities with the nation's most influential figures.
               </p>
             </section>
 
-            <div className="grid md:grid-cols-2 gap-6">
-              <div className="bg-secondary p-6 rounded-lg">
-                <div className="flex items-center gap-3 mb-3">
-                  <MapPin className="w-6 h-6 text-primary" />
-                  <h3 className="font-serif text-xl font-semibold text-foreground">Venue</h3>
+            <section className="py-20 bg-cool-gray px-12">
+              <h2 className="font-serif text-2xl font-medium text-foreground mb-12 text-center">Event details</h2>
+              
+              <div className="grid md:grid-cols-2 gap-x-16 gap-y-8 max-w-3xl mx-auto">
+                <div>
+                  <h3 className="font-serif text-lg font-medium text-foreground mb-2">Venue</h3>
+                  <div className="w-10 h-px bg-gold mb-3" />
+                  <p className="font-sans text-sm text-muted-foreground font-light">
+                    Main Ballroom<br />
+                    Zabeel Ladies Club<br />
+                    Dubai, United Arab Emirates
+                  </p>
                 </div>
-                <p className="font-sans text-muted-foreground">
-                  Zabeel Ladies Club<br />
-                  Dubai, United Arab Emirates
-                </p>
-              </div>
 
-              <div className="bg-secondary p-6 rounded-lg">
-                <div className="flex items-center gap-3 mb-3">
-                  <Calendar className="w-6 h-6 text-primary" />
-                  <h3 className="font-serif text-xl font-semibold text-foreground">Date</h3>
+                <div>
+                  <h3 className="font-serif text-lg font-medium text-foreground mb-2">Date</h3>
+                  <div className="w-10 h-px bg-gold mb-3" />
+                  <p className="font-sans text-sm text-muted-foreground font-light">
+                    January 4, 2026
+                  </p>
                 </div>
-                <p className="font-sans text-muted-foreground">
-                  <strong className="text-foreground">January 4th, 2026</strong>
-                </p>
-              </div>
 
-              <div className="bg-secondary p-6 rounded-lg">
-                <div className="flex items-center gap-3 mb-3">
-                  <Clock className="w-6 h-6 text-primary" />
-                  <h3 className="font-serif text-xl font-semibold text-foreground">Timing</h3>
+                <div>
+                  <h3 className="font-serif text-lg font-medium text-foreground mb-2">Format</h3>
+                  <div className="w-10 h-px bg-gold mb-3" />
+                  <p className="font-sans text-sm text-muted-foreground font-light">
+                    Ceremony + Gala Dinner
+                  </p>
                 </div>
-                <p className="font-sans text-muted-foreground">
-                  Evening Reception & Awards Ceremony
-                </p>
-              </div>
 
-              <div className="bg-secondary p-6 rounded-lg">
-                <div className="flex items-center gap-3 mb-3">
-                  <Users className="w-6 h-6 text-primary" />
-                  <h3 className="font-serif text-xl font-semibold text-foreground">Dress Code</h3>
+                <div>
+                  <h3 className="font-serif text-lg font-medium text-foreground mb-2">Dress code</h3>
+                  <div className="w-10 h-px bg-gold mb-3" />
+                  <p className="font-sans text-sm text-muted-foreground font-light">
+                    Black Tie / National Dress
+                  </p>
                 </div>
-                <p className="font-sans text-muted-foreground">
-                  Black Tie / National Dress
-                </p>
               </div>
-            </div>
+            </section>
 
-            <section className="bg-card p-8 rounded-lg border border-primary/20">
-              <h2 className="font-serif text-3xl font-semibold text-primary mb-6 text-center">
-                Experience Excellence
-              </h2>
-              <div className="grid md:grid-cols-3 gap-6 text-center">
-                <div className="p-4">
-                  <div className="w-24 h-24 bg-secondary rounded-full mx-auto mb-4 flex items-center justify-center">
-                    <span className="font-sans text-xs text-muted-foreground">Gallery</span>
-                  </div>
-                  <h4 className="font-serif text-lg font-semibold text-foreground mb-2">Red Carpet</h4>
-                  <p className="font-sans text-sm text-muted-foreground">Exclusive photography and media coverage</p>
+            <section>
+              <h2 className="font-serif text-2xl font-medium text-foreground mb-12 text-center">Program flow</h2>
+              
+              <div className="space-y-6 max-w-2xl mx-auto">
+                <div className="flex gap-6 pb-6 border-b border-border">
+                  <span className="font-sans text-sm text-gold font-light flex-shrink-0 w-20">6:00 PM</span>
+                  <span className="font-sans text-sm text-foreground font-light">Reception</span>
                 </div>
-                <div className="p-4">
-                  <div className="w-24 h-24 bg-secondary rounded-full mx-auto mb-4 flex items-center justify-center">
-                    <span className="font-sans text-xs text-muted-foreground">Gallery</span>
-                  </div>
-                  <h4 className="font-serif text-lg font-semibold text-foreground mb-2">Award Ceremony</h4>
-                  <p className="font-sans text-sm text-muted-foreground">Honouring exceptional achievements</p>
+                <div className="flex gap-6 pb-6 border-b border-border">
+                  <span className="font-sans text-sm text-gold font-light flex-shrink-0 w-20">6:45 PM</span>
+                  <span className="font-sans text-sm text-foreground font-light">Opening</span>
                 </div>
-                <div className="p-4">
-                  <div className="w-24 h-24 bg-secondary rounded-full mx-auto mb-4 flex items-center justify-center">
-                    <span className="font-sans text-xs text-muted-foreground">Gallery</span>
-                  </div>
-                  <h4 className="font-serif text-lg font-semibold text-foreground mb-2">Networking</h4>
-                  <p className="font-sans text-sm text-muted-foreground">Connect with UAE's finest leaders</p>
+                <div className="flex gap-6 pb-6 border-b border-border">
+                  <span className="font-sans text-sm text-gold font-light flex-shrink-0 w-20">7:15 PM</span>
+                  <span className="font-sans text-sm text-foreground font-light">Award Ceremony</span>
+                </div>
+                <div className="flex gap-6 pb-6 border-b border-border">
+                  <span className="font-sans text-sm text-gold font-light flex-shrink-0 w-20">8:45 PM</span>
+                  <span className="font-sans text-sm text-foreground font-light">Dinner</span>
+                </div>
+                <div className="flex gap-6 pb-6">
+                  <span className="font-sans text-sm text-gold font-light flex-shrink-0 w-20">10:00 PM</span>
+                  <span className="font-sans text-sm text-foreground font-light">Closing</span>
                 </div>
               </div>
             </section>
