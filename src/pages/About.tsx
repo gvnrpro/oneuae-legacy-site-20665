@@ -28,7 +28,7 @@ const About = () => {
           </div>
 
           {/* About Content - Two Column Layout */}
-          <section className="mb-32 fade-in">
+          <section className="mb-20 fade-in">
             <div className="grid md:grid-cols-5 gap-12">
               <div className="md:col-span-3 space-y-8">
                 <div>
@@ -68,7 +68,7 @@ const About = () => {
           </section>
 
           {/* Patronage Section */}
-          <section className="mb-32 py-20 bg-cool-gray fade-in">
+          <section className="mb-20 py-30 bg-cool-gray fade-in">
             <div className="max-w-4xl mx-auto px-8">
               <h2 className="font-serif text-3xl font-medium text-center mb-16">Under the Patronage</h2>
               
@@ -96,7 +96,7 @@ const About = () => {
           </section>
 
           {/* Core Values */}
-          <section className="mb-32 fade-in">
+          <section className="mb-20 fade-in">
             <h2 className="font-serif text-3xl font-medium text-center mb-16">Core values</h2>
             
             <div className="grid md:grid-cols-3 gap-16 max-w-5xl mx-auto">
@@ -127,7 +127,7 @@ const About = () => {
           </section>
 
           {/* Selection Process */}
-          <section className="py-20 bg-cool-gray fade-in">
+          <section className="py-30 bg-cool-gray fade-in">
             <div className="max-w-4xl mx-auto px-8">
               <h2 className="font-serif text-3xl font-medium text-center mb-16">Selection process</h2>
               

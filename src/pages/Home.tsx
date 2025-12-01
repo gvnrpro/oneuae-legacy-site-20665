@@ -65,7 +65,7 @@ const Home = () => {
       </section>
 
       {/* About OneUAE Awards - Two Column Layout */}
-      <section id="main-content" className="py-32 bg-white">
+      <section id="main-content" className="py-30 bg-white">
         <div className="container mx-auto px-4 max-w-6xl">
           <div className="grid md:grid-cols-5 gap-16 items-start">
             {/* Left Column - Content */}
@@ -122,7 +122,7 @@ const Home = () => {
       </section>
 
       {/* The Three Pillars */}
-      <section className="py-32 bg-cool-gray">
+      <section className="py-30 bg-cool-gray">
         <div className="container mx-auto px-4 max-w-5xl">
           <h2 className="font-serif text-3xl md:text-4xl text-center text-deep-charcoal mb-20" style={{
           fontWeight: 500,
@@ -181,7 +181,7 @@ const Home = () => {
       </section>
 
       {/* Award Categories - MIITE Style */}
-      <section className="py-32 bg-white">
+      <section className="py-30 bg-white">
         <div className="container mx-auto px-4 max-w-6xl">
           <h2 className="font-serif text-3xl md:text-4xl text-center text-deep-charcoal mb-20" style={{
           fontWeight: 500,
@@ -206,7 +206,7 @@ const Home = () => {
       </section>
 
       {/* Event Details - Two Column */}
-      <section className="py-32 bg-cool-gray">
+      <section className="py-30 bg-cool-gray">
         <div className="container mx-auto px-4 max-w-5xl">
           <h2 className="font-serif text-3xl md:text-4xl text-center text-deep-charcoal mb-20" style={{
           fontWeight: 500,
@@ -262,7 +262,7 @@ const Home = () => {
       </section>
 
       {/* Audience Profile */}
-      <section className="py-32 bg-white">
+      <section className="py-30 bg-white">
         <div className="container mx-auto px-4 max-w-6xl">
           <h2 className="font-serif text-3xl md:text-4xl text-center text-deep-charcoal mb-20" style={{
           fontWeight: 500,
@@ -287,7 +287,7 @@ const Home = () => {
       </section>
 
       {/* Sponsorship Tiers - Minimal Equal Treatment */}
-      <section className="py-32 bg-cool-gray">
+      <section className="py-30 bg-cool-gray">
         <div className="container mx-auto px-4 max-w-6xl">
           <h2 className="font-serif text-3xl md:text-4xl text-center text-deep-charcoal mb-20" style={{
           fontWeight: 500,
@@ -340,7 +340,7 @@ const Home = () => {
       </section>
 
       {/* Contact Section - Minimal & Centered */}
-      <section className="py-32 bg-white">
+      <section className="py-30 bg-white">
         <div className="container mx-auto px-4 max-w-2xl text-center">
           <h2 className="font-serif text-3xl md:text-4xl text-deep-charcoal mb-12" style={{
           fontWeight: 500,
