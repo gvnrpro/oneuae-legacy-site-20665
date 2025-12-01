@@ -146,8 +146,22 @@
     padding-bottom: 7.5rem; /* 120px */
   }
   
+  /* Mobile responsive spacing */
+  @media (max-width: 768px) {
+    .py-30 {
+      padding-top: 4rem; /* 64px */
+      padding-bottom: 4rem; /* 64px */
+    }
+  }
+  
   .gap-20 {
     gap: 5rem; /* 80px */
+  }
+  
+  @media (max-width: 768px) {
+    .gap-20 {
+      gap: 3rem; /* 48px */
+    }
   }
   
   /* Minimal fade-in animation only */
