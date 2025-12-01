@@ -66,31 +66,31 @@ const Home = () => {
 
       {/* About OneUAE Awards - Two Column Layout */}
       <section id="main-content" className="py-30 bg-white">
-        <div className="container mx-auto px-4 max-w-6xl">
-          <div className="grid md:grid-cols-5 gap-16 items-start">
+        <div className="container mx-auto px-4 md:px-6 max-w-6xl">
+          <div className="grid md:grid-cols-5 gap-8 md:gap-16 items-start">
             {/* Left Column - Content */}
             <div className="md:col-span-3">
-              <h2 className="font-serif text-3xl md:text-4xl text-deep-charcoal mb-8" style={{
+              <h2 className="font-serif text-2xl md:text-3xl lg:text-4xl text-deep-charcoal mb-6 md:mb-8" style={{
               fontWeight: 500,
               letterSpacing: '0.05em'
             }}>
                 About OneUAE Awards
               </h2>
               
-              <p className="font-sans text-base md:text-lg text-slate-gray mb-12 leading-relaxed" style={{
+              <p className="font-sans text-sm md:text-base lg:text-lg text-slate-gray mb-8 md:mb-12 leading-relaxed" style={{
               fontWeight: 300,
               lineHeight: 1.8
             }}>
                 The OneUAE Awards is a national platform honoring individuals and establishments driving the UAE's journey of growth, development, and sustainability. Under the patronage of H.E. Sheikh Sultan Bin Nasser Bin Humaid Al Nuaimi, the Awards celebrate excellence across vital sectors shaping the future of the nation.
               </p>
               
-              <div className="space-y-8">
+              <div className="space-y-6 md:space-y-8">
                 <div>
-                  <div className="w-10 h-px bg-gold mb-4" />
-                  <h3 className="font-serif text-xl text-deep-charcoal mb-3" style={{
+                  <div className="w-8 md:w-10 h-px bg-gold mb-3 md:mb-4" />
+                  <h3 className="font-serif text-lg md:text-xl text-deep-charcoal mb-2 md:mb-3" style={{
                   fontWeight: 500
                 }}>Mission</h3>
-                  <p className="font-sans text-base text-slate-gray leading-relaxed" style={{
+                  <p className="font-sans text-sm md:text-base text-slate-gray leading-relaxed" style={{
                   fontWeight: 300,
                   lineHeight: 1.8
                 }}>
@@ -99,11 +99,11 @@ const Home = () => {
                 </div>
                 
                 <div>
-                  <div className="w-10 h-px bg-gold mb-4" />
-                  <h3 className="font-serif text-xl text-deep-charcoal mb-3" style={{
+                  <div className="w-8 md:w-10 h-px bg-gold mb-3 md:mb-4" />
+                  <h3 className="font-serif text-lg md:text-xl text-deep-charcoal mb-2 md:mb-3" style={{
                   fontWeight: 500
                 }}>Vision</h3>
-                  <p className="font-sans text-base text-slate-gray leading-relaxed" style={{
+                  <p className="font-sans text-sm md:text-base text-slate-gray leading-relaxed" style={{
                   fontWeight: 300,
                   lineHeight: 1.8
                 }}>
@@ -114,7 +114,7 @@ const Home = () => {
             </div>
             
             {/* Right Column - Subtle Accent */}
-            <div className="md:col-span-2 flex items-center justify-center">
+            <div className="hidden md:flex md:col-span-2 items-center justify-center">
               <div className="w-px h-64 bg-gradient-to-b from-transparent via-gold to-transparent" />
             </div>
           </div>
@@ -123,23 +123,23 @@ const Home = () => {
 
       {/* The Three Pillars */}
       <section className="py-30 bg-cool-gray">
-        <div className="container mx-auto px-4 max-w-5xl">
-          <h2 className="font-serif text-3xl md:text-4xl text-center text-deep-charcoal mb-20" style={{
+        <div className="container mx-auto px-4 md:px-6 max-w-5xl">
+          <h2 className="font-serif text-2xl md:text-3xl lg:text-4xl text-center text-deep-charcoal mb-12 md:mb-20" style={{
           fontWeight: 500,
           letterSpacing: '0.05em'
         }}>
             The Three Pillars
           </h2>
           
-          <div className="space-y-20">
+          <div className="space-y-12 md:space-y-20">
             <div className="text-center max-w-3xl mx-auto">
-              <h3 className="font-serif text-2xl text-deep-charcoal mb-4" style={{
+              <h3 className="font-serif text-xl md:text-2xl text-deep-charcoal mb-3 md:mb-4" style={{
               fontWeight: 500
             }}>
                 Growth & Economic Excellence
               </h3>
-              <div className="w-16 h-px bg-gold mx-auto mb-6" />
-              <p className="font-sans text-base text-slate-gray leading-relaxed" style={{
+              <div className="w-12 md:w-16 h-px bg-gold mx-auto mb-4 md:mb-6" />
+              <p className="font-sans text-sm md:text-base text-slate-gray leading-relaxed" style={{
               fontWeight: 300,
               lineHeight: 1.8
             }}>
@@ -148,13 +148,13 @@ const Home = () => {
             </div>
             
             <div className="text-center max-w-3xl mx-auto">
-              <h3 className="font-serif text-2xl text-deep-charcoal mb-4" style={{
+              <h3 className="font-serif text-xl md:text-2xl text-deep-charcoal mb-3 md:mb-4" style={{
               fontWeight: 500
             }}>
                 Development & Human Progress
               </h3>
-              <div className="w-16 h-px bg-gold mx-auto mb-6" />
-              <p className="font-sans text-base text-slate-gray leading-relaxed" style={{
+              <div className="w-12 md:w-16 h-px bg-gold mx-auto mb-4 md:mb-6" />
+              <p className="font-sans text-sm md:text-base text-slate-gray leading-relaxed" style={{
               fontWeight: 300,
               lineHeight: 1.8
             }}>
@@ -163,13 +163,13 @@ const Home = () => {
             </div>
             
             <div className="text-center max-w-3xl mx-auto">
-              <h3 className="font-serif text-2xl text-deep-charcoal mb-4" style={{
+              <h3 className="font-serif text-xl md:text-2xl text-deep-charcoal mb-3 md:mb-4" style={{
               fontWeight: 500
             }}>
                 Sustainability & Global Leadership
               </h3>
-              <div className="w-16 h-px bg-gold mx-auto mb-6" />
-              <p className="font-sans text-base text-slate-gray leading-relaxed" style={{
+              <div className="w-12 md:w-16 h-px bg-gold mx-auto mb-4 md:mb-6" />
+              <p className="font-sans text-sm md:text-base text-slate-gray leading-relaxed" style={{
               fontWeight: 300,
               lineHeight: 1.8
             }}>
@@ -182,24 +182,24 @@ const Home = () => {
 
       {/* Award Categories - MIITE Style */}
       <section className="py-30 bg-white">
-        <div className="container mx-auto px-4 max-w-6xl">
-          <h2 className="font-serif text-3xl md:text-4xl text-center text-deep-charcoal mb-20" style={{
+        <div className="container mx-auto px-4 md:px-6 max-w-6xl">
+          <h2 className="font-serif text-2xl md:text-3xl lg:text-4xl text-center text-deep-charcoal mb-12 md:mb-20" style={{
           fontWeight: 500,
           letterSpacing: '0.05em'
         }}>
             Award Categories
           </h2>
           
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            {['Growth & Economic Excellence', 'Entrepreneurship & Innovation', 'Corporate Leadership', 'Finance & Banking', 'Retail & Hospitality', 'Technology & Digital Transformation', 'Development & Human Progress', 'Education', 'Healthcare', 'Community Service', 'Culture & Arts', 'Youth Excellence', 'Sustainability & Global Leadership', 'Sustainability & Environment', 'Infrastructure & Construction', 'International Relations & Diplomacy', 'Media & Communication', 'Lifetime Achievement & Legacy'].map(category => <div key={category} className="border border-border bg-white p-10 text-center transition-colors duration-300 hover:border-gold" style={{
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+            {['Growth & Economic Excellence', 'Entrepreneurship & Innovation', 'Corporate Leadership', 'Finance & Banking', 'Retail & Hospitality', 'Technology & Digital Transformation', 'Development & Human Progress', 'Education', 'Healthcare', 'Community Service', 'Culture & Arts', 'Youth Excellence', 'Sustainability & Global Leadership', 'Sustainability & Environment', 'Infrastructure & Construction', 'International Relations & Diplomacy', 'Media & Communication', 'Lifetime Achievement & Legacy'].map(category => <div key={category} className="border border-border bg-white p-6 md:p-10 text-center transition-colors duration-300 hover:border-gold" style={{
             borderRadius: '4px'
           }}>
-                <h3 className="font-serif text-lg text-deep-charcoal mb-4" style={{
+                <h3 className="font-serif text-base md:text-lg text-deep-charcoal mb-3 md:mb-4" style={{
               fontWeight: 500
             }}>
                   {category}
                 </h3>
-                <div className="w-10 h-px bg-gold mx-auto" />
+                <div className="w-8 md:w-10 h-px bg-gold mx-auto" />
               </div>)}
           </div>
         </div>
@@ -207,21 +207,21 @@ const Home = () => {
 
       {/* Event Details - Two Column */}
       <section className="py-30 bg-cool-gray">
-        <div className="container mx-auto px-4 max-w-5xl">
-          <h2 className="font-serif text-3xl md:text-4xl text-center text-deep-charcoal mb-20" style={{
+        <div className="container mx-auto px-4 md:px-6 max-w-5xl">
+          <h2 className="font-serif text-2xl md:text-3xl lg:text-4xl text-center text-deep-charcoal mb-12 md:mb-20" style={{
           fontWeight: 500,
           letterSpacing: '0.05em'
         }}>
             Event Details
           </h2>
           
-          <div className="grid md:grid-cols-2 gap-16">
+          <div className="grid md:grid-cols-2 gap-12 md:gap-16">
             {/* Left - Event Facts */}
-            <div className="space-y-6">
-              <h3 className="font-serif text-xl text-deep-charcoal mb-6" style={{
+            <div className="space-y-4 md:space-y-6">
+              <h3 className="font-serif text-lg md:text-xl text-deep-charcoal mb-4 md:mb-6" style={{
               fontWeight: 500
             }}>Event Facts</h3>
-              <div className="space-y-4 font-sans text-base text-slate-gray" style={{
+              <div className="space-y-3 md:space-y-4 font-sans text-sm md:text-base text-slate-gray" style={{
               fontWeight: 300
             }}>
                 <p><span className="text-deep-charcoal" style={{
@@ -243,11 +243,11 @@ const Home = () => {
             </div>
             
             {/* Right - Program Flow */}
-            <div className="space-y-6 md:border-l md:border-gold/30 md:pl-16">
-              <h3 className="font-serif text-xl text-deep-charcoal mb-6" style={{
+            <div className="space-y-4 md:space-y-6 md:border-l md:border-gold/30 md:pl-16">
+              <h3 className="font-serif text-lg md:text-xl text-deep-charcoal mb-4 md:mb-6" style={{
               fontWeight: 500
             }}>Program Flow</h3>
-              <div className="space-y-4 font-sans text-base text-slate-gray" style={{
+              <div className="space-y-3 md:space-y-4 font-sans text-sm md:text-base text-slate-gray" style={{
               fontWeight: 300
             }}>
                 <p>6:00 PM – Reception</p>
@@ -263,20 +263,20 @@ const Home = () => {
 
       {/* Audience Profile */}
       <section className="py-30 bg-white">
-        <div className="container mx-auto px-4 max-w-6xl">
-          <h2 className="font-serif text-3xl md:text-4xl text-center text-deep-charcoal mb-20" style={{
+        <div className="container mx-auto px-4 md:px-6 max-w-6xl">
+          <h2 className="font-serif text-2xl md:text-3xl lg:text-4xl text-center text-deep-charcoal mb-12 md:mb-20" style={{
           fontWeight: 500,
           letterSpacing: '0.05em'
         }}>
             Audience Profile
           </h2>
           
-          <div className="grid grid-cols-2 md:grid-cols-5 gap-12">
+          <div className="grid grid-cols-2 md:grid-cols-5 gap-8 md:gap-12">
             {['Government Representatives', 'Business & Corporate Leaders', 'Entrepreneurs & Innovators', 'Healthcare & Education Professionals', 'Media & Cultural Figures'].map(audience => <div key={audience} className="text-center">
-                <div className="w-10 h-10 border border-gold rounded-full mx-auto mb-4 flex items-center justify-center">
+                <div className="w-8 h-8 md:w-10 md:h-10 border border-gold rounded-full mx-auto mb-3 md:mb-4 flex items-center justify-center">
                   <div className="w-1 h-1 bg-gold rounded-full" />
                 </div>
-                <p className="font-sans text-sm text-slate-gray" style={{
+                <p className="font-sans text-xs md:text-sm text-slate-gray" style={{
               fontWeight: 400
             }}>
                   {audience}
@@ -288,15 +288,15 @@ const Home = () => {
 
       {/* Sponsorship Tiers - Minimal Equal Treatment */}
       <section className="py-30 bg-cool-gray">
-        <div className="container mx-auto px-4 max-w-6xl">
-          <h2 className="font-serif text-3xl md:text-4xl text-center text-deep-charcoal mb-20" style={{
+        <div className="container mx-auto px-4 md:px-6 max-w-6xl">
+          <h2 className="font-serif text-2xl md:text-3xl lg:text-4xl text-center text-deep-charcoal mb-12 md:mb-20" style={{
           fontWeight: 500,
           letterSpacing: '0.05em'
         }}>
             Sponsorship Tiers
           </h2>
           
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
             {[{
             name: 'Gold Partner',
             amount: 'AED 100,000'
@@ -309,16 +309,16 @@ const Home = () => {
           }, {
             name: 'Red-Carpet Partner',
             amount: 'AED 25,000'
-          }].map(tier => <div key={tier.name} className="border border-gold bg-white p-12 text-center transition-all duration-300 hover:border-2" style={{
+          }].map(tier => <div key={tier.name} className="border border-gold bg-white p-8 md:p-12 text-center transition-all duration-300 hover:border-2" style={{
             borderRadius: '4px'
           }}>
-                <h3 className="font-serif text-lg text-deep-charcoal mb-4" style={{
+                <h3 className="font-serif text-base md:text-lg text-deep-charcoal mb-3 md:mb-4" style={{
               fontWeight: 500
             }}>
                   {tier.name}
                 </h3>
-                <div className="w-16 h-px bg-gold mx-auto mb-4" />
-                <p className="font-sans text-base text-slate-gray" style={{
+                <div className="w-12 md:w-16 h-px bg-gold mx-auto mb-3 md:mb-4" />
+                <p className="font-sans text-sm md:text-base text-slate-gray" style={{
               fontWeight: 300
             }}>
                   {tier.amount}
@@ -326,9 +326,9 @@ const Home = () => {
               </div>)}
           </div>
           
-          <div className="text-center mt-16">
+          <div className="text-center mt-12 md:mt-16">
             <Link to="/partnerships">
-              <Button variant="outline" className="border border-gold bg-transparent text-deep-charcoal hover:bg-gold hover:text-white transition-colors duration-300" style={{
+              <Button variant="outline" className="border border-gold bg-transparent text-deep-charcoal hover:bg-gold hover:text-white transition-colors duration-300 text-sm md:text-base" style={{
               fontWeight: 400,
               letterSpacing: '0.05em'
             }}>
@@ -341,15 +341,15 @@ const Home = () => {
 
       {/* Contact Section - Minimal & Centered */}
       <section className="py-30 bg-white">
-        <div className="container mx-auto px-4 max-w-2xl text-center">
-          <h2 className="font-serif text-3xl md:text-4xl text-deep-charcoal mb-12" style={{
+        <div className="container mx-auto px-4 md:px-6 max-w-2xl text-center">
+          <h2 className="font-serif text-2xl md:text-3xl lg:text-4xl text-deep-charcoal mb-8 md:mb-12" style={{
           fontWeight: 500,
           letterSpacing: '0.05em'
         }}>
             Contact
           </h2>
           
-          <div className="space-y-4 font-sans text-base text-slate-gray" style={{
+          <div className="space-y-3 md:space-y-4 font-sans text-sm md:text-base text-slate-gray" style={{
           fontWeight: 300
         }}>
             <p className="text-deep-charcoal" style={{
@@ -363,7 +363,7 @@ const Home = () => {
             </a>
           </div>
           
-          <div className="uae-accent-line mx-auto mt-12" />
+          <div className="uae-accent-line mx-auto mt-8 md:mt-12" />
         </div>
       </section>
 
