@@ -54,7 +54,7 @@ const Gala = () => {
               </p>
             </section>
 
-            <section className="py-20 bg-cool-gray px-12">
+            <section className="py-30 bg-cool-gray px-12">
               <h2 className="font-serif text-2xl font-medium text-foreground mb-12 text-center">Event details</h2>
               
               <div className="grid md:grid-cols-2 gap-x-16 gap-y-8 max-w-3xl mx-auto">

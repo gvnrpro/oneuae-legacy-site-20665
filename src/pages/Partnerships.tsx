@@ -53,7 +53,7 @@ const Partnerships = () => {
             </div>
           </section>
 
-          <section className="py-20 bg-cool-gray fade-in">
+          <section className="py-30 bg-cool-gray fade-in">
             <div className="max-w-4xl mx-auto px-8">
               <h2 className="font-serif text-2xl font-medium text-center mb-8">Partnership inquiry</h2>
               <p className="font-sans text-base text-muted-foreground text-center mb-12 font-light max-w-2xl mx-auto">

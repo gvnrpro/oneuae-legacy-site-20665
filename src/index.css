@@ -140,6 +140,16 @@
 }
 
 @layer utilities {
+  /* Strict spacing - SKGEP Grid Discipline */
+  .py-30 {
+    padding-top: 7.5rem; /* 120px */
+    padding-bottom: 7.5rem; /* 120px */
+  }
+  
+  .gap-20 {
+    gap: 5rem; /* 80px */
+  }
+  
   /* Minimal fade-in animation only */
   .fade-in {
     animation: fadeIn 1s ease-out;
