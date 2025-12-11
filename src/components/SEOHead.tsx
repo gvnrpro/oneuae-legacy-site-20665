@@ -9,9 +9,9 @@ interface SEOHeadProps {
 }
 
 const SEOHead = ({
-  title = "OneUAE Awards 2026 - Celebrating Unity, Vision, and Excellence",
-  description = "OneUAE Awards celebrates exceptional individuals and organizations shaping the UAE's future. Join us January 4th, 2026 at Zabeel Ladies Club for an evening of national pride and excellence.",
-  keywords = "UAE awards, OneUAE, national excellence, UAE leaders, innovation awards, Dubai awards, Emirates recognition, 2026 awards",
+  title = "ONE UAE International Business Awards 2026 - Celebrating Unity, Vision, and Excellence",
+  description = "ONE UAE International Business Awards celebrates exceptional individuals and organizations shaping the UAE's future. Join us January 4th, 2026 at Zabeel Ladies Club for an evening of national pride and excellence.",
+  keywords = "UAE awards, ONE UAE, international business awards, national excellence, UAE leaders, innovation awards, Dubai awards, Emirates recognition, 2026 awards",
   path = "",
   image = "https://oneuaeawards.ae/og-image.jpg",
 }: SEOHeadProps) => {
@@ -32,7 +32,7 @@ const SEOHead = ({
       <meta property="og:title" content={title} />
       <meta property="og:description" content={description} />
       <meta property="og:image" content={image} />
-      <meta property="og:site_name" content="OneUAE Awards" />
+      <meta property="og:site_name" content="ONE UAE International Business Awards" />
       <meta property="og:locale" content="en_AE" />
 
       {/* Twitter */}
@@ -50,11 +50,11 @@ const SEOHead = ({
         {JSON.stringify({
           "@context": "https://schema.org",
           "@type": "Organization",
-          name: "OneUAE Awards",
+          name: "ONE UAE International Business Awards",
           url: siteUrl,
           logo: `${siteUrl}/android-chrome-512x512.png`,
           description:
-            "OneUAE Awards celebrates exceptional individuals and organizations shaping the UAE's future.",
+            "ONE UAE International Business Awards celebrates exceptional individuals and organizations shaping the UAE's future.",
           address: {
             "@type": "PostalAddress",
             addressLocality: "Dubai",
@@ -62,13 +62,11 @@ const SEOHead = ({
           },
           contactPoint: {
             "@type": "ContactPoint",
-            email: "info@oneuaeawards.ae",
+            email: "info@oneuaeaward.ae",
             telephone: "+971562555100",
             contactType: "Customer Service",
           },
-          sameAs: [
-            // Add social media URLs when available
-          ],
+          sameAs: [],
         })}
       </script>
 
@@ -77,7 +75,7 @@ const SEOHead = ({
         {JSON.stringify({
           "@context": "https://schema.org",
           "@type": "Event",
-          name: "OneUAE Awards 2026",
+          name: "ONE UAE International Business Awards 2026",
           description:
             "An exclusive black-tie ceremony celebrating unity, vision, and excellence in the United Arab Emirates.",
           startDate: "2026-01-04T18:00:00+04:00",
@@ -95,7 +93,7 @@ const SEOHead = ({
           },
           organizer: {
             "@type": "Organization",
-            name: "OneUAE Awards",
+            name: "ONE UAE International Business Awards",
             url: siteUrl,
           },
         })}

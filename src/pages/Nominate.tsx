@@ -8,9 +8,9 @@ const Nominate = () => {
   return (
     <div className="min-h-screen">
       <SEOHead
-        title="Nominate - OneUAE Awards 2026"
-        description="Submit a nomination for the OneUAE Awards 2026. Recognize excellence and honor individuals making extraordinary contributions to the Emirates."
-        keywords="UAE nomination, nominate leader, OneUAE nomination, award nomination, recognize excellence"
+        title="Nominate - ONE UAE International Business Awards 2026"
+        description="Submit a nomination for the ONE UAE International Business Awards 2026. Recognize excellence and honor individuals making extraordinary contributions to the Emirates."
+        keywords="UAE nomination, nominate leader, ONE UAE nomination, award nomination, recognize excellence, international business awards"
         path="/nominate"
       />
       <Navigation />
@@ -18,18 +18,18 @@ const Nominate = () => {
       <main className="pt-32 pb-24" id="main-content">
         <div className="container mx-auto px-4 max-w-6xl">
           <div className="text-center mb-20 fade-in">
-            <h1 className="font-serif text-5xl md:text-6xl font-medium text-foreground mb-6">
+            <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl font-medium text-foreground mb-6">
               Submit a nomination
             </h1>
             <div className="gold-divider mb-8" />
-            <p className="font-sans text-lg text-muted-foreground max-w-3xl mx-auto leading-relaxed font-light">
+            <p className="font-sans text-base md:text-lg text-muted-foreground max-w-3xl mx-auto leading-relaxed font-light">
               Recognize excellence. Nominate an individual or organization making extraordinary contributions to the Emirates.
             </p>
           </div>
 
           <div className="mb-20 fade-in">
             <div className="text-center mb-12">
-              <h2 className="font-serif text-2xl font-medium text-foreground mb-2">
+              <h2 className="font-serif text-xl md:text-2xl font-medium text-foreground mb-2">
                 Time until awards
               </h2>
             </div>
