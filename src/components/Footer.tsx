@@ -5,7 +5,7 @@ const Footer = () => {
     <footer className="bg-deep-charcoal text-white py-16">
       <div className="container mx-auto px-4 text-center max-w-3xl">
         <p className="font-serif text-lg mb-3" style={{ fontWeight: 500, opacity: 0.9 }}>
-          OneUAE Awards 2026
+          ONE UAE International Business Awards 2026
         </p>
         
         <p className="font-sans text-sm mb-8" style={{ fontWeight: 300, opacity: 0.7, lineHeight: 1.6 }}>
