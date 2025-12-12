@@ -14,8 +14,9 @@ export default {
     },
     extend: {
       fontFamily: {
-        serif: ['Crimson Text', 'Georgia', 'serif'],
-        sans: ['Inter', 'system-ui', 'sans-serif'],
+        display: ['Playfair Display', 'Georgia', 'serif'],
+        sans: ['Sora', 'Inter', 'system-ui', 'sans-serif'],
+        serif: ['Playfair Display', 'Georgia', 'serif'],
       },
       colors: {
         border: "hsl(var(--border))",
@@ -51,8 +52,13 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        gold: "hsl(var(--gold))",
+        gold: {
+          DEFAULT: "hsl(var(--gold))",
+          light: "hsl(var(--gold-light))",
+          dark: "hsl(var(--gold-dark))",
+        },
         "cool-gray": "hsl(var(--cool-gray))",
+        "warm-gray": "hsl(var(--warm-gray))",
         "deep-charcoal": "hsl(var(--deep-charcoal))",
         "slate-gray": "hsl(var(--slate-gray))",
         uae: {
@@ -67,6 +73,12 @@ export default {
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
       },
+      boxShadow: {
+        'premium': '0 20px 40px -20px rgba(0, 0, 0, 0.1)',
+        'premium-lg': '0 40px 80px -30px rgba(0, 0, 0, 0.15)',
+        'glow': '0 0 40px hsl(var(--primary) / 0.2)',
+        'inner-glow': 'inset 0 0 20px hsl(var(--primary) / 0.1)',
+      },
       keyframes: {
         "accordion-down": {
           from: { height: "0" },
@@ -80,11 +92,29 @@ export default {
           from: { opacity: "0" },
           to: { opacity: "1" },
         },
+        slideUp: {
+          from: { opacity: "0", transform: "translateY(20px)" },
+          to: { opacity: "1", transform: "translateY(0)" },
+        },
+        slideDown: {
+          from: { opacity: "0", transform: "translateY(-20px)" },
+          to: { opacity: "1", transform: "translateY(0)" },
+        },
+        scaleIn: {
+          from: { opacity: "0", transform: "scale(0.95)" },
+          to: { opacity: "1", transform: "scale(1)" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
-        fadeIn: "fadeIn 1s ease-out",
+        fadeIn: "fadeIn 0.8s ease-out",
+        slideUp: "slideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1)",
+        slideDown: "slideDown 0.6s cubic-bezier(0.16, 1, 0.3, 1)",
+        scaleIn: "scaleIn 0.4s cubic-bezier(0.16, 1, 0.3, 1)",
+      },
+      transitionTimingFunction: {
+        'premium': 'cubic-bezier(0.16, 1, 0.3, 1)',
       },
     },
   },

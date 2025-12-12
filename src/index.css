@@ -2,98 +2,104 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Minimal Institutional Design System - Following SKGEP & MIITE Awards
-   All colors MUST be HSL. No gradients, no shadows, no glow effects.
+/* Modern Media Conglomerate Design System
+   Premium, sophisticated, editorial aesthetic
 */
 
 @layer base {
   :root {
-    /* Base Colors - Minimal & Flat */
+    /* Refined Color Palette */
     --background: 0 0% 100%;
-    --foreground: 0 0% 5%;
+    --foreground: 220 20% 10%;
     
     --card: 0 0% 100%;
-    --card-foreground: 0 0% 5%;
+    --card-foreground: 220 20% 10%;
     
     --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 5%;
+    --popover-foreground: 220 20% 10%;
     
-    /* Muted Gold - Used ONLY for thin lines and minimal highlights */
-    --primary: 40 30% 58%;
+    /* Premium Gold */
+    --primary: 42 65% 55%;
     --primary-foreground: 0 0% 100%;
     
-    /* Cool Gray for alternating sections */
-    --secondary: 0 0% 96%;
-    --secondary-foreground: 0 0% 5%;
+    /* Soft Gray */
+    --secondary: 220 15% 97%;
+    --secondary-foreground: 220 20% 10%;
     
-    --muted: 0 0% 96%;
-    --muted-foreground: 0 0% 40%;
+    --muted: 220 15% 95%;
+    --muted-foreground: 220 10% 45%;
     
-    /* Accent - Muted Gold */
-    --accent: 40 30% 58%;
+    /* Accent - Warm Gold */
+    --accent: 42 65% 55%;
     --accent-foreground: 0 0% 100%;
     
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
     
-    /* Borders - Very subtle */
-    --border: 0 0% 90%;
-    --input: 0 0% 90%;
-    --ring: 40 30% 58%;
+    /* Borders */
+    --border: 220 15% 90%;
+    --input: 220 15% 90%;
+    --ring: 42 65% 55%;
     
-    --radius: 0.25rem;
+    --radius: 0.5rem;
     
-    /* Institutional Color Palette */
-    --gold: 40 30% 58%;
-    --cool-gray: 0 0% 96%;
-    --deep-charcoal: 0 0% 5%;
-    --slate-gray: 0 0% 17%;
+    /* Extended Palette */
+    --gold: 42 65% 55%;
+    --gold-light: 42 70% 70%;
+    --gold-dark: 42 60% 40%;
+    --cool-gray: 220 15% 97%;
+    --warm-gray: 30 10% 96%;
+    --deep-charcoal: 220 20% 8%;
+    --slate-gray: 220 10% 35%;
     
-    /* UAE Flag Colors - Used ONLY as 1-2px accent lines */
+    /* UAE Flag Colors */
     --uae-red: 349 86% 47%;
     --uae-green: 159 100% 24%;
     --uae-black: 0 0% 0%;
     --uae-white: 0 0% 100%;
+    
+    /* Premium Gradients */
+    --gradient-gold: linear-gradient(135deg, hsl(42 65% 55%) 0%, hsl(38 70% 65%) 100%);
+    --gradient-dark: linear-gradient(180deg, hsl(220 20% 8%) 0%, hsl(220 25% 12%) 100%);
+    --gradient-light: linear-gradient(180deg, hsl(0 0% 100%) 0%, hsl(220 15% 97%) 100%);
   }
 
   .dark {
-    --background: 0 0% 12%;
+    --background: 220 20% 8%;
     --foreground: 0 0% 95%;
     
-    --card: 0 0% 15%;
+    --card: 220 20% 12%;
     --card-foreground: 0 0% 95%;
     
-    --popover: 0 0% 12%;
+    --popover: 220 20% 10%;
     --popover-foreground: 0 0% 95%;
     
-    --primary: 40 30% 58%;
-    --primary-foreground: 0 0% 100%;
+    --primary: 42 65% 55%;
+    --primary-foreground: 220 20% 8%;
     
-    --secondary: 0 0% 18%;
+    --secondary: 220 20% 15%;
     --secondary-foreground: 0 0% 95%;
     
-    --muted: 0 0% 18%;
-    --muted-foreground: 0 0% 60%;
+    --muted: 220 20% 18%;
+    --muted-foreground: 220 10% 60%;
     
-    --accent: 40 30% 58%;
-    --accent-foreground: 0 0% 100%;
+    --accent: 42 65% 55%;
+    --accent-foreground: 220 20% 8%;
     
     --destructive: 0 63% 31%;
     --destructive-foreground: 0 0% 100%;
     
-    --border: 0 0% 25%;
-    --input: 0 0% 25%;
-    --ring: 40 30% 58%;
+    --border: 220 20% 20%;
+    --input: 220 20% 20%;
+    --ring: 42 65% 55%;
     
-    --gold: 40 30% 58%;
-    --cool-gray: 0 0% 18%;
+    --gold: 42 65% 55%;
+    --gold-light: 42 70% 70%;
+    --gold-dark: 42 60% 40%;
+    --cool-gray: 220 20% 15%;
+    --warm-gray: 220 15% 12%;
     --deep-charcoal: 0 0% 95%;
-    --slate-gray: 0 0% 70%;
-    
-    --uae-red: 349 86% 47%;
-    --uae-green: 159 100% 24%;
-    --uae-black: 0 0% 0%;
-    --uae-white: 0 0% 100%;
+    --slate-gray: 220 10% 65%;
   }
 }
 
@@ -104,77 +110,133 @@
 
   body {
     @apply bg-background text-foreground font-sans;
-    font-feature-settings: "kern" 1;
+    font-feature-settings: "kern" 1, "liga" 1, "calt" 1;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    line-height: 1.8;
-    font-weight: 300;
+    line-height: 1.7;
+    font-weight: 400;
   }
   
-  /* Institutional Typography - Minimal & Clean */
+  /* Premium Typography */
   h1, h2, h3, h4, h5, h6 {
-    @apply font-serif;
+    @apply font-display;
     font-feature-settings: "kern" 1, "liga" 1;
-    letter-spacing: 0.05em;
+    letter-spacing: -0.02em;
     font-weight: 500;
   }
   
   h1 {
-    font-size: clamp(2.5rem, 5vw, 4rem);
-    letter-spacing: 0.05em;
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    line-height: 1.1;
   }
   
   h2 {
-    font-size: clamp(2rem, 4vw, 3rem);
-    letter-spacing: 0.05em;
+    font-size: clamp(1.875rem, 4vw, 3rem);
+    line-height: 1.15;
   }
   
   h3 {
-    font-size: clamp(1.5rem, 3vw, 2rem);
-    letter-spacing: 0.03em;
+    font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+    line-height: 1.25;
   }
   
   html {
     scroll-behavior: smooth;
   }
+  
+  /* Premium Selection */
+  ::selection {
+    background: hsl(var(--primary) / 0.2);
+    color: hsl(var(--foreground));
+  }
+}
+
+@layer components {
+  /* Premium Card Styles */
+  .card-premium {
+    @apply bg-card border border-border/50 transition-all duration-500;
+    box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.02);
+  }
+  
+  .card-premium:hover {
+    @apply border-primary/30;
+    box-shadow: 0 20px 40px -20px rgb(0 0 0 / 0.1), 0 1px 3px 0 rgb(0 0 0 / 0.02);
+    transform: translateY(-2px);
+  }
+  
+  /* Glass Effect */
+  .glass {
+    background: hsl(var(--background) / 0.8);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+  }
+  
+  /* Premium Button */
+  .btn-premium {
+    @apply relative overflow-hidden transition-all duration-300;
+  }
+  
+  .btn-premium::before {
+    content: '';
+    @apply absolute inset-0 opacity-0 transition-opacity duration-300;
+    background: linear-gradient(135deg, hsl(var(--primary) / 0.1) 0%, transparent 100%);
+  }
+  
+  .btn-premium:hover::before {
+    @apply opacity-100;
+  }
+  
+  /* Section Styles */
+  .section-padding {
+    @apply py-20 md:py-28 lg:py-36;
+  }
+  
+  .section-padding-sm {
+    @apply py-12 md:py-16 lg:py-20;
+  }
 }
 
 @layer utilities {
-  /* Strict spacing - SKGEP Grid Discipline */
+  /* Premium Spacing */
   .py-30 {
-    padding-top: 7.5rem; /* 120px */
-    padding-bottom: 7.5rem; /* 120px */
+    padding-top: 7.5rem;
+    padding-bottom: 7.5rem;
   }
   
-  /* Mobile responsive spacing */
   @media (max-width: 768px) {
     .py-30 {
-      padding-top: 4rem; /* 64px */
-      padding-bottom: 4rem; /* 64px */
+      padding-top: 4rem;
+      padding-bottom: 4rem;
     }
   }
   
   .gap-20 {
-    gap: 5rem; /* 80px */
+    gap: 5rem;
   }
   
   @media (max-width: 768px) {
     .gap-20 {
-      gap: 3rem; /* 48px */
+      gap: 3rem;
     }
   }
   
-  /* Minimal fade-in animation only */
+  /* Animation Classes */
   .fade-in {
-    animation: fadeIn 1s ease-out;
+    animation: fadeIn 0.8s ease-out;
   }
   
-  /* Thin gold divider - 1px line */
+  /* Gold Divider - Premium */
   .gold-divider {
-    @apply h-px w-16 bg-gold mx-auto;
+    @apply h-px w-16 mx-auto;
+    background: linear-gradient(90deg, transparent 0%, hsl(var(--primary)) 50%, transparent 100%);
   }
   
-  /* UAE Flag Accent Line - Used sparingly */
+  .gold-divider-left {
+    @apply h-px w-12;
+    background: linear-gradient(90deg, hsl(var(--primary)) 0%, transparent 100%);
+  }
+  
+  /* UAE Flag Accent Line */
   .uae-accent-line {
     height: 2px;
     width: 80px;
@@ -186,45 +248,152 @@
     );
   }
   
-  /* Logo reveal animation - fade-in with scale */
+  /* Logo Reveal Animation */
   .animate-logo-reveal {
-    animation: logoReveal 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    animation: logoReveal 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   }
   
-  /* Fade in up animation for staggered content */
+  /* Fade In Up Animation */
   .animate-fade-in-up {
     animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
     opacity: 0;
   }
+  
+  /* Stagger Animation Delays */
+  .stagger-1 { animation-delay: 0.1s; }
+  .stagger-2 { animation-delay: 0.2s; }
+  .stagger-3 { animation-delay: 0.3s; }
+  .stagger-4 { animation-delay: 0.4s; }
+  .stagger-5 { animation-delay: 0.5s; }
+  .stagger-6 { animation-delay: 0.6s; }
+  
+  /* Hover Lift */
+  .hover-lift {
+    @apply transition-transform duration-300;
+  }
+  
+  .hover-lift:hover {
+    transform: translateY(-4px);
+  }
+  
+  /* Text Gradient */
+  .text-gradient-gold {
+    background: linear-gradient(135deg, hsl(var(--gold)) 0%, hsl(var(--gold-light)) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  /* Premium Border */
+  .border-gradient {
+    position: relative;
+  }
+  
+  .border-gradient::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(135deg, hsl(var(--primary) / 0.3) 0%, transparent 50%, hsl(var(--primary) / 0.1) 100%);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+  }
+  
+  /* Shimmer Effect */
+  .shimmer {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .shimmer::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      hsl(var(--primary) / 0.1) 50%,
+      transparent 100%
+    );
+    transform: translateX(-100%);
+    animation: shimmer 3s infinite;
+  }
+  
+  /* Noise Texture Overlay */
+  .noise-overlay {
+    position: relative;
+  }
+  
+  .noise-overlay::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    opacity: 0.03;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    pointer-events: none;
+  }
 }
 
+/* Keyframe Animations */
 @keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
 @keyframes logoReveal {
   0% {
     opacity: 0;
-    transform: scale(0.85);
+    transform: scale(0.9) translateY(10px);
+    filter: blur(10px);
   }
   100% {
     opacity: 1;
-    transform: scale(1);
+    transform: scale(1) translateY(0);
+    filter: blur(0);
   }
 }
 
 @keyframes fadeInUp {
   0% {
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateY(30px);
   }
   100% {
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { 
+    box-shadow: 0 0 20px hsl(var(--primary) / 0.2);
+  }
+  50% { 
+    box-shadow: 0 0 40px hsl(var(--primary) / 0.4);
+  }
+}
+
+/* Scroll Progress Indicator */
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  z-index: 100;
+  background: linear-gradient(90deg, hsl(var(--primary)) var(--scroll), transparent var(--scroll));
 }
