@@ -5,6 +5,7 @@ import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
 import heroBg from "@/assets/hero-bg.jpg";
 import trophyGold from "@/assets/trophy-gold.jpeg";
+import oneUaeLogo from "@/assets/one-uae-logo.png";
 
 const Home = () => {
   return (
@@ -38,34 +39,52 @@ const Home = () => {
           style={{ backgroundImage: `url(${heroBg})` }} 
         />
         
-        {/* Minimal Overlay - Only for text legibility */}
-        <div className="absolute inset-0 bg-black/30" />
+        {/* Gradient Overlay for depth and text legibility */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/30 to-black/60" />
         
         {/* Hero Content - Minimal & Centered */}
-        <div className="relative z-10 container mx-auto px-4 text-center fade-in">
+        <div className="relative z-10 container mx-auto px-4 text-center">
           <div className="max-w-5xl mx-auto">
+            {/* Animated Logo */}
+            <img 
+              src={oneUaeLogo} 
+              alt="ONE UAE Awards Logo" 
+              className="h-24 md:h-32 lg:h-40 mx-auto mb-8 animate-logo-reveal"
+            />
+            
             <h1 
-              className="font-serif text-white mb-6 tracking-wide" 
+              className="font-serif text-white mb-6 tracking-wide animate-fade-in-up" 
               style={{
                 fontSize: 'clamp(2rem, 4.5vw, 3.5rem)',
                 fontWeight: 500,
-                letterSpacing: '0.05em'
+                letterSpacing: '0.05em',
+                animationDelay: '0.3s',
+                animationFillMode: 'both'
               }}
             >
               ONE UAE INTERNATIONAL<br />BUSINESS AWARDS 2026
             </h1>
             
             <div 
-              className="font-sans text-lg md:text-xl text-white/90 mb-4 font-light" 
-              style={{ letterSpacing: '0.03em' }}
+              className="font-sans text-lg md:text-xl text-white/90 mb-4 font-light animate-fade-in-up" 
+              style={{ 
+                letterSpacing: '0.03em',
+                animationDelay: '0.5s',
+                animationFillMode: 'both'
+              }}
             >
               Under the Patronage of<br />
               H.E. Sheikh Sultan Bin Nasser Bin Humaid Al Nuaimi
             </div>
             
             <p 
-              className="font-sans text-base md:text-lg text-white/80 font-light" 
-              style={{ letterSpacing: '0.1em', marginTop: '1rem' }}
+              className="font-sans text-base md:text-lg text-white/80 font-light animate-fade-in-up" 
+              style={{ 
+                letterSpacing: '0.1em', 
+                marginTop: '1rem',
+                animationDelay: '0.7s',
+                animationFillMode: 'both'
+              }}
             >
               Celebrating Growth · Development · Sustainability
             </p>
@@ -73,7 +92,7 @@ const Home = () => {
         </div>
         
         {/* Simple Scroll Indicator */}
-        <div className="absolute bottom-10 left-1/2 -translate-x-1/2">
+        <div className="absolute bottom-10 left-1/2 -translate-x-1/2 animate-fade-in-up" style={{ animationDelay: '1s', animationFillMode: 'both' }}>
           <div className="w-6 h-10 border border-white/40 rounded-full flex items-start justify-center p-2">
             <div className="w-1 h-2 bg-white/60 rounded-full animate-bounce" />
           </div>
