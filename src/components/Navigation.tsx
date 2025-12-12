@@ -1,59 +1,97 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Menu, X } from "lucide-react";
+import { Menu, X, ArrowRight } from "lucide-react";
 import oneUaeLogo from "@/assets/one-uae-logo.png";
 
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const navLinks = [
     { path: "/", label: "Home" },
     { path: "/about", label: "About" },
-    { path: "/categories", label: "Award Categories" },
+    { path: "/categories", label: "Categories" },
     { path: "/partnerships", label: "Partnerships" },
     { path: "/gala", label: "Gala" },
-    { path: "/nominate", label: "Nominate" },
     { path: "/contact", label: "Contact" },
   ];
 
   const isActive = (path: string) => location.pathname === path;
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-white border-b border-border">
-      <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between h-20">
+    <nav 
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+        scrolled 
+          ? "bg-background/95 backdrop-blur-xl shadow-sm border-b border-border/50" 
+          : "bg-transparent"
+      }`}
+    >
+      <div className="container mx-auto px-6 lg:px-8">
+        <div className="flex items-center justify-between h-20 lg:h-24">
           {/* Logo */}
-          <Link to="/" className="flex items-center">
+          <Link 
+            to="/" 
+            className="flex items-center group"
+          >
             <img 
               src={oneUaeLogo} 
               alt="ONE UAE International Business Awards" 
-              className="h-12 md:h-14 w-auto"
+              className="h-12 lg:h-14 w-auto transition-transform duration-300 group-hover:scale-105"
             />
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-8">
+          <div className="hidden lg:flex items-center gap-1">
             {navLinks.map((link) => (
               <Link
                 key={link.path}
                 to={link.path}
-                className={`font-sans text-sm transition-colors duration-300 ${
+                className={`relative px-4 py-2 text-sm font-medium transition-all duration-300 ${
                   isActive(link.path)
-                    ? "text-gold border-b border-gold"
-                    : "text-slate-gray hover:text-gold"
+                    ? scrolled ? "text-primary" : "text-white"
+                    : scrolled 
+                      ? "text-muted-foreground hover:text-foreground" 
+                      : "text-white/80 hover:text-white"
                 }`}
-                style={{ fontWeight: 300, letterSpacing: '0.05em' }}
               >
                 {link.label}
+                {isActive(link.path) && (
+                  <span className="absolute bottom-0 left-4 right-4 h-0.5 bg-primary rounded-full" />
+                )}
               </Link>
             ))}
+            
+            {/* CTA Button */}
+            <Link
+              to="/nominate"
+              className={`ml-4 inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-300 ${
+                scrolled
+                  ? "bg-primary text-primary-foreground hover:bg-primary/90"
+                  : "bg-white/10 backdrop-blur-sm text-white border border-white/20 hover:bg-white/20"
+              }`}
+            >
+              Nominate
+              <ArrowRight className="w-4 h-4" />
+            </Link>
           </div>
 
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="md:hidden p-2 text-slate-gray hover:text-gold transition-colors"
+            className={`lg:hidden p-2 rounded-lg transition-colors ${
+              scrolled 
+                ? "text-foreground hover:bg-muted" 
+                : "text-white hover:bg-white/10"
+            }`}
             aria-label="Toggle menu"
           >
             {isOpen ? <X size={24} /> : <Menu size={24} />}
@@ -61,27 +99,40 @@ const Navigation = () => {
         </div>
 
         {/* Mobile Navigation */}
-        {isOpen && (
-          <div className="md:hidden py-4 border-t border-border">
-            <div className="flex flex-col gap-4">
-              {navLinks.map((link) => (
-                <Link
-                  key={link.path}
-                  to={link.path}
-                  onClick={() => setIsOpen(false)}
-                  className={`font-sans text-sm py-2 transition-colors duration-300 ${
-                    isActive(link.path)
-                      ? "text-gold"
-                      : "text-slate-gray hover:text-gold"
-                  }`}
-                  style={{ fontWeight: 300, letterSpacing: '0.05em' }}
-                >
-                  {link.label}
-                </Link>
-              ))}
-            </div>
+        <div 
+          className={`lg:hidden overflow-hidden transition-all duration-500 ease-premium ${
+            isOpen ? "max-h-screen opacity-100" : "max-h-0 opacity-0"
+          }`}
+        >
+          <div className="py-6 space-y-1 border-t border-border/50">
+            {navLinks.map((link, index) => (
+              <Link
+                key={link.path}
+                to={link.path}
+                onClick={() => setIsOpen(false)}
+                className={`block px-4 py-3 rounded-lg text-base font-medium transition-all duration-300 ${
+                  isActive(link.path)
+                    ? "bg-primary/10 text-primary"
+                    : "text-muted-foreground hover:bg-muted hover:text-foreground"
+                }`}
+                style={{ 
+                  animationDelay: `${index * 50}ms`,
+                  animationFillMode: 'both'
+                }}
+              >
+                {link.label}
+              </Link>
+            ))}
+            
+            <Link
+              to="/nominate"
+              onClick={() => setIsOpen(false)}
+              className="block mt-4 mx-4 px-4 py-3 bg-primary text-primary-foreground rounded-lg text-center font-medium"
+            >
+              Submit Nomination
+            </Link>
           </div>
-        )}
+        </div>
       </div>
     </nav>
   );

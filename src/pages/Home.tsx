@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
+import { ArrowRight, Calendar, MapPin, Users, Award, Sparkles } from "lucide-react";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
@@ -8,13 +9,28 @@ import trophyGold from "@/assets/trophy-gold.jpeg";
 import oneUaeLogo from "@/assets/one-uae-logo.png";
 
 const Home = () => {
+  const categories = [
+    'Growth & Economic Excellence', 
+    'Entrepreneurship & Innovation', 
+    'Corporate Leadership', 
+    'Finance & Banking', 
+    'Retail & Hospitality', 
+    'Technology & Digital Transformation', 
+  ];
+
+  const stats = [
+    { value: "750+", label: "Distinguished Guests" },
+    { value: "18", label: "Award Categories" },
+    { value: "6", label: "VIP Dignitaries" },
+  ];
+
   return (
     <div className="min-h-screen">
       <SEOHead />
       <Navigation />
       
-      {/* Hero Section - Video Background */}
-      <section className="relative h-screen flex items-center justify-center overflow-hidden">
+      {/* Hero Section */}
+      <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
         <a href="#main-content" className="sr-only focus:not-sr-only">Skip to main content</a>
         
         {/* Video Background */}
@@ -24,7 +40,7 @@ const Home = () => {
           muted 
           playsInline 
           poster={heroBg} 
-          className="absolute inset-0 w-full h-full object-cover"
+          className="absolute inset-0 w-full h-full object-cover scale-105"
           onError={e => {
             e.currentTarget.style.display = 'none';
           }}
@@ -39,250 +55,345 @@ const Home = () => {
           style={{ backgroundImage: `url(${heroBg})` }} 
         />
         
-        {/* Gradient Overlay for depth and text legibility */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/30 to-black/60" />
+        {/* Premium Gradient Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black/80" />
+        <div className="absolute inset-0 bg-gradient-to-r from-black/30 via-transparent to-black/30" />
         
-        {/* Hero Content - Minimal & Centered */}
-        <div className="relative z-10 container mx-auto px-4 text-center">
+        {/* Hero Content */}
+        <div className="relative z-10 container mx-auto px-6 lg:px-8 text-center">
           <div className="max-w-5xl mx-auto">
             {/* Animated Logo */}
-            <img 
-              src={oneUaeLogo} 
-              alt="ONE UAE Awards Logo" 
-              className="h-24 md:h-32 lg:h-40 mx-auto mb-8 animate-logo-reveal"
-            />
+            <div className="animate-logo-reveal mb-8 lg:mb-12">
+              <img 
+                src={oneUaeLogo} 
+                alt="ONE UAE Awards Logo" 
+                className="h-28 md:h-36 lg:h-44 mx-auto drop-shadow-2xl"
+              />
+            </div>
             
+            {/* Main Heading */}
             <h1 
-              className="font-serif text-white mb-6 tracking-wide animate-fade-in-up" 
+              className="font-display text-white mb-6 lg:mb-8 animate-fade-in-up" 
               style={{
-                fontSize: 'clamp(2rem, 4.5vw, 3.5rem)',
+                fontSize: 'clamp(2rem, 5vw, 4rem)',
                 fontWeight: 500,
-                letterSpacing: '0.05em',
+                lineHeight: 1.1,
                 animationDelay: '0.3s',
                 animationFillMode: 'both'
               }}
             >
-              ONE UAE INTERNATIONAL<br />BUSINESS AWARDS 2026
+              ONE UAE INTERNATIONAL<br />
+              <span className="text-gradient-gold">BUSINESS AWARDS</span> 2026
             </h1>
             
+            {/* Patronage */}
             <div 
-              className="font-sans text-lg md:text-xl text-white/90 mb-4 font-light animate-fade-in-up" 
-              style={{ 
-                letterSpacing: '0.03em',
-                animationDelay: '0.5s',
-                animationFillMode: 'both'
-              }}
+              className="animate-fade-in-up mb-8" 
+              style={{ animationDelay: '0.5s', animationFillMode: 'both' }}
             >
-              Under the Patronage of<br />
-              H.E. Sheikh Sultan Bin Nasser Bin Humaid Al Nuaimi
+              <p className="text-white/60 text-sm uppercase tracking-[0.2em] mb-2">
+                Under the Patronage of
+              </p>
+              <p className="text-white/90 text-lg md:text-xl font-light">
+                H.E. Sheikh Sultan Bin Nasser Bin Humaid Al Nuaimi
+              </p>
             </div>
             
-            <p 
-              className="font-sans text-base md:text-lg text-white/80 font-light animate-fade-in-up" 
-              style={{ 
-                letterSpacing: '0.1em', 
-                marginTop: '1rem',
-                animationDelay: '0.7s',
-                animationFillMode: 'both'
-              }}
+            {/* Tagline */}
+            <div 
+              className="animate-fade-in-up flex items-center justify-center gap-3 text-white/70 mb-12" 
+              style={{ animationDelay: '0.7s', animationFillMode: 'both' }}
             >
-              Celebrating Growth · Development · Sustainability
-            </p>
+              <span className="w-8 h-px bg-gradient-to-r from-transparent to-primary" />
+              <p className="text-sm md:text-base tracking-widest uppercase">
+                Growth · Development · Sustainability
+              </p>
+              <span className="w-8 h-px bg-gradient-to-l from-transparent to-primary" />
+            </div>
+            
+            {/* CTA Buttons */}
+            <div 
+              className="animate-fade-in-up flex flex-col sm:flex-row items-center justify-center gap-4" 
+              style={{ animationDelay: '0.9s', animationFillMode: 'both' }}
+            >
+              <Link to="/nominate">
+                <Button 
+                  size="lg" 
+                  className="bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-6 text-base font-medium rounded-full group"
+                >
+                  Submit Nomination
+                  <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                </Button>
+              </Link>
+              <Link to="/about">
+                <Button 
+                  size="lg" 
+                  variant="outline"
+                  className="bg-white/5 backdrop-blur-sm border-white/20 text-white hover:bg-white/10 hover:border-white/30 px-8 py-6 text-base font-medium rounded-full"
+                >
+                  Learn More
+                </Button>
+              </Link>
+            </div>
           </div>
         </div>
         
-        {/* Simple Scroll Indicator */}
-        <div className="absolute bottom-10 left-1/2 -translate-x-1/2 animate-fade-in-up" style={{ animationDelay: '1s', animationFillMode: 'both' }}>
-          <div className="w-6 h-10 border border-white/40 rounded-full flex items-start justify-center p-2">
-            <div className="w-1 h-2 bg-white/60 rounded-full animate-bounce" />
+        {/* Scroll Indicator */}
+        <div 
+          className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-fade-in-up" 
+          style={{ animationDelay: '1.2s', animationFillMode: 'both' }}
+        >
+          <div className="flex flex-col items-center gap-2 text-white/50">
+            <span className="text-xs uppercase tracking-widest">Scroll</span>
+            <div className="w-5 h-8 border border-white/30 rounded-full flex items-start justify-center p-1.5">
+              <div className="w-1 h-2 bg-white/60 rounded-full animate-bounce" />
+            </div>
           </div>
         </div>
       </section>
 
-      {/* About Section - Two Column Layout with Trophy Image */}
-      <section id="main-content" className="py-30 bg-white">
-        <div className="container mx-auto px-4 md:px-6 max-w-6xl">
-          <div className="grid md:grid-cols-5 gap-8 md:gap-16 items-start">
-            {/* Left Column - Content */}
-            <div className="md:col-span-3">
-              <h2 
-                className="font-serif text-2xl md:text-3xl lg:text-4xl text-deep-charcoal mb-6 md:mb-8" 
-                style={{ fontWeight: 500, letterSpacing: '0.05em' }}
-              >
-                About ONE UAE Awards
+      {/* Stats Bar */}
+      <section className="relative -mt-20 z-20 px-6 lg:px-8">
+        <div className="container mx-auto max-w-5xl">
+          <div className="bg-background/95 backdrop-blur-xl rounded-2xl shadow-premium-lg border border-border/50 p-6 md:p-8">
+            <div className="grid grid-cols-3 divide-x divide-border">
+              {stats.map((stat, index) => (
+                <div key={index} className="text-center px-4">
+                  <p className="text-3xl md:text-4xl lg:text-5xl font-display font-medium text-foreground mb-1">
+                    {stat.value}
+                  </p>
+                  <p className="text-xs md:text-sm text-muted-foreground">
+                    {stat.label}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* About Section */}
+      <section id="main-content" className="section-padding bg-background">
+        <div className="container mx-auto px-6 lg:px-8 max-w-6xl">
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+            {/* Content */}
+            <div>
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-primary/10 rounded-full text-primary text-sm font-medium mb-6">
+                <Sparkles className="w-4 h-4" />
+                About The Awards
+              </div>
+              
+              <h2 className="font-display text-3xl md:text-4xl lg:text-5xl text-foreground mb-6 leading-tight">
+                A National Platform for <span className="text-gradient-gold">Excellence</span>
               </h2>
               
-              <p 
-                className="font-sans text-sm md:text-base lg:text-lg text-slate-gray mb-8 md:mb-12 leading-relaxed" 
-                style={{ fontWeight: 300, lineHeight: 1.8 }}
-              >
+              <p className="text-muted-foreground text-base lg:text-lg leading-relaxed mb-8">
                 The ONE UAE International Business Awards is a prestigious national platform honoring individuals and establishments driving the UAE's journey of growth, development, and sustainability. Under the patronage of H.E. Sheikh Sultan Bin Nasser Bin Humaid Al Nuaimi, the Awards celebrate excellence across vital sectors shaping the future of the nation.
               </p>
               
-              <div className="space-y-6 md:space-y-8">
-                <div>
-                  <div className="w-8 md:w-10 h-px bg-gold mb-3 md:mb-4" />
-                  <h3 className="font-serif text-lg md:text-xl text-deep-charcoal mb-2 md:mb-3" style={{ fontWeight: 500 }}>
-                    Mission
-                  </h3>
-                  <p className="font-sans text-sm md:text-base text-slate-gray leading-relaxed" style={{ fontWeight: 300, lineHeight: 1.8 }}>
-                    To recognize leaders and institutions contributing to national progress and UAE Vision 2071.
-                  </p>
+              <div className="grid sm:grid-cols-2 gap-6 mb-8">
+                <div className="flex items-start gap-4">
+                  <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
+                    <Calendar className="w-5 h-5 text-primary" />
+                  </div>
+                  <div>
+                    <h4 className="font-medium text-foreground mb-1">January 4, 2026</h4>
+                    <p className="text-sm text-muted-foreground">Gala Night</p>
+                  </div>
                 </div>
-                
-                <div>
-                  <div className="w-8 md:w-10 h-px bg-gold mb-3 md:mb-4" />
-                  <h3 className="font-serif text-lg md:text-xl text-deep-charcoal mb-2 md:mb-3" style={{ fontWeight: 500 }}>
-                    Vision
-                  </h3>
-                  <p className="font-sans text-sm md:text-base text-slate-gray leading-relaxed" style={{ fontWeight: 300, lineHeight: 1.8 }}>
-                    To build a prestigious tradition of honoring excellence, unity, and sustainable advancement.
-                  </p>
+                <div className="flex items-start gap-4">
+                  <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
+                    <MapPin className="w-5 h-5 text-primary" />
+                  </div>
+                  <div>
+                    <h4 className="font-medium text-foreground mb-1">Zabeel Ladies Club</h4>
+                    <p className="text-sm text-muted-foreground">Dubai, UAE</p>
+                  </div>
                 </div>
               </div>
+              
+              <Link to="/about">
+                <Button variant="outline" className="group">
+                  Discover Our Story
+                  <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                </Button>
+              </Link>
             </div>
             
-            {/* Right Column - Trophy Image */}
-            <div className="hidden md:flex md:col-span-2 items-center justify-center">
-              <div className="relative w-full max-w-xs">
+            {/* Trophy Image */}
+            <div className="relative">
+              <div className="relative aspect-[4/5] rounded-2xl overflow-hidden">
                 <img 
                   src={trophyGold} 
                   alt="ONE UAE Awards Trophy" 
-                  className="w-full h-auto object-contain opacity-90"
-                  style={{ filter: 'contrast(1.05)' }}
+                  className="w-full h-full object-cover"
                 />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
               </div>
+              {/* Decorative elements */}
+              <div className="absolute -bottom-6 -left-6 w-24 h-24 border-2 border-primary/20 rounded-2xl -z-10" />
+              <div className="absolute -top-6 -right-6 w-32 h-32 bg-primary/5 rounded-2xl -z-10" />
             </div>
           </div>
         </div>
       </section>
 
       {/* The Three Pillars */}
-      <section className="py-30 bg-cool-gray">
-        <div className="container mx-auto px-4 md:px-6 max-w-5xl">
-          <h2 
-            className="font-serif text-2xl md:text-3xl lg:text-4xl text-center text-deep-charcoal mb-12 md:mb-20" 
-            style={{ fontWeight: 500, letterSpacing: '0.05em' }}
-          >
-            The Three Pillars
-          </h2>
-          
-          <div className="space-y-12 md:space-y-20">
-            <div className="text-center max-w-3xl mx-auto">
-              <h3 className="font-serif text-xl md:text-2xl text-deep-charcoal mb-3 md:mb-4" style={{ fontWeight: 500 }}>
-                Growth & Economic Excellence
-              </h3>
-              <div className="w-12 md:w-16 h-px bg-gold mx-auto mb-4 md:mb-6" />
-              <p className="font-sans text-sm md:text-base text-slate-gray leading-relaxed" style={{ fontWeight: 300, lineHeight: 1.8 }}>
-                Honoring achievements in entrepreneurship, innovation, corporate leadership, finance, retail, hospitality, technology, and digital transformation.
-              </p>
-            </div>
-            
-            <div className="text-center max-w-3xl mx-auto">
-              <h3 className="font-serif text-xl md:text-2xl text-deep-charcoal mb-3 md:mb-4" style={{ fontWeight: 500 }}>
-                Development & Human Progress
-              </h3>
-              <div className="w-12 md:w-16 h-px bg-gold mx-auto mb-4 md:mb-6" />
-              <p className="font-sans text-sm md:text-base text-slate-gray leading-relaxed" style={{ fontWeight: 300, lineHeight: 1.8 }}>
-                Recognizing contributions in education, healthcare, community service, culture, arts, and youth excellence.
-              </p>
-            </div>
-            
-            <div className="text-center max-w-3xl mx-auto">
-              <h3 className="font-serif text-xl md:text-2xl text-deep-charcoal mb-3 md:mb-4" style={{ fontWeight: 500 }}>
-                Sustainability & Global Leadership
-              </h3>
-              <div className="w-12 md:w-16 h-px bg-gold mx-auto mb-4 md:mb-6" />
-              <p className="font-sans text-sm md:text-base text-slate-gray leading-relaxed" style={{ fontWeight: 300, lineHeight: 1.8 }}>
-                Celebrating environmental stewardship, infrastructure innovation, international diplomacy, media excellence, and lifetime achievement.
-              </p>
-            </div>
+      <section className="section-padding bg-secondary/50">
+        <div className="container mx-auto px-6 lg:px-8 max-w-6xl">
+          <div className="text-center mb-16">
+            <h2 className="font-display text-3xl md:text-4xl lg:text-5xl text-foreground mb-4">
+              The Three Pillars
+            </h2>
+            <div className="gold-divider mt-6" />
           </div>
-        </div>
-      </section>
-
-      {/* Award Categories */}
-      <section className="py-30 bg-white">
-        <div className="container mx-auto px-4 md:px-6 max-w-6xl">
-          <h2 
-            className="font-serif text-2xl md:text-3xl lg:text-4xl text-center text-deep-charcoal mb-12 md:mb-20" 
-            style={{ fontWeight: 500, letterSpacing: '0.05em' }}
-          >
-            Award Categories
-          </h2>
           
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+          <div className="grid md:grid-cols-3 gap-8">
             {[
-              'Growth & Economic Excellence', 
-              'Entrepreneurship & Innovation', 
-              'Corporate Leadership', 
-              'Finance & Banking', 
-              'Retail & Hospitality', 
-              'Technology & Digital Transformation', 
-              'Development & Human Progress', 
-              'Education', 
-              'Healthcare', 
-              'Community Service', 
-              'Culture & Arts', 
-              'Youth Excellence', 
-              'Sustainability & Global Leadership', 
-              'Sustainability & Environment', 
-              'Infrastructure & Construction', 
-              'International Relations & Diplomacy', 
-              'Media & Communication', 
-              'Lifetime Achievement & Legacy'
-            ].map(category => (
+              {
+                title: "Growth & Economic Excellence",
+                description: "Honoring achievements in entrepreneurship, innovation, corporate leadership, finance, retail, hospitality, technology, and digital transformation.",
+                icon: "📈"
+              },
+              {
+                title: "Development & Human Progress",
+                description: "Recognizing contributions in education, healthcare, community service, culture, arts, and youth excellence.",
+                icon: "🌱"
+              },
+              {
+                title: "Sustainability & Global Leadership",
+                description: "Celebrating environmental stewardship, infrastructure innovation, international diplomacy, media excellence, and lifetime achievement.",
+                icon: "🌍"
+              }
+            ].map((pillar, index) => (
               <div 
-                key={category} 
-                className="border border-border bg-white p-6 md:p-10 text-center transition-colors duration-300 hover:border-gold" 
-                style={{ borderRadius: '4px' }}
+                key={index}
+                className="card-premium rounded-2xl p-8 lg:p-10 text-center group"
               >
-                <h3 className="font-serif text-base md:text-lg text-deep-charcoal mb-3 md:mb-4" style={{ fontWeight: 500 }}>
-                  {category}
+                <div className="text-4xl mb-6">{pillar.icon}</div>
+                <h3 className="font-display text-xl lg:text-2xl text-foreground mb-4">
+                  {pillar.title}
                 </h3>
-                <div className="w-8 md:w-10 h-px bg-gold mx-auto" />
+                <div className="gold-divider-left mx-auto mb-4" style={{ width: '40px' }} />
+                <p className="text-muted-foreground text-sm lg:text-base leading-relaxed">
+                  {pillar.description}
+                </p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Event Details */}
-      <section className="py-30 bg-cool-gray">
-        <div className="container mx-auto px-4 md:px-6 max-w-5xl">
-          <h2 
-            className="font-serif text-2xl md:text-3xl lg:text-4xl text-center text-deep-charcoal mb-12 md:mb-20" 
-            style={{ fontWeight: 500, letterSpacing: '0.05em' }}
-          >
-            Event Details
-          </h2>
+      {/* Award Categories Preview */}
+      <section className="section-padding bg-background">
+        <div className="container mx-auto px-6 lg:px-8 max-w-6xl">
+          <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-12">
+            <div>
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-primary/10 rounded-full text-primary text-sm font-medium mb-4">
+                <Award className="w-4 h-4" />
+                18 Categories
+              </div>
+              <h2 className="font-display text-3xl md:text-4xl lg:text-5xl text-foreground">
+                Award Categories
+              </h2>
+            </div>
+            <Link to="/categories">
+              <Button variant="outline" className="group">
+                View All Categories
+                <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              </Button>
+            </Link>
+          </div>
           
-          <div className="grid md:grid-cols-2 gap-12 md:gap-16">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {categories.map((category, index) => (
+              <div 
+                key={category}
+                className="card-premium rounded-xl p-6 flex items-center gap-4"
+              >
+                <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
+                  <span className="text-primary font-medium text-sm">
+                    {String(index + 1).padStart(2, '0')}
+                  </span>
+                </div>
+                <h3 className="font-medium text-foreground">
+                  {category}
+                </h3>
+              </div>
+            ))}
+          </div>
+          
+          <div className="text-center mt-8">
+            <p className="text-muted-foreground">
+              + 12 more categories
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Event Details */}
+      <section className="section-padding bg-deep-charcoal text-white relative overflow-hidden">
+        {/* Background decoration */}
+        <div className="absolute inset-0 opacity-20">
+          <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-primary/10 to-transparent" />
+        </div>
+        
+        <div className="relative container mx-auto px-6 lg:px-8 max-w-6xl">
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-20">
             {/* Left - Event Facts */}
-            <div className="space-y-4 md:space-y-6">
-              <h3 className="font-serif text-lg md:text-xl text-deep-charcoal mb-4 md:mb-6" style={{ fontWeight: 500 }}>
-                Event Facts
-              </h3>
-              <div className="space-y-3 md:space-y-4 font-sans text-sm md:text-base text-slate-gray" style={{ fontWeight: 300 }}>
-                <p><span className="text-deep-charcoal" style={{ fontWeight: 400 }}>Date:</span> January 4, 2026</p>
-                <p><span className="text-deep-charcoal" style={{ fontWeight: 400 }}>Venue:</span> Main Ballroom, Zabeel Ladies Club, Dubai</p>
-                <p><span className="text-deep-charcoal" style={{ fontWeight: 400 }}>Format:</span> Ceremony + Gala Dinner</p>
-                <p><span className="text-deep-charcoal" style={{ fontWeight: 400 }}>Attendees:</span> 750</p>
-                <p><span className="text-deep-charcoal" style={{ fontWeight: 400 }}>VIP Dignitaries:</span> 5–6</p>
+            <div>
+              <h2 className="font-display text-3xl md:text-4xl text-white mb-8">
+                Event Details
+              </h2>
+              
+              <div className="space-y-6">
+                {[
+                  { label: "Date", value: "January 4, 2026" },
+                  { label: "Venue", value: "Main Ballroom, Zabeel Ladies Club, Dubai" },
+                  { label: "Format", value: "Ceremony + Gala Dinner" },
+                  { label: "Attendees", value: "750 Distinguished Guests" },
+                  { label: "VIP Dignitaries", value: "5–6 Royal & Government Officials" },
+                ].map((item, index) => (
+                  <div key={index} className="flex items-start gap-4 pb-6 border-b border-white/10">
+                    <span className="text-white/40 text-sm w-28 flex-shrink-0">{item.label}</span>
+                    <span className="text-white/90">{item.value}</span>
+                  </div>
+                ))}
               </div>
             </div>
             
             {/* Right - Program Flow */}
-            <div className="space-y-4 md:space-y-6 md:border-l md:border-gold/30 md:pl-16">
-              <h3 className="font-serif text-lg md:text-xl text-deep-charcoal mb-4 md:mb-6" style={{ fontWeight: 500 }}>
+            <div className="lg:border-l lg:border-white/10 lg:pl-20">
+              <h3 className="font-display text-2xl text-white mb-8">
                 Program Flow
               </h3>
-              <div className="space-y-3 md:space-y-4 font-sans text-sm md:text-base text-slate-gray" style={{ fontWeight: 300 }}>
-                <p>6:00 PM – Reception</p>
-                <p>6:45 PM – Opening</p>
-                <p>7:15 PM – Award Ceremony</p>
-                <p>8:45 PM – Dinner</p>
-                <p>10:00 PM – Closing</p>
+              
+              <div className="space-y-6">
+                {[
+                  { time: "6:00 PM", event: "Reception & Networking" },
+                  { time: "6:45 PM", event: "Opening Ceremony" },
+                  { time: "7:15 PM", event: "Award Presentations" },
+                  { time: "8:45 PM", event: "Gala Dinner" },
+                  { time: "10:00 PM", event: "Closing Remarks" },
+                ].map((item, index) => (
+                  <div key={index} className="flex items-center gap-6">
+                    <span className="text-primary font-medium w-20">{item.time}</span>
+                    <div className="w-2 h-2 rounded-full bg-primary" />
+                    <span className="text-white/80">{item.event}</span>
+                  </div>
+                ))}
+              </div>
+              
+              <div className="mt-12">
+                <Link to="/gala">
+                  <Button 
+                    variant="outline" 
+                    className="border-white/20 text-white hover:bg-white/10 group"
+                  >
+                    View Gala Details
+                    <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                  </Button>
+                </Link>
               </div>
             </div>
           </div>
@@ -290,29 +401,33 @@ const Home = () => {
       </section>
 
       {/* Audience Profile */}
-      <section className="py-30 bg-white">
-        <div className="container mx-auto px-4 md:px-6 max-w-6xl">
-          <h2 
-            className="font-serif text-2xl md:text-3xl lg:text-4xl text-center text-deep-charcoal mb-12 md:mb-20" 
-            style={{ fontWeight: 500, letterSpacing: '0.05em' }}
-          >
-            Audience Profile
-          </h2>
+      <section className="section-padding bg-background">
+        <div className="container mx-auto px-6 lg:px-8 max-w-6xl">
+          <div className="text-center mb-12">
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-primary/10 rounded-full text-primary text-sm font-medium mb-4">
+              <Users className="w-4 h-4" />
+              Our Audience
+            </div>
+            <h2 className="font-display text-3xl md:text-4xl lg:text-5xl text-foreground">
+              Distinguished Guests
+            </h2>
+          </div>
           
-          <div className="grid grid-cols-2 md:grid-cols-5 gap-8 md:gap-12">
+          <div className="grid grid-cols-2 md:grid-cols-5 gap-6">
             {[
-              'Government Representatives', 
-              'Business & Corporate Leaders', 
-              'Entrepreneurs & Innovators', 
-              'Healthcare & Education Professionals', 
-              'Media & Cultural Figures'
-            ].map(audience => (
-              <div key={audience} className="text-center">
-                <div className="w-8 h-8 md:w-10 md:h-10 border border-gold rounded-full mx-auto mb-3 md:mb-4 flex items-center justify-center">
-                  <div className="w-1 h-1 bg-gold rounded-full" />
-                </div>
-                <p className="font-sans text-xs md:text-sm text-slate-gray" style={{ fontWeight: 400 }}>
-                  {audience}
+              { icon: "🏛️", title: "Government Representatives" },
+              { icon: "💼", title: "Business Leaders" },
+              { icon: "💡", title: "Entrepreneurs" },
+              { icon: "🏥", title: "Healthcare Leaders" },
+              { icon: "📺", title: "Media Figures" },
+            ].map((item, index) => (
+              <div 
+                key={index}
+                className="text-center p-6"
+              >
+                <div className="text-3xl mb-4">{item.icon}</div>
+                <p className="text-sm text-muted-foreground">
+                  {item.title}
                 </p>
               </div>
             ))}
@@ -320,76 +435,58 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Sponsorship Tiers */}
-      <section className="py-30 bg-cool-gray">
-        <div className="container mx-auto px-4 md:px-6 max-w-6xl">
-          <h2 
-            className="font-serif text-2xl md:text-3xl lg:text-4xl text-center text-deep-charcoal mb-12 md:mb-20" 
-            style={{ fontWeight: 500, letterSpacing: '0.05em' }}
-          >
-            Sponsorship Tiers
+      {/* Sponsorship CTA */}
+      <section className="section-padding bg-secondary/50">
+        <div className="container mx-auto px-6 lg:px-8 max-w-4xl text-center">
+          <h2 className="font-display text-3xl md:text-4xl lg:text-5xl text-foreground mb-6">
+            Partner With Us
           </h2>
-          
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
-            {[
-              { name: 'Gold Partner', amount: 'AED 100,000' }, 
-              { name: 'Silver Partner', amount: 'AED 75,000' }, 
-              { name: 'Bronze Partner', amount: 'AED 50,000' }, 
-              { name: 'Red-Carpet Partner', amount: 'AED 25,000' }
-            ].map(tier => (
-              <div 
-                key={tier.name} 
-                className="border border-gold bg-white p-8 md:p-12 text-center transition-all duration-300 hover:border-2" 
-                style={{ borderRadius: '4px' }}
-              >
-                <h3 className="font-serif text-base md:text-lg text-deep-charcoal mb-3 md:mb-4" style={{ fontWeight: 500 }}>
-                  {tier.name}
-                </h3>
-                <div className="w-12 md:w-16 h-px bg-gold mx-auto mb-3 md:mb-4" />
-                <p className="font-sans text-sm md:text-base text-slate-gray" style={{ fontWeight: 300 }}>
-                  {tier.amount}
-                </p>
-              </div>
-            ))}
-          </div>
-          
-          <div className="text-center mt-12 md:mt-16">
-            <Link to="/partnerships">
-              <Button 
-                variant="outline" 
-                className="border border-gold bg-transparent text-deep-charcoal hover:bg-gold hover:text-white transition-colors duration-300 text-sm md:text-base" 
-                style={{ fontWeight: 400, letterSpacing: '0.05em' }}
-              >
-                Learn More About Partnerships
-              </Button>
-            </Link>
-          </div>
+          <p className="text-muted-foreground text-lg mb-8 max-w-2xl mx-auto">
+            Join the most prestigious business awards in the UAE. Multiple partnership tiers available starting from AED 25,000.
+          </p>
+          <Link to="/partnerships">
+            <Button 
+              size="lg" 
+              className="bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-6 text-base font-medium rounded-full group"
+            >
+              Explore Partnerships
+              <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            </Button>
+          </Link>
         </div>
       </section>
 
       {/* Contact Section */}
-      <section className="py-30 bg-white">
-        <div className="container mx-auto px-4 md:px-6 max-w-2xl text-center">
-          <h2 
-            className="font-serif text-2xl md:text-3xl lg:text-4xl text-deep-charcoal mb-8 md:mb-12" 
-            style={{ fontWeight: 500, letterSpacing: '0.05em' }}
-          >
-            Contact
+      <section className="section-padding bg-background border-t border-border">
+        <div className="container mx-auto px-6 lg:px-8 max-w-2xl text-center">
+          <h2 className="font-display text-3xl md:text-4xl text-foreground mb-8">
+            Get In Touch
           </h2>
           
-          <div className="space-y-3 md:space-y-4 font-sans text-sm md:text-base text-slate-gray" style={{ fontWeight: 300 }}>
-            <p className="text-deep-charcoal" style={{ fontWeight: 400 }}>
+          <div className="space-y-4 mb-8">
+            <p className="text-lg text-foreground font-medium">
               ONE UAE Awards Secretariat
             </p>
-            <a className="block hover:text-gold transition-colors duration-300" href="mailto:info@oneuaeaward.ae">
+            <a 
+              className="block text-primary hover:text-primary/80 transition-colors" 
+              href="mailto:info@oneuaeaward.ae"
+            >
               info@oneuaeaward.ae
             </a>
-            <a href="tel:+971562555100" className="block hover:text-gold transition-colors duration-300">
+            <a 
+              href="tel:+971562555100" 
+              className="block text-muted-foreground hover:text-foreground transition-colors"
+            >
               +971 56 255 5100
             </a>
           </div>
           
-          <div className="uae-accent-line mx-auto mt-8 md:mt-12" />
+          <Link to="/contact">
+            <Button variant="outline" className="group">
+              Contact Us
+              <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            </Button>
+          </Link>
         </div>
       </section>
 
