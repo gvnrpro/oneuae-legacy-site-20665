@@ -185,6 +185,17 @@
       hsl(var(--uae-red)) 75% 100%
     );
   }
+  
+  /* Logo reveal animation - fade-in with scale */
+  .animate-logo-reveal {
+    animation: logoReveal 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+  
+  /* Fade in up animation for staggered content */
+  .animate-fade-in-up {
+    animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    opacity: 0;
+  }
 }
 
 @keyframes fadeIn {
@@ -193,5 +204,27 @@
   }
   to {
     opacity: 1;
+  }
+}
+
+@keyframes logoReveal {
+  0% {
+    opacity: 0;
+    transform: scale(0.85);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
