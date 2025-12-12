@@ -9,11 +9,11 @@ interface SEOHeadProps {
 }
 
 const SEOHead = ({
-  title = "ONE UAE International Business Awards 2026 - Celebrating Unity, Vision, and Excellence",
+  title = "ONE UAE International Business Awards 2026 | Celebrating Excellence",
   description = "ONE UAE International Business Awards celebrates exceptional individuals and organizations shaping the UAE's future. Join us January 4th, 2026 at Zabeel Ladies Club for an evening of national pride and excellence.",
-  keywords = "UAE awards, ONE UAE, international business awards, national excellence, UAE leaders, innovation awards, Dubai awards, Emirates recognition, 2026 awards",
+  keywords = "ONE UAE Awards, international business awards, UAE excellence, national recognition, leadership awards, innovation awards, Dubai awards 2026",
   path = "",
-  image = "https://oneuaeawards.ae/og-image.jpg",
+  image = "https://oneuaeawards.ae/logo.png",
 }: SEOHeadProps) => {
   const siteUrl = "https://oneuaeawards.ae";
   const fullUrl = `${siteUrl}${path}`;

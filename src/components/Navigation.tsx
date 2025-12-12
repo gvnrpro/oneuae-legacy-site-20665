@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Menu, X } from "lucide-react";
+import oneUaeLogo from "@/assets/one-uae-logo.png";
 
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -23,8 +24,12 @@ const Navigation = () => {
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
-          <Link to="/" className="font-serif text-lg md:text-xl text-deep-charcoal" style={{ fontWeight: 500 }}>
-            ONE UAE Awards
+          <Link to="/" className="flex items-center">
+            <img 
+              src={oneUaeLogo} 
+              alt="ONE UAE International Business Awards" 
+              className="h-12 md:h-14 w-auto"
+            />
           </Link>
 
           {/* Desktop Navigation */}
