@@ -1,15 +1,39 @@
+import { Sparkles, Check, ArrowRight, Star } from "lucide-react";
+import { Link } from "react-router-dom";
+import { Button } from "@/components/ui/button";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import PartnershipForm from "@/components/PartnershipForm";
 import SEOHead from "@/components/SEOHead";
+import AnimatedSection from "@/components/AnimatedSection";
 import trophyGold from "@/assets/trophy-gold.jpeg";
 
 const Partnerships = () => {
   const tiers = [
-    { name: "Gold Partner", amount: "AED 100,000" },
-    { name: "Silver Partner", amount: "AED 75,000" },
-    { name: "Bronze Partner", amount: "AED 50,000" },
-    { name: "Red-Carpet Partner", amount: "AED 25,000" },
+    { 
+      name: "Gold Partner", 
+      amount: "AED 100,000",
+      featured: true,
+      benefits: ["Premium logo placement", "VIP table for 10", "Award presentation rights", "Media coverage priority"]
+    },
+    { 
+      name: "Silver Partner", 
+      amount: "AED 75,000",
+      featured: false,
+      benefits: ["Logo on all materials", "VIP table for 8", "Social media features", "Event program listing"]
+    },
+    { 
+      name: "Bronze Partner", 
+      amount: "AED 50,000",
+      featured: false,
+      benefits: ["Logo visibility", "Reserved seating for 6", "Website recognition", "Certificate of partnership"]
+    },
+    { 
+      name: "Red-Carpet Partner", 
+      amount: "AED 25,000",
+      featured: false,
+      benefits: ["Event branding", "Reserved seating for 4", "Digital recognition", "Networking access"]
+    },
   ];
 
   return (
@@ -22,71 +46,164 @@ const Partnerships = () => {
       />
       <Navigation />
       
-      <main className="pt-32 pb-24" id="main-content">
-        <div className="container mx-auto px-4 max-w-6xl">
-          <div className="text-center mb-20 fade-in">
-            <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl font-medium text-foreground mb-6">
-              Partnerships
-            </h1>
-            <div className="gold-divider mb-8" />
-            <p className="font-sans text-base md:text-lg text-muted-foreground max-w-3xl mx-auto leading-relaxed font-light">
-              Partner with ONE UAE International Business Awards to showcase your commitment to excellence
-            </p>
-          </div>
-
-          {/* Trophy Visual Section */}
-          <section className="mb-20 fade-in">
-            <div className="flex flex-col md:flex-row items-center gap-12 max-w-5xl mx-auto">
-              <div className="w-full md:w-1/3 flex justify-center">
-                <img 
-                  src={trophyGold} 
-                  alt="ONE UAE Awards Trophy" 
-                  className="w-48 md:w-64 h-auto object-contain opacity-90"
-                  style={{ filter: 'contrast(1.05)' }}
-                />
+      <main id="main-content">
+        {/* Hero Section */}
+        <section className="pt-32 pb-20 lg:pt-40 lg:pb-28 bg-gradient-to-b from-secondary/50 to-background">
+          <div className="container mx-auto px-6 lg:px-8 max-w-6xl">
+            <div className="max-w-3xl">
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-primary/10 rounded-full text-primary text-sm font-medium mb-6">
+                <Sparkles className="w-4 h-4" />
+                Partnership Opportunities
               </div>
-              <div className="flex-1 text-center md:text-left">
-                <h2 className="font-serif text-xl md:text-2xl font-medium text-foreground mb-4">
-                  Align your brand with excellence
+              
+              <h1 className="font-display text-4xl md:text-5xl lg:text-6xl text-foreground mb-6 leading-tight">
+                Align Your Brand with <span className="text-gradient-gold">Excellence</span>
+              </h1>
+              
+              <p className="text-lg lg:text-xl text-muted-foreground leading-relaxed">
+                Partner with ONE UAE International Business Awards to showcase your commitment to excellence and connect with 750+ distinguished leaders.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* Trophy Visual Section */}
+        <section className="section-padding bg-background">
+          <div className="container mx-auto px-6 lg:px-8 max-w-6xl">
+            <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+              <AnimatedSection animation="slide-right">
+                <div className="relative">
+                  <div className="aspect-square rounded-2xl overflow-hidden max-w-md mx-auto lg:mx-0">
+                    <img 
+                      src={trophyGold} 
+                      alt="ONE UAE Awards Trophy" 
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                  <div className="absolute -bottom-4 -right-4 w-24 h-24 border-2 border-primary/20 rounded-2xl -z-10" />
+                </div>
+              </AnimatedSection>
+              
+              <AnimatedSection animation="fade-up" delay={200}>
+                <h2 className="font-display text-2xl md:text-3xl lg:text-4xl text-foreground mb-6">
+                  Join an Elite Group of Visionary Companies
                 </h2>
-                <p className="font-sans text-sm md:text-base text-muted-foreground leading-relaxed font-light">
-                  As a partner of the ONE UAE International Business Awards, your organization joins an elite group of visionary companies committed to celebrating and advancing excellence across the Emirates. Our partners gain exclusive visibility among 750+ distinguished attendees including government representatives, business leaders, and industry innovators.
+                <p className="text-muted-foreground leading-relaxed mb-6">
+                  As a partner of the ONE UAE International Business Awards, your organization gains exclusive visibility among distinguished attendees including government representatives, business leaders, and industry innovators.
+                </p>
+                <div className="space-y-3">
+                  {["750+ Distinguished Guests", "Government & Royal Attendance", "Premium Media Coverage", "Exclusive Networking"].map((item, i) => (
+                    <div key={i} className="flex items-center gap-3">
+                      <div className="w-5 h-5 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+                        <Check className="w-3 h-3 text-primary" />
+                      </div>
+                      <span className="text-foreground">{item}</span>
+                    </div>
+                  ))}
+                </div>
+              </AnimatedSection>
+            </div>
+          </div>
+        </section>
+
+        {/* Partnership Tiers */}
+        <section className="section-padding bg-secondary/50">
+          <div className="container mx-auto px-6 lg:px-8 max-w-6xl">
+            <AnimatedSection>
+              <div className="text-center mb-16">
+                <h2 className="font-display text-3xl md:text-4xl text-foreground mb-4">
+                  Partnership Tiers
+                </h2>
+                <p className="text-muted-foreground">
+                  Choose the partnership level that aligns with your goals
                 </p>
               </div>
-            </div>
-          </section>
-
-          <section className="mb-20 fade-in">
-            <h2 className="font-serif text-xl md:text-2xl font-medium text-center mb-12">Partnership tiers</h2>
+            </AnimatedSection>
             
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 max-w-5xl mx-auto">
+            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
               {tiers.map((tier, index) => (
-                <div
-                  key={index}
-                  className="bg-background border border-gold p-6 md:p-8 text-center transition-colors duration-300 hover:border-gold/60"
-                >
-                  <h3 className="font-serif text-base md:text-xl font-medium text-foreground mb-3">
-                    {tier.name}
-                  </h3>
-                  <div className="w-12 h-px bg-gold mx-auto mb-4" />
-                  <p className="font-sans text-sm md:text-base text-gold font-light">
-                    {tier.amount}
-                  </p>
-                </div>
+                <AnimatedSection key={index} delay={index * 100}>
+                  <div 
+                    className={`card-premium rounded-2xl p-6 lg:p-8 h-full relative ${
+                      tier.featured ? 'border-primary ring-1 ring-primary/20' : ''
+                    }`}
+                  >
+                    {tier.featured && (
+                      <div className="absolute -top-3 left-1/2 -translate-x-1/2">
+                        <span className="inline-flex items-center gap-1 px-3 py-1 bg-primary text-primary-foreground text-xs font-medium rounded-full">
+                          <Star className="w-3 h-3" />
+                          Featured
+                        </span>
+                      </div>
+                    )}
+                    
+                    <div className="text-center mb-6 pt-2">
+                      <h3 className="font-display text-lg lg:text-xl text-foreground mb-2">
+                        {tier.name}
+                      </h3>
+                      <div className="w-8 h-px bg-primary mx-auto mb-3" />
+                      <p className="text-primary font-medium text-lg">
+                        {tier.amount}
+                      </p>
+                    </div>
+                    
+                    <ul className="space-y-3">
+                      {tier.benefits.map((benefit, i) => (
+                        <li key={i} className="flex items-start gap-2 text-sm text-muted-foreground">
+                          <Check className="w-4 h-4 text-primary flex-shrink-0 mt-0.5" />
+                          {benefit}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </AnimatedSection>
               ))}
             </div>
-          </section>
+          </div>
+        </section>
 
-          <section className="py-30 bg-cool-gray fade-in">
-            <div className="max-w-4xl mx-auto px-8">
-              <h2 className="font-serif text-xl md:text-2xl font-medium text-center mb-8">Partnership inquiry</h2>
-              <p className="font-sans text-sm md:text-base text-muted-foreground text-center mb-12 font-light max-w-2xl mx-auto">
-                For detailed information about partnership benefits and to discuss customized packages, please submit an inquiry below.
-              </p>
-              <PartnershipForm />
-            </div>
-          </section>
-        </div>
+        {/* Partnership Inquiry Form */}
+        <section className="section-padding bg-background">
+          <div className="container mx-auto px-6 lg:px-8 max-w-4xl">
+            <AnimatedSection>
+              <div className="text-center mb-12">
+                <h2 className="font-display text-2xl md:text-3xl text-foreground mb-4">
+                  Partnership Inquiry
+                </h2>
+                <p className="text-muted-foreground max-w-2xl mx-auto">
+                  For detailed information about partnership benefits and to discuss customized packages, please submit an inquiry below.
+                </p>
+              </div>
+            </AnimatedSection>
+            
+            <AnimatedSection delay={200}>
+              <div className="card-premium rounded-2xl p-8 lg:p-12">
+                <PartnershipForm />
+              </div>
+            </AnimatedSection>
+          </div>
+        </section>
+
+        {/* CTA */}
+        <section className="section-padding bg-deep-charcoal text-white">
+          <div className="container mx-auto px-6 lg:px-8 max-w-3xl text-center">
+            <h2 className="font-display text-3xl md:text-4xl text-white mb-6">
+              Have Questions?
+            </h2>
+            <p className="text-white/70 mb-8">
+              Our partnerships team is ready to discuss how we can create a customized package for your organization.
+            </p>
+            <Link to="/contact">
+              <Button 
+                size="lg" 
+                className="bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-6 rounded-full group"
+              >
+                Contact Us
+                <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              </Button>
+            </Link>
+          </div>
+        </section>
       </main>
 
       <Footer />
