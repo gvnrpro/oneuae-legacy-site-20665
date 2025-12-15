@@ -397,3 +397,51 @@
   z-index: 100;
   background: linear-gradient(90deg, hsl(var(--primary)) var(--scroll), transparent var(--scroll));
 }
+
+/* Premium Box Shadow */
+.shadow-premium-lg {
+  box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.15), 0 12px 24px -8px rgb(0 0 0 / 0.1);
+}
+
+/* Scroll Animations */
+.scroll-animate {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.scroll-animate.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Interactive Elements */
+.interactive-card {
+  @apply transition-all duration-300;
+}
+
+.interactive-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px -15px rgb(0 0 0 / 0.1);
+}
+
+/* Button Glow Effect */
+.btn-glow {
+  @apply relative overflow-hidden;
+}
+
+.btn-glow::after {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  background: linear-gradient(45deg, hsl(var(--primary) / 0.4), transparent, hsl(var(--primary) / 0.4));
+  border-radius: inherit;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: -1;
+  filter: blur(8px);
+}
+
+.btn-glow:hover::after {
+  opacity: 1;
+}

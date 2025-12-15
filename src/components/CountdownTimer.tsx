@@ -47,16 +47,16 @@ const CountdownTimer = () => {
 
   return (
     <div className="w-full max-w-4xl mx-auto">
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
         {timeUnits.map((unit) => (
           <div
             key={unit.label}
-            className="bg-background border border-border p-6 text-center transition-colors duration-300 hover:border-gold"
+            className="card-premium rounded-xl p-6 md:p-8 text-center group"
           >
-            <div className="font-serif text-4xl md:text-5xl font-medium text-gold mb-2">
+            <div className="font-display text-4xl md:text-5xl lg:text-6xl font-medium text-primary mb-2 transition-transform group-hover:scale-105">
               {unit.value.toString().padStart(2, "0")}
             </div>
-            <div className="font-sans text-xs text-muted-foreground uppercase tracking-wider font-light">
+            <div className="text-xs md:text-sm text-muted-foreground uppercase tracking-wider">
               {unit.label}
             </div>
           </div>

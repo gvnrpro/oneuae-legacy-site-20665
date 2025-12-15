@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Calendar, MapPin, Users, Award, Sparkles } from "lucide-react";
+import { ArrowRight, Calendar, MapPin, Users, Award, Sparkles, TrendingUp, Heart, Globe } from "lucide-react";
+import AnimatedSection from "@/components/AnimatedSection";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
@@ -253,33 +254,37 @@ const Home = () => {
               {
                 title: "Growth & Economic Excellence",
                 description: "Honoring achievements in entrepreneurship, innovation, corporate leadership, finance, retail, hospitality, technology, and digital transformation.",
-                icon: "📈"
+                icon: TrendingUp
               },
               {
                 title: "Development & Human Progress",
                 description: "Recognizing contributions in education, healthcare, community service, culture, arts, and youth excellence.",
-                icon: "🌱"
+                icon: Heart
               },
               {
                 title: "Sustainability & Global Leadership",
                 description: "Celebrating environmental stewardship, infrastructure innovation, international diplomacy, media excellence, and lifetime achievement.",
-                icon: "🌍"
+                icon: Globe
               }
-            ].map((pillar, index) => (
-              <div 
-                key={index}
-                className="card-premium rounded-2xl p-8 lg:p-10 text-center group"
-              >
-                <div className="text-4xl mb-6">{pillar.icon}</div>
-                <h3 className="font-display text-xl lg:text-2xl text-foreground mb-4">
-                  {pillar.title}
-                </h3>
-                <div className="gold-divider-left mx-auto mb-4" style={{ width: '40px' }} />
-                <p className="text-muted-foreground text-sm lg:text-base leading-relaxed">
-                  {pillar.description}
-                </p>
-              </div>
-            ))}
+            ].map((pillar, index) => {
+              const Icon = pillar.icon;
+              return (
+                <AnimatedSection key={index} delay={index * 100}>
+                  <div className="card-premium rounded-2xl p-8 lg:p-10 text-center group h-full">
+                    <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto mb-6 group-hover:bg-primary/20 transition-colors">
+                      <Icon className="w-7 h-7 text-primary" />
+                    </div>
+                    <h3 className="font-display text-xl lg:text-2xl text-foreground mb-4">
+                      {pillar.title}
+                    </h3>
+                    <div className="gold-divider-left mx-auto mb-4" style={{ width: '40px' }} />
+                    <p className="text-muted-foreground text-sm lg:text-base leading-relaxed">
+                      {pillar.description}
+                    </p>
+                  </div>
+                </AnimatedSection>
+              );
+            })}
           </div>
         </div>
       </section>
@@ -415,21 +420,22 @@ const Home = () => {
           
           <div className="grid grid-cols-2 md:grid-cols-5 gap-6">
             {[
-              { icon: "🏛️", title: "Government Representatives" },
-              { icon: "💼", title: "Business Leaders" },
-              { icon: "💡", title: "Entrepreneurs" },
-              { icon: "🏥", title: "Healthcare Leaders" },
-              { icon: "📺", title: "Media Figures" },
+              { title: "Government Representatives" },
+              { title: "Business Leaders" },
+              { title: "Entrepreneurs" },
+              { title: "Healthcare Leaders" },
+              { title: "Media Figures" },
             ].map((item, index) => (
-              <div 
-                key={index}
-                className="text-center p-6"
-              >
-                <div className="text-3xl mb-4">{item.icon}</div>
-                <p className="text-sm text-muted-foreground">
-                  {item.title}
-                </p>
-              </div>
+              <AnimatedSection key={index} delay={index * 80}>
+                <div className="text-center p-6 card-premium rounded-xl">
+                  <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mx-auto mb-4">
+                    <Users className="w-5 h-5 text-primary" />
+                  </div>
+                  <p className="text-sm text-foreground font-medium">
+                    {item.title}
+                  </p>
+                </div>
+              </AnimatedSection>
             ))}
           </div>
         </div>
