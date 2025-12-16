@@ -1,9 +1,10 @@
 import { Link } from "react-router-dom";
-import { ArrowRight, Sparkles, Target, Eye, Heart, Lightbulb, Star } from "lucide-react";
+import { ArrowRight, Target, Eye, Heart, Lightbulb, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
+import AnimatedSection from "@/components/AnimatedSection";
 import sheikhPortrait from "@/assets/sheikh-sultan.jpeg";
 import trophySkyline from "@/assets/trophy-skyline.jpeg";
 
@@ -19,22 +20,26 @@ const About = () => {
       <Navigation />
       
       <main id="main-content">
-        {/* Hero Section */}
-        <section className="pt-32 pb-20 lg:pt-40 lg:pb-28 bg-gradient-to-b from-secondary/50 to-background">
+        {/* Hero Section - Full-width image band with offset headline */}
+        <section className="relative pt-20">
+          <div className="h-[40vh] min-h-[320px] relative overflow-hidden">
+            <img 
+              src={trophySkyline} 
+              alt="ONE UAE Awards" 
+              className="w-full h-full object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-r from-background via-background/60 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-background to-transparent" />
+          </div>
+          
+          {/* Offset headline */}
           <div className="container mx-auto px-6 lg:px-8 max-w-6xl">
-            <div className="max-w-3xl">
-              <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-primary/10 rounded-full text-primary text-sm font-medium mb-6">
-                <Sparkles className="w-4 h-4" />
-                About Us
-              </div>
-              
-              <h1 className="font-display text-4xl md:text-5xl lg:text-6xl text-foreground mb-6 leading-tight">
-                A National Platform for <span className="text-gradient-gold">Excellence</span>
+            <div className="relative -mt-32 lg:-mt-40 max-w-2xl">
+              <p className="editorial-label mb-4">About the Awards</p>
+              <h1 className="section-title-editorial mb-6">
+                A National Platform for Excellence
               </h1>
-              
-              <p className="text-lg lg:text-xl text-muted-foreground leading-relaxed">
-                Celebrating the exceptional individuals and organizations shaping the UAE's future through innovation, leadership, and sustainable growth.
-              </p>
+              <div className="gold-rule-left" />
             </div>
           </div>
         </section>
@@ -42,52 +47,67 @@ const About = () => {
         {/* About Content */}
         <section className="section-padding bg-background">
           <div className="container mx-auto px-6 lg:px-8 max-w-6xl">
-            <div className="grid lg:grid-cols-5 gap-12 lg:gap-20">
-              <div className="lg:col-span-3 space-y-8">
-                <div className="prose prose-lg max-w-none">
-                  <p className="text-foreground text-lg leading-relaxed">
-                    The ONE UAE International Business Awards is a prestigious national platform honoring individuals and establishments driving the UAE's journey of growth, development, and sustainability. Under the patronage of H.E. Sheikh Sultan Bin Nasser Bin Humaid Al Nuaimi, the Awards celebrate excellence across vital sectors shaping the future of the nation.
-                  </p>
-                  <p className="text-muted-foreground leading-relaxed">
-                    What began as a vision to honor outstanding contributions has grown into a national platform celebrating the diverse achievements that define the UAE's spirit of unity, vision, and excellence.
-                  </p>
-                </div>
+            <div className="grid lg:grid-cols-5 gap-16 lg:gap-24">
+              <div className="lg:col-span-3 space-y-10">
+                <AnimatedSection>
+                  <div className="space-y-6">
+                    <p className="text-lg text-foreground leading-relaxed">
+                      The ONE UAE International Business Awards is a prestigious national platform honoring individuals and establishments driving the UAE's journey of growth, development, and sustainability.
+                    </p>
+                    <p className="text-muted-foreground leading-relaxed">
+                      What began as a vision to honor outstanding contributions has grown into a national platform celebrating the diverse achievements that define the UAE's spirit of unity, vision, and excellence.
+                    </p>
+                  </div>
+                </AnimatedSection>
+
+                {/* Pull Quote */}
+                <AnimatedSection delay={100}>
+                  <blockquote className="pull-quote my-12">
+                    "Celebrating the extraordinary achievements of individuals and organizations who embody the spirit of national excellence."
+                  </blockquote>
+                </AnimatedSection>
 
                 {/* Mission & Vision */}
-                <div className="grid sm:grid-cols-2 gap-6 pt-8">
-                  <div className="card-premium rounded-2xl p-6">
-                    <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-4">
-                      <Target className="w-5 h-5 text-primary" />
+                <AnimatedSection delay={200}>
+                  <div className="grid sm:grid-cols-2 gap-6">
+                    <div className="card-standard">
+                      <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
+                        <Target className="w-5 h-5 text-primary" />
+                      </div>
+                      <h3 className="font-display text-lg text-foreground mb-2">Mission</h3>
+                      <p className="text-muted-foreground text-sm leading-relaxed">
+                        To recognize leaders and institutions contributing to national progress and UAE Vision 2071.
+                      </p>
                     </div>
-                    <h3 className="font-display text-xl text-foreground mb-2">Mission</h3>
-                    <p className="text-muted-foreground text-sm leading-relaxed">
-                      To recognize leaders and institutions contributing to national progress and UAE Vision 2071.
-                    </p>
-                  </div>
 
-                  <div className="card-premium rounded-2xl p-6">
-                    <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-4">
-                      <Eye className="w-5 h-5 text-primary" />
+                    <div className="card-standard">
+                      <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
+                        <Eye className="w-5 h-5 text-primary" />
+                      </div>
+                      <h3 className="font-display text-lg text-foreground mb-2">Vision</h3>
+                      <p className="text-muted-foreground text-sm leading-relaxed">
+                        To build a prestigious tradition of honoring excellence, unity, and sustainable advancement.
+                      </p>
                     </div>
-                    <h3 className="font-display text-xl text-foreground mb-2">Vision</h3>
-                    <p className="text-muted-foreground text-sm leading-relaxed">
-                      To build a prestigious tradition of honoring excellence, unity, and sustainable advancement.
-                    </p>
                   </div>
-                </div>
+                </AnimatedSection>
               </div>
 
-              {/* Trophy Image */}
+              {/* Stats Column */}
               <div className="lg:col-span-2">
-                <div className="relative sticky top-32">
-                  <div className="aspect-[3/4] rounded-2xl overflow-hidden">
-                    <img 
-                      src={trophySkyline} 
-                      alt="ONE UAE Awards Trophy with Dubai skyline" 
-                      className="w-full h-full object-cover"
-                    />
+                <div className="sticky top-32 space-y-8">
+                  <div className="text-center lg:text-left">
+                    <span className="editorial-number">18</span>
+                    <p className="text-muted-foreground text-sm mt-2">Award Categories</p>
                   </div>
-                  <div className="absolute -bottom-4 -left-4 w-20 h-20 border-2 border-primary/20 rounded-xl -z-10" />
+                  <div className="text-center lg:text-left">
+                    <span className="editorial-number">750</span>
+                    <p className="text-muted-foreground text-sm mt-2">Distinguished Guests</p>
+                  </div>
+                  <div className="text-center lg:text-left">
+                    <span className="editorial-number">1</span>
+                    <p className="text-muted-foreground text-sm mt-2">Unified Vision</p>
+                  </div>
                 </div>
               </div>
             </div>
@@ -95,47 +115,49 @@ const About = () => {
         </section>
 
         {/* Patronage Section */}
-        <section className="section-padding bg-deep-charcoal text-white">
+        <section className="section-breathing bg-deep-charcoal text-white">
           <div className="container mx-auto px-6 lg:px-8 max-w-6xl">
-            <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-              <div>
-                <p className="text-white/40 text-sm uppercase tracking-widest mb-4">Under the Patronage</p>
-                <h2 className="font-display text-3xl md:text-4xl text-white mb-6">
-                  H.E. Sheikh Sultan Bin Nasser Bin Humaid Al Nuaimi
-                </h2>
-                <p className="text-white/70 leading-relaxed mb-8">
-                  ONE UAE International Business Awards is honored to operate under the distinguished patronage of H.E. Sheikh Sultan Bin Nasser Bin Humaid Al Nuaimi, whose commitment to excellence and national development continues to inspire our mission.
-                </p>
-                <div className="uae-accent-line" />
-              </div>
-              
-              <div className="flex justify-center lg:justify-end">
-                <div className="relative">
-                  <div className="w-64 h-64 lg:w-80 lg:h-80 rounded-2xl overflow-hidden border border-white/10">
-                    <img 
-                      src={sheikhPortrait} 
-                      alt="H.E. Sheikh Sultan Bin Nasser Bin Humaid Al Nuaimi" 
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                  <div className="absolute -bottom-4 -right-4 w-full h-full border border-primary/20 rounded-2xl -z-10" />
+            <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center">
+              <AnimatedSection>
+                <div>
+                  <p className="editorial-label text-white/40 mb-4">Under the Patronage</p>
+                  <h2 className="font-display text-3xl md:text-4xl text-white mb-6">
+                    H.E. Sheikh Sultan Bin Nasser Bin Humaid Al Nuaimi
+                  </h2>
+                  <p className="text-white/60 leading-relaxed mb-8">
+                    ONE UAE International Business Awards is honored to operate under the distinguished patronage of H.E. Sheikh Sultan Bin Nasser Bin Humaid Al Nuaimi, whose commitment to excellence and national development continues to inspire our mission.
+                  </p>
+                  <div className="gold-rule-left" />
                 </div>
-              </div>
+              </AnimatedSection>
+              
+              <AnimatedSection delay={200}>
+                <div className="flex justify-center lg:justify-end">
+                  <div className="relative">
+                    <div className="w-64 h-80 lg:w-72 lg:h-96 rounded-2xl overflow-hidden">
+                      <img 
+                        src={sheikhPortrait} 
+                        alt="H.E. Sheikh Sultan Bin Nasser Bin Humaid Al Nuaimi" 
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                    <div className="absolute -bottom-3 -right-3 w-full h-full border border-primary/20 rounded-2xl -z-10" />
+                  </div>
+                </div>
+              </AnimatedSection>
             </div>
           </div>
         </section>
 
         {/* Core Values */}
         <section className="section-padding bg-background">
-          <div className="container mx-auto px-6 lg:px-8 max-w-6xl">
+          <div className="container mx-auto px-6 lg:px-8 max-w-5xl">
             <div className="text-center mb-16">
-              <h2 className="font-display text-3xl md:text-4xl lg:text-5xl text-foreground mb-4">
-                Core Values
-              </h2>
-              <div className="gold-divider mt-6" />
+              <p className="editorial-label mb-4">Our Foundation</p>
+              <h2 className="section-title-editorial">Core Values</h2>
             </div>
             
-            <div className="grid md:grid-cols-3 gap-8">
+            <div className="grid md:grid-cols-3 gap-12">
               {[
                 {
                   icon: Heart,
@@ -153,77 +175,74 @@ const About = () => {
                   description: "Recognizing exceptional achievement and unwavering commitment to the highest standards."
                 }
               ].map((value, index) => (
-                <div key={index} className="text-center p-8">
-                  <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto mb-6">
-                    <value.icon className="w-7 h-7 text-primary" />
+                <AnimatedSection key={index} delay={index * 100}>
+                  <div className="text-center">
+                    <div className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center mx-auto mb-5">
+                      <value.icon className="w-6 h-6 text-primary" />
+                    </div>
+                    <h3 className="font-display text-xl text-foreground mb-3">{value.title}</h3>
+                    <p className="text-muted-foreground text-sm leading-relaxed">
+                      {value.description}
+                    </p>
                   </div>
-                  <h3 className="font-display text-xl text-foreground mb-3">{value.title}</h3>
-                  <p className="text-muted-foreground text-sm leading-relaxed">
-                    {value.description}
-                  </p>
-                </div>
+                </AnimatedSection>
               ))}
             </div>
           </div>
         </section>
 
         {/* Selection Process */}
-        <section className="section-padding bg-secondary/50">
+        <section className="section-padding bg-secondary/30">
           <div className="container mx-auto px-6 lg:px-8 max-w-4xl">
             <div className="text-center mb-16">
-              <h2 className="font-display text-3xl md:text-4xl lg:text-5xl text-foreground mb-4">
-                Selection Process
-              </h2>
-              <p className="text-muted-foreground text-lg">
-                A rigorous and transparent evaluation journey
-              </p>
+              <p className="editorial-label mb-4">The Journey</p>
+              <h2 className="section-title-editorial">Selection Process</h2>
             </div>
             
-            <div className="space-y-8">
+            <div className="space-y-6">
               {[
                 {
                   step: "01",
                   title: "Nomination",
-                  description: "Individuals and organizations submit nominations highlighting exceptional achievements and contributions to the UAE."
+                  description: "Individuals and organizations submit nominations highlighting exceptional achievements and contributions."
                 },
                 {
                   step: "02",
                   title: "Expert Review",
-                  description: "A distinguished panel of judges evaluates nominations based on impact, innovation, and alignment with award criteria."
+                  description: "A distinguished panel evaluates nominations based on impact, innovation, and alignment with criteria."
                 },
                 {
                   step: "03",
                   title: "Final Selection",
-                  description: "Winners are selected and honored at our prestigious annual ceremony, celebrating their remarkable achievements."
+                  description: "Winners are selected and honored at our prestigious annual ceremony."
                 }
               ].map((item, index) => (
-                <div 
-                  key={index}
-                  className="card-premium rounded-2xl p-8 flex gap-6"
-                >
-                  <div className="flex-shrink-0">
-                    <span className="inline-flex items-center justify-center w-14 h-14 rounded-xl bg-primary text-primary-foreground font-display text-xl">
+                <AnimatedSection key={index} delay={index * 100}>
+                  <div className="card-standard flex gap-6 items-start">
+                    <span className="font-display text-3xl text-primary/30 flex-shrink-0">
                       {item.step}
                     </span>
+                    <div>
+                      <h3 className="font-display text-lg text-foreground mb-2">{item.title}</h3>
+                      <p className="text-muted-foreground text-sm leading-relaxed">
+                        {item.description}
+                      </p>
+                    </div>
                   </div>
-                  <div>
-                    <h3 className="font-display text-xl text-foreground mb-2">{item.title}</h3>
-                    <p className="text-muted-foreground leading-relaxed">
-                      {item.description}
-                    </p>
-                  </div>
-                </div>
+                </AnimatedSection>
               ))}
             </div>
             
-            <div className="text-center mt-12">
-              <Link to="/nominate">
-                <Button size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-6 rounded-full group">
-                  Submit Your Nomination
-                  <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                </Button>
-              </Link>
-            </div>
+            <AnimatedSection delay={400}>
+              <div className="text-center mt-12">
+                <Link to="/nominate">
+                  <Button size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-6 rounded-full group">
+                    Submit Your Nomination
+                    <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                  </Button>
+                </Link>
+              </div>
+            </AnimatedSection>
           </div>
         </section>
       </main>

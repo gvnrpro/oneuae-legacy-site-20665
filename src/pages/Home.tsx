@@ -173,42 +173,35 @@ const Home = () => {
         </div>
       </section>
 
-      {/* About Section */}
-      <section id="main-content" className="section-padding bg-background">
+      {/* About Section - Asymmetric layout */}
+      <section id="main-content" className="section-breathing bg-background">
         <div className="container mx-auto px-6 lg:px-8 max-w-6xl">
-          <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-            {/* Content */}
-            <div>
-              <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-primary/10 rounded-full text-primary text-sm font-medium mb-6">
-                <Sparkles className="w-4 h-4" />
-                About The Awards
-              </div>
+          <div className="grid lg:grid-cols-5 gap-12 lg:gap-20 items-center">
+            {/* Content - 3 columns */}
+            <div className="lg:col-span-3">
+              <p className="editorial-label mb-4">About The Awards</p>
               
-              <h2 className="font-display text-3xl md:text-4xl lg:text-5xl text-foreground mb-6 leading-tight">
-                A National Platform for <span className="text-gradient-gold">Excellence</span>
+              <h2 className="section-title-editorial mb-6">
+                A National Platform for Excellence
               </h2>
               
-              <p className="text-muted-foreground text-base lg:text-lg leading-relaxed mb-8">
+              <p className="text-muted-foreground leading-relaxed mb-8">
                 The ONE UAE International Business Awards is a prestigious national platform honoring individuals and establishments driving the UAE's journey of growth, development, and sustainability. Under the patronage of H.E. Sheikh Sultan Bin Nasser Bin Humaid Al Nuaimi, the Awards celebrate excellence across vital sectors shaping the future of the nation.
               </p>
               
-              <div className="grid sm:grid-cols-2 gap-6 mb-8">
-                <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
-                    <Calendar className="w-5 h-5 text-primary" />
-                  </div>
+              <div className="flex flex-wrap gap-6 mb-8">
+                <div className="flex items-center gap-3">
+                  <Calendar className="w-5 h-5 text-primary" />
                   <div>
-                    <h4 className="font-medium text-foreground mb-1">January 4, 2026</h4>
-                    <p className="text-sm text-muted-foreground">Gala Night</p>
+                    <p className="font-medium text-foreground text-sm">January 4, 2026</p>
+                    <p className="text-xs text-muted-foreground">Gala Night</p>
                   </div>
                 </div>
-                <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
-                    <MapPin className="w-5 h-5 text-primary" />
-                  </div>
+                <div className="flex items-center gap-3">
+                  <MapPin className="w-5 h-5 text-primary" />
                   <div>
-                    <h4 className="font-medium text-foreground mb-1">Zabeel Ladies Club</h4>
-                    <p className="text-sm text-muted-foreground">Dubai, UAE</p>
+                    <p className="font-medium text-foreground text-sm">Zabeel Ladies Club</p>
+                    <p className="text-xs text-muted-foreground">Dubai, UAE</p>
                   </div>
                 </div>
               </div>
@@ -221,39 +214,34 @@ const Home = () => {
               </Link>
             </div>
             
-            {/* Trophy Image */}
-            <div className="relative">
-              <div className="relative aspect-[4/5] rounded-2xl overflow-hidden">
+            {/* Trophy Image - 2 columns */}
+            <div className="lg:col-span-2 relative">
+              <div className="aspect-[3/4] rounded-2xl overflow-hidden">
                 <img 
                   src={trophyGold} 
                   alt="ONE UAE Awards Trophy" 
                   className="w-full h-full object-cover"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
               </div>
-              {/* Decorative elements */}
-              <div className="absolute -bottom-6 -left-6 w-24 h-24 border-2 border-primary/20 rounded-2xl -z-10" />
-              <div className="absolute -top-6 -right-6 w-32 h-32 bg-primary/5 rounded-2xl -z-10" />
+              <div className="absolute -bottom-4 -left-4 w-20 h-20 border border-primary/20 rounded-xl -z-10" />
             </div>
           </div>
         </div>
       </section>
 
       {/* The Three Pillars */}
-      <section className="section-padding bg-secondary/50">
+      <section className="section-padding bg-secondary/30">
         <div className="container mx-auto px-6 lg:px-8 max-w-6xl">
           <div className="text-center mb-16">
-            <h2 className="font-display text-3xl md:text-4xl lg:text-5xl text-foreground mb-4">
-              The Three Pillars
-            </h2>
-            <div className="gold-divider mt-6" />
+            <p className="editorial-label mb-4">Foundation</p>
+            <h2 className="section-title-editorial">The Three Pillars</h2>
           </div>
           
           <div className="grid md:grid-cols-3 gap-8">
             {[
               {
                 title: "Growth & Economic Excellence",
-                description: "Honoring achievements in entrepreneurship, innovation, corporate leadership, finance, retail, hospitality, technology, and digital transformation.",
+                description: "Honoring achievements in entrepreneurship, innovation, corporate leadership, finance, retail, hospitality, and digital transformation.",
                 icon: TrendingUp
               },
               {
@@ -263,22 +251,21 @@ const Home = () => {
               },
               {
                 title: "Sustainability & Global Leadership",
-                description: "Celebrating environmental stewardship, infrastructure innovation, international diplomacy, media excellence, and lifetime achievement.",
+                description: "Celebrating environmental stewardship, infrastructure innovation, international diplomacy, and lifetime achievement.",
                 icon: Globe
               }
             ].map((pillar, index) => {
               const Icon = pillar.icon;
               return (
                 <AnimatedSection key={index} delay={index * 100}>
-                  <div className="card-premium rounded-2xl p-8 lg:p-10 text-center group h-full">
-                    <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto mb-6 group-hover:bg-primary/20 transition-colors">
-                      <Icon className="w-7 h-7 text-primary" />
+                  <div className="card-standard text-center h-full p-8">
+                    <div className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center mx-auto mb-5">
+                      <Icon className="w-6 h-6 text-primary" />
                     </div>
-                    <h3 className="font-display text-xl lg:text-2xl text-foreground mb-4">
+                    <h3 className="font-display text-lg text-foreground mb-3">
                       {pillar.title}
                     </h3>
-                    <div className="gold-divider-left mx-auto mb-4" style={{ width: '40px' }} />
-                    <p className="text-muted-foreground text-sm lg:text-base leading-relaxed">
+                    <p className="text-muted-foreground text-sm leading-relaxed">
                       {pillar.description}
                     </p>
                   </div>
