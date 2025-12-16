@@ -2,6 +2,59 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Editorial Typography Utilities */
+.editorial-label {
+  @apply text-xs uppercase tracking-[0.2em] text-muted-foreground font-medium;
+}
+
+.editorial-number {
+  @apply font-display text-8xl md:text-9xl font-light text-primary/10 leading-none;
+}
+
+.pull-quote {
+  @apply font-display text-2xl md:text-3xl text-foreground/90 leading-relaxed border-l-2 border-primary pl-6 italic;
+}
+
+.section-title-editorial {
+  @apply font-display text-3xl md:text-4xl lg:text-5xl text-foreground tracking-tight;
+}
+
+/* Visual Rhythm Utilities */
+.section-breathing {
+  @apply py-24 md:py-32 lg:py-40;
+}
+
+.section-compact {
+  @apply py-12 md:py-16;
+}
+
+/* Card Hierarchy */
+.card-featured {
+  @apply bg-background border-2 border-primary/30 shadow-lg shadow-primary/5 rounded-2xl p-8 lg:p-10 transition-all duration-300 hover:border-primary/50 hover:shadow-xl hover:shadow-primary/10;
+}
+
+.card-standard {
+  @apply bg-background border border-border rounded-xl p-6 transition-all duration-300 hover:border-primary/30 hover:shadow-md;
+}
+
+.card-minimal {
+  @apply bg-transparent border border-border/50 rounded-lg p-5 transition-all duration-300 hover:bg-muted/50;
+}
+
+/* Gold accent variations */
+.gold-rule {
+  @apply h-px bg-gradient-to-r from-transparent via-primary to-transparent max-w-xs mx-auto;
+}
+
+.gold-rule-left {
+  @apply h-px bg-gradient-to-r from-primary to-transparent w-16;
+}
+
+/* Scroll progress indicator */
+.scroll-progress-bar {
+  @apply fixed top-0 left-0 h-0.5 bg-primary z-[60] transition-all duration-100;
+}
+
 /* Modern Media Conglomerate Design System
    Premium, sophisticated, editorial aesthetic
 */

@@ -1,4 +1,4 @@
-import { Mail, Phone, MapPin, Clock, Sparkles } from "lucide-react";
+import { Mail, Phone, MapPin, Clock } from "lucide-react";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
@@ -43,57 +43,46 @@ const Contact = () => {
       <Navigation />
       
       <main id="main-content">
-        {/* Hero Section */}
-        <section className="pt-32 pb-20 lg:pt-40 lg:pb-28 bg-gradient-to-b from-secondary/50 to-background">
-          <div className="container mx-auto px-6 lg:px-8 max-w-6xl">
-            <div className="max-w-3xl mx-auto text-center">
-              <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-primary/10 rounded-full text-primary text-sm font-medium mb-6">
-                <Sparkles className="w-4 h-4" />
-                Get In Touch
-              </div>
-              
-              <h1 className="font-display text-4xl md:text-5xl lg:text-6xl text-foreground mb-6">
-                Contact Us
+        {/* Hero Section - Minimal */}
+        <section className="pt-32 pb-12 lg:pt-40 lg:pb-16 bg-background">
+          <div className="container mx-auto px-6 lg:px-8 max-w-4xl">
+            <div className="max-w-lg">
+              <p className="editorial-label mb-4">Get in Touch</p>
+              <h1 className="section-title-editorial mb-6">
+                Contact
               </h1>
-              
-              <p className="text-lg text-muted-foreground leading-relaxed">
-                For inquiries about nominations, partnerships, or general information about the ONE UAE International Business Awards.
-              </p>
+              <div className="gold-rule-left" />
             </div>
           </div>
         </section>
 
         {/* Contact Information */}
         <section className="section-padding bg-background">
-          <div className="container mx-auto px-6 lg:px-8 max-w-5xl">
+          <div className="container mx-auto px-6 lg:px-8 max-w-4xl">
             <AnimatedSection>
-              <div className="text-center mb-16">
-                <h2 className="font-display text-2xl md:text-3xl text-foreground mb-4">
-                  ONE UAE Awards Secretariat
+              <div className="mb-12">
+                <p className="editorial-label mb-2">Awards Secretariat</p>
+                <h2 className="font-display text-2xl text-foreground">
+                  ONE UAE International Business Awards
                 </h2>
-                <div className="gold-divider" />
               </div>
             </AnimatedSection>
             
-            <div className="grid sm:grid-cols-2 gap-6 mb-16">
+            <div className="grid sm:grid-cols-2 gap-4">
               {contactInfo.map((item, index) => {
                 const Icon = item.icon;
                 const content = (
-                  <div className="card-premium rounded-2xl p-8 h-full group">
-                    <div className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center mb-6 group-hover:bg-primary/20 transition-colors">
-                      <Icon className="w-6 h-6 text-primary" />
-                    </div>
-                    <p className="text-xs text-muted-foreground uppercase tracking-wider mb-2">
-                      {item.label}
-                    </p>
-                    <p className={`font-medium ${item.href ? 'text-primary group-hover:text-primary/80' : 'text-foreground'} transition-colors`}>
+                  <div className="card-standard h-full">
+                    <Icon className="w-5 h-5 text-primary mb-4" />
+                    <p className="editorial-label mb-1">{item.label}</p>
+                    <p className={`font-medium text-sm ${item.href ? 'text-foreground hover:text-primary' : 'text-foreground'} transition-colors`}>
                       {item.value}
                     </p>
                   </div>
                 );
 
                 return (
-                  <AnimatedSection key={index} delay={index * 100}>
+                  <AnimatedSection key={index} delay={index * 80}>
                     {item.href ? (
                       <a href={item.href} className="block h-full">
                         {content}
@@ -106,12 +95,11 @@ const Contact = () => {
               })}
             </div>
 
-            {/* Decorative Section */}
-            <AnimatedSection animation="fade-in" delay={400}>
-              <div className="text-center py-12 border-t border-border">
-                <div className="uae-accent-line mx-auto mb-8" />
-                <p className="text-muted-foreground max-w-xl mx-auto">
-                  We look forward to hearing from you. Our team is dedicated to ensuring your experience with the ONE UAE International Business Awards is exceptional.
+            {/* Closing Note */}
+            <AnimatedSection delay={400}>
+              <div className="mt-16 pt-12 border-t border-border text-center">
+                <p className="text-muted-foreground max-w-md mx-auto text-sm leading-relaxed">
+                  Our team is dedicated to ensuring your experience with the ONE UAE International Business Awards is exceptional.
                 </p>
               </div>
             </AnimatedSection>

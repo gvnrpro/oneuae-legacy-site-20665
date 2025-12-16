@@ -6,11 +6,18 @@ import oneUaeLogo from "@/assets/one-uae-logo.png";
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [scrollProgress, setScrollProgress] = useState(0);
   const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
+      
+      // Calculate scroll progress
+      const winScroll = document.documentElement.scrollTop;
+      const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const scrolled = (winScroll / height) * 100;
+      setScrollProgress(scrolled);
     };
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
@@ -28,113 +35,121 @@ const Navigation = () => {
   const isActive = (path: string) => location.pathname === path;
 
   return (
-    <nav 
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        scrolled 
-          ? "bg-background/95 backdrop-blur-xl shadow-sm border-b border-border/50" 
-          : "bg-transparent"
-      }`}
-    >
-      <div className="container mx-auto px-6 lg:px-8">
-        <div className="flex items-center justify-between h-20 lg:h-24">
-          {/* Logo */}
-          <Link 
-            to="/" 
-            className="flex items-center group"
-          >
-            <img 
-              src={oneUaeLogo} 
-              alt="ONE UAE International Business Awards" 
-              className="h-12 lg:h-14 w-auto transition-transform duration-300 group-hover:scale-105"
-            />
-          </Link>
+    <>
+      {/* Scroll Progress Bar */}
+      <div 
+        className="scroll-progress-bar"
+        style={{ width: `${scrollProgress}%` }}
+      />
+      
+      <nav 
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+          scrolled 
+            ? "bg-background/95 backdrop-blur-xl shadow-sm border-b border-border/50" 
+            : "bg-transparent"
+        }`}
+      >
+        <div className="container mx-auto px-6 lg:px-8">
+          <div className="flex items-center justify-between h-20 lg:h-24">
+            {/* Logo */}
+            <Link 
+              to="/" 
+              className="flex items-center group"
+            >
+              <img 
+                src={oneUaeLogo} 
+                alt="ONE UAE International Business Awards" 
+                className="h-12 lg:h-14 w-auto transition-transform duration-300 group-hover:scale-105"
+              />
+            </Link>
 
-          {/* Desktop Navigation */}
-          <div className="hidden lg:flex items-center gap-1">
-            {navLinks.map((link) => (
+            {/* Desktop Navigation */}
+            <div className="hidden lg:flex items-center gap-1">
+              {navLinks.map((link) => (
+                <Link
+                  key={link.path}
+                  to={link.path}
+                  className={`relative px-4 py-2 text-sm font-medium transition-all duration-300 group ${
+                    isActive(link.path)
+                      ? scrolled ? "text-primary" : "text-white"
+                      : scrolled 
+                        ? "text-muted-foreground hover:text-foreground" 
+                        : "text-white/80 hover:text-white"
+                  }`}
+                >
+                  {link.label}
+                  <span className={`absolute bottom-0 left-4 right-4 h-0.5 bg-primary rounded-full transition-transform duration-300 origin-left ${
+                    isActive(link.path) ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"
+                  }`} />
+                </Link>
+              ))}
+              
+              {/* CTA Button */}
               <Link
-                key={link.path}
-                to={link.path}
-                className={`relative px-4 py-2 text-sm font-medium transition-all duration-300 ${
-                  isActive(link.path)
-                    ? scrolled ? "text-primary" : "text-white"
-                    : scrolled 
-                      ? "text-muted-foreground hover:text-foreground" 
-                      : "text-white/80 hover:text-white"
+                to="/nominate"
+                className={`ml-4 inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-300 group ${
+                  scrolled
+                    ? "bg-primary text-primary-foreground hover:bg-primary/90"
+                    : "bg-white/10 backdrop-blur-sm text-white border border-white/20 hover:bg-white/20"
                 }`}
               >
-                {link.label}
-                {isActive(link.path) && (
-                  <span className="absolute bottom-0 left-4 right-4 h-0.5 bg-primary rounded-full" />
-                )}
+                Nominate
+                <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5" />
               </Link>
-            ))}
-            
-            {/* CTA Button */}
-            <Link
-              to="/nominate"
-              className={`ml-4 inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-300 ${
-                scrolled
-                  ? "bg-primary text-primary-foreground hover:bg-primary/90"
-                  : "bg-white/10 backdrop-blur-sm text-white border border-white/20 hover:bg-white/20"
+            </div>
+
+            {/* Mobile Menu Button */}
+            <button
+              onClick={() => setIsOpen(!isOpen)}
+              className={`lg:hidden p-2 rounded-lg transition-colors ${
+                scrolled 
+                  ? "text-foreground hover:bg-muted" 
+                  : "text-white hover:bg-white/10"
               }`}
+              aria-label="Toggle menu"
             >
-              Nominate
-              <ArrowRight className="w-4 h-4" />
-            </Link>
+              {isOpen ? <X size={24} /> : <Menu size={24} />}
+            </button>
           </div>
 
-          {/* Mobile Menu Button */}
-          <button
-            onClick={() => setIsOpen(!isOpen)}
-            className={`lg:hidden p-2 rounded-lg transition-colors ${
-              scrolled 
-                ? "text-foreground hover:bg-muted" 
-                : "text-white hover:bg-white/10"
+          {/* Mobile Navigation */}
+          <div 
+            className={`lg:hidden overflow-hidden transition-all duration-500 ease-premium ${
+              isOpen ? "max-h-screen opacity-100" : "max-h-0 opacity-0"
             }`}
-            aria-label="Toggle menu"
           >
-            {isOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
-        </div>
-
-        {/* Mobile Navigation */}
-        <div 
-          className={`lg:hidden overflow-hidden transition-all duration-500 ease-premium ${
-            isOpen ? "max-h-screen opacity-100" : "max-h-0 opacity-0"
-          }`}
-        >
-          <div className="py-6 space-y-1 border-t border-border/50">
-            {navLinks.map((link, index) => (
+            <div className="py-6 space-y-1 border-t border-border/50">
+              {navLinks.map((link, index) => (
+                <Link
+                  key={link.path}
+                  to={link.path}
+                  onClick={() => setIsOpen(false)}
+                  className={`block px-4 py-3 rounded-lg text-base font-medium transition-all duration-300 ${
+                    isActive(link.path)
+                      ? "bg-primary/10 text-primary"
+                      : "text-muted-foreground hover:bg-muted hover:text-foreground"
+                  }`}
+                  style={{ 
+                    animationDelay: `${index * 50}ms`,
+                    animationFillMode: 'both'
+                  }}
+                >
+                  {link.label}
+                </Link>
+              ))}
+              
               <Link
-                key={link.path}
-                to={link.path}
+                to="/nominate"
                 onClick={() => setIsOpen(false)}
-                className={`block px-4 py-3 rounded-lg text-base font-medium transition-all duration-300 ${
-                  isActive(link.path)
-                    ? "bg-primary/10 text-primary"
-                    : "text-muted-foreground hover:bg-muted hover:text-foreground"
-                }`}
-                style={{ 
-                  animationDelay: `${index * 50}ms`,
-                  animationFillMode: 'both'
-                }}
+                className="block mt-4 mx-4 px-4 py-3 bg-primary text-primary-foreground rounded-lg text-center font-medium"
               >
-                {link.label}
+                Submit Nomination
               </Link>
-            ))}
-            
-            <Link
-              to="/nominate"
-              onClick={() => setIsOpen(false)}
-              className="block mt-4 mx-4 px-4 py-3 bg-primary text-primary-foreground rounded-lg text-center font-medium"
-            >
-              Submit Nomination
-            </Link>
+            </div>
           </div>
         </div>
-      </div>
-    </nav>
+      </nav>
+    </>
   );
 };
 
