@@ -60,52 +60,26 @@ const Nominate = () => {
 
     const ctx = gsap.context(() => {
       const cards = gsap.utils.toArray('.step-card');
-      
+
       cards.forEach((card: any, i) => {
-        // Initial state
+        // Initial state - clean vertical offset
         gsap.set(card, {
-          scale: 0.8,
-          rotation: (Math.random() - 0.5) * 6,
+          y: 30,
           autoAlpha: 0,
         });
 
-        // Scroll-triggered animation
+        // Scroll-triggered animation - simple fade up
         gsap.to(card, {
-          scale: 1,
-          rotation: 0,
+          y: 0,
           autoAlpha: 1,
-          duration: 0.6,
-          ease: 'back.out(1.7)',
+          duration: 0.5,
+          ease: 'power2.out',
           scrollTrigger: {
             trigger: card,
-            start: 'top 80%',
+            start: 'top 85%',
             toggleActions: 'play none none none',
           },
-          delay: i * 0.15,
-        });
-      });
-
-      // Hover effects
-      cards.forEach((card: any) => {
-        card.addEventListener('mouseenter', () => {
-          gsap.to(card, {
-            y: -12,
-            rotation: 0,
-            scale: 1.02,
-            zIndex: 10,
-            duration: 0.3,
-            ease: 'power2.out',
-          });
-        });
-
-        card.addEventListener('mouseleave', () => {
-          gsap.to(card, {
-            y: 0,
-            scale: 1,
-            zIndex: 1,
-            duration: 0.3,
-            ease: 'power2.out',
-          });
+          delay: i * 0.1,
         });
       });
     }, stepsContainerRef);

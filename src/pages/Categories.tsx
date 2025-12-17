@@ -45,7 +45,7 @@ const Categories = () => {
       const viewportWidth = window.innerWidth;
 
       // Horizontal scroll
-      const scrollTween = gsap.to(scrollContainer, {
+      gsap.to(scrollContainer, {
         x: -(scrollWidth - viewportWidth + 100),
         ease: 'none',
         scrollTrigger: {
@@ -62,24 +62,16 @@ const Categories = () => {
         },
       });
 
-      // Card 3D tilt on enter
-      gsap.utils.toArray('.category-card').forEach((card: any) => {
-        gsap.fromTo(
-          card,
-          { rotateY: -8, opacity: 0.5 },
-          {
-            rotateY: 0,
-            opacity: 1,
-            duration: 0.5,
-            scrollTrigger: {
-              trigger: card,
-              containerAnimation: scrollTween,
-              start: 'left 80%',
-              end: 'left 50%',
-              scrub: 1,
-            },
-          }
-        );
+      // Simple fade-in for cards
+      gsap.utils.toArray('.category-card').forEach((card: any, i) => {
+        gsap.set(card, { autoAlpha: 0, y: 20 });
+        gsap.to(card, {
+          autoAlpha: 1,
+          y: 0,
+          duration: 0.5,
+          delay: i * 0.05,
+          ease: 'power2.out',
+        });
       });
     }, containerRef);
 
@@ -130,7 +122,6 @@ const Categories = () => {
           <div
             ref={scrollContainerRef}
             className="flex items-center gap-8 px-8 py-20 min-h-screen"
-            style={{ perspective: '1000px' }}
           >
             {categories.map((category, index) => {
               const Icon = category.icon;
@@ -140,7 +131,6 @@ const Categories = () => {
                   className={`category-card flex-shrink-0 ${
                     category.featured ? 'w-80 h-96' : 'w-72 h-80'
                   } bg-background border border-border/40 rounded-lg p-8 flex flex-col items-center justify-center text-center hover:border-primary/40 transition-all duration-300`}
-                  style={{ transformStyle: 'preserve-3d' }}
                 >
                   {category.featured && (
                     <span className="text-xs text-primary uppercase tracking-widest mb-4">Featured</span>

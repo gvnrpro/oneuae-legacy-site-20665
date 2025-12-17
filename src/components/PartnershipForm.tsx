@@ -21,7 +21,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
-import { Loader2 } from "lucide-react";
+import { Loader2, CheckCircle } from "lucide-react";
 
 const tiers = [
   "Gold Partner (AED 100,000)",
@@ -45,6 +45,7 @@ type FormValues = z.infer<typeof formSchema>;
 
 const PartnershipForm = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
   const { toast } = useToast();
 
   const form = useForm<FormValues>({
@@ -62,43 +63,36 @@ const PartnershipForm = () => {
 
   const onSubmit = async (data: FormValues) => {
     setIsSubmitting(true);
-    
+
     try {
-      const subject = encodeURIComponent(`OneUAE Awards Partnership Inquiry - ${data.companyName}`);
-      const body = encodeURIComponent(`
-PARTNERSHIP INQUIRY
-==================
-
-COMPANY INFORMATION:
-Company Name: ${data.companyName}
-Website: ${data.website || 'N/A'}
-
-CONTACT INFORMATION:
-Name: ${data.contactName}
-Email: ${data.email}
-Phone: ${data.phone}
-
-PARTNERSHIP DETAILS:
-Preferred Tier: ${data.tier}
-
-MESSAGE:
-${data.message}
-
-Submitted: ${new Date().toLocaleString()}
-      `);
-
-      window.location.href = `mailto:info@oneuaeawards.ae?subject=${subject}&body=${body}`;
-
-      toast({
-        title: "Inquiry Prepared",
-        description: "Your email client will open with the partnership inquiry. Please review and send.",
+      // Encode form data for Netlify
+      const formData = new URLSearchParams();
+      formData.append("form-name", "partnership");
+      Object.entries(data).forEach(([key, value]) => {
+        formData.append(key, value || "");
       });
 
-      form.reset();
+      // Submit to Netlify Forms
+      const response = await fetch("/", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: formData.toString(),
+      });
+
+      if (response.ok) {
+        setIsSubmitted(true);
+        toast({
+          title: "Inquiry Submitted",
+          description: "Thank you! Our team will contact you shortly.",
+        });
+        form.reset();
+      } else {
+        throw new Error("Form submission failed");
+      }
     } catch (error) {
       toast({
         title: "Error",
-        description: "Failed to prepare inquiry. Please try again.",
+        description: "Failed to submit inquiry. Please try again.",
         variant: "destructive",
       });
     } finally {
@@ -106,9 +100,41 @@ Submitted: ${new Date().toLocaleString()}
     }
   };
 
+  if (isSubmitted) {
+    return (
+      <div className="bg-card p-12 rounded-lg border border-border text-center">
+        <CheckCircle className="w-16 h-16 text-primary mx-auto mb-6" />
+        <h3 className="font-serif text-2xl font-semibold text-foreground mb-4">
+          Inquiry Submitted
+        </h3>
+        <p className="text-muted-foreground mb-6">
+          Thank you for your partnership interest. Our team will contact you within 2-3 business days.
+        </p>
+        <Button onClick={() => setIsSubmitted(false)} variant="outline">
+          Submit Another Inquiry
+        </Button>
+      </div>
+    );
+  }
+
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+      <form
+        name="partnership"
+        method="POST"
+        data-netlify="true"
+        data-netlify-honeypot="bot-field"
+        onSubmit={form.handleSubmit(onSubmit)}
+        className="space-y-8"
+      >
+        {/* Hidden field for Netlify form name */}
+        <input type="hidden" name="form-name" value="partnership" />
+        {/* Honeypot field for spam prevention */}
+        <p className="hidden">
+          <label>
+            Don't fill this out: <input name="bot-field" />
+          </label>
+        </p>
         <div className="bg-card p-8 rounded-lg border border-border">
           <h3 className="font-serif text-2xl font-semibold text-primary mb-6">
             Company Information
