@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { useRef, useLayoutEffect, useState, useEffect } from "react";
+import { useRef, useLayoutEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Calendar, MapPin, Users, Award, TrendingUp, Heart, Globe, Utensils, Star } from "lucide-react";
 import AnimatedSection from "@/components/AnimatedSection";
@@ -18,7 +18,6 @@ import { prefersReducedMotion } from "@/utils/motion-preference";
 const Home = () => {
   const heroRef = useRef<HTMLElement>(null);
   const overlayRef = useRef<HTMLDivElement>(null);
-  const headlineRef = useRef<HTMLHeadingElement>(null);
   const [heroLoaded, setHeroLoaded] = useState(false);
   const originalText = "ONE UAE INTERNATIONAL BUSINESS AWARDS 2026";
 
@@ -74,54 +73,6 @@ const Home = () => {
     }, heroRef);
 
     return () => ctx.revert();
-  }, []);
-
-  // Text scramble effect
-  useEffect(() => {
-    if (!headlineRef.current || prefersReducedMotion() || !heroLoaded) return;
-
-    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-    let iteration = 0;
-    const interval = setInterval(() => {
-      if (!headlineRef.current) return;
-      
-      headlineRef.current.innerText = originalText
-        .split('')
-        .map((char, index) => {
-          if (index < iteration || char === ' ') return char;
-          return chars[Math.floor(Math.random() * chars.length)];
-        })
-        .join('');
-
-      if (iteration >= originalText.length) {
-        clearInterval(interval);
-      }
-      iteration += 1;
-    }, 40);
-
-    return () => clearInterval(interval);
-  }, [heroLoaded]);
-
-  // Floating orbs animation
-  useLayoutEffect(() => {
-    if (prefersReducedMotion()) return;
-
-    const orbs = document.querySelectorAll('.floating-orb');
-    const animations: gsap.core.Tween[] = [];
-    
-    orbs.forEach((orb, i) => {
-      const tween = gsap.to(orb, {
-        y: `random(-30, 30)`,
-        x: `random(-20, 20)`,
-        duration: 8 + i * 2,
-        repeat: -1,
-        yoyo: true,
-        ease: 'sine.inOut',
-      });
-      animations.push(tween);
-    });
-
-    return () => animations.forEach(a => a.kill());
   }, []);
 
   // Section parallax and reveals
@@ -197,15 +148,7 @@ const Home = () => {
         />
 
         {/* Grid Background */}
-        <div className="hero-grid absolute inset-0 pointer-events-none opacity-30" />
-        
-        {/* Scanning Line */}
-        <div className="scanning-line absolute left-0 right-0 h-px bg-primary/20 pointer-events-none" />
-
-        {/* Floating Orbs */}
-        <div className="floating-orb absolute top-1/4 left-1/4 w-32 h-32 rounded-full bg-primary/10" />
-        <div className="floating-orb absolute top-1/3 right-1/4 w-24 h-24 rounded-full bg-primary/5" />
-        <div className="floating-orb absolute bottom-1/3 left-1/3 w-20 h-20 rounded-full bg-primary/8" />
+        <div className="hero-grid absolute inset-0 pointer-events-none opacity-20" />
 
         {/* Cinematic Overlay */}
         <div
@@ -233,10 +176,9 @@ const Home = () => {
               />
             </div>
             
-            {/* Main Heading with scramble effect */}
-            <h1 
-              ref={headlineRef}
-              className="font-display text-white mb-6 lg:mb-8" 
+            {/* Main Heading */}
+            <h1
+              className="font-display text-white mb-6 lg:mb-8"
               style={{
                 fontSize: 'clamp(2rem, 5vw, 4rem)',
                 fontWeight: 500,

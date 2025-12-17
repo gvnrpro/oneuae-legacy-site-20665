@@ -35,5 +35,30 @@
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
+
+    <!-- Hidden forms for Netlify Forms detection (required for React SPAs) -->
+    <form name="nomination" netlify netlify-honeypot="bot-field" hidden>
+      <input type="text" name="nomineeName" />
+      <input type="email" name="nomineeEmail" />
+      <input type="text" name="nomineePhone" />
+      <input type="text" name="category" />
+      <input type="text" name="organization" />
+      <input type="text" name="nominatorName" />
+      <input type="email" name="nominatorEmail" />
+      <input type="text" name="nominatorPhone" />
+      <input type="text" name="relationship" />
+      <textarea name="achievements"></textarea>
+      <textarea name="impact"></textarea>
+    </form>
+
+    <form name="partnership" netlify netlify-honeypot="bot-field" hidden>
+      <input type="text" name="companyName" />
+      <input type="text" name="contactName" />
+      <input type="email" name="email" />
+      <input type="text" name="phone" />
+      <input type="text" name="tier" />
+      <input type="url" name="website" />
+      <textarea name="message"></textarea>
+    </form>
   </body>
 </html>
