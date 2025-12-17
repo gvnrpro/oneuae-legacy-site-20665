@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
-import { ArrowRight, CheckCircle2, Users, FileText, Award } from "lucide-react";
+import { useRef, useLayoutEffect } from "react";
+import { ArrowRight, CheckCircle2, Users, FileText, Award, Trophy, Mail, FileCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
@@ -7,6 +8,8 @@ import CountdownTimer from "@/components/CountdownTimer";
 import NominationForm from "@/components/NominationForm";
 import SEOHead from "@/components/SEOHead";
 import AnimatedSection from "@/components/AnimatedSection";
+import { gsap } from "@/utils/gsap-config";
+import { prefersReducedMotion } from "@/utils/motion-preference";
 
 const Nominate = () => {
   const eligibility = [
@@ -26,6 +29,89 @@ const Nominate = () => {
       description: "Contributions aligned with UAE Vision 2071 and national development goals."
     }
   ];
+
+  const steps = [
+    {
+      icon: FileCheck,
+      title: "Application Reviewed",
+      description: "Our panel reviews each submission thoroughly",
+    },
+    {
+      icon: Users,
+      title: "Shortlisted Nominees Contacted",
+      description: "Selected nominees are notified via email",
+    },
+    {
+      icon: Award,
+      title: "Final Selection Announced",
+      description: "Winners revealed at the Gala Night ceremony",
+    },
+    {
+      icon: Trophy,
+      title: "Winners Celebrated",
+      description: "Recognition on stage with trophy presentation",
+    },
+  ];
+
+  const stepsContainerRef = useRef<HTMLDivElement>(null);
+
+  useLayoutEffect(() => {
+    if (!stepsContainerRef.current || prefersReducedMotion()) return;
+
+    const ctx = gsap.context(() => {
+      const cards = gsap.utils.toArray('.step-card');
+      
+      cards.forEach((card: any, i) => {
+        // Initial state
+        gsap.set(card, {
+          scale: 0.8,
+          rotation: (Math.random() - 0.5) * 6,
+          autoAlpha: 0,
+        });
+
+        // Scroll-triggered animation
+        gsap.to(card, {
+          scale: 1,
+          rotation: 0,
+          autoAlpha: 1,
+          duration: 0.6,
+          ease: 'back.out(1.7)',
+          scrollTrigger: {
+            trigger: card,
+            start: 'top 80%',
+            toggleActions: 'play none none none',
+          },
+          delay: i * 0.15,
+        });
+      });
+
+      // Hover effects
+      cards.forEach((card: any) => {
+        card.addEventListener('mouseenter', () => {
+          gsap.to(card, {
+            y: -12,
+            rotation: 0,
+            scale: 1.02,
+            zIndex: 10,
+            duration: 0.3,
+            ease: 'power2.out',
+          });
+        });
+
+        card.addEventListener('mouseleave', () => {
+          gsap.to(card, {
+            y: 0,
+            scale: 1,
+            zIndex: 1,
+            duration: 0.3,
+            ease: 'power2.out',
+          });
+        });
+      });
+    }, stepsContainerRef);
+
+    return () => ctx.revert();
+  }, []);
 
   return (
     <div className="min-h-screen">
@@ -93,32 +179,50 @@ const Nominate = () => {
           </div>
         </section>
 
-        {/* Additional Info */}
+        {/* Stacking Steps Cards */}
         <section className="section-padding bg-secondary/30">
+          <div className="container mx-auto px-6 lg:px-8 max-w-4xl">
+            <div className="text-center mb-12">
+              <p className="editorial-label mb-4">The Process</p>
+              <h2 className="font-display text-2xl text-foreground">What Happens Next?</h2>
+            </div>
+            
+            <div
+              ref={stepsContainerRef}
+              className="grid md:grid-cols-2 lg:grid-cols-4 gap-6"
+            >
+              {steps.map((step, index) => {
+                const Icon = step.icon;
+                return (
+                  <div
+                    key={index}
+                    className="step-card relative bg-background border border-border rounded-xl p-6 cursor-pointer transition-shadow hover:shadow-lg"
+                    style={{ transformOrigin: 'center center' }}
+                  >
+                    <span className="absolute top-4 right-4 text-4xl font-display text-primary/20">
+                      {index + 1}
+                    </span>
+                    <Icon className="h-10 w-10 text-primary mb-4" />
+                    <h3 className="text-lg font-display text-foreground mb-2">
+                      {step.title}
+                    </h3>
+                    <p className="text-sm text-muted-foreground">
+                      {step.description}
+                    </p>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+
+        {/* Additional Info */}
+        <section className="section-padding bg-background">
           <div className="container mx-auto px-6 lg:px-8 max-w-4xl">
             <div className="grid md:grid-cols-2 gap-8">
               <AnimatedSection>
                 <div className="card-standard">
-                  <h3 className="font-display text-lg text-foreground mb-4">What happens next?</h3>
-                  <ul className="space-y-3">
-                    {[
-                      "Application reviewed by selection committee",
-                      "Shortlisted nominees contacted for verification",
-                      "Final selection announced before the gala",
-                      "Winners celebrated at the Awards ceremony"
-                    ].map((step, i) => (
-                      <li key={i} className="flex items-start gap-3 text-sm text-muted-foreground">
-                        <CheckCircle2 className="w-4 h-4 text-primary flex-shrink-0 mt-0.5" />
-                        {step}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </AnimatedSection>
-              
-              <AnimatedSection delay={100}>
-                <div className="card-standard">
-                  <h3 className="font-display text-lg text-foreground mb-4">Need help?</h3>
+                  <h3 className="font-display text-lg text-foreground mb-4">Need Help?</h3>
                   <p className="text-muted-foreground text-sm mb-6">
                     Our team is available to assist with your nomination or answer any questions.
                   </p>
@@ -136,6 +240,22 @@ const Nominate = () => {
                       </Button>
                     </Link>
                   </div>
+                </div>
+              </AnimatedSection>
+              
+              <AnimatedSection delay={100}>
+                <div className="card-standard flex flex-col items-center text-center">
+                  <Mail className="h-10 w-10 text-primary mb-4" />
+                  <h3 className="font-display text-lg text-foreground mb-2">Questions?</h3>
+                  <p className="text-muted-foreground text-sm mb-4">
+                    Contact us at
+                  </p>
+                  <a 
+                    href="mailto:info@oneuaeaward.ae" 
+                    className="text-primary hover:underline font-medium"
+                  >
+                    info@oneuaeaward.ae
+                  </a>
                 </div>
               </AnimatedSection>
             </div>

@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
+import { useRef, useLayoutEffect, useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Calendar, MapPin, Users, Award, Sparkles, TrendingUp, Heart, Globe } from "lucide-react";
+import { ArrowRight, Calendar, MapPin, Users, Award, TrendingUp, Heart, Globe, Utensils, Star } from "lucide-react";
 import AnimatedSection from "@/components/AnimatedSection";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
@@ -8,8 +9,19 @@ import SEOHead from "@/components/SEOHead";
 import heroBg from "@/assets/hero-bg.jpg";
 import trophyGold from "@/assets/trophy-gold.jpeg";
 import oneUaeLogo from "@/assets/one-uae-logo.png";
+import { MarqueeStrip } from "@/components/MarqueeStrip";
+import { MissionReveal } from "@/components/MissionReveal";
+import { MagneticButton } from "@/components/MagneticButton";
+import { gsap, ScrollTrigger } from "@/utils/gsap-config";
+import { prefersReducedMotion } from "@/utils/motion-preference";
 
 const Home = () => {
+  const heroRef = useRef<HTMLElement>(null);
+  const overlayRef = useRef<HTMLDivElement>(null);
+  const headlineRef = useRef<HTMLHeadingElement>(null);
+  const [heroLoaded, setHeroLoaded] = useState(false);
+  const originalText = "ONE UAE INTERNATIONAL BUSINESS AWARDS 2026";
+
   const categories = [
     'Growth & Economic Excellence', 
     'Entrepreneurship & Innovation', 
@@ -25,13 +37,141 @@ const Home = () => {
     { value: "6", label: "VIP Dignitaries" },
   ];
 
+  // Hero cinematic reveal
+  useLayoutEffect(() => {
+    if (!heroRef.current || !overlayRef.current || prefersReducedMotion()) {
+      setHeroLoaded(true);
+      return;
+    }
+
+    const ctx = gsap.context(() => {
+      const tl = gsap.timeline({
+        onComplete: () => setHeroLoaded(true),
+      });
+
+      // Dark veil wipe away
+      tl.to(overlayRef.current, {
+        clipPath: 'inset(0 0 100% 0)',
+        duration: 1.2,
+        ease: 'power3.inOut',
+      });
+
+      // Gold edge sweep
+      tl.fromTo(
+        '.hero-gold-edge',
+        { scaleX: 0 },
+        { scaleX: 1, duration: 0.6, ease: 'power2.out' },
+        '-=0.4'
+      );
+
+      // Content reveal
+      tl.fromTo(
+        '.hero-content > *',
+        { y: 40, autoAlpha: 0 },
+        { y: 0, autoAlpha: 1, stagger: 0.15, duration: 0.8, ease: 'power2.out' },
+        '-=0.3'
+      );
+    }, heroRef);
+
+    return () => ctx.revert();
+  }, []);
+
+  // Text scramble effect
+  useEffect(() => {
+    if (!headlineRef.current || prefersReducedMotion() || !heroLoaded) return;
+
+    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+    let iteration = 0;
+    const interval = setInterval(() => {
+      if (!headlineRef.current) return;
+      
+      headlineRef.current.innerText = originalText
+        .split('')
+        .map((char, index) => {
+          if (index < iteration || char === ' ') return char;
+          return chars[Math.floor(Math.random() * chars.length)];
+        })
+        .join('');
+
+      if (iteration >= originalText.length) {
+        clearInterval(interval);
+      }
+      iteration += 1;
+    }, 40);
+
+    return () => clearInterval(interval);
+  }, [heroLoaded]);
+
+  // Floating orbs animation
+  useLayoutEffect(() => {
+    if (prefersReducedMotion()) return;
+
+    const orbs = document.querySelectorAll('.floating-orb');
+    const animations: gsap.core.Tween[] = [];
+    
+    orbs.forEach((orb, i) => {
+      const tween = gsap.to(orb, {
+        y: `random(-30, 30)`,
+        x: `random(-20, 20)`,
+        duration: 8 + i * 2,
+        repeat: -1,
+        yoyo: true,
+        ease: 'sine.inOut',
+      });
+      animations.push(tween);
+    });
+
+    return () => animations.forEach(a => a.kill());
+  }, []);
+
+  // Section parallax and reveals
+  useLayoutEffect(() => {
+    if (prefersReducedMotion()) return;
+
+    const ctx = gsap.context(() => {
+      // Parallax shapes
+      gsap.utils.toArray('.parallax-shape').forEach((shape: any) => {
+        gsap.to(shape, {
+          y: -100,
+          scrollTrigger: {
+            trigger: shape,
+            start: 'top bottom',
+            end: 'bottom top',
+            scrub: 1,
+          },
+        });
+      });
+
+      // Section reveals
+      gsap.utils.toArray('.gsap-reveal').forEach((section: any) => {
+        gsap.fromTo(
+          section.children,
+          { y: 50, autoAlpha: 0 },
+          {
+            y: 0,
+            autoAlpha: 1,
+            stagger: 0.1,
+            duration: 0.8,
+            scrollTrigger: {
+              trigger: section,
+              start: 'top 80%',
+              toggleActions: 'play none none none',
+            },
+          }
+        );
+      });
+    });
+
+    return () => ctx.revert();
+  }, []);
+
   return (
     <div className="min-h-screen">
       <SEOHead />
       <Navigation />
       
       {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+      <section ref={heroRef} className="relative min-h-screen flex items-center justify-center overflow-hidden">
         <a href="#main-content" className="sr-only focus:not-sr-only">Skip to main content</a>
         
         {/* Video Background */}
@@ -55,16 +195,37 @@ const Home = () => {
           className="absolute inset-0 bg-cover bg-center bg-no-repeat -z-10" 
           style={{ backgroundImage: `url(${heroBg})` }} 
         />
+
+        {/* Grid Background */}
+        <div className="hero-grid absolute inset-0 pointer-events-none opacity-30" />
+        
+        {/* Scanning Line */}
+        <div className="scanning-line absolute left-0 right-0 h-px bg-primary/20 pointer-events-none" />
+
+        {/* Floating Orbs */}
+        <div className="floating-orb absolute top-1/4 left-1/4 w-32 h-32 rounded-full bg-primary/10" />
+        <div className="floating-orb absolute top-1/3 right-1/4 w-24 h-24 rounded-full bg-primary/5" />
+        <div className="floating-orb absolute bottom-1/3 left-1/3 w-20 h-20 rounded-full bg-primary/8" />
+
+        {/* Cinematic Overlay */}
+        <div
+          ref={overlayRef}
+          className="absolute inset-0 bg-background z-20"
+          style={{ clipPath: 'inset(0 0 0 0)' }}
+        />
+        
+        {/* Gold Edge */}
+        <div className="hero-gold-edge absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-primary to-transparent z-30 origin-left" />
         
         {/* Premium Gradient Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black/80" />
-        <div className="absolute inset-0 bg-gradient-to-r from-black/30 via-transparent to-black/30" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black/80 z-[5]" />
+        <div className="absolute inset-0 bg-gradient-to-r from-black/30 via-transparent to-black/30 z-[5]" />
         
         {/* Hero Content */}
-        <div className="relative z-10 container mx-auto px-6 lg:px-8 text-center">
+        <div className="hero-content relative z-10 container mx-auto px-6 lg:px-8 text-center">
           <div className="max-w-5xl mx-auto">
             {/* Animated Logo */}
-            <div className="animate-logo-reveal mb-8 lg:mb-12">
+            <div className="mb-8 lg:mb-12">
               <img 
                 src={oneUaeLogo} 
                 alt="ONE UAE Awards Logo" 
@@ -72,26 +233,21 @@ const Home = () => {
               />
             </div>
             
-            {/* Main Heading */}
+            {/* Main Heading with scramble effect */}
             <h1 
-              className="font-display text-white mb-6 lg:mb-8 animate-fade-in-up" 
+              ref={headlineRef}
+              className="font-display text-white mb-6 lg:mb-8" 
               style={{
                 fontSize: 'clamp(2rem, 5vw, 4rem)',
                 fontWeight: 500,
                 lineHeight: 1.1,
-                animationDelay: '0.3s',
-                animationFillMode: 'both'
               }}
             >
-              ONE UAE INTERNATIONAL<br />
-              <span className="text-gradient-gold">BUSINESS AWARDS</span> 2026
+              {originalText}
             </h1>
             
             {/* Patronage */}
-            <div 
-              className="animate-fade-in-up mb-8" 
-              style={{ animationDelay: '0.5s', animationFillMode: 'both' }}
-            >
+            <div className="mb-8">
               <p className="text-white/60 text-sm uppercase tracking-[0.2em] mb-2">
                 Under the Patronage of
               </p>
@@ -101,10 +257,7 @@ const Home = () => {
             </div>
             
             {/* Tagline */}
-            <div 
-              className="animate-fade-in-up flex items-center justify-center gap-3 text-white/70 mb-12" 
-              style={{ animationDelay: '0.7s', animationFillMode: 'both' }}
-            >
+            <div className="flex items-center justify-center gap-3 text-white/70 mb-12">
               <span className="w-8 h-px bg-gradient-to-r from-transparent to-primary" />
               <p className="text-sm md:text-base tracking-widest uppercase">
                 Growth · Development · Sustainability
@@ -113,37 +266,35 @@ const Home = () => {
             </div>
             
             {/* CTA Buttons */}
-            <div 
-              className="animate-fade-in-up flex flex-col sm:flex-row items-center justify-center gap-4" 
-              style={{ animationDelay: '0.9s', animationFillMode: 'both' }}
-            >
-              <Link to="/nominate">
-                <Button 
-                  size="lg" 
-                  className="bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-6 text-base font-medium rounded-full group"
-                >
-                  Submit Nomination
-                  <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                </Button>
-              </Link>
-              <Link to="/about">
-                <Button 
-                  size="lg" 
-                  variant="outline"
-                  className="bg-white/5 backdrop-blur-sm border-white/20 text-white hover:bg-white/10 hover:border-white/30 px-8 py-6 text-base font-medium rounded-full"
-                >
-                  Learn More
-                </Button>
-              </Link>
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+              <MagneticButton strength={0.2}>
+                <Link to="/nominate">
+                  <Button 
+                    size="lg" 
+                    className="bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-6 text-base font-medium rounded-full group"
+                  >
+                    Submit Nomination
+                    <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                  </Button>
+                </Link>
+              </MagneticButton>
+              <MagneticButton strength={0.2}>
+                <Link to="/about">
+                  <Button 
+                    size="lg" 
+                    variant="outline"
+                    className="bg-white/5 backdrop-blur-sm border-white/20 text-white hover:bg-white/10 hover:border-white/30 px-8 py-6 text-base font-medium rounded-full"
+                  >
+                    Learn More
+                  </Button>
+                </Link>
+              </MagneticButton>
             </div>
           </div>
         </div>
         
         {/* Scroll Indicator */}
-        <div 
-          className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-fade-in-up" 
-          style={{ animationDelay: '1.2s', animationFillMode: 'both' }}
-        >
+        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10">
           <div className="flex flex-col items-center gap-2 text-white/50">
             <span className="text-xs uppercase tracking-widest">Scroll</span>
             <div className="w-5 h-8 border border-white/30 rounded-full flex items-start justify-center p-1.5">
@@ -153,10 +304,13 @@ const Home = () => {
         </div>
       </section>
 
+      {/* Marquee Strip */}
+      <MarqueeStrip />
+
       {/* Stats Bar */}
       <section className="relative -mt-20 z-20 px-6 lg:px-8">
         <div className="container mx-auto max-w-5xl">
-          <div className="bg-background/95 backdrop-blur-xl rounded-2xl shadow-premium-lg border border-border/50 p-6 md:p-8">
+          <div className="gsap-reveal bg-background/95 backdrop-blur-xl rounded-2xl shadow-premium-lg border border-border/50 p-6 md:p-8">
             <div className="grid grid-cols-3 divide-x divide-border">
               {stats.map((stat, index) => (
                 <div key={index} className="text-center px-4">
@@ -173,12 +327,18 @@ const Home = () => {
         </div>
       </section>
 
+      {/* Mission Reveal Transition */}
+      <MissionReveal />
+
       {/* About Section - Asymmetric layout */}
-      <section id="main-content" className="section-breathing bg-background">
+      <section id="main-content" className="section-breathing bg-background relative">
+        {/* Parallax Shape */}
+        <div className="parallax-shape absolute top-20 right-10 w-40 h-40 rounded-full bg-primary/5 pointer-events-none" />
+        
         <div className="container mx-auto px-6 lg:px-8 max-w-6xl">
           <div className="grid lg:grid-cols-5 gap-12 lg:gap-20 items-center">
             {/* Content - 3 columns */}
-            <div className="lg:col-span-3">
+            <div className="lg:col-span-3 gsap-reveal">
               <p className="editorial-label mb-4">About The Awards</p>
               
               <h2 className="section-title-editorial mb-6">
@@ -230,14 +390,16 @@ const Home = () => {
       </section>
 
       {/* The Three Pillars */}
-      <section className="section-padding bg-secondary/30">
+      <section className="section-padding bg-secondary/30 relative">
+        <div className="parallax-shape absolute bottom-20 left-10 w-32 h-32 rounded-full bg-primary/5 pointer-events-none" />
+        
         <div className="container mx-auto px-6 lg:px-8 max-w-6xl">
-          <div className="text-center mb-16">
+          <div className="text-center mb-16 gsap-reveal">
             <p className="editorial-label mb-4">Foundation</p>
             <h2 className="section-title-editorial">The Three Pillars</h2>
           </div>
           
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="gsap-reveal grid md:grid-cols-3 gap-8">
             {[
               {
                 title: "Growth & Economic Excellence",
@@ -257,19 +419,17 @@ const Home = () => {
             ].map((pillar, index) => {
               const Icon = pillar.icon;
               return (
-                <AnimatedSection key={index} delay={index * 100}>
-                  <div className="card-standard text-center h-full p-8">
-                    <div className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center mx-auto mb-5">
-                      <Icon className="w-6 h-6 text-primary" />
-                    </div>
-                    <h3 className="font-display text-lg text-foreground mb-3">
-                      {pillar.title}
-                    </h3>
-                    <p className="text-muted-foreground text-sm leading-relaxed">
-                      {pillar.description}
-                    </p>
+                <div key={index} className="card-standard text-center h-full p-8">
+                  <div className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center mx-auto mb-5">
+                    <Icon className="w-6 h-6 text-primary" />
                   </div>
-                </AnimatedSection>
+                  <h3 className="font-display text-lg text-foreground mb-3">
+                    {pillar.title}
+                  </h3>
+                  <p className="text-muted-foreground text-sm leading-relaxed">
+                    {pillar.description}
+                  </p>
+                </div>
               );
             })}
           </div>
@@ -279,7 +439,7 @@ const Home = () => {
       {/* Award Categories Preview */}
       <section className="section-padding bg-background">
         <div className="container mx-auto px-6 lg:px-8 max-w-6xl">
-          <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-12">
+          <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-12 gsap-reveal">
             <div>
               <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-primary/10 rounded-full text-primary text-sm font-medium mb-4">
                 <Award className="w-4 h-4" />
@@ -297,7 +457,7 @@ const Home = () => {
             </Link>
           </div>
           
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className="gsap-reveal grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {categories.map((category, index) => (
               <div 
                 key={category}
@@ -329,11 +489,12 @@ const Home = () => {
         <div className="absolute inset-0 opacity-20">
           <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-primary/10 to-transparent" />
         </div>
+        <div className="parallax-shape absolute top-40 right-20 w-48 h-48 rounded-full bg-primary/5 pointer-events-none" />
         
         <div className="relative container mx-auto px-6 lg:px-8 max-w-6xl">
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-20">
             {/* Left - Event Facts */}
-            <div>
+            <div className="gsap-reveal">
               <h2 className="font-display text-3xl md:text-4xl text-white mb-8">
                 Event Details
               </h2>
@@ -355,25 +516,29 @@ const Home = () => {
             </div>
             
             {/* Right - Program Flow */}
-            <div className="lg:border-l lg:border-white/10 lg:pl-20">
+            <div className="lg:border-l lg:border-white/10 lg:pl-20 gsap-reveal">
               <h3 className="font-display text-2xl text-white mb-8">
                 Program Flow
               </h3>
               
               <div className="space-y-6">
                 {[
-                  { time: "6:00 PM", event: "Reception & Networking" },
-                  { time: "6:45 PM", event: "Opening Ceremony" },
-                  { time: "7:15 PM", event: "Award Presentations" },
-                  { time: "8:45 PM", event: "Gala Dinner" },
-                  { time: "10:00 PM", event: "Closing Remarks" },
-                ].map((item, index) => (
-                  <div key={index} className="flex items-center gap-6">
-                    <span className="text-primary font-medium w-20">{item.time}</span>
-                    <div className="w-2 h-2 rounded-full bg-primary" />
-                    <span className="text-white/80">{item.event}</span>
-                  </div>
-                ))}
+                  { time: "6:00 PM", event: "Reception & Networking", icon: Users },
+                  { time: "6:45 PM", event: "Opening Ceremony", icon: Award },
+                  { time: "7:15 PM", event: "Award Presentations", icon: Star },
+                  { time: "8:45 PM", event: "Gala Dinner", icon: Utensils },
+                ].map((item, index) => {
+                  const Icon = item.icon;
+                  return (
+                    <div key={index} className="flex items-center gap-6">
+                      <span className="text-primary font-medium w-20">{item.time}</span>
+                      <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center">
+                        <Icon className="w-4 h-4 text-primary" />
+                      </div>
+                      <span className="text-white/80">{item.event}</span>
+                    </div>
+                  );
+                })}
               </div>
               
               <div className="mt-12">
@@ -395,7 +560,7 @@ const Home = () => {
       {/* Audience Profile */}
       <section className="section-padding bg-background">
         <div className="container mx-auto px-6 lg:px-8 max-w-6xl">
-          <div className="text-center mb-12">
+          <div className="text-center mb-12 gsap-reveal">
             <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-primary/10 rounded-full text-primary text-sm font-medium mb-4">
               <Users className="w-4 h-4" />
               Our Audience
@@ -405,7 +570,7 @@ const Home = () => {
             </h2>
           </div>
           
-          <div className="grid grid-cols-2 md:grid-cols-5 gap-6">
+          <div className="gsap-reveal grid grid-cols-2 md:grid-cols-5 gap-6">
             {[
               { title: "Government Representatives" },
               { title: "Business Leaders" },
@@ -413,12 +578,9 @@ const Home = () => {
               { title: "Healthcare Leaders" },
               { title: "Media Figures" },
             ].map((item, index) => (
-              <AnimatedSection key={index} delay={index * 80}>
-                <div className="text-center p-6 card-premium rounded-xl">
-                  <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mx-auto mb-4">
-                    <Users className="w-5 h-5 text-primary" />
-                  </div>
-                  <p className="text-sm text-foreground font-medium">
+              <AnimatedSection key={index} delay={index * 100}>
+                <div className="text-center p-6 bg-secondary/30 rounded-xl">
+                  <p className="font-medium text-foreground text-sm">
                     {item.title}
                   </p>
                 </div>
@@ -428,57 +590,40 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Sponsorship CTA */}
-      <section className="section-padding bg-secondary/50">
-        <div className="container mx-auto px-6 lg:px-8 max-w-4xl text-center">
-          <h2 className="font-display text-3xl md:text-4xl lg:text-5xl text-foreground mb-6">
-            Partner With Us
+      {/* Partnership CTA */}
+      <section className="section-padding bg-secondary/30">
+        <div className="container mx-auto px-6 lg:px-8 max-w-3xl text-center gsap-reveal">
+          <p className="editorial-label mb-4">Partner With Us</p>
+          <h2 className="section-title-editorial mb-6">
+            Become a Sponsor
           </h2>
-          <p className="text-muted-foreground text-lg mb-8 max-w-2xl mx-auto">
-            Join the most prestigious business awards in the UAE. Multiple partnership tiers available starting from AED 25,000.
+          <p className="text-muted-foreground text-lg mb-8">
+            Join prestigious brands in supporting the UAE's premier business awards ceremony. 
+            Multiple sponsorship tiers available.
           </p>
-          <Link to="/partnerships">
-            <Button 
-              size="lg" 
-              className="bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-6 text-base font-medium rounded-full group"
-            >
-              Explore Partnerships
-              <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
-            </Button>
-          </Link>
+          <MagneticButton strength={0.15}>
+            <Link to="/partnerships">
+              <Button size="lg" className="px-8">
+                Explore Partnerships <ArrowRight className="ml-2 h-5 w-5" />
+              </Button>
+            </Link>
+          </MagneticButton>
         </div>
       </section>
 
       {/* Contact Section */}
-      <section className="section-padding bg-background border-t border-border">
-        <div className="container mx-auto px-6 lg:px-8 max-w-2xl text-center">
-          <h2 className="font-display text-3xl md:text-4xl text-foreground mb-8">
-            Get In Touch
-          </h2>
-          
-          <div className="space-y-4 mb-8">
-            <p className="text-lg text-foreground font-medium">
-              ONE UAE Awards Secretariat
-            </p>
-            <a 
-              className="block text-primary hover:text-primary/80 transition-colors" 
-              href="mailto:info@oneuaeaward.ae"
-            >
+      <section className="section-compact bg-background border-t border-border/20">
+        <div className="container mx-auto px-4 text-center gsap-reveal">
+          <p className="editorial-label mb-4">Get in Touch</p>
+          <h2 className="text-2xl font-display text-foreground mb-6">Have Questions?</h2>
+          <p className="text-muted-foreground mb-6">
+            Contact us at{" "}
+            <a href="mailto:info@oneuaeaward.ae" className="text-primary hover:underline">
               info@oneuaeaward.ae
             </a>
-            <a 
-              href="tel:+971562555100" 
-              className="block text-muted-foreground hover:text-foreground transition-colors"
-            >
-              +971 56 255 5100
-            </a>
-          </div>
-          
+          </p>
           <Link to="/contact">
-            <Button variant="outline" className="group">
-              Contact Us
-              <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
-            </Button>
+            <Button variant="outline">Contact Us</Button>
           </Link>
         </div>
       </section>

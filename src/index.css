@@ -55,6 +55,30 @@
   @apply fixed top-0 left-0 h-0.5 bg-primary z-[60] transition-all duration-100;
 }
 
+/* Hero grid background */
+.hero-grid {
+  background-image: 
+    linear-gradient(to right, hsl(var(--primary) / 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, hsl(var(--primary) / 0.05) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+
+/* Scanning line animation */
+.scanning-line {
+  animation: scan 8s linear infinite;
+}
+
+@keyframes scan {
+  0% { top: 0%; }
+  100% { top: 100%; }
+}
+
+/* Floating orbs */
+.floating-orb {
+  filter: blur(40px);
+  will-change: transform;
+}
+
 /* Modern Media Conglomerate Design System
    Premium, sophisticated, editorial aesthetic
 */
@@ -497,4 +521,21 @@
 
 .btn-glow:hover::after {
   opacity: 1;
+}
+
+/* GSAP visibility helper */
+.gsap-reveal > * {
+  opacity: 0;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .scanning-line,
+  .floating-orb {
+    animation: none !important;
+  }
+  
+  .gsap-reveal > * {
+    opacity: 1;
+  }
 }
