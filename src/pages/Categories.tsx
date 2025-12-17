@@ -1,10 +1,12 @@
 import { Link } from "react-router-dom";
+import { useRef, useLayoutEffect } from "react";
 import { ArrowRight, TrendingUp, Lightbulb, Briefcase, Building2, ShoppingBag, Cpu, GraduationCap, HeartPulse, Users, Palette, Star, Globe, Leaf, HardHat, Handshake, Radio, Award } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
-import AnimatedSection from "@/components/AnimatedSection";
+import { gsap, ScrollTrigger } from "@/utils/gsap-config";
+import { prefersReducedMotion } from "@/utils/motion-preference";
 
 const Categories = () => {
   const categories = [
@@ -27,6 +29,62 @@ const Categories = () => {
     { icon: Radio, title: "Media & Communication" },
     { icon: Award, title: "Lifetime Achievement & Legacy" },
   ];
+
+  const containerRef = useRef<HTMLDivElement>(null);
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const progressRef = useRef<HTMLDivElement>(null);
+
+  useLayoutEffect(() => {
+    if (!containerRef.current || !scrollContainerRef.current || prefersReducedMotion()) return;
+
+    const ctx = gsap.context(() => {
+      const scrollContainer = scrollContainerRef.current;
+      if (!scrollContainer) return;
+
+      const scrollWidth = scrollContainer.scrollWidth;
+      const viewportWidth = window.innerWidth;
+
+      // Horizontal scroll
+      const scrollTween = gsap.to(scrollContainer, {
+        x: -(scrollWidth - viewportWidth + 100),
+        ease: 'none',
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: 'top top',
+          end: () => `+=${scrollWidth}`,
+          pin: true,
+          scrub: 1,
+          onUpdate: (self) => {
+            if (progressRef.current) {
+              progressRef.current.style.width = `${self.progress * 100}%`;
+            }
+          },
+        },
+      });
+
+      // Card 3D tilt on enter
+      gsap.utils.toArray('.category-card').forEach((card: any) => {
+        gsap.fromTo(
+          card,
+          { rotateY: -8, opacity: 0.5 },
+          {
+            rotateY: 0,
+            opacity: 1,
+            duration: 0.5,
+            scrollTrigger: {
+              trigger: card,
+              containerAnimation: scrollTween,
+              start: 'left 80%',
+              end: 'left 50%',
+              scrub: 1,
+            },
+          }
+        );
+      });
+    }, containerRef);
+
+    return () => ctx.revert();
+  }, []);
 
   return (
     <div className="min-h-screen">
@@ -58,51 +116,54 @@ const Categories = () => {
           </div>
         </section>
 
-        {/* Categories Grid */}
-        <section className="section-padding bg-background">
-          <div className="container mx-auto px-6 lg:px-8 max-w-6xl">
-            {/* Featured Categories - Larger */}
-            <div className="grid md:grid-cols-3 gap-6 mb-8">
-              {categories.slice(0, 3).map((category, index) => {
-                const Icon = category.icon;
-                return (
-                  <AnimatedSection key={index} delay={index * 100}>
-                    <div className="card-featured text-center h-full">
-                      <div className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center mx-auto mb-5">
-                        <Icon className="w-6 h-6 text-primary" />
-                      </div>
-                      <span className="text-xs text-primary font-medium mb-2 block">Featured</span>
-                      <h3 className="font-display text-lg text-foreground">
-                        {category.title}
-                      </h3>
-                    </div>
-                  </AnimatedSection>
-                );
-              })}
-            </div>
+        {/* Progress Bar */}
+        <div className="fixed top-20 left-0 right-0 h-1 bg-border/20 z-40">
+          <div
+            ref={progressRef}
+            className="h-full bg-primary transition-none"
+            style={{ width: '0%' }}
+          />
+        </div>
+
+        {/* Horizontal Scroll Categories */}
+        <section ref={containerRef} className="bg-card min-h-screen">
+          <div
+            ref={scrollContainerRef}
+            className="flex items-center gap-8 px-8 py-20 min-h-screen"
+            style={{ perspective: '1000px' }}
+          >
+            {categories.map((category, index) => {
+              const Icon = category.icon;
+              return (
+                <div
+                  key={index}
+                  className={`category-card flex-shrink-0 ${
+                    category.featured ? 'w-80 h-96' : 'w-72 h-80'
+                  } bg-background border border-border/40 rounded-lg p-8 flex flex-col items-center justify-center text-center hover:border-primary/40 transition-all duration-300`}
+                  style={{ transformStyle: 'preserve-3d' }}
+                >
+                  {category.featured && (
+                    <span className="text-xs text-primary uppercase tracking-widest mb-4">Featured</span>
+                  )}
+                  <Icon className={`${category.featured ? 'h-16 w-16' : 'h-12 w-12'} text-primary mb-6`} />
+                  <h3 className={`${category.featured ? 'text-xl' : 'text-lg'} font-display text-foreground`}>
+                    {category.title}
+                  </h3>
+                  <div className="w-12 h-px bg-primary/40 mt-6" />
+                </div>
+              );
+            })}
             
-            {/* Standard Categories */}
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-              {categories.slice(3).map((category, index) => {
-                const Icon = category.icon;
-                return (
-                  <AnimatedSection key={index + 3} delay={(index + 3) * 50}>
-                    <div className="card-standard flex items-center gap-4">
-                      <div className="w-10 h-10 rounded-lg bg-primary/5 flex items-center justify-center flex-shrink-0">
-                        <Icon className="w-4 h-4 text-primary" />
-                      </div>
-                      <div className="flex-1 min-w-0">
-                        <span className="text-xs text-muted-foreground">
-                          {String(index + 4).padStart(2, '0')}
-                        </span>
-                        <h3 className="font-medium text-foreground text-sm leading-tight">
-                          {category.title}
-                        </h3>
-                      </div>
-                    </div>
-                  </AnimatedSection>
-                );
-              })}
+            {/* CTA Card at end */}
+            <div className="category-card flex-shrink-0 w-80 h-96 bg-primary/10 border border-primary/40 rounded-lg p-8 flex flex-col items-center justify-center text-center">
+              <Award className="h-16 w-16 text-primary mb-6" />
+              <h3 className="text-xl font-display text-foreground mb-4">Ready to Nominate?</h3>
+              <p className="text-muted-foreground mb-6">Submit your nomination today</p>
+              <Link to="/nominate">
+                <Button>
+                  Nominate Now <ArrowRight className="ml-2 h-4 w-4" />
+                </Button>
+              </Link>
             </div>
           </div>
         </section>
@@ -110,21 +171,19 @@ const Categories = () => {
         {/* CTA */}
         <section className="section-padding bg-secondary/30">
           <div className="container mx-auto px-6 lg:px-8 max-w-2xl text-center">
-            <AnimatedSection>
-              <p className="editorial-label mb-4">Ready to Apply?</p>
-              <h2 className="section-title-editorial mb-6">
-                Submit Your Nomination
-              </h2>
-              <p className="text-muted-foreground mb-8">
-                Recognize excellence in your organization or nominate a deserving leader.
-              </p>
-              <Link to="/nominate">
-                <Button size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-6 rounded-full group">
-                  Start Nomination
-                  <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                </Button>
-              </Link>
-            </AnimatedSection>
+            <p className="editorial-label mb-4">Ready to Apply?</p>
+            <h2 className="section-title-editorial mb-6">
+              Submit Your Nomination
+            </h2>
+            <p className="text-muted-foreground mb-8">
+              Recognize excellence in your organization or nominate a deserving leader.
+            </p>
+            <Link to="/nominate">
+              <Button size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-6 rounded-full group">
+                Start Nomination
+                <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              </Button>
+            </Link>
           </div>
         </section>
       </main>

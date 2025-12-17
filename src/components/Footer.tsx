@@ -1,9 +1,15 @@
 import { Link } from "react-router-dom";
+import { useRef, useLayoutEffect } from "react";
 import { ArrowUpRight, Mail, Phone, MapPin } from "lucide-react";
 import oneUaeLogo from "@/assets/one-uae-logo.png";
+import { gsap, ScrollTrigger } from "@/utils/gsap-config";
+import { prefersReducedMotion } from "@/utils/motion-preference";
+import { MagneticButton } from "@/components/MagneticButton";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
+  const footerRef = useRef<HTMLElement>(null);
+  const headingRef = useRef<HTMLDivElement>(null);
   
   const footerLinks = {
     main: [
@@ -18,8 +24,51 @@ const Footer = () => {
     ],
   };
 
+  useLayoutEffect(() => {
+    if (!footerRef.current || !headingRef.current || prefersReducedMotion()) return;
+
+    const ctx = gsap.context(() => {
+      // Heading scale reveal
+      gsap.fromTo(
+        headingRef.current,
+        { scale: 0.95, autoAlpha: 0 },
+        {
+          scale: 1,
+          autoAlpha: 1,
+          duration: 0.8,
+          ease: 'power2.out',
+          scrollTrigger: {
+            trigger: footerRef.current,
+            start: 'top 90%',
+            toggleActions: 'play none none none',
+          },
+        }
+      );
+
+      // Links stagger reveal
+      gsap.fromTo(
+        '.footer-link',
+        { y: 20, autoAlpha: 0 },
+        {
+          y: 0,
+          autoAlpha: 1,
+          stagger: 0.05,
+          duration: 0.5,
+          ease: 'power2.out',
+          scrollTrigger: {
+            trigger: footerRef.current,
+            start: 'top 85%',
+            toggleActions: 'play none none none',
+          },
+        }
+      );
+    }, footerRef);
+
+    return () => ctx.revert();
+  }, []);
+
   return (
-    <footer className="bg-deep-charcoal text-white relative overflow-hidden">
+    <footer ref={footerRef} className="bg-deep-charcoal text-white relative overflow-hidden">
       {/* Subtle decorative element */}
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
       
@@ -27,7 +76,7 @@ const Footer = () => {
         {/* Main Footer Content */}
         <div className="py-16 lg:py-20 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8">
           {/* Brand Column */}
-          <div className="lg:col-span-2">
+          <div ref={headingRef} className="lg:col-span-2">
             <Link to="/" className="inline-block mb-6">
               <img 
                 src={oneUaeLogo} 
@@ -54,13 +103,15 @@ const Footer = () => {
             <ul className="space-y-3">
               {footerLinks.main.map((link) => (
                 <li key={link.path}>
-                  <Link 
-                    to={link.path}
-                    className="group inline-flex items-center gap-2 text-white/60 hover:text-white transition-colors duration-300 text-sm"
-                  >
-                    {link.label}
-                    <ArrowUpRight className="w-3 h-3 opacity-0 -translate-y-1 translate-x-1 group-hover:opacity-100 group-hover:translate-y-0 group-hover:translate-x-0 transition-all duration-300" />
-                  </Link>
+                  <MagneticButton strength={0.15}>
+                    <Link 
+                      to={link.path}
+                      className="footer-link group inline-flex items-center gap-2 text-white/60 hover:text-white transition-colors duration-300 text-sm"
+                    >
+                      {link.label}
+                      <ArrowUpRight className="w-3 h-3 opacity-0 -translate-y-1 translate-x-1 group-hover:opacity-100 group-hover:translate-y-0 group-hover:translate-x-0 transition-all duration-300" />
+                    </Link>
+                  </MagneticButton>
                 </li>
               ))}
             </ul>
@@ -73,25 +124,29 @@ const Footer = () => {
             </h4>
             <ul className="space-y-4">
               <li>
-                <a 
-                  href="mailto:info@oneuaeaward.ae"
-                  className="flex items-center gap-3 text-white/60 hover:text-white transition-colors duration-300 text-sm"
-                >
-                  <Mail className="w-4 h-4 text-primary/70" />
-                  info@oneuaeaward.ae
-                </a>
+                <MagneticButton strength={0.1}>
+                  <a 
+                    href="mailto:info@oneuaeaward.ae"
+                    className="footer-link flex items-center gap-3 text-white/60 hover:text-white transition-colors duration-300 text-sm"
+                  >
+                    <Mail className="w-4 h-4 text-primary/70" />
+                    info@oneuaeaward.ae
+                  </a>
+                </MagneticButton>
               </li>
               <li>
-                <a 
-                  href="tel:+971562555100"
-                  className="flex items-center gap-3 text-white/60 hover:text-white transition-colors duration-300 text-sm"
-                >
-                  <Phone className="w-4 h-4 text-primary/70" />
-                  +971 56 255 5100
-                </a>
+                <MagneticButton strength={0.1}>
+                  <a 
+                    href="tel:+971562555100"
+                    className="footer-link flex items-center gap-3 text-white/60 hover:text-white transition-colors duration-300 text-sm"
+                  >
+                    <Phone className="w-4 h-4 text-primary/70" />
+                    +971 56 255 5100
+                  </a>
+                </MagneticButton>
               </li>
               <li>
-                <div className="flex items-center gap-3 text-white/60 text-sm">
+                <div className="footer-link flex items-center gap-3 text-white/60 text-sm">
                   <MapPin className="w-4 h-4 text-primary/70" />
                   Zabeel Ladies Club, Dubai
                 </div>
