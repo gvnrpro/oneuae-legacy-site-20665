@@ -5,70 +5,71 @@ import oneUaeLogo from "@/assets/one-uae-logo.png";
 import { gsap, ScrollTrigger } from "@/utils/gsap-config";
 import { prefersReducedMotion } from "@/utils/motion-preference";
 import { MagneticButton } from "@/components/MagneticButton";
-
 const Footer = () => {
   const currentYear = new Date().getFullYear();
   const footerRef = useRef<HTMLElement>(null);
   const headingRef = useRef<HTMLDivElement>(null);
-  
   const footerLinks = {
-    main: [
-      { label: "About", path: "/about" },
-      { label: "Categories", path: "/categories" },
-      { label: "Partnerships", path: "/partnerships" },
-      { label: "Gala Night", path: "/gala" },
-    ],
-    actions: [
-      { label: "Submit Nomination", path: "/nominate" },
-      { label: "Contact Us", path: "/contact" },
-    ],
+    main: [{
+      label: "About",
+      path: "/about"
+    }, {
+      label: "Categories",
+      path: "/categories"
+    }, {
+      label: "Partnerships",
+      path: "/partnerships"
+    }, {
+      label: "Gala Night",
+      path: "/gala"
+    }],
+    actions: [{
+      label: "Submit Nomination",
+      path: "/nominate"
+    }, {
+      label: "Contact Us",
+      path: "/contact"
+    }]
   };
-
   useLayoutEffect(() => {
     if (!footerRef.current || !headingRef.current || prefersReducedMotion()) return;
-
     const ctx = gsap.context(() => {
       // Heading scale reveal
-      gsap.fromTo(
-        headingRef.current,
-        { scale: 0.95, autoAlpha: 0 },
-        {
-          scale: 1,
-          autoAlpha: 1,
-          duration: 0.8,
-          ease: 'power2.out',
-          scrollTrigger: {
-            trigger: footerRef.current,
-            start: 'top 90%',
-            toggleActions: 'play none none none',
-          },
+      gsap.fromTo(headingRef.current, {
+        scale: 0.95,
+        autoAlpha: 0
+      }, {
+        scale: 1,
+        autoAlpha: 1,
+        duration: 0.8,
+        ease: 'power2.out',
+        scrollTrigger: {
+          trigger: footerRef.current,
+          start: 'top 90%',
+          toggleActions: 'play none none none'
         }
-      );
+      });
 
       // Links stagger reveal
-      gsap.fromTo(
-        '.footer-link',
-        { y: 20, autoAlpha: 0 },
-        {
-          y: 0,
-          autoAlpha: 1,
-          stagger: 0.05,
-          duration: 0.5,
-          ease: 'power2.out',
-          scrollTrigger: {
-            trigger: footerRef.current,
-            start: 'top 85%',
-            toggleActions: 'play none none none',
-          },
+      gsap.fromTo('.footer-link', {
+        y: 20,
+        autoAlpha: 0
+      }, {
+        y: 0,
+        autoAlpha: 1,
+        stagger: 0.05,
+        duration: 0.5,
+        ease: 'power2.out',
+        scrollTrigger: {
+          trigger: footerRef.current,
+          start: 'top 85%',
+          toggleActions: 'play none none none'
         }
-      );
+      });
     }, footerRef);
-
     return () => ctx.revert();
   }, []);
-
-  return (
-    <footer ref={footerRef} className="bg-deep-charcoal text-white relative overflow-hidden">
+  return <footer ref={footerRef} className="bg-deep-charcoal text-white relative overflow-hidden">
       {/* Subtle decorative element */}
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
       
@@ -78,11 +79,7 @@ const Footer = () => {
           {/* Brand Column */}
           <div ref={headingRef} className="lg:col-span-2">
             <Link to="/" className="inline-block mb-6">
-              <img 
-                src={oneUaeLogo} 
-                alt="ONE UAE International Business Awards" 
-                className="h-14 w-auto opacity-95 hover:opacity-100 transition-opacity"
-              />
+              <img src={oneUaeLogo} alt="ONE UAE International Business Awards" className="h-14 w-auto opacity-95 hover:opacity-100 transition-opacity" />
             </Link>
             <p className="text-white/50 text-sm leading-relaxed max-w-md mb-6">
               Under the distinguished patronage of<br />
@@ -101,19 +98,14 @@ const Footer = () => {
               Explore
             </h4>
             <ul className="space-y-3">
-              {footerLinks.main.map((link) => (
-                <li key={link.path}>
+              {footerLinks.main.map(link => <li key={link.path}>
                   <MagneticButton strength={0.15}>
-                    <Link 
-                      to={link.path}
-                      className="footer-link group inline-flex items-center gap-2 text-white/60 hover:text-white transition-colors duration-300 text-sm"
-                    >
+                    <Link to={link.path} className="footer-link group inline-flex items-center gap-2 text-white/60 hover:text-white transition-colors duration-300 text-sm">
                       {link.label}
                       <ArrowUpRight className="w-3 h-3 opacity-0 -translate-y-1 translate-x-1 group-hover:opacity-100 group-hover:translate-y-0 group-hover:translate-x-0 transition-all duration-300" />
                     </Link>
                   </MagneticButton>
-                </li>
-              ))}
+                </li>)}
             </ul>
           </div>
           
@@ -125,21 +117,15 @@ const Footer = () => {
             <ul className="space-y-4">
               <li>
                 <MagneticButton strength={0.1}>
-                  <a 
-                    href="mailto:info@oneuaeaward.ae"
-                    className="footer-link flex items-center gap-3 text-white/60 hover:text-white transition-colors duration-300 text-sm"
-                  >
+                  <a className="footer-link flex items-center gap-3 text-white/60 hover:text-white transition-colors duration-300 text-sm" href="mailto:info@oneuaeawards.ae">
                     <Mail className="w-4 h-4 text-primary/70" />
-                    info@oneuaeaward.ae
+                    info@oneuaeawards.ae
                   </a>
                 </MagneticButton>
               </li>
               <li>
                 <MagneticButton strength={0.1}>
-                  <a 
-                    href="tel:+971562555100"
-                    className="footer-link flex items-center gap-3 text-white/60 hover:text-white transition-colors duration-300 text-sm"
-                  >
+                  <a href="tel:+971562555100" className="footer-link flex items-center gap-3 text-white/60 hover:text-white transition-colors duration-300 text-sm">
                     <Phone className="w-4 h-4 text-primary/70" />
                     +971 56 255 5100
                   </a>
@@ -169,8 +155,6 @@ const Footer = () => {
           </div>
         </div>
       </div>
-    </footer>
-  );
+    </footer>;
 };
-
 export default Footer;
