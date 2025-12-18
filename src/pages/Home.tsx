@@ -560,8 +560,8 @@ const Home = () => {
           <h2 className="text-2xl font-display text-foreground mb-6">Have Questions?</h2>
           <p className="text-muted-foreground mb-6">
             Contact us at{" "}
-            <a href="mailto:info@oneuaeaward.ae" className="text-primary hover:underline">
-              info@oneuaeaward.ae
+            <a href="mailto:info@oneuaeawards.ae" className="text-primary hover:underline">
+              info@oneuaeawards.ae
             </a>
           </p>
           <Link to="/contact">
