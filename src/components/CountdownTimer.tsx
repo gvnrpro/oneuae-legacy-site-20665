@@ -16,7 +16,7 @@ const CountdownTimer = () => {
   });
 
   useEffect(() => {
-    const targetDate = new Date("2026-02-06T18:00:00+04:00").getTime();
+    const targetDate = new Date("2026-02-05T18:00:00+04:00").getTime();
 
     const calculateTimeLeft = () => {
       const now = new Date().getTime();

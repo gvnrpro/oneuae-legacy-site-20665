@@ -119,7 +119,7 @@ const Home = () => {
               <div className="flex flex-wrap items-center gap-x-6 gap-y-2 text-white/50 text-sm mb-10">
                 <span className="flex items-center gap-2">
                   <Calendar className="w-4 h-4" />
-                  February 6, 2026
+                  February 5, 2026
                 </span>
                 <span className="flex items-center gap-2">
                   <MapPin className="w-4 h-4" />
@@ -217,7 +217,7 @@ const Home = () => {
                 <div className="flex gap-4 items-start">
                   <Calendar className="w-5 h-5 text-primary mt-1 flex-shrink-0" />
                   <div>
-                    <p className="font-medium text-foreground">February 6, 2026</p>
+                    <p className="font-medium text-foreground">February 5, 2026</p>
                     <p className="text-sm text-muted-foreground">Gala Night Ceremony</p>
                   </div>
                 </div>
@@ -335,7 +335,7 @@ const Home = () => {
             <div className="reveal-up lg:pt-16">
               <div className="space-y-8">
                 {[
-                  { label: "Date", value: "February 6, 2026" },
+                  { label: "Date", value: "February 5, 2026" },
                   { label: "Venue", value: "Zabeel Ladies Club, Dubai" },
                   { label: "Format", value: "Ceremony + Gala Dinner" },
                   { label: "Attendees", value: "750 Distinguished Guests" },
