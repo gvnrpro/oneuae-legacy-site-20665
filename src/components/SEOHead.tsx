@@ -10,7 +10,7 @@ interface SEOHeadProps {
 
 const SEOHead = ({
   title = "ONE UAE International Business Awards 2026 | Celebrating Excellence",
-  description = "ONE UAE International Business Awards celebrates exceptional individuals and organizations shaping the UAE's future. Join us January 4th, 2026 at Zabeel Ladies Club for an evening of national pride and excellence.",
+  description = "ONE UAE International Business Awards celebrates exceptional individuals and organizations shaping the UAE's future. Join us February 6th, 2026 at Zabeel Ladies Club for an evening of national pride and excellence.",
   keywords = "ONE UAE Awards, international business awards, UAE excellence, national recognition, leadership awards, innovation awards, Dubai awards 2026",
   path = "",
   image = "https://oneuaeawards.ae/logo.png",
@@ -78,8 +78,8 @@ const SEOHead = ({
           name: "ONE UAE International Business Awards 2026",
           description:
             "An exclusive black-tie ceremony celebrating unity, vision, and excellence in the United Arab Emirates.",
-          startDate: "2026-01-04T18:00:00+04:00",
-          endDate: "2026-01-04T23:00:00+04:00",
+          startDate: "2026-02-06T18:00:00+04:00",
+          endDate: "2026-02-06T23:00:00+04:00",
           eventStatus: "https://schema.org/EventScheduled",
           eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
           location: {
