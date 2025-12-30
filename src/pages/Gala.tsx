@@ -50,7 +50,7 @@ const Gala = () => {
     <div ref={mainRef} className="min-h-screen bg-background">
       <SEOHead
         title="Gala Night - ONE UAE International Business Awards 2026"
-        description="Join us for an exclusive black-tie awards ceremony on February 6th, 2026 at Zabeel Ladies Club."
+        description="Join us for an exclusive black-tie awards ceremony on February 5th, 2026 at Zabeel Ladies Club."
         keywords="UAE gala night, awards ceremony Dubai, black tie event, ONE UAE gala 2026"
         path="/gala"
       />
@@ -74,7 +74,7 @@ const Gala = () => {
                 Save the Date
               </span>
               <p className="text-4xl md:text-5xl font-display text-foreground">
-                February 6, 2026
+                February 5, 2026
               </p>
               <p className="text-muted-foreground mt-2">Awards Gala Night</p>
             </div>
@@ -106,7 +106,7 @@ const Gala = () => {
               
               <div className="reveal-up grid grid-cols-2 gap-6">
                 {[
-                  { icon: Calendar, label: "Date", value: "February 6, 2026" },
+                  { icon: Calendar, label: "Date", value: "February 5, 2026" },
                   { icon: MapPin, label: "Venue", value: "Zabeel Ladies Club" },
                   { icon: Clock, label: "Time", value: "6:00 PM onwards" },
                   { icon: Users, label: "Guests", value: "750+" },
