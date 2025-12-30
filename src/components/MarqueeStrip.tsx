@@ -3,7 +3,7 @@ import { gsap, ScrollTrigger } from '@/utils/gsap-config';
 import { prefersReducedMotion } from '@/utils/motion-preference';
 
 const row1Content = "GROWTH · INNOVATION · LEADERSHIP · EXCELLENCE · ";
-const row2Content = "JAN 4, 2026 · ZABEEL LADIES CLUB · DUBAI · 18 CATEGORIES · ";
+const row2Content = "FEB 6, 2026 · ZABEEL LADIES CLUB · DUBAI · 18 CATEGORIES · ";
 
 export const MarqueeStrip: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);

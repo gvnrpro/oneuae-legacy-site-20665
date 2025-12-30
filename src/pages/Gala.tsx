@@ -21,7 +21,7 @@ const Gala = () => {
     <div className="min-h-screen">
       <SEOHead
         title="Gala Night - ONE UAE International Business Awards 2026"
-        description="Join us for an exclusive black-tie awards ceremony on January 4th, 2026 at Zabeel Ladies Club. An evening celebrating excellence and national pride."
+        description="Join us for an exclusive black-tie awards ceremony on February 6th, 2026 at Zabeel Ladies Club. An evening celebrating excellence and national pride."
         keywords="UAE gala night, awards ceremony Dubai, black tie event, ONE UAE gala 2026, international business awards"
         path="/gala"
       />
@@ -45,7 +45,7 @@ const Gala = () => {
               <div className="inline-block bg-background border border-border rounded-2xl p-8 shadow-lg">
                 <p className="editorial-label mb-2">Save the Date</p>
                 <p className="font-display text-4xl md:text-5xl text-foreground">
-                  January 4<sup className="text-primary">,</sup> 2026
+                  February 6<sup className="text-primary">,</sup> 2026
                 </p>
                 <p className="text-muted-foreground mt-2">Awards Gala Night</p>
               </div>
@@ -81,7 +81,7 @@ const Gala = () => {
               <div className="lg:col-span-2">
                 <div className="grid grid-cols-2 gap-4">
                   {[
-                    { icon: Calendar, label: "Date", value: "January 4, 2026" },
+                    { icon: Calendar, label: "Date", value: "February 6, 2026" },
                     { icon: MapPin, label: "Venue", value: "Zabeel Ladies Club" },
                     { icon: Clock, label: "Time", value: "6:00 PM onwards" },
                     { icon: Users, label: "Guests", value: "750+" },

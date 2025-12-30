@@ -86,7 +86,7 @@ const Footer = () => {
               <span className="text-white/70">H.E. Sheikh Sultan Bin Nasser Bin Humaid Al Nuaimi</span>
             </p>
             <div className="flex items-center gap-3 text-sm">
-              <span className="text-white/40">January 4, 2026</span>
+              <span className="text-white/40">February 6, 2026</span>
               <span className="w-1 h-1 rounded-full bg-primary" />
               <span className="text-white/40">Dubai, UAE</span>
             </div>

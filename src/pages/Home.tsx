@@ -295,7 +295,7 @@ const Home = () => {
                 <div className="flex items-center gap-3">
                   <Calendar className="w-5 h-5 text-primary" />
                   <div>
-                    <p className="font-medium text-foreground text-sm">January 4, 2026</p>
+                    <p className="font-medium text-foreground text-sm">February 6, 2026</p>
                     <p className="text-xs text-muted-foreground">Gala Night</p>
                   </div>
                 </div>
@@ -443,7 +443,7 @@ const Home = () => {
               
               <div className="space-y-6">
                 {[
-                  { label: "Date", value: "January 4, 2026" },
+                  { label: "Date", value: "February 6, 2026" },
                   { label: "Venue", value: "Main Ballroom, Zabeel Ladies Club, Dubai" },
                   { label: "Format", value: "Ceremony + Gala Dinner" },
                   { label: "Attendees", value: "750 Distinguished Guests" },
