@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
-import { useRef, useLayoutEffect, useEffect, useState } from "react";
+import { useRef, useLayoutEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Calendar, MapPin, Users, Award, Star, Utensils } from "lucide-react";
+import { ArrowRight, Calendar, MapPin, Users, Award, Star, Utensils, CalendarPlus } from "lucide-react";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
@@ -11,6 +11,7 @@ import oneUaeLogo from "@/assets/one-uae-logo.png";
 import { MarqueeStrip } from "@/components/MarqueeStrip";
 import { gsap, ScrollTrigger } from "@/utils/gsap-config";
 import { prefersReducedMotion } from "@/utils/motion-preference";
+import { generateICSFile } from "@/utils/calendar";
 
 const Home = () => {
   const heroRef = useRef<HTMLElement>(null);
@@ -166,6 +167,15 @@ const Home = () => {
                     Learn More
                   </Button>
                 </Link>
+                <Button 
+                  size="lg" 
+                  variant="outline"
+                  onClick={generateICSFile}
+                  className="bg-transparent border-white/30 text-white hover:bg-white/10 h-14 px-8 text-base"
+                >
+                  <CalendarPlus className="mr-2 w-5 h-5" />
+                  Add to Calendar
+                </Button>
               </div>
             </div>
           </div>
