@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { useRef, useLayoutEffect } from "react";
+import { useRef, useLayoutEffect, useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Calendar, MapPin, Users, Award, Star, Utensils } from "lucide-react";
 import Navigation from "@/components/Navigation";
@@ -77,15 +77,29 @@ const Home = () => {
       <SEOHead />
       <Navigation />
       
-      {/* Hero - Editorial Asymmetric Layout */}
+      {/* Hero - Video Background */}
       <section ref={heroRef} className="relative min-h-[100svh] overflow-hidden">
         <a href="#main-content" className="sr-only focus:not-sr-only">Skip to main content</a>
         
-        {/* Background Image */}
-        <div 
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat" 
-          style={{ backgroundImage: `url(${heroBg})` }} 
-        />
+        {/* Video Background */}
+        {!prefersReducedMotion() ? (
+          <video
+            autoPlay
+            muted
+            loop
+            playsInline
+            poster={heroBg}
+            className="absolute inset-0 w-full h-full object-cover"
+          >
+            <source src="/hero-video.webm" type="video/webm" />
+            <source src="/hero-video.mp4" type="video/mp4" />
+          </video>
+        ) : (
+          <div 
+            className="absolute inset-0 bg-cover bg-center bg-no-repeat" 
+            style={{ backgroundImage: `url(${heroBg})` }} 
+          />
+        )}
 
         {/* Overlay - asymmetric gradient */}
         <div className="absolute inset-0 bg-gradient-to-br from-black/80 via-black/60 to-black/40" />
@@ -96,22 +110,27 @@ const Home = () => {
           <div className="container mx-auto px-6 lg:px-8">
             <div className="max-w-4xl">
               {/* Logo */}
-              <div className="mb-8">
+              <div className="mb-6">
                 <img 
                   src={oneUaeLogo} 
                   alt="ONE UAE Awards" 
-                  className="h-16 md:h-20 drop-shadow-lg"
+                  className="h-14 md:h-16 drop-shadow-lg"
                 />
               </div>
               
-              {/* Main Headline - Large, editorial */}
-              <h1 className="text-[clamp(2.5rem,8vw,6rem)] font-display text-white leading-[0.95] tracking-tight mb-6">
-                International<br />
-                <span className="text-primary">Business</span> Awards
+              {/* Main Headline - ONE UAE Awards prominent */}
+              <h1 className="text-[clamp(3rem,10vw,7rem)] font-display text-white leading-[0.9] tracking-tight mb-4">
+                ONE UAE<br />
+                <span className="text-primary">Awards</span>
               </h1>
               
-              {/* Subtext */}
-              <p className="text-white/60 text-lg md:text-xl max-w-xl mb-4">
+              {/* Secondary tagline - smaller */}
+              <p className="text-white/70 text-xl md:text-2xl font-medium mb-4">
+                International Business Awards
+              </p>
+              
+              {/* Patronage */}
+              <p className="text-white/50 text-base md:text-lg max-w-xl mb-4">
                 Under the Patronage of H.E. Sheikh Sultan Bin Nasser Bin Humaid Al Nuaimi
               </p>
               
@@ -123,7 +142,7 @@ const Home = () => {
                 </span>
                 <span className="flex items-center gap-2">
                   <MapPin className="w-4 h-4" />
-                  Dubai, UAE
+                  Zabeel Ladies Club, Dubai
                 </span>
               </div>
               

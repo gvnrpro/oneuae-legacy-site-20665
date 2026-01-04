@@ -13,7 +13,7 @@ const SEOHead = ({
   description = "ONE UAE International Business Awards celebrates exceptional individuals and organizations shaping the UAE's future. Join us February 5th, 2026 at Zabeel Ladies Club for an evening of national pride and excellence.",
   keywords = "ONE UAE Awards, international business awards, UAE excellence, national recognition, leadership awards, innovation awards, Dubai awards 2026",
   path = "",
-  image = "https://oneuaeawards.ae/logo.png",
+  image = "https://oneuaeawards.ae/og-image.png",
 }: SEOHeadProps) => {
   const siteUrl = "https://oneuaeawards.ae";
   const fullUrl = `${siteUrl}${path}`;
@@ -25,6 +25,8 @@ const SEOHead = ({
       <meta name="title" content={title} />
       <meta name="description" content={description} />
       <meta name="keywords" content={keywords} />
+      <meta name="robots" content="index, follow" />
+      <meta name="author" content="ONE UAE International Business Awards" />
 
       {/* Open Graph / Facebook */}
       <meta property="og:type" content="website" />
@@ -32,6 +34,10 @@ const SEOHead = ({
       <meta property="og:title" content={title} />
       <meta property="og:description" content={description} />
       <meta property="og:image" content={image} />
+      <meta property="og:image:width" content="1200" />
+      <meta property="og:image:height" content="630" />
+      <meta property="og:image:alt" content="ONE UAE International Business Awards 2026 - Celebrating Excellence in the UAE" />
+      <meta property="og:image:type" content="image/png" />
       <meta property="og:site_name" content="ONE UAE International Business Awards" />
       <meta property="og:locale" content="en_AE" />
 
