@@ -13,69 +13,53 @@ import { gsap, ScrollTrigger } from "@/utils/gsap-config";
 import { prefersReducedMotion } from "@/utils/motion-preference";
 import { generateICSFile } from "@/utils/calendar";
 import SocialShare from "@/components/SocialShare";
-
 const Home = () => {
   const heroRef = useRef<HTMLElement>(null);
   const mainRef = useRef<HTMLDivElement>(null);
-
-  const categories = [
-    'Growth & Economic Excellence', 
-    'Entrepreneurship & Innovation', 
-    'Corporate Leadership', 
-    'Finance & Banking', 
-    'Retail & Hospitality', 
-    'Technology & Digital',
-  ];
+  const categories = ['Growth & Economic Excellence', 'Entrepreneurship & Innovation', 'Corporate Leadership', 'Finance & Banking', 'Retail & Hospitality', 'Technology & Digital'];
 
   // Section reveals
   useLayoutEffect(() => {
     if (prefersReducedMotion()) return;
-
     const ctx = gsap.context(() => {
       gsap.utils.toArray('.reveal-up').forEach((el: any) => {
-        gsap.fromTo(
-          el,
-          { y: 60, opacity: 0 },
-          {
-            y: 0,
-            opacity: 1,
-            duration: 1,
-            ease: 'power3.out',
-            scrollTrigger: {
-              trigger: el,
-              start: 'top 85%',
-              toggleActions: 'play none none none',
-            },
+        gsap.fromTo(el, {
+          y: 60,
+          opacity: 0
+        }, {
+          y: 0,
+          opacity: 1,
+          duration: 1,
+          ease: 'power3.out',
+          scrollTrigger: {
+            trigger: el,
+            start: 'top 85%',
+            toggleActions: 'play none none none'
           }
-        );
+        });
       });
-
       gsap.utils.toArray('.reveal-stagger').forEach((container: any) => {
         const children = container.children;
-        gsap.fromTo(
-          children,
-          { y: 40, opacity: 0 },
-          {
-            y: 0,
-            opacity: 1,
-            stagger: 0.08,
-            duration: 0.8,
-            ease: 'power2.out',
-            scrollTrigger: {
-              trigger: container,
-              start: 'top 80%',
-              toggleActions: 'play none none none',
-            },
+        gsap.fromTo(children, {
+          y: 40,
+          opacity: 0
+        }, {
+          y: 0,
+          opacity: 1,
+          stagger: 0.08,
+          duration: 0.8,
+          ease: 'power2.out',
+          scrollTrigger: {
+            trigger: container,
+            start: 'top 80%',
+            toggleActions: 'play none none none'
           }
-        );
+        });
       });
     }, mainRef);
-
     return () => ctx.revert();
   }, []);
-
-  return (
-    <div ref={mainRef} className="min-h-screen bg-background">
+  return <div ref={mainRef} className="min-h-screen bg-background">
       <SEOHead />
       <Navigation />
       
@@ -84,24 +68,12 @@ const Home = () => {
         <a href="#main-content" className="sr-only focus:not-sr-only">Skip to main content</a>
         
         {/* Video Background */}
-        {!prefersReducedMotion() ? (
-          <video
-            autoPlay
-            muted
-            loop
-            playsInline
-            poster={heroBg}
-            className="absolute inset-0 w-full h-full object-cover"
-          >
+        {!prefersReducedMotion() ? <video autoPlay muted loop playsInline poster={heroBg} className="absolute inset-0 w-full h-full object-cover">
             <source src="/hero-video.webm" type="video/webm" />
             <source src="/hero-video.mp4" type="video/mp4" />
-          </video>
-        ) : (
-          <div 
-            className="absolute inset-0 bg-cover bg-center bg-no-repeat" 
-            style={{ backgroundImage: `url(${heroBg})` }} 
-          />
-        )}
+          </video> : <div className="absolute inset-0 bg-cover bg-center bg-no-repeat" style={{
+        backgroundImage: `url(${heroBg})`
+      }} />}
 
         {/* Overlay - asymmetric gradient */}
         <div className="absolute inset-0 bg-gradient-to-br from-black/80 via-black/60 to-black/40" />
@@ -113,11 +85,7 @@ const Home = () => {
             <div className="max-w-4xl">
               {/* Logo */}
               <div className="mb-6">
-                <img 
-                  src={oneUaeLogo} 
-                  alt="ONE UAE Awards" 
-                  className="h-14 md:h-16 drop-shadow-lg"
-                />
+                <img src={oneUaeLogo} alt="ONE UAE Awards" className="h-14 md:h-16 drop-shadow-lg" />
               </div>
               
               {/* Main Headline - ONE UAE Awards prominent */}
@@ -151,41 +119,21 @@ const Home = () => {
               {/* CTAs */}
               <div className="flex flex-wrap gap-4">
                 <Link to="/nominate">
-                  <Button 
-                    size="lg" 
-                    className="bg-primary hover:bg-primary/90 text-primary-foreground h-14 px-8 text-base"
-                  >
+                  <Button size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground h-14 px-8 text-base">
                     Submit Nomination
                     <ArrowRight className="ml-2 w-5 h-5" />
                   </Button>
                 </Link>
                 <Link to="/about">
-                  <Button 
-                    size="lg" 
-                    variant="outline"
-                    className="bg-transparent border-white/30 text-white hover:bg-white/10 h-14 px-8 text-base"
-                  >
+                  <Button size="lg" variant="outline" className="bg-transparent border-white/30 text-white hover:bg-white/10 h-14 px-8 text-base">
                     Learn More
                   </Button>
                 </Link>
-                <Button 
-                  size="lg" 
-                  variant="outline"
-                  onClick={generateICSFile}
-                  className="bg-transparent border-white/30 text-white hover:bg-white/10 h-14 px-8 text-base"
-                >
+                <Button size="lg" variant="outline" onClick={generateICSFile} className="bg-transparent border-white/30 text-white hover:bg-white/10 h-14 px-8 text-base">
                   <CalendarPlus className="mr-2 w-5 h-5" />
                   Add to Calendar
                 </Button>
-                <Button 
-                  size="lg" 
-                  variant="outline"
-                  onClick={generateICSFile}
-                  className="bg-transparent border-white/30 text-white hover:bg-white/10 h-14 px-8 text-base"
-                >
-                  <CalendarPlus className="mr-2 w-5 h-5" />
-                  Add to Calendar
-                </Button>
+                
               </div>
               
               {/* Social Share */}
@@ -209,21 +157,26 @@ const Home = () => {
       <section className="py-16 md:py-20 bg-card border-b border-border/50">
         <div className="container mx-auto px-6 lg:px-8">
           <div className="reveal-stagger flex flex-col md:flex-row md:items-baseline md:justify-between gap-8 md:gap-4">
-            {[
-              { value: "750+", label: "Distinguished Guests" },
-              { value: "18", label: "Award Categories" },
-              { value: "6", label: "VIP Dignitaries" },
-              { value: "1", label: "Prestigious Night" },
-            ].map((stat, i) => (
-              <div key={i} className="flex items-baseline gap-3 md:gap-4">
+            {[{
+            value: "750+",
+            label: "Distinguished Guests"
+          }, {
+            value: "18",
+            label: "Award Categories"
+          }, {
+            value: "6",
+            label: "VIP Dignitaries"
+          }, {
+            value: "1",
+            label: "Prestigious Night"
+          }].map((stat, i) => <div key={i} className="flex items-baseline gap-3 md:gap-4">
                 <span className="text-5xl md:text-6xl lg:text-7xl font-display text-foreground leading-none">
                   {stat.value}
                 </span>
                 <span className="text-sm text-muted-foreground uppercase tracking-wider">
                   {stat.label}
                 </span>
-              </div>
-            ))}
+              </div>)}
           </div>
         </div>
       </section>
@@ -235,11 +188,7 @@ const Home = () => {
             {/* Left - Image */}
             <div className="reveal-up order-2 lg:order-1">
               <div className="aspect-[4/5] rounded-lg overflow-hidden">
-                <img 
-                  src={trophyGold} 
-                  alt="ONE UAE Awards Trophy" 
-                  className="w-full h-full object-cover"
-                />
+                <img src={trophyGold} alt="ONE UAE Awards Trophy" className="w-full h-full object-cover" />
               </div>
             </div>
             
@@ -306,11 +255,7 @@ const Home = () => {
           </div>
           
           <div className="reveal-stagger divide-y divide-border">
-            {categories.map((category, index) => (
-              <div 
-                key={category}
-                className="py-6 flex items-center justify-between group cursor-pointer hover:bg-background/50 -mx-4 px-4 transition-colors"
-              >
+            {categories.map((category, index) => <div key={category} className="py-6 flex items-center justify-between group cursor-pointer hover:bg-background/50 -mx-4 px-4 transition-colors">
                 <div className="flex items-center gap-6">
                   <span className="text-sm text-muted-foreground font-mono w-8">
                     {String(index + 1).padStart(2, '0')}
@@ -320,8 +265,7 @@ const Home = () => {
                   </span>
                 </div>
                 <ArrowRight className="w-5 h-5 text-muted-foreground group-hover:text-primary group-hover:translate-x-1 transition-all" />
-              </div>
-            ))}
+              </div>)}
           </div>
           
           <p className="text-center text-muted-foreground mt-8">
@@ -344,30 +288,35 @@ const Home = () => {
               </h2>
               
               <div className="reveal-stagger space-y-0">
-                {[
-                  { time: "6:00 PM", event: "Reception & Networking", icon: Users },
-                  { time: "6:45 PM", event: "Opening Ceremony", icon: Award },
-                  { time: "7:15 PM", event: "Award Presentations", icon: Star },
-                  { time: "8:45 PM", event: "Gala Dinner", icon: Utensils },
-                ].map((item, index) => {
-                  const Icon = item.icon;
-                  return (
-                    <div key={index} className="flex items-center gap-6 py-5 border-b border-background/10">
+                {[{
+                time: "6:00 PM",
+                event: "Reception & Networking",
+                icon: Users
+              }, {
+                time: "6:45 PM",
+                event: "Opening Ceremony",
+                icon: Award
+              }, {
+                time: "7:15 PM",
+                event: "Award Presentations",
+                icon: Star
+              }, {
+                time: "8:45 PM",
+                event: "Gala Dinner",
+                icon: Utensils
+              }].map((item, index) => {
+                const Icon = item.icon;
+                return <div key={index} className="flex items-center gap-6 py-5 border-b border-background/10">
                       <span className="text-primary font-mono text-sm w-20">{item.time}</span>
                       <Icon className="w-5 h-5 text-background/40" />
                       <span className="text-background/80 text-lg">{item.event}</span>
-                    </div>
-                  );
-                })}
+                    </div>;
+              })}
               </div>
               
               <div className="mt-10">
                 <Link to="/gala">
-                  <Button 
-                    variant="outline" 
-                    size="lg"
-                    className="border-background/30 text-background hover:bg-background/10 group"
-                  >
+                  <Button variant="outline" size="lg" className="border-background/30 text-background hover:bg-background/10 group">
                     View Gala Details
                     <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
                   </Button>
@@ -378,19 +327,24 @@ const Home = () => {
             {/* Right - Details */}
             <div className="reveal-up lg:pt-16">
               <div className="space-y-8">
-                {[
-                  { label: "Date", value: "February 5, 2026" },
-                  { label: "Venue", value: "Zabeel Ladies Club, Dubai" },
-                  { label: "Format", value: "Ceremony + Gala Dinner" },
-                  { label: "Attendees", value: "750 Distinguished Guests" },
-                ].map((item, index) => (
-                  <div key={index}>
+                {[{
+                label: "Date",
+                value: "February 5, 2026"
+              }, {
+                label: "Venue",
+                value: "Zabeel Ladies Club, Dubai"
+              }, {
+                label: "Format",
+                value: "Ceremony + Gala Dinner"
+              }, {
+                label: "Attendees",
+                value: "750 Distinguished Guests"
+              }].map((item, index) => <div key={index}>
                     <span className="text-xs uppercase tracking-[0.15em] text-background/40 block mb-1">
                       {item.label}
                     </span>
                     <span className="text-xl text-background/90">{item.value}</span>
-                  </div>
-                ))}
+                  </div>)}
               </div>
             </div>
           </div>
@@ -410,22 +364,9 @@ const Home = () => {
           </div>
           
           <div className="reveal-stagger flex flex-wrap justify-center gap-3">
-            {[
-              "Government Representatives",
-              "Business Leaders",
-              "Entrepreneurs",
-              "Healthcare Leaders",
-              "Media Figures",
-              "Finance Executives",
-              "Tech Innovators",
-            ].map((item, index) => (
-              <span 
-                key={index} 
-                className="px-5 py-3 bg-secondary text-foreground text-sm rounded-full"
-              >
+            {["Government Representatives", "Business Leaders", "Entrepreneurs", "Healthcare Leaders", "Media Figures", "Finance Executives", "Tech Innovators"].map((item, index) => <span key={index} className="px-5 py-3 bg-secondary text-foreground text-sm rounded-full">
                 {item}
-              </span>
-            ))}
+              </span>)}
           </div>
         </div>
       </section>
@@ -457,18 +398,13 @@ const Home = () => {
       <section className="py-16 bg-background">
         <div className="container mx-auto px-6 lg:px-8 text-center">
           <p className="text-muted-foreground mb-2">Have questions?</p>
-          <a 
-            href="mailto:info@oneuaeawards.ae" 
-            className="text-xl md:text-2xl font-display text-foreground hover:text-primary transition-colors"
-          >
+          <a href="mailto:info@oneuaeawards.ae" className="text-xl md:text-2xl font-display text-foreground hover:text-primary transition-colors">
             info@oneuaeawards.ae
           </a>
         </div>
       </section>
 
       <Footer />
-    </div>
-  );
+    </div>;
 };
-
 export default Home;
