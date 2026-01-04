@@ -12,6 +12,7 @@ import { MarqueeStrip } from "@/components/MarqueeStrip";
 import { gsap, ScrollTrigger } from "@/utils/gsap-config";
 import { prefersReducedMotion } from "@/utils/motion-preference";
 import { generateICSFile } from "@/utils/calendar";
+import SocialShare from "@/components/SocialShare";
 
 const Home = () => {
   const heroRef = useRef<HTMLElement>(null);
@@ -176,6 +177,20 @@ const Home = () => {
                   <CalendarPlus className="mr-2 w-5 h-5" />
                   Add to Calendar
                 </Button>
+                <Button 
+                  size="lg" 
+                  variant="outline"
+                  onClick={generateICSFile}
+                  className="bg-transparent border-white/30 text-white hover:bg-white/10 h-14 px-8 text-base"
+                >
+                  <CalendarPlus className="mr-2 w-5 h-5" />
+                  Add to Calendar
+                </Button>
+              </div>
+              
+              {/* Social Share */}
+              <div className="mt-6">
+                <SocialShare />
               </div>
             </div>
           </div>
