@@ -2,6 +2,53 @@
 @tailwind components;
 @tailwind utilities;
 
+/* RTL Support */
+[dir="rtl"] {
+  text-align: right;
+}
+
+[dir="rtl"] .flex-row {
+  flex-direction: row-reverse;
+}
+
+[dir="rtl"] .space-x-2 > :not([hidden]) ~ :not([hidden]),
+[dir="rtl"] .space-x-3 > :not([hidden]) ~ :not([hidden]),
+[dir="rtl"] .space-x-4 > :not([hidden]) ~ :not([hidden]),
+[dir="rtl"] .space-x-6 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-x-reverse: 1;
+}
+
+[dir="rtl"] .ml-2 { margin-left: 0; margin-right: 0.5rem; }
+[dir="rtl"] .ml-4 { margin-left: 0; margin-right: 1rem; }
+[dir="rtl"] .mr-2 { margin-right: 0; margin-left: 0.5rem; }
+[dir="rtl"] .mr-4 { margin-right: 0; margin-left: 1rem; }
+
+[dir="rtl"] .left-0 { left: auto; right: 0; }
+[dir="rtl"] .right-0 { right: auto; left: 0; }
+
+[dir="rtl"] .text-left { text-align: right; }
+[dir="rtl"] .text-right { text-align: left; }
+
+[dir="rtl"] .translate-x-1 { --tw-translate-x: -0.25rem; }
+[dir="rtl"] .-translate-x-1\/2 { --tw-translate-x: 50%; }
+
+[dir="rtl"] .group-hover\:translate-x-0\.5:hover { --tw-translate-x: -0.125rem; }
+[dir="rtl"] .group-hover\:translate-x-1:hover { --tw-translate-x: -0.25rem; }
+
+[dir="rtl"] .border-l-2 { border-left-width: 0; border-right-width: 2px; }
+[dir="rtl"] .pl-6 { padding-left: 0; padding-right: 1.5rem; }
+[dir="rtl"] .pr-6 { padding-right: 0; padding-left: 1.5rem; }
+
+/* RTL font adjustments */
+[dir="rtl"] body {
+  font-family: 'Noto Kufi Arabic', 'Playfair Display', serif;
+}
+
+[dir="rtl"] h1, [dir="rtl"] h2, [dir="rtl"] h3, [dir="rtl"] h4, [dir="rtl"] h5, [dir="rtl"] h6 {
+  font-family: 'Noto Kufi Arabic', 'Playfair Display', serif;
+  letter-spacing: 0;
+}
+
 /* Editorial Typography Utilities */
 .editorial-label {
   @apply text-xs uppercase tracking-[0.2em] text-muted-foreground font-medium;
