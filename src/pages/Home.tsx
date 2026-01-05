@@ -13,10 +13,12 @@ import { gsap, ScrollTrigger } from "@/utils/gsap-config";
 import { prefersReducedMotion } from "@/utils/motion-preference";
 import { generateICSFile } from "@/utils/calendar";
 import SocialShare from "@/components/SocialShare";
+import { useLanguage } from "@/contexts/LanguageContext";
+
 const Home = () => {
   const heroRef = useRef<HTMLElement>(null);
   const mainRef = useRef<HTMLDivElement>(null);
-  const categories = ['Growth & Economic Excellence', 'Entrepreneurship & Innovation', 'Corporate Leadership', 'Finance & Banking', 'Retail & Hospitality', 'Technology & Digital'];
+  const { t, isRTL } = useLanguage();
 
   // Section reveals
   useLayoutEffect(() => {
@@ -59,7 +61,9 @@ const Home = () => {
     }, mainRef);
     return () => ctx.revert();
   }, []);
-  return <div ref={mainRef} className="min-h-screen bg-background">
+
+  return (
+    <div ref={mainRef} className="min-h-screen bg-background">
       <SEOHead />
       <Navigation />
       
@@ -68,12 +72,14 @@ const Home = () => {
         <a href="#main-content" className="sr-only focus:not-sr-only">Skip to main content</a>
         
         {/* Video Background */}
-        {!prefersReducedMotion() ? <video autoPlay muted loop playsInline poster={heroBg} className="absolute inset-0 w-full h-full object-cover">
+        {!prefersReducedMotion() ? (
+          <video autoPlay muted loop playsInline poster={heroBg} className="absolute inset-0 w-full h-full object-cover">
             <source src="/hero-video.webm" type="video/webm" />
             <source src="/hero-video.mp4" type="video/mp4" />
-          </video> : <div className="absolute inset-0 bg-cover bg-center bg-no-repeat" style={{
-        backgroundImage: `url(${heroBg})`
-      }} />}
+          </video>
+        ) : (
+          <div className="absolute inset-0 bg-cover bg-center bg-no-repeat" style={{ backgroundImage: `url(${heroBg})` }} />
+        )}
 
         {/* Overlay - asymmetric gradient */}
         <div className="absolute inset-0 bg-gradient-to-br from-black/80 via-black/60 to-black/40" />
@@ -90,50 +96,49 @@ const Home = () => {
               
               {/* Main Headline - ONE UAE Awards prominent */}
               <h1 className="text-[clamp(3rem,10vw,7rem)] font-display text-white leading-[0.9] tracking-tight mb-4">
-                ONE UAE<br />
-                <span className="text-primary">Awards</span>
+                {t('hero.title')}<br />
+                <span className="text-primary">{t('hero.titleAccent')}</span>
               </h1>
               
               {/* Secondary tagline - smaller */}
               <p className="text-white/70 text-xl md:text-2xl font-medium mb-4">
-                International Business Awards
+                {t('hero.tagline')}
               </p>
               
               {/* Patronage */}
               <p className="text-white/50 text-base md:text-lg max-w-xl mb-4">
-                Under the Patronage of H.E. Sheikh Sultan Bin Nasser Bin Humaid Al Nuaimi
+                {t('hero.patronage')}
               </p>
               
               {/* Date & Location Tag */}
-              <div className="flex flex-wrap items-center gap-x-6 gap-y-2 text-white/50 text-sm mb-10">
-                <span className="flex items-center gap-2">
+              <div className={`flex flex-wrap items-center gap-x-6 gap-y-2 text-white/50 text-sm mb-10 ${isRTL ? 'flex-row-reverse justify-end' : ''}`}>
+                <span className={`flex items-center gap-2 ${isRTL ? 'flex-row-reverse' : ''}`}>
                   <Calendar className="w-4 h-4" />
-                  February 5, 2026
+                  {t('hero.date')}
                 </span>
-                <span className="flex items-center gap-2">
+                <span className={`flex items-center gap-2 ${isRTL ? 'flex-row-reverse' : ''}`}>
                   <MapPin className="w-4 h-4" />
-                  Zabeel Ladies Club, Dubai
+                  {t('hero.venue')}
                 </span>
               </div>
               
               {/* CTAs */}
-              <div className="flex flex-wrap gap-4">
+              <div className={`flex flex-wrap gap-4 ${isRTL ? 'flex-row-reverse' : ''}`}>
                 <Link to="/nominate">
-                  <Button size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground h-14 px-8 text-base">
-                    Submit Nomination
-                    <ArrowRight className="ml-2 w-5 h-5" />
+                  <Button size="lg" className={`bg-primary hover:bg-primary/90 text-primary-foreground h-14 px-8 text-base ${isRTL ? 'flex-row-reverse' : ''}`}>
+                    {t('hero.submitNomination')}
+                    <ArrowRight className={`w-5 h-5 ${isRTL ? 'mr-2 rotate-180' : 'ml-2'}`} />
                   </Button>
                 </Link>
                 <Link to="/about">
                   <Button size="lg" variant="outline" className="bg-transparent border-white/30 text-white hover:bg-white/10 h-14 px-8 text-base">
-                    Learn More
+                    {t('hero.learnMore')}
                   </Button>
                 </Link>
-                <Button size="lg" variant="outline" onClick={generateICSFile} className="bg-transparent border-white/30 text-white hover:bg-white/10 h-14 px-8 text-base">
-                  <CalendarPlus className="mr-2 w-5 h-5" />
-                  Add to Calendar
+                <Button size="lg" variant="outline" onClick={generateICSFile} className={`bg-transparent border-white/30 text-white hover:bg-white/10 h-14 px-8 text-base ${isRTL ? 'flex-row-reverse' : ''}`}>
+                  <CalendarPlus className={`w-5 h-5 ${isRTL ? 'ml-2' : 'mr-2'}`} />
+                  {t('hero.addToCalendar')}
                 </Button>
-                
               </div>
               
               {/* Social Share */}
@@ -156,27 +161,22 @@ const Home = () => {
       {/* Stats - Horizontal strip */}
       <section className="py-16 md:py-20 bg-card border-b border-border/50">
         <div className="container mx-auto px-6 lg:px-8">
-          <div className="reveal-stagger flex flex-col md:flex-row md:items-baseline md:justify-between gap-8 md:gap-4">
-            {[{
-            value: "750+",
-            label: "Distinguished Guests"
-          }, {
-            value: "18",
-            label: "Award Categories"
-          }, {
-            value: "6",
-            label: "VIP Dignitaries"
-          }, {
-            value: "1",
-            label: "Prestigious Night"
-          }].map((stat, i) => <div key={i} className="flex items-baseline gap-3 md:gap-4">
+          <div className={`reveal-stagger flex flex-col md:flex-row md:items-baseline md:justify-between gap-8 md:gap-4 ${isRTL ? 'md:flex-row-reverse' : ''}`}>
+            {[
+              { value: "750+", labelKey: "stats.guests" },
+              { value: "18", labelKey: "stats.categories" },
+              { value: "6", labelKey: "stats.dignitaries" },
+              { value: "1", labelKey: "stats.night" },
+            ].map((stat, i) => (
+              <div key={i} className={`flex items-baseline gap-3 md:gap-4 ${isRTL ? 'flex-row-reverse' : ''}`}>
                 <span className="text-5xl md:text-6xl lg:text-7xl font-display text-foreground leading-none">
                   {stat.value}
                 </span>
                 <span className="text-sm text-muted-foreground uppercase tracking-wider">
-                  {stat.label}
+                  {t(stat.labelKey)}
                 </span>
-              </div>)}
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -184,49 +184,49 @@ const Home = () => {
       {/* About - Split layout with large image */}
       <section id="main-content" className="py-24 md:py-32 lg:py-40 bg-background">
         <div className="container mx-auto px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-start">
+          <div className={`grid lg:grid-cols-2 gap-12 lg:gap-20 items-start ${isRTL ? 'lg:grid-flow-dense' : ''}`}>
             {/* Left - Image */}
-            <div className="reveal-up order-2 lg:order-1">
+            <div className={`reveal-up ${isRTL ? 'lg:col-start-2' : ''}`}>
               <div className="aspect-[4/5] rounded-lg overflow-hidden">
                 <img src={trophyGold} alt="ONE UAE Awards Trophy" className="w-full h-full object-cover" />
               </div>
             </div>
             
             {/* Right - Content */}
-            <div className="reveal-up order-1 lg:order-2 lg:sticky lg:top-32">
+            <div className={`reveal-up lg:sticky lg:top-32 ${isRTL ? 'lg:col-start-1 lg:row-start-1' : ''}`}>
               <span className="text-xs uppercase tracking-[0.2em] text-muted-foreground mb-4 block">
-                About the Awards
+                {t('about.label')}
               </span>
               
               <h2 className="text-3xl md:text-4xl lg:text-5xl font-display text-foreground leading-tight mb-6">
-                A National Platform for Excellence
+                {t('about.title')}
               </h2>
               
               <p className="text-muted-foreground text-lg leading-relaxed mb-8">
-                The ONE UAE International Business Awards is a prestigious national platform honoring individuals and establishments driving the UAE's journey of growth, development, and sustainability.
+                {t('about.description')}
               </p>
               
               <div className="space-y-4 mb-10">
-                <div className="flex gap-4 items-start">
+                <div className={`flex gap-4 items-start ${isRTL ? 'flex-row-reverse' : ''}`}>
                   <Calendar className="w-5 h-5 text-primary mt-1 flex-shrink-0" />
-                  <div>
-                    <p className="font-medium text-foreground">February 5, 2026</p>
-                    <p className="text-sm text-muted-foreground">Gala Night Ceremony</p>
+                  <div className={isRTL ? 'text-right' : ''}>
+                    <p className="font-medium text-foreground">{t('about.date')}</p>
+                    <p className="text-sm text-muted-foreground">{t('about.galaLabel')}</p>
                   </div>
                 </div>
-                <div className="flex gap-4 items-start">
+                <div className={`flex gap-4 items-start ${isRTL ? 'flex-row-reverse' : ''}`}>
                   <MapPin className="w-5 h-5 text-primary mt-1 flex-shrink-0" />
-                  <div>
-                    <p className="font-medium text-foreground">Zabeel Ladies Club</p>
-                    <p className="text-sm text-muted-foreground">Main Ballroom, Dubai</p>
+                  <div className={isRTL ? 'text-right' : ''}>
+                    <p className="font-medium text-foreground">{t('about.venueTitle')}</p>
+                    <p className="text-sm text-muted-foreground">{t('about.venueDetail')}</p>
                   </div>
                 </div>
               </div>
               
               <Link to="/about">
-                <Button variant="outline" size="lg" className="group">
-                  Discover Our Story
-                  <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                <Button variant="outline" size="lg" className={`group ${isRTL ? 'flex-row-reverse' : ''}`}>
+                  {t('about.discoverStory')}
+                  <ArrowRight className={`w-4 h-4 group-hover:translate-x-1 transition-transform ${isRTL ? 'mr-2 rotate-180 group-hover:-translate-x-1' : 'ml-2'}`} />
                 </Button>
               </Link>
             </div>
@@ -239,24 +239,25 @@ const Home = () => {
         <div className="container mx-auto px-6 lg:px-8 max-w-5xl">
           <div className="reveal-up mb-16">
             <span className="text-xs uppercase tracking-[0.2em] text-muted-foreground mb-4 block">
-              18 Categories
+              {t('categories.label')}
             </span>
-            <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
+            <div className={`flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 ${isRTL ? 'sm:flex-row-reverse' : ''}`}>
               <h2 className="text-3xl md:text-4xl lg:text-5xl font-display text-foreground">
-                Award Categories
+                {t('categories.title')}
               </h2>
               <Link to="/categories">
-                <Button variant="ghost" className="group text-muted-foreground hover:text-foreground">
-                  View All
-                  <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                <Button variant="ghost" className={`group text-muted-foreground hover:text-foreground ${isRTL ? 'flex-row-reverse' : ''}`}>
+                  {t('categories.viewAll')}
+                  <ArrowRight className={`w-4 h-4 group-hover:translate-x-1 transition-transform ${isRTL ? 'mr-2 rotate-180 group-hover:-translate-x-1' : 'ml-2'}`} />
                 </Button>
               </Link>
             </div>
           </div>
           
           <div className="reveal-stagger divide-y divide-border">
-            {categories.map((category, index) => <div key={category} className="py-6 flex items-center justify-between group cursor-pointer hover:bg-background/50 -mx-4 px-4 transition-colors">
-                <div className="flex items-center gap-6">
+            {(t('categories.list') as unknown as string[]).map((category: string, index: number) => (
+              <div key={category} className={`py-6 flex items-center justify-between group cursor-pointer hover:bg-background/50 -mx-4 px-4 transition-colors ${isRTL ? 'flex-row-reverse' : ''}`}>
+                <div className={`flex items-center gap-6 ${isRTL ? 'flex-row-reverse' : ''}`}>
                   <span className="text-sm text-muted-foreground font-mono w-8">
                     {String(index + 1).padStart(2, '0')}
                   </span>
@@ -264,12 +265,13 @@ const Home = () => {
                     {category}
                   </span>
                 </div>
-                <ArrowRight className="w-5 h-5 text-muted-foreground group-hover:text-primary group-hover:translate-x-1 transition-all" />
-              </div>)}
+                <ArrowRight className={`w-5 h-5 text-muted-foreground group-hover:text-primary group-hover:translate-x-1 transition-all ${isRTL ? 'rotate-180 group-hover:-translate-x-1' : ''}`} />
+              </div>
+            ))}
           </div>
           
           <p className="text-center text-muted-foreground mt-8">
-            + 12 more categories
+            {t('categories.more')}
           </p>
         </div>
       </section>
@@ -277,74 +279,62 @@ const Home = () => {
       {/* Event Program - Dark section */}
       <section className="py-24 md:py-32 lg:py-40 bg-foreground text-background">
         <div className="container mx-auto px-6 lg:px-8 max-w-6xl">
-          <div className="grid lg:grid-cols-2 gap-16 lg:gap-24">
+          <div className={`grid lg:grid-cols-2 gap-16 lg:gap-24 ${isRTL ? 'lg:grid-flow-dense' : ''}`}>
             {/* Left */}
-            <div className="reveal-up">
+            <div className={`reveal-up ${isRTL ? 'lg:col-start-2' : ''}`}>
               <span className="text-xs uppercase tracking-[0.2em] text-background/50 mb-4 block">
-                The Evening
+                {t('program.label')}
               </span>
               <h2 className="text-3xl md:text-4xl lg:text-5xl font-display text-background mb-8">
-                Program Flow
+                {t('program.title')}
               </h2>
               
               <div className="reveal-stagger space-y-0">
-                {[{
-                time: "6:00 PM",
-                event: "Reception & Networking",
-                icon: Users
-              }, {
-                time: "6:45 PM",
-                event: "Opening Ceremony",
-                icon: Award
-              }, {
-                time: "7:15 PM",
-                event: "Award Presentations",
-                icon: Star
-              }, {
-                time: "8:45 PM",
-                event: "Gala Dinner",
-                icon: Utensils
-              }].map((item, index) => {
-                const Icon = item.icon;
-                return <div key={index} className="flex items-center gap-6 py-5 border-b border-background/10">
+                {[
+                  { time: "6:00 PM", eventKey: "program.reception", icon: Users },
+                  { time: "6:45 PM", eventKey: "program.opening", icon: Award },
+                  { time: "7:15 PM", eventKey: "program.awards", icon: Star },
+                  { time: "8:45 PM", eventKey: "program.dinner", icon: Utensils },
+                ].map((item, index) => {
+                  const Icon = item.icon;
+                  return (
+                    <div key={index} className={`flex items-center gap-6 py-5 border-b border-background/10 ${isRTL ? 'flex-row-reverse' : ''}`}>
                       <span className="text-primary font-mono text-sm w-20">{item.time}</span>
                       <Icon className="w-5 h-5 text-background/40" />
-                      <span className="text-background/80 text-lg">{item.event}</span>
-                    </div>;
-              })}
+                      <span className="text-background/80 text-lg">{t(item.eventKey)}</span>
+                    </div>
+                  );
+                })}
               </div>
               
               <div className="mt-10">
                 <Link to="/gala">
-                  <Button variant="outline" size="lg" className="border-background/30 text-background hover:bg-background/10 group">
-                    View Gala Details
-                    <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                  <Button variant="outline" size="lg" className={`border-background/30 text-background hover:bg-background/10 group ${isRTL ? 'flex-row-reverse' : ''}`}>
+                    {t('program.viewDetails')}
+                    <ArrowRight className={`w-4 h-4 group-hover:translate-x-1 transition-transform ${isRTL ? 'mr-2 rotate-180 group-hover:-translate-x-1' : 'ml-2'}`} />
                   </Button>
                 </Link>
               </div>
             </div>
             
             {/* Right - Details */}
-            <div className="reveal-up lg:pt-16">
+            <div className={`reveal-up lg:pt-16 ${isRTL ? 'lg:col-start-1 lg:row-start-1' : ''}`}>
               <div className="space-y-8">
-                {[{
-                label: "Date",
-                value: "February 5, 2026"
-              }, {
-                label: "Venue",
-                value: "Zabeel Ladies Club, Dubai"
-              }, {
-                label: "Format",
-                value: "Ceremony + Gala Dinner"
-              }, {
-                label: "Attendees",
-                value: "750 Distinguished Guests"
-              }].map((item, index) => <div key={index}>
+                {[
+                  { labelKey: "program.dateLabel", valueKey: "about.date" },
+                  { labelKey: "program.venueLabel", value: t('hero.venue') },
+                  { labelKey: "program.formatLabel", valueKey: "program.format" },
+                  { labelKey: "program.attendeesLabel", valueKey: "program.attendees" },
+                ].map((item, index) => (
+                  <div key={index}>
                     <span className="text-xs uppercase tracking-[0.15em] text-background/40 block mb-1">
-                      {item.label}
+                      {t(item.labelKey)}
                     </span>
-                    <span className="text-xl text-background/90">{item.value}</span>
-                  </div>)}
+                    <span className="text-xl text-background/90">
+                      {item.value || t(item.valueKey!)}
+                    </span>
+                  </div>
+                ))}
               </div>
             </div>
           </div>
@@ -356,17 +346,19 @@ const Home = () => {
         <div className="container mx-auto px-6 lg:px-8 max-w-5xl">
           <div className="reveal-up text-center mb-12">
             <span className="text-xs uppercase tracking-[0.2em] text-muted-foreground mb-4 block">
-              Who Attends
+              {t('audience.label')}
             </span>
             <h2 className="text-3xl md:text-4xl font-display text-foreground">
-              Distinguished Guests
+              {t('audience.title')}
             </h2>
           </div>
           
-          <div className="reveal-stagger flex flex-wrap justify-center gap-3">
-            {["Government Representatives", "Business Leaders", "Entrepreneurs", "Healthcare Leaders", "Media Figures", "Finance Executives", "Tech Innovators"].map((item, index) => <span key={index} className="px-5 py-3 bg-secondary text-foreground text-sm rounded-full">
+          <div className={`reveal-stagger flex flex-wrap justify-center gap-3 ${isRTL ? 'flex-row-reverse' : ''}`}>
+            {(t('audience.list') as unknown as string[]).map((item: string, index: number) => (
+              <span key={index} className="px-5 py-3 bg-secondary text-foreground text-sm rounded-full">
                 {item}
-              </span>)}
+              </span>
+            ))}
           </div>
         </div>
       </section>
@@ -376,18 +368,18 @@ const Home = () => {
         <div className="container mx-auto px-6 lg:px-8 max-w-3xl text-center">
           <div className="reveal-up">
             <span className="text-xs uppercase tracking-[0.2em] text-primary mb-4 block">
-              Partner With Us
+              {t('partnership.label')}
             </span>
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-display text-foreground mb-6">
-              Become a Sponsor
+              {t('partnership.title')}
             </h2>
             <p className="text-muted-foreground text-lg mb-10 max-w-xl mx-auto">
-              Join prestigious brands in supporting the UAE's premier business awards ceremony.
+              {t('partnership.description')}
             </p>
             <Link to="/partnerships">
-              <Button size="lg" className="h-14 px-10 text-base">
-                Explore Partnerships
-                <ArrowRight className="ml-2 h-5 w-5" />
+              <Button size="lg" className={`h-14 px-10 text-base ${isRTL ? 'flex-row-reverse' : ''}`}>
+                {t('partnership.explore')}
+                <ArrowRight className={`h-5 w-5 ${isRTL ? 'mr-2 rotate-180' : 'ml-2'}`} />
               </Button>
             </Link>
           </div>
@@ -397,7 +389,7 @@ const Home = () => {
       {/* Contact - Minimal */}
       <section className="py-16 bg-background">
         <div className="container mx-auto px-6 lg:px-8 text-center">
-          <p className="text-muted-foreground mb-2">Have questions?</p>
+          <p className="text-muted-foreground mb-2">{t('contact.question')}</p>
           <a href="mailto:info@oneuaeawards.ae" className="text-xl md:text-2xl font-display text-foreground hover:text-primary transition-colors">
             info@oneuaeawards.ae
           </a>
@@ -405,6 +397,8 @@ const Home = () => {
       </section>
 
       <Footer />
-    </div>;
+    </div>
+  );
 };
+
 export default Home;

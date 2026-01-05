@@ -2,12 +2,15 @@ import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Menu, X, ArrowRight } from "lucide-react";
 import oneUaeLogo from "@/assets/one-uae-logo.png";
+import { useLanguage } from "@/contexts/LanguageContext";
+import LanguageToggle from "@/components/LanguageToggle";
 
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
   const location = useLocation();
+  const { t, isRTL } = useLanguage();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -24,12 +27,12 @@ const Navigation = () => {
   }, []);
 
   const navLinks = [
-    { path: "/", label: "Home" },
-    { path: "/about", label: "About" },
-    { path: "/categories", label: "Categories" },
-    { path: "/partnerships", label: "Partnerships" },
-    { path: "/gala", label: "Gala" },
-    { path: "/contact", label: "Contact" },
+    { path: "/", labelKey: "nav.home" },
+    { path: "/about", labelKey: "nav.about" },
+    { path: "/categories", labelKey: "nav.categories" },
+    { path: "/partnerships", labelKey: "nav.partnerships" },
+    { path: "/gala", labelKey: "nav.gala" },
+    { path: "/contact", labelKey: "nav.contact" },
   ];
 
   const isActive = (path: string) => location.pathname === path;
@@ -39,7 +42,10 @@ const Navigation = () => {
       {/* Scroll Progress Bar */}
       <div 
         className="scroll-progress-bar"
-        style={{ width: `${scrollProgress}%` }}
+        style={{ 
+          width: `${scrollProgress}%`,
+          [isRTL ? 'right' : 'left']: 0,
+        }}
       />
       
       <nav 
@@ -77,39 +83,47 @@ const Navigation = () => {
                         : "text-white/80 hover:text-white"
                   }`}
                 >
-                  {link.label}
-                  <span className={`absolute bottom-0 left-4 right-4 h-0.5 bg-primary rounded-full transition-transform duration-300 origin-left ${
+                  {t(link.labelKey)}
+                  <span className={`absolute bottom-0 ${isRTL ? 'right-4 left-4' : 'left-4 right-4'} h-0.5 bg-primary rounded-full transition-transform duration-300 ${isRTL ? 'origin-right' : 'origin-left'} ${
                     isActive(link.path) ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"
                   }`} />
                 </Link>
               ))}
               
+              {/* Language Toggle */}
+              <div className="mx-2">
+                <LanguageToggle variant={scrolled ? 'dark' : 'light'} />
+              </div>
+              
               {/* CTA Button */}
               <Link
                 to="/nominate"
-                className={`ml-4 inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-300 group ${
+                className={`inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-300 group ${
                   scrolled
                     ? "bg-primary text-primary-foreground hover:bg-primary/90"
                     : "bg-white/10 backdrop-blur-sm text-white border border-white/20 hover:bg-white/20"
                 }`}
               >
-                Nominate
-                <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5" />
+                {t('nav.nominate')}
+                <ArrowRight className={`w-4 h-4 transition-transform ${isRTL ? 'rotate-180 group-hover:-translate-x-0.5' : 'group-hover:translate-x-0.5'}`} />
               </Link>
             </div>
 
             {/* Mobile Menu Button */}
-            <button
-              onClick={() => setIsOpen(!isOpen)}
-              className={`lg:hidden p-2 rounded-lg transition-colors ${
-                scrolled 
-                  ? "text-foreground hover:bg-muted" 
-                  : "text-white hover:bg-white/10"
-              }`}
-              aria-label="Toggle menu"
-            >
-              {isOpen ? <X size={24} /> : <Menu size={24} />}
-            </button>
+            <div className="lg:hidden flex items-center gap-2">
+              <LanguageToggle variant={scrolled ? 'dark' : 'light'} />
+              <button
+                onClick={() => setIsOpen(!isOpen)}
+                className={`p-2 rounded-lg transition-colors ${
+                  scrolled 
+                    ? "text-foreground hover:bg-muted" 
+                    : "text-white hover:bg-white/10"
+                }`}
+                aria-label="Toggle menu"
+              >
+                {isOpen ? <X size={24} /> : <Menu size={24} />}
+              </button>
+            </div>
           </div>
 
           {/* Mobile Navigation */}
@@ -134,7 +148,7 @@ const Navigation = () => {
                     animationFillMode: 'both'
                   }}
                 >
-                  {link.label}
+                  {t(link.labelKey)}
                 </Link>
               ))}
               
@@ -143,7 +157,7 @@ const Navigation = () => {
                 onClick={() => setIsOpen(false)}
                 className="block mt-4 mx-4 px-4 py-3 bg-primary text-primary-foreground rounded-lg text-center font-medium"
               >
-                Submit Nomination
+                {t('nav.submitNomination')}
               </Link>
             </div>
           </div>
