@@ -9,9 +9,11 @@ import sheikhPortrait from "@/assets/sheikh-sultan.jpeg";
 import trophySkyline from "@/assets/trophy-skyline.jpeg";
 import { gsap } from "@/utils/gsap-config";
 import { prefersReducedMotion } from "@/utils/motion-preference";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const About = () => {
   const mainRef = useRef<HTMLDivElement>(null);
+  const { t, isRTL } = useLanguage();
 
   useLayoutEffect(() => {
     if (prefersReducedMotion()) return;
@@ -39,8 +41,14 @@ const About = () => {
     return () => ctx.revert();
   }, []);
 
+  const selectionSteps = [
+    { step: "01", titleKey: "about.step1Title", descKey: "about.step1Desc" },
+    { step: "02", titleKey: "about.step2Title", descKey: "about.step2Desc" },
+    { step: "03", titleKey: "about.step3Title", descKey: "about.step3Desc" },
+  ];
+
   return (
-    <div ref={mainRef} className="min-h-screen bg-background">
+    <div ref={mainRef} className="min-h-screen bg-background" dir={isRTL ? 'rtl' : 'ltr'}>
       <SEOHead
         title="About - ONE UAE International Business Awards 2026"
         description="Learn about ONE UAE International Business Awards' mission to celebrate unity, vision, and excellence across the Emirates."
@@ -58,17 +66,17 @@ const About = () => {
               alt="ONE UAE Awards" 
               className="w-full h-full object-cover"
             />
-            <div className="absolute inset-0 bg-gradient-to-r from-background via-background/70 to-transparent" />
+            <div className={`absolute inset-0 bg-gradient-to-r ${isRTL ? 'from-transparent via-background/70 to-background' : 'from-background via-background/70 to-transparent'}`} />
             <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent" />
           </div>
           
           <div className="container mx-auto px-6 lg:px-8 max-w-5xl -mt-32 relative z-10">
-            <div className="max-w-2xl">
+            <div className={`max-w-2xl ${isRTL ? 'mr-auto text-right' : ''}`}>
               <span className="text-xs uppercase tracking-[0.2em] text-muted-foreground mb-4 block">
-                About the Awards
+                {t('about.label')}
               </span>
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-display text-foreground leading-tight">
-                A National Platform for Excellence
+                {t('about.title')}
               </h1>
             </div>
           </div>
@@ -77,24 +85,24 @@ const About = () => {
         {/* Intro */}
         <section className="py-24 md:py-32">
           <div className="container mx-auto px-6 lg:px-8 max-w-5xl">
-            <div className="grid lg:grid-cols-3 gap-16">
-              <div className="lg:col-span-2 reveal-up">
+            <div className={`grid lg:grid-cols-3 gap-16 ${isRTL ? 'lg:grid-flow-dense' : ''}`}>
+              <div className={`lg:col-span-2 reveal-up ${isRTL ? 'lg:col-start-2 text-right' : ''}`}>
                 <p className="text-xl md:text-2xl text-foreground leading-relaxed mb-8">
-                  The ONE UAE International Business Awards is a prestigious national platform honoring individuals and establishments driving the UAE's journey of growth, development, and sustainability.
+                  {t('about.description')}
                 </p>
                 <p className="text-muted-foreground leading-relaxed">
-                  What began as a vision to honor outstanding contributions has grown into a platform celebrating the diverse achievements that define the UAE's spirit of unity, vision, and excellence.
+                  {t('about.intro')}
                 </p>
               </div>
               
-              <div className="reveal-up space-y-8">
+              <div className={`reveal-up space-y-8 ${isRTL ? 'lg:col-start-1 text-right' : ''}`}>
                 <div>
-                  <span className="text-6xl font-display text-foreground">18</span>
-                  <p className="text-sm text-muted-foreground mt-1">Award Categories</p>
+                  <span className="text-6xl font-display text-foreground">{isRTL ? '١٨' : '18'}</span>
+                  <p className="text-sm text-muted-foreground mt-1">{t('about.awardCategories')}</p>
                 </div>
                 <div>
-                  <span className="text-6xl font-display text-foreground">750</span>
-                  <p className="text-sm text-muted-foreground mt-1">Distinguished Guests</p>
+                  <span className="text-6xl font-display text-foreground">{isRTL ? '٧٥٠' : '750'}</span>
+                  <p className="text-sm text-muted-foreground mt-1">{t('about.distinguishedGuests')}</p>
                 </div>
               </div>
             </div>
@@ -105,18 +113,18 @@ const About = () => {
         <section className="py-20 bg-secondary/50">
           <div className="container mx-auto px-6 lg:px-8 max-w-5xl">
             <div className="grid md:grid-cols-2 gap-8">
-              <div className="reveal-up p-8 bg-background rounded-lg">
-                <Target className="w-6 h-6 text-primary mb-4" />
-                <h3 className="text-xl font-display text-foreground mb-3">Mission</h3>
+              <div className={`reveal-up p-8 bg-background rounded-lg ${isRTL ? 'text-right' : ''}`}>
+                <Target className={`w-6 h-6 text-primary mb-4 ${isRTL ? 'mr-auto' : ''}`} />
+                <h3 className="text-xl font-display text-foreground mb-3">{t('about.mission')}</h3>
                 <p className="text-muted-foreground leading-relaxed">
-                  To recognize leaders and institutions contributing to national progress and UAE Vision 2071.
+                  {t('about.missionText')}
                 </p>
               </div>
-              <div className="reveal-up p-8 bg-background rounded-lg">
-                <Eye className="w-6 h-6 text-primary mb-4" />
-                <h3 className="text-xl font-display text-foreground mb-3">Vision</h3>
+              <div className={`reveal-up p-8 bg-background rounded-lg ${isRTL ? 'text-right' : ''}`}>
+                <Eye className={`w-6 h-6 text-primary mb-4 ${isRTL ? 'mr-auto' : ''}`} />
+                <h3 className="text-xl font-display text-foreground mb-3">{t('about.vision')}</h3>
                 <p className="text-muted-foreground leading-relaxed">
-                  To build a prestigious tradition of honoring excellence, unity, and sustainable advancement.
+                  {t('about.visionText')}
                 </p>
               </div>
             </div>
@@ -126,24 +134,24 @@ const About = () => {
         {/* Patronage - Dark section */}
         <section className="py-24 md:py-32 lg:py-40 bg-foreground text-background">
           <div className="container mx-auto px-6 lg:px-8 max-w-5xl">
-            <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center">
-              <div className="reveal-up">
+            <div className={`grid lg:grid-cols-2 gap-16 lg:gap-24 items-center ${isRTL ? 'lg:grid-flow-dense' : ''}`}>
+              <div className={`reveal-up ${isRTL ? 'lg:col-start-2 text-right' : ''}`}>
                 <span className="text-xs uppercase tracking-[0.2em] text-background/40 mb-4 block">
-                  Under the Patronage
+                  {t('about.underPatronage')}
                 </span>
                 <h2 className="text-3xl md:text-4xl font-display text-background mb-6 leading-tight">
-                  H.E. Sheikh Sultan Bin Nasser Bin Humaid Al Nuaimi
+                  {t('about.patronName')}
                 </h2>
                 <p className="text-background/60 leading-relaxed">
-                  ONE UAE International Business Awards is honored to operate under the distinguished patronage of H.E. Sheikh Sultan Bin Nasser Bin Humaid Al Nuaimi, whose commitment to excellence and national development continues to inspire our mission.
+                  {t('about.patronDesc')}
                 </p>
               </div>
               
-              <div className="reveal-up flex justify-center lg:justify-end">
+              <div className={`reveal-up flex ${isRTL ? 'lg:col-start-1 justify-center lg:justify-start' : 'justify-center lg:justify-end'}`}>
                 <div className="w-64 h-80 lg:w-72 lg:h-96 rounded-lg overflow-hidden">
                   <img 
                     src={sheikhPortrait} 
-                    alt="H.E. Sheikh Sultan Bin Nasser Bin Humaid Al Nuaimi" 
+                    alt={t('about.patronName')} 
                     className="w-full h-full object-cover"
                   />
                 </div>
@@ -155,38 +163,34 @@ const About = () => {
         {/* Selection Process */}
         <section className="py-24 md:py-32">
           <div className="container mx-auto px-6 lg:px-8 max-w-4xl">
-            <div className="reveal-up mb-16">
+            <div className={`reveal-up mb-16 ${isRTL ? 'text-right' : ''}`}>
               <span className="text-xs uppercase tracking-[0.2em] text-muted-foreground mb-4 block">
-                The Journey
+                {t('about.theJourney')}
               </span>
               <h2 className="text-3xl md:text-4xl font-display text-foreground">
-                Selection Process
+                {t('about.selectionProcess')}
               </h2>
             </div>
             
             <div className="space-y-0 divide-y divide-border">
-              {[
-                { step: "01", title: "Nomination", desc: "Individuals and organizations submit nominations highlighting exceptional achievements." },
-                { step: "02", title: "Expert Review", desc: "A distinguished panel evaluates nominations based on impact and innovation." },
-                { step: "03", title: "Final Selection", desc: "Winners are selected and honored at our prestigious annual ceremony." },
-              ].map((item, index) => (
-                <div key={index} className="reveal-up py-8 flex gap-8 items-start">
+              {selectionSteps.map((item, index) => (
+                <div key={index} className={`reveal-up py-8 flex gap-8 items-start ${isRTL ? 'flex-row-reverse text-right' : ''}`}>
                   <span className="text-4xl font-display text-primary/30 flex-shrink-0 w-16">
-                    {item.step}
+                    {isRTL ? ['٠١', '٠٢', '٠٣'][index] : item.step}
                   </span>
                   <div>
-                    <h3 className="text-lg font-display text-foreground mb-2">{item.title}</h3>
-                    <p className="text-muted-foreground">{item.desc}</p>
+                    <h3 className="text-lg font-display text-foreground mb-2">{t(item.titleKey)}</h3>
+                    <p className="text-muted-foreground">{t(item.descKey)}</p>
                   </div>
                 </div>
               ))}
             </div>
             
-            <div className="reveal-up mt-12">
+            <div className={`reveal-up mt-12 ${isRTL ? 'text-right' : ''}`}>
               <Link to="/nominate">
-                <Button size="lg" className="h-14 px-8">
-                  Submit Your Nomination
-                  <ArrowRight className="ml-2 w-5 h-5" />
+                <Button size="lg" className={`h-14 px-8 ${isRTL ? 'flex-row-reverse' : ''}`}>
+                  {t('about.submitYourNomination')}
+                  <ArrowRight className={`w-5 h-5 ${isRTL ? 'mr-2 rotate-180' : 'ml-2'}`} />
                 </Button>
               </Link>
             </div>
