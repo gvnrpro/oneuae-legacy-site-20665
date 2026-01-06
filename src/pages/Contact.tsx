@@ -5,33 +5,35 @@ import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
 import { gsap } from "@/utils/gsap-config";
 import { prefersReducedMotion } from "@/utils/motion-preference";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const Contact = () => {
   const mainRef = useRef<HTMLDivElement>(null);
+  const { t, isRTL } = useLanguage();
 
   const contactInfo = [
     {
       icon: Mail,
-      label: "Email",
+      labelKey: "contact.email",
       value: "info@oneuaeawards.ae",
       href: "mailto:info@oneuaeawards.ae",
     },
     {
       icon: Phone,
-      label: "Phone",
+      labelKey: "contact.phone",
       value: "+971 56 255 5100",
       href: "tel:+971562555100",
     },
     {
       icon: MapPin,
-      label: "Location",
-      value: "Zabeel Ladies Club, Dubai, UAE",
+      labelKey: "contact.locationLabel",
+      valueKey: "hero.venue",
       href: null,
     },
     {
       icon: Clock,
-      label: "Office Hours",
-      value: "Sunday - Thursday, 9AM - 6PM GST",
+      labelKey: "contact.officeHours",
+      valueKey: "contact.officeHoursValue",
       href: null,
     },
   ];
@@ -63,7 +65,7 @@ const Contact = () => {
   }, []);
 
   return (
-    <div ref={mainRef} className="min-h-screen bg-background">
+    <div ref={mainRef} className="min-h-screen bg-background" dir={isRTL ? 'rtl' : 'ltr'}>
       <SEOHead
         title="Contact Us - ONE UAE International Business Awards 2026"
         description="Get in touch with ONE UAE International Business Awards for nominations, partnerships, and inquiries."
@@ -76,12 +78,12 @@ const Contact = () => {
         {/* Hero */}
         <section className="pt-32 pb-16 lg:pt-40 lg:pb-20">
           <div className="container mx-auto px-6 lg:px-8 max-w-4xl">
-            <div className="max-w-lg reveal-up">
+            <div className={`max-w-lg reveal-up ${isRTL ? 'mr-auto text-right' : ''}`}>
               <span className="text-xs uppercase tracking-[0.2em] text-muted-foreground mb-4 block">
-                Get in Touch
+                {t('contact.getInTouch')}
               </span>
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-display text-foreground">
-                Contact
+                {t('contact.contactTitle')}
               </h1>
             </div>
           </div>
@@ -90,24 +92,25 @@ const Contact = () => {
         {/* Contact Info */}
         <section className="py-16 lg:py-24">
           <div className="container mx-auto px-6 lg:px-8 max-w-4xl">
-            <div className="reveal-up mb-12">
+            <div className={`reveal-up mb-12 ${isRTL ? 'text-right' : ''}`}>
               <span className="text-xs uppercase tracking-[0.2em] text-muted-foreground mb-2 block">
-                Awards Secretariat
+                {t('contact.awardsSecretariat')}
               </span>
               <h2 className="text-2xl font-display text-foreground">
-                ONE UAE International Business Awards
+                {isRTL ? 'جوائز الإمارات الموحدة للأعمال الدولية' : 'ONE UAE International Business Awards'}
               </h2>
             </div>
             
             <div className="grid sm:grid-cols-2 gap-4">
               {contactInfo.map((item, index) => {
                 const Icon = item.icon;
+                const displayValue = item.valueKey ? t(item.valueKey) : item.value;
                 const content = (
-                  <div className="reveal-up p-6 border border-border rounded-lg hover:border-primary/30 transition-colors">
-                    <Icon className="w-5 h-5 text-primary mb-4" />
-                    <p className="text-xs uppercase tracking-wider text-muted-foreground mb-1">{item.label}</p>
+                  <div className={`reveal-up p-6 border border-border rounded-lg hover:border-primary/30 transition-colors ${isRTL ? 'text-right' : ''}`}>
+                    <Icon className={`w-5 h-5 text-primary mb-4 ${isRTL ? 'mr-auto' : ''}`} />
+                    <p className="text-xs uppercase tracking-wider text-muted-foreground mb-1">{t(item.labelKey)}</p>
                     <p className={`font-medium ${item.href ? 'text-foreground hover:text-primary transition-colors' : 'text-foreground'}`}>
-                      {item.value}
+                      {displayValue}
                     </p>
                   </div>
                 );
@@ -124,7 +127,7 @@ const Contact = () => {
 
             <div className="reveal-up mt-20 pt-12 border-t border-border text-center">
               <p className="text-muted-foreground max-w-md mx-auto leading-relaxed">
-                Our team is dedicated to ensuring your experience with the ONE UAE International Business Awards is exceptional.
+                {t('contact.dedicatedTeam')}
               </p>
             </div>
           </div>
