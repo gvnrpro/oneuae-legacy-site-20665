@@ -22,17 +22,7 @@ import {
 } from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
 import { Loader2, CheckCircle } from "lucide-react";
-
-const categories = [
-  "National Visionary Leader",
-  "National Entrepreneur",
-  "National Humanitarian",
-  "National Innovator",
-  "National Cultural Ambassador",
-  "National Environmental Champion",
-  "National Youth Leader",
-  "National Sports Excellence",
-];
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const formSchema = z.object({
   nomineeName: z.string().trim().min(2, "Nominee name must be at least 2 characters").max(100, "Name too long"),
@@ -51,9 +41,21 @@ const formSchema = z.object({
 type FormValues = z.infer<typeof formSchema>;
 
 const NominationForm = () => {
+  const { t, isRTL } = useLanguage();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const { toast } = useToast();
+
+  const categories = [
+    { key: "visionary", en: "National Visionary Leader" },
+    { key: "entrepreneur", en: "National Entrepreneur" },
+    { key: "humanitarian", en: "National Humanitarian" },
+    { key: "innovator", en: "National Innovator" },
+    { key: "cultural", en: "National Cultural Ambassador" },
+    { key: "environmental", en: "National Environmental Champion" },
+    { key: "youth", en: "National Youth Leader" },
+    { key: "sports", en: "National Sports Excellence" },
+  ];
 
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
@@ -76,14 +78,12 @@ const NominationForm = () => {
     setIsSubmitting(true);
 
     try {
-      // Encode form data for Netlify
       const formData = new URLSearchParams();
       formData.append("form-name", "nomination");
       Object.entries(data).forEach(([key, value]) => {
         formData.append(key, value || "");
       });
 
-      // Submit to Netlify Forms
       const response = await fetch("/", {
         method: "POST",
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
@@ -93,8 +93,8 @@ const NominationForm = () => {
       if (response.ok) {
         setIsSubmitted(true);
         toast({
-          title: "Nomination Submitted",
-          description: "Thank you! Your nomination has been received successfully.",
+          title: t('forms.nominationSubmitted'),
+          description: t('forms.nominationSuccess'),
         });
         form.reset();
       } else {
@@ -102,8 +102,8 @@ const NominationForm = () => {
       }
     } catch (error) {
       toast({
-        title: "Error",
-        description: "Failed to submit nomination. Please try again.",
+        title: t('forms.error'),
+        description: t('forms.errorSubmitting'),
         variant: "destructive",
       });
     } finally {
@@ -113,16 +113,16 @@ const NominationForm = () => {
 
   if (isSubmitted) {
     return (
-      <div className="bg-card p-12 rounded-lg border border-border text-center">
+      <div className={`bg-card p-12 rounded-lg border border-border text-center ${isRTL ? 'rtl' : 'ltr'}`}>
         <CheckCircle className="w-16 h-16 text-primary mx-auto mb-6" />
         <h3 className="font-serif text-2xl font-semibold text-foreground mb-4">
-          Nomination Submitted
+          {t('forms.nominationSubmitted')}
         </h3>
         <p className="text-muted-foreground mb-6">
-          Thank you for your nomination. We will review it and contact you if additional information is needed.
+          {t('forms.nominationReview')}
         </p>
         <Button onClick={() => setIsSubmitted(false)} variant="outline">
-          Submit Another Nomination
+          {t('forms.submitAnother')}
         </Button>
       </div>
     );
@@ -137,18 +137,17 @@ const NominationForm = () => {
         data-netlify-honeypot="bot-field"
         onSubmit={form.handleSubmit(onSubmit)}
         className="space-y-8"
+        dir={isRTL ? 'rtl' : 'ltr'}
       >
-        {/* Hidden field for Netlify form name */}
         <input type="hidden" name="form-name" value="nomination" />
-        {/* Honeypot field for spam prevention */}
         <p className="hidden">
           <label>
             Don't fill this out: <input name="bot-field" />
           </label>
         </p>
         <div className="bg-card p-8 rounded-lg border border-border">
-          <h3 className="font-serif text-2xl font-semibold text-primary mb-6">
-            Nominee Information
+          <h3 className={`font-serif text-2xl font-semibold text-primary mb-6 ${isRTL ? 'text-right' : ''}`}>
+            {t('forms.nomineeInfo')}
           </h3>
           
           <div className="space-y-6">
@@ -156,10 +155,10 @@ const NominationForm = () => {
               control={form.control}
               name="nomineeName"
               render={({ field }) => (
-                <FormItem>
-                  <FormLabel className="font-sans">Full Name *</FormLabel>
+                <FormItem className={isRTL ? 'text-right' : ''}>
+                  <FormLabel className="font-sans">{t('forms.fullName')} *</FormLabel>
                   <FormControl>
-                    <Input placeholder="Nominee's full name" {...field} />
+                    <Input placeholder={t('forms.nomineeFullName')} {...field} className={isRTL ? 'text-right' : ''} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -171,10 +170,10 @@ const NominationForm = () => {
                 control={form.control}
                 name="nomineeEmail"
                 render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className="font-sans">Email Address *</FormLabel>
+                  <FormItem className={isRTL ? 'text-right' : ''}>
+                    <FormLabel className="font-sans">{t('forms.emailAddress')} *</FormLabel>
                     <FormControl>
-                      <Input type="email" placeholder="nominee@example.com" {...field} />
+                      <Input type="email" placeholder="nominee@example.com" {...field} className={isRTL ? 'text-right' : ''} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -185,10 +184,10 @@ const NominationForm = () => {
                 control={form.control}
                 name="nomineePhone"
                 render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className="font-sans">Phone Number *</FormLabel>
+                  <FormItem className={isRTL ? 'text-right' : ''}>
+                    <FormLabel className="font-sans">{t('forms.phoneNumber')} *</FormLabel>
                     <FormControl>
-                      <Input placeholder="+971 XX XXX XXXX" {...field} />
+                      <Input placeholder="+971 XX XXX XXXX" {...field} className={isRTL ? 'text-right' : ''} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -201,18 +200,18 @@ const NominationForm = () => {
                 control={form.control}
                 name="category"
                 render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className="font-sans">Award Category *</FormLabel>
+                  <FormItem className={isRTL ? 'text-right' : ''}>
+                    <FormLabel className="font-sans">{t('forms.awardCategory')} *</FormLabel>
                     <Select onValueChange={field.onChange} defaultValue={field.value}>
                       <FormControl>
-                        <SelectTrigger>
-                          <SelectValue placeholder="Select a category" />
+                        <SelectTrigger className={isRTL ? 'text-right' : ''}>
+                          <SelectValue placeholder={t('forms.selectCategory')} />
                         </SelectTrigger>
                       </FormControl>
                       <SelectContent>
                         {categories.map((category) => (
-                          <SelectItem key={category} value={category}>
-                            {category}
+                          <SelectItem key={category.key} value={category.en}>
+                            {t(`forms.categories.${category.key}`)}
                           </SelectItem>
                         ))}
                       </SelectContent>
@@ -226,10 +225,10 @@ const NominationForm = () => {
                 control={form.control}
                 name="organization"
                 render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className="font-sans">Organization (Optional)</FormLabel>
+                  <FormItem className={isRTL ? 'text-right' : ''}>
+                    <FormLabel className="font-sans">{t('forms.organizationOptional')}</FormLabel>
                     <FormControl>
-                      <Input placeholder="Company or institution" {...field} />
+                      <Input placeholder={t('forms.companyOrInstitution')} {...field} className={isRTL ? 'text-right' : ''} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -240,8 +239,8 @@ const NominationForm = () => {
         </div>
 
         <div className="bg-card p-8 rounded-lg border border-border">
-          <h3 className="font-serif text-2xl font-semibold text-primary mb-6">
-            Your Information
+          <h3 className={`font-serif text-2xl font-semibold text-primary mb-6 ${isRTL ? 'text-right' : ''}`}>
+            {t('forms.yourInfo')}
           </h3>
           
           <div className="space-y-6">
@@ -249,10 +248,10 @@ const NominationForm = () => {
               control={form.control}
               name="nominatorName"
               render={({ field }) => (
-                <FormItem>
-                  <FormLabel className="font-sans">Your Full Name *</FormLabel>
+                <FormItem className={isRTL ? 'text-right' : ''}>
+                  <FormLabel className="font-sans">{t('forms.yourFullName')} *</FormLabel>
                   <FormControl>
-                    <Input placeholder="Your name" {...field} />
+                    <Input placeholder={t('forms.yourName')} {...field} className={isRTL ? 'text-right' : ''} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -264,10 +263,10 @@ const NominationForm = () => {
                 control={form.control}
                 name="nominatorEmail"
                 render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className="font-sans">Your Email Address *</FormLabel>
+                  <FormItem className={isRTL ? 'text-right' : ''}>
+                    <FormLabel className="font-sans">{t('forms.yourEmail')} *</FormLabel>
                     <FormControl>
-                      <Input type="email" placeholder="your@example.com" {...field} />
+                      <Input type="email" placeholder="your@example.com" {...field} className={isRTL ? 'text-right' : ''} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -278,10 +277,10 @@ const NominationForm = () => {
                 control={form.control}
                 name="nominatorPhone"
                 render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className="font-sans">Your Phone Number *</FormLabel>
+                  <FormItem className={isRTL ? 'text-right' : ''}>
+                    <FormLabel className="font-sans">{t('forms.yourPhone')} *</FormLabel>
                     <FormControl>
-                      <Input placeholder="+971 XX XXX XXXX" {...field} />
+                      <Input placeholder="+971 XX XXX XXXX" {...field} className={isRTL ? 'text-right' : ''} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -293,10 +292,10 @@ const NominationForm = () => {
               control={form.control}
               name="relationship"
               render={({ field }) => (
-                <FormItem>
-                  <FormLabel className="font-sans">Relationship to Nominee *</FormLabel>
+                <FormItem className={isRTL ? 'text-right' : ''}>
+                  <FormLabel className="font-sans">{t('forms.relationship')} *</FormLabel>
                   <FormControl>
-                    <Input placeholder="e.g., Colleague, Manager, Friend" {...field} />
+                    <Input placeholder={t('forms.relationshipPlaceholder')} {...field} className={isRTL ? 'text-right' : ''} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -306,8 +305,8 @@ const NominationForm = () => {
         </div>
 
         <div className="bg-card p-8 rounded-lg border border-border">
-          <h3 className="font-serif text-2xl font-semibold text-primary mb-6">
-            Nomination Details
+          <h3 className={`font-serif text-2xl font-semibold text-primary mb-6 ${isRTL ? 'text-right' : ''}`}>
+            {t('forms.nominationDetails')}
           </h3>
           
           <div className="space-y-6">
@@ -315,12 +314,12 @@ const NominationForm = () => {
               control={form.control}
               name="achievements"
               render={({ field }) => (
-                <FormItem>
-                  <FormLabel className="font-sans">Key Achievements *</FormLabel>
+                <FormItem className={isRTL ? 'text-right' : ''}>
+                  <FormLabel className="font-sans">{t('forms.keyAchievements')} *</FormLabel>
                   <FormControl>
                     <Textarea
-                      placeholder="Describe the nominee's most significant achievements (minimum 50 characters)"
-                      className="min-h-32"
+                      placeholder={t('forms.achievementsPlaceholder')}
+                      className={`min-h-32 ${isRTL ? 'text-right' : ''}`}
                       {...field}
                     />
                   </FormControl>
@@ -333,12 +332,12 @@ const NominationForm = () => {
               control={form.control}
               name="impact"
               render={({ field }) => (
-                <FormItem>
-                  <FormLabel className="font-sans">Impact on UAE *</FormLabel>
+                <FormItem className={isRTL ? 'text-right' : ''}>
+                  <FormLabel className="font-sans">{t('forms.impactOnUAE')} *</FormLabel>
                   <FormControl>
                     <Textarea
-                      placeholder="Describe how the nominee has positively impacted the UAE and its communities (minimum 50 characters)"
-                      className="min-h-32"
+                      placeholder={t('forms.impactPlaceholder')}
+                      className={`min-h-32 ${isRTL ? 'text-right' : ''}`}
                       {...field}
                     />
                   </FormControl>
@@ -354,15 +353,15 @@ const NominationForm = () => {
             type="submit"
             size="lg"
             disabled={isSubmitting}
-            className="bg-primary hover:bg-primary/90 text-white font-sans text-lg px-12 py-6 font-medium"
+            className={`bg-primary hover:bg-primary/90 text-white font-sans text-lg px-12 py-6 font-medium ${isRTL ? 'flex-row-reverse' : ''}`}
           >
             {isSubmitting ? (
               <>
-                <Loader2 className="mr-2 h-5 w-5 animate-spin" />
-                Preparing...
+                <Loader2 className={`h-5 w-5 animate-spin ${isRTL ? 'ml-2' : 'mr-2'}`} />
+                {t('forms.preparing')}
               </>
             ) : (
-              "Submit Nomination"
+              t('forms.submitNomination')
             )}
           </Button>
         </div>
