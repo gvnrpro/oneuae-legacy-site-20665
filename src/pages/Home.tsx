@@ -63,7 +63,7 @@ const Home = () => {
   }, []);
 
   return (
-    <div ref={mainRef} className="min-h-screen bg-background">
+    <div ref={mainRef} className="min-h-screen bg-background" dir={isRTL ? 'rtl' : 'ltr'}>
       <SEOHead />
       <Navigation />
       
