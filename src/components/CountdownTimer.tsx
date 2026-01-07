@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 interface TimeLeft {
   days: number;
@@ -8,6 +9,7 @@ interface TimeLeft {
 }
 
 const CountdownTimer = () => {
+  const { t, isRTL } = useLanguage();
   const [timeLeft, setTimeLeft] = useState<TimeLeft>({
     days: 0,
     hours: 0,
@@ -39,25 +41,25 @@ const CountdownTimer = () => {
   }, []);
 
   const timeUnits = [
-    { value: timeLeft.days, label: "Days" },
-    { value: timeLeft.hours, label: "Hours" },
-    { value: timeLeft.minutes, label: "Minutes" },
-    { value: timeLeft.seconds, label: "Seconds" },
+    { value: timeLeft.days, labelKey: "countdown.days" },
+    { value: timeLeft.hours, labelKey: "countdown.hours" },
+    { value: timeLeft.minutes, labelKey: "countdown.minutes" },
+    { value: timeLeft.seconds, labelKey: "countdown.seconds" },
   ];
 
   return (
-    <div className="w-full max-w-4xl mx-auto">
+    <div className="w-full max-w-4xl mx-auto" dir={isRTL ? 'rtl' : 'ltr'}>
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
         {timeUnits.map((unit) => (
           <div
-            key={unit.label}
+            key={unit.labelKey}
             className="card-premium rounded-xl p-6 md:p-8 text-center group"
           >
             <div className="font-display text-4xl md:text-5xl lg:text-6xl font-medium text-primary mb-2 transition-transform group-hover:scale-105">
               {unit.value.toString().padStart(2, "0")}
             </div>
             <div className="text-xs md:text-sm text-muted-foreground uppercase tracking-wider">
-              {unit.label}
+              {t(unit.labelKey)}
             </div>
           </div>
         ))}

@@ -22,14 +22,7 @@ import {
 } from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
 import { Loader2, CheckCircle } from "lucide-react";
-
-const tiers = [
-  "Gold Partner (AED 100,000)",
-  "Silver Partner (AED 75,000)",
-  "Bronze Partner (AED 50,000)",
-  "Red-Carpet Partner (AED 25,000)",
-  "Custom Package",
-];
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const formSchema = z.object({
   companyName: z.string().trim().min(2, "Company name must be at least 2 characters").max(150, "Company name too long"),
@@ -44,9 +37,18 @@ const formSchema = z.object({
 type FormValues = z.infer<typeof formSchema>;
 
 const PartnershipForm = () => {
+  const { t, isRTL } = useLanguage();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const { toast } = useToast();
+
+  const tiers = [
+    { key: "gold", en: "Gold Partner (AED 100,000)" },
+    { key: "silver", en: "Silver Partner (AED 75,000)" },
+    { key: "bronze", en: "Bronze Partner (AED 50,000)" },
+    { key: "redCarpet", en: "Red-Carpet Partner (AED 25,000)" },
+    { key: "custom", en: "Custom Package" },
+  ];
 
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
@@ -65,14 +67,12 @@ const PartnershipForm = () => {
     setIsSubmitting(true);
 
     try {
-      // Encode form data for Netlify
       const formData = new URLSearchParams();
       formData.append("form-name", "partnership");
       Object.entries(data).forEach(([key, value]) => {
         formData.append(key, value || "");
       });
 
-      // Submit to Netlify Forms
       const response = await fetch("/", {
         method: "POST",
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
@@ -82,8 +82,8 @@ const PartnershipForm = () => {
       if (response.ok) {
         setIsSubmitted(true);
         toast({
-          title: "Inquiry Submitted",
-          description: "Thank you! Our team will contact you shortly.",
+          title: t('forms.inquirySubmitted'),
+          description: t('forms.inquirySuccess'),
         });
         form.reset();
       } else {
@@ -91,8 +91,8 @@ const PartnershipForm = () => {
       }
     } catch (error) {
       toast({
-        title: "Error",
-        description: "Failed to submit inquiry. Please try again.",
+        title: t('forms.error'),
+        description: t('forms.errorInquiry'),
         variant: "destructive",
       });
     } finally {
@@ -102,16 +102,16 @@ const PartnershipForm = () => {
 
   if (isSubmitted) {
     return (
-      <div className="bg-card p-12 rounded-lg border border-border text-center">
+      <div className={`bg-card p-12 rounded-lg border border-border text-center ${isRTL ? 'rtl' : 'ltr'}`}>
         <CheckCircle className="w-16 h-16 text-primary mx-auto mb-6" />
         <h3 className="font-serif text-2xl font-semibold text-foreground mb-4">
-          Inquiry Submitted
+          {t('forms.inquirySubmitted')}
         </h3>
         <p className="text-muted-foreground mb-6">
-          Thank you for your partnership interest. Our team will contact you within 2-3 business days.
+          {t('forms.inquiryReview')}
         </p>
         <Button onClick={() => setIsSubmitted(false)} variant="outline">
-          Submit Another Inquiry
+          {t('forms.submitAnotherInquiry')}
         </Button>
       </div>
     );
@@ -126,18 +126,17 @@ const PartnershipForm = () => {
         data-netlify-honeypot="bot-field"
         onSubmit={form.handleSubmit(onSubmit)}
         className="space-y-8"
+        dir={isRTL ? 'rtl' : 'ltr'}
       >
-        {/* Hidden field for Netlify form name */}
         <input type="hidden" name="form-name" value="partnership" />
-        {/* Honeypot field for spam prevention */}
         <p className="hidden">
           <label>
             Don't fill this out: <input name="bot-field" />
           </label>
         </p>
         <div className="bg-card p-8 rounded-lg border border-border">
-          <h3 className="font-serif text-2xl font-semibold text-primary mb-6">
-            Company Information
+          <h3 className={`font-serif text-2xl font-semibold text-primary mb-6 ${isRTL ? 'text-right' : ''}`}>
+            {t('forms.companyInfo')}
           </h3>
           
           <div className="space-y-6">
@@ -145,10 +144,10 @@ const PartnershipForm = () => {
               control={form.control}
               name="companyName"
               render={({ field }) => (
-                <FormItem>
-                  <FormLabel className="font-sans">Company Name *</FormLabel>
+                <FormItem className={isRTL ? 'text-right' : ''}>
+                  <FormLabel className="font-sans">{t('forms.companyName')} *</FormLabel>
                   <FormControl>
-                    <Input placeholder="Your company name" {...field} />
+                    <Input placeholder={t('forms.yourCompanyName')} {...field} className={isRTL ? 'text-right' : ''} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -159,10 +158,10 @@ const PartnershipForm = () => {
               control={form.control}
               name="website"
               render={({ field }) => (
-                <FormItem>
-                  <FormLabel className="font-sans">Company Website</FormLabel>
+                <FormItem className={isRTL ? 'text-right' : ''}>
+                  <FormLabel className="font-sans">{t('forms.companyWebsite')}</FormLabel>
                   <FormControl>
-                    <Input placeholder="https://www.example.com" {...field} />
+                    <Input placeholder="https://www.example.com" {...field} className={isRTL ? 'text-right' : ''} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -172,8 +171,8 @@ const PartnershipForm = () => {
         </div>
 
         <div className="bg-card p-8 rounded-lg border border-border">
-          <h3 className="font-serif text-2xl font-semibold text-primary mb-6">
-            Contact Information
+          <h3 className={`font-serif text-2xl font-semibold text-primary mb-6 ${isRTL ? 'text-right' : ''}`}>
+            {t('forms.contactInfo')}
           </h3>
           
           <div className="space-y-6">
@@ -181,10 +180,10 @@ const PartnershipForm = () => {
               control={form.control}
               name="contactName"
               render={({ field }) => (
-                <FormItem>
-                  <FormLabel className="font-sans">Contact Person *</FormLabel>
+                <FormItem className={isRTL ? 'text-right' : ''}>
+                  <FormLabel className="font-sans">{t('forms.contactPerson')} *</FormLabel>
                   <FormControl>
-                    <Input placeholder="Full name" {...field} />
+                    <Input placeholder={t('forms.fullName')} {...field} className={isRTL ? 'text-right' : ''} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -196,10 +195,10 @@ const PartnershipForm = () => {
                 control={form.control}
                 name="email"
                 render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className="font-sans">Email Address *</FormLabel>
+                  <FormItem className={isRTL ? 'text-right' : ''}>
+                    <FormLabel className="font-sans">{t('forms.emailAddress')} *</FormLabel>
                     <FormControl>
-                      <Input type="email" placeholder="contact@company.com" {...field} />
+                      <Input type="email" placeholder="contact@company.com" {...field} className={isRTL ? 'text-right' : ''} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -210,10 +209,10 @@ const PartnershipForm = () => {
                 control={form.control}
                 name="phone"
                 render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className="font-sans">Phone Number *</FormLabel>
+                  <FormItem className={isRTL ? 'text-right' : ''}>
+                    <FormLabel className="font-sans">{t('forms.phoneNumber')} *</FormLabel>
                     <FormControl>
-                      <Input placeholder="+971 XX XXX XXXX" {...field} />
+                      <Input placeholder="+971 XX XXX XXXX" {...field} className={isRTL ? 'text-right' : ''} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -224,8 +223,8 @@ const PartnershipForm = () => {
         </div>
 
         <div className="bg-card p-8 rounded-lg border border-border">
-          <h3 className="font-serif text-2xl font-semibold text-primary mb-6">
-            Partnership Details
+          <h3 className={`font-serif text-2xl font-semibold text-primary mb-6 ${isRTL ? 'text-right' : ''}`}>
+            {t('forms.partnershipDetails')}
           </h3>
           
           <div className="space-y-6">
@@ -233,18 +232,18 @@ const PartnershipForm = () => {
               control={form.control}
               name="tier"
               render={({ field }) => (
-                <FormItem>
-                  <FormLabel className="font-sans">Preferred Partnership Tier *</FormLabel>
+                <FormItem className={isRTL ? 'text-right' : ''}>
+                  <FormLabel className="font-sans">{t('forms.preferredTier')} *</FormLabel>
                   <Select onValueChange={field.onChange} defaultValue={field.value}>
                     <FormControl>
-                      <SelectTrigger>
-                        <SelectValue placeholder="Select a tier" />
+                      <SelectTrigger className={isRTL ? 'text-right' : ''}>
+                        <SelectValue placeholder={t('forms.selectTier')} />
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent>
                       {tiers.map((tier) => (
-                        <SelectItem key={tier} value={tier}>
-                          {tier}
+                        <SelectItem key={tier.key} value={tier.en}>
+                          {t(`forms.tiers.${tier.key}`)}
                         </SelectItem>
                       ))}
                     </SelectContent>
@@ -258,12 +257,12 @@ const PartnershipForm = () => {
               control={form.control}
               name="message"
               render={({ field }) => (
-                <FormItem>
-                  <FormLabel className="font-sans">Additional Information *</FormLabel>
+                <FormItem className={isRTL ? 'text-right' : ''}>
+                  <FormLabel className="font-sans">{t('forms.additionalInfo')} *</FormLabel>
                   <FormControl>
                     <Textarea
-                      placeholder="Tell us about your company and why you'd like to partner with OneUAE Awards (minimum 20 characters)"
-                      className="min-h-32"
+                      placeholder={t('forms.additionalInfoPlaceholder')}
+                      className={`min-h-32 ${isRTL ? 'text-right' : ''}`}
                       {...field}
                     />
                   </FormControl>
@@ -279,15 +278,15 @@ const PartnershipForm = () => {
             type="submit"
             size="lg"
             disabled={isSubmitting}
-            className="bg-primary hover:bg-primary/90 text-white font-sans text-lg px-12 py-6 font-medium"
+            className={`bg-primary hover:bg-primary/90 text-white font-sans text-lg px-12 py-6 font-medium ${isRTL ? 'flex-row-reverse' : ''}`}
           >
             {isSubmitting ? (
               <>
-                <Loader2 className="mr-2 h-5 w-5 animate-spin" />
-                Preparing...
+                <Loader2 className={`h-5 w-5 animate-spin ${isRTL ? 'ml-2' : 'mr-2'}`} />
+                {t('forms.preparing')}
               </>
             ) : (
-              "Submit Inquiry"
+              t('forms.submitInquiry')
             )}
           </Button>
         </div>
