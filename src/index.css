@@ -2,42 +2,89 @@
 @tailwind components;
 @tailwind utilities;
 
-/* RTL Support */
-[dir="rtl"] {
+/* RTL Support - Global */
+[dir="rtl"],
+[dir="rtl"] * {
   text-align: right;
 }
 
-[dir="rtl"] .flex-row {
+[dir="rtl"] .text-center {
+  text-align: center;
+}
+
+/* RTL Flex direction reversals */
+[dir="rtl"] .flex-row:not(.flex-row-reverse) {
   flex-direction: row-reverse;
 }
 
+/* RTL Spacing reversals */
+[dir="rtl"] .space-x-1 > :not([hidden]) ~ :not([hidden]),
 [dir="rtl"] .space-x-2 > :not([hidden]) ~ :not([hidden]),
 [dir="rtl"] .space-x-3 > :not([hidden]) ~ :not([hidden]),
 [dir="rtl"] .space-x-4 > :not([hidden]) ~ :not([hidden]),
-[dir="rtl"] .space-x-6 > :not([hidden]) ~ :not([hidden]) {
+[dir="rtl"] .space-x-6 > :not([hidden]) ~ :not([hidden]),
+[dir="rtl"] .space-x-8 > :not([hidden]) ~ :not([hidden]) {
   --tw-space-x-reverse: 1;
 }
 
+[dir="rtl"] .gap-x-1, [dir="rtl"] .gap-x-2, [dir="rtl"] .gap-x-3, 
+[dir="rtl"] .gap-x-4, [dir="rtl"] .gap-x-6, [dir="rtl"] .gap-x-8 {
+  direction: rtl;
+}
+
+/* RTL Margin flips */
+[dir="rtl"] .ml-1 { margin-left: 0; margin-right: 0.25rem; }
 [dir="rtl"] .ml-2 { margin-left: 0; margin-right: 0.5rem; }
+[dir="rtl"] .ml-3 { margin-left: 0; margin-right: 0.75rem; }
 [dir="rtl"] .ml-4 { margin-left: 0; margin-right: 1rem; }
+[dir="rtl"] .ml-6 { margin-left: 0; margin-right: 1.5rem; }
+[dir="rtl"] .mr-1 { margin-right: 0; margin-left: 0.25rem; }
 [dir="rtl"] .mr-2 { margin-right: 0; margin-left: 0.5rem; }
+[dir="rtl"] .mr-3 { margin-right: 0; margin-left: 0.75rem; }
 [dir="rtl"] .mr-4 { margin-right: 0; margin-left: 1rem; }
+[dir="rtl"] .mr-6 { margin-right: 0; margin-left: 1.5rem; }
 
+/* RTL Padding flips */
+[dir="rtl"] .pl-2 { padding-left: 0; padding-right: 0.5rem; }
+[dir="rtl"] .pl-4 { padding-left: 0; padding-right: 1rem; }
+[dir="rtl"] .pl-6 { padding-left: 0; padding-right: 1.5rem; }
+[dir="rtl"] .pl-8 { padding-left: 0; padding-right: 2rem; }
+[dir="rtl"] .pr-2 { padding-right: 0; padding-left: 0.5rem; }
+[dir="rtl"] .pr-4 { padding-right: 0; padding-left: 1rem; }
+[dir="rtl"] .pr-6 { padding-right: 0; padding-left: 1.5rem; }
+[dir="rtl"] .pr-8 { padding-right: 0; padding-left: 2rem; }
+
+/* RTL Position flips */
 [dir="rtl"] .left-0 { left: auto; right: 0; }
+[dir="rtl"] .left-4 { left: auto; right: 1rem; }
+[dir="rtl"] .left-6 { left: auto; right: 1.5rem; }
 [dir="rtl"] .right-0 { right: auto; left: 0; }
+[dir="rtl"] .right-4 { right: auto; left: 1rem; }
+[dir="rtl"] .right-6 { right: auto; left: 1.5rem; }
 
+/* RTL Text alignment context swap */
 [dir="rtl"] .text-left { text-align: right; }
 [dir="rtl"] .text-right { text-align: left; }
 
+/* RTL Transforms */
 [dir="rtl"] .translate-x-1 { --tw-translate-x: -0.25rem; }
 [dir="rtl"] .-translate-x-1\/2 { --tw-translate-x: 50%; }
-
 [dir="rtl"] .group-hover\:translate-x-0\.5:hover { --tw-translate-x: -0.125rem; }
 [dir="rtl"] .group-hover\:translate-x-1:hover { --tw-translate-x: -0.25rem; }
 
+/* RTL Borders */
+[dir="rtl"] .border-l { border-left-width: 0; border-right-width: 1px; }
 [dir="rtl"] .border-l-2 { border-left-width: 0; border-right-width: 2px; }
-[dir="rtl"] .pl-6 { padding-left: 0; padding-right: 1.5rem; }
-[dir="rtl"] .pr-6 { padding-right: 0; padding-left: 1.5rem; }
+[dir="rtl"] .border-r { border-right-width: 0; border-left-width: 1px; }
+[dir="rtl"] .border-r-2 { border-right-width: 0; border-left-width: 2px; }
+
+/* RTL Gradient directions */
+[dir="rtl"] .bg-gradient-to-r {
+  background-image: linear-gradient(to left, var(--tw-gradient-stops));
+}
+[dir="rtl"] .bg-gradient-to-l {
+  background-image: linear-gradient(to right, var(--tw-gradient-stops));
+}
 
 /* RTL font adjustments - Tajawal for Arabic */
 [dir="rtl"] body {
