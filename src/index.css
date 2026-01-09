@@ -62,9 +62,11 @@
 [dir="rtl"] .right-4 { right: auto; left: 1rem; }
 [dir="rtl"] .right-6 { right: auto; left: 1.5rem; }
 
-/* RTL Text alignment context swap */
+/* RTL Text alignment
+   - Keep Tailwind's `text-right` working in RTL (do NOT invert it).
+   - Convert `text-left` to right align when in RTL.
+*/
 [dir="rtl"] .text-left { text-align: right; }
-[dir="rtl"] .text-right { text-align: left; }
 
 /* RTL Transforms */
 [dir="rtl"] .translate-x-1 { --tw-translate-x: -0.25rem; }

@@ -36,6 +36,8 @@ const Navigation = () => {
   ];
 
   const isActive = (path: string) => location.pathname === path;
+  const isHome = location.pathname === "/";
+  const isOverlay = isHome && !scrolled;
 
   return (
     <>
