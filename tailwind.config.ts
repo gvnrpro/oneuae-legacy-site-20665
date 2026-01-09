@@ -17,6 +17,7 @@ export default {
         display: ['Playfair Display', 'Georgia', 'serif'],
         sans: ['Sora', 'Inter', 'system-ui', 'sans-serif'],
         serif: ['Playfair Display', 'Georgia', 'serif'],
+        arabic: ['Tajawal', 'system-ui', 'sans-serif'],
       },
       colors: {
         border: "hsl(var(--border))",

@@ -39,13 +39,14 @@
 [dir="rtl"] .pl-6 { padding-left: 0; padding-right: 1.5rem; }
 [dir="rtl"] .pr-6 { padding-right: 0; padding-left: 1.5rem; }
 
-/* RTL font adjustments */
+/* RTL font adjustments - Tajawal for Arabic */
 [dir="rtl"] body {
-  font-family: 'Noto Kufi Arabic', 'Playfair Display', serif;
+  font-family: 'Tajawal', 'system-ui', sans-serif;
 }
 
 [dir="rtl"] h1, [dir="rtl"] h2, [dir="rtl"] h3, [dir="rtl"] h4, [dir="rtl"] h5, [dir="rtl"] h6 {
-  font-family: 'Noto Kufi Arabic', 'Playfair Display', serif;
+  font-family: 'Tajawal', 'system-ui', sans-serif;
+  font-weight: 700;
   letter-spacing: 0;
 }
 
