@@ -52,9 +52,9 @@ const Navigation = () => {
       
       <nav 
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-          scrolled 
-            ? "bg-background/95 backdrop-blur-xl shadow-sm border-b border-border/50" 
-            : "bg-transparent"
+          isOverlay 
+            ? "bg-transparent" 
+            : "bg-background/95 backdrop-blur-xl shadow-sm border-b border-border/50"
         }`}
       >
         <div className="container mx-auto px-6 lg:px-8">
@@ -79,10 +79,10 @@ const Navigation = () => {
                   to={link.path}
                   className={`relative px-4 py-2 text-sm font-medium transition-all duration-300 group ${
                     isActive(link.path)
-                      ? scrolled ? "text-primary" : "text-white"
-                      : scrolled 
-                        ? "text-muted-foreground hover:text-foreground" 
-                        : "text-white/80 hover:text-white"
+                      ? isOverlay ? "text-white" : "text-primary"
+                      : isOverlay 
+                        ? "text-white/80 hover:text-white" 
+                        : "text-muted-foreground hover:text-foreground"
                   }`}
                 >
                   {t(link.labelKey)}
@@ -94,16 +94,16 @@ const Navigation = () => {
               
               {/* Language Toggle */}
               <div className="mx-2">
-                <LanguageToggle variant={scrolled ? 'dark' : 'light'} />
+                <LanguageToggle variant={isOverlay ? 'light' : 'dark'} />
               </div>
               
               {/* CTA Button */}
               <Link
                 to="/nominate"
                 className={`inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-300 group ${
-                  scrolled
-                    ? "bg-primary text-primary-foreground hover:bg-primary/90"
-                    : "bg-white/10 backdrop-blur-sm text-white border border-white/20 hover:bg-white/20"
+                  isOverlay
+                    ? "bg-white/10 backdrop-blur-sm text-white border border-white/20 hover:bg-white/20"
+                    : "bg-primary text-primary-foreground hover:bg-primary/90"
                 }`}
               >
                 {t('nav.nominate')}
@@ -113,13 +113,13 @@ const Navigation = () => {
 
             {/* Mobile Menu Button */}
             <div className="lg:hidden flex items-center gap-2">
-              <LanguageToggle variant={scrolled ? 'dark' : 'light'} />
+              <LanguageToggle variant={isOverlay ? 'light' : 'dark'} />
               <button
                 onClick={() => setIsOpen(!isOpen)}
                 className={`p-2 rounded-lg transition-colors ${
-                  scrolled 
-                    ? "text-foreground hover:bg-muted" 
-                    : "text-white hover:bg-white/10"
+                  isOverlay 
+                    ? "text-white hover:bg-white/10" 
+                    : "text-foreground hover:bg-muted"
                 }`}
                 aria-label="Toggle menu"
               >
