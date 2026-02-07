@@ -129,28 +129,29 @@ const Awardees2026 = () => {
 
       <main id="main-content">
         {/* Hero Section */}
-        <section className="relative pt-28 pb-16 md:pt-40 md:pb-24 overflow-hidden">
-          {/* Subtle Golden Glow for Premium Feel */}
-          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-5xl h-[500px] bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-primary/10 via-background/0 to-transparent pointer-events-none -z-10" />
-          
-          <div className="container mx-auto px-6 lg:px-8 max-w-6xl">
-            <div className={`${isRTL ? "text-right" : "text-left"}`}>
-              <span className="hero-animate editorial-label mb-4 inline-block px-3 py-1 rounded-full border border-primary/20 bg-primary/5 text-primary text-[10px] font-bold tracking-[0.2em] uppercase">
-                {t('awardees.year_badge', 'ONE UAE Awards 2026')}
-              </span>
-              
-              <h1 className="hero-animate text-4xl sm:text-5xl md:text-7xl font-display text-foreground leading-[1.1] mb-6 tracking-tight">
-                {t('awardees.hero_title', 'Award Recipients')}
-              </h1>
-              
-              <p className="hero-animate text-muted-foreground text-base md:text-xl max-w-2xl leading-relaxed">
-                {loading 
-                  ? t('common.loading', 'Retrieving honorees…') 
-                  : t('awardees.count_message', `Celebrating the pioneers and organizations recognized at the ONE UAE Awards 2026.`)}
-              </p>
-            </div>
-          </div>
-        </section>
+{/* Hero Section */}
+<section className="relative pt-28 pb-16 md:pt-40 md:pb-24 overflow-hidden">
+  {/* Subtle Golden Glow for Premium Feel */}
+  <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-5xl h-[500px] bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-primary/10 via-background/0 to-transparent pointer-events-none -z-10" />
+  
+  <div className="container mx-auto px-6 lg:px-8 max-w-6xl">
+    <div className={`${isRTL ? "text-right" : "text-left"}`}>
+      <span className="hero-animate editorial-label mb-4 inline-block px-3 py-1 rounded-full border border-primary/20 bg-primary/5 text-primary text-[10px] font-bold tracking-[0.2em] uppercase">
+        ONE UAE Awards 2026
+      </span>
+      
+      <h1 className="hero-animate text-4xl sm:text-5xl md:text-7xl font-display text-foreground leading-[1.1] mb-6 tracking-tight">
+        Award Recipients
+      </h1>
+      
+      <p className="hero-animate text-muted-foreground text-base md:text-xl max-w-2xl leading-relaxed">
+        {loading 
+          ? "Retrieving honorees…" 
+          : "Celebrating the pioneers and organizations recognized at the ONE UAE Awards 2026."}
+      </p>
+    </div>
+  </div>
+</section>
 
         {/* Grid Section - Optimized for Desktop and Mobile */}
         <section className="py-16 md:py-32 bg-foreground text-background relative">
@@ -224,36 +225,34 @@ const Awardees2026 = () => {
           </div>
         </section>
 
-        {/* CTA Section - Fixed branding and Contact redirect */}
-        <section className="cta-section py-20 md:py-32">
-          <div className="container mx-auto px-6 lg:px-8 max-w-4xl text-center">
-            <div className="cta-animate bg-muted/30 rounded-3xl p-8 md:p-16 border border-border/50">
-              <span className="editorial-label mb-4 block text-primary font-bold tracking-[0.2em] uppercase text-xs">
-                {t('nominations.label_2027', '2027 Edition')}
-              </span>
-              
-              <h2 className="text-3xl md:text-5xl font-display text-foreground mb-6">
-                {t('nominations.title_2027', 'Submit a Nomination')}
-              </h2>
-              
-              <p className="text-muted-foreground text-lg mb-10 max-w-xl mx-auto leading-relaxed">
-                {t('nominations.desc_2027', 'To submit a nomination for the 2027 edition of the ONE UAE Awards, please contact the Awards Secretariat.')}
-              </p>
-              
-              <Link to="/contact">
-                <Button 
-                    size="lg" 
-                    className={`h-14 px-10 text-base rounded-full shadow-lg group transition-all duration-300 gap-3 ${isRTL ? "flex-row-reverse" : ""}`}
-                >
-                  {t('nominations.cta_contact', 'Contact Awards Secretariat')}
-                  <ArrowRight className={`w-5 h-5 transition-transform duration-300 ${isRTL ? "rotate-180 group-hover:-translate-x-2" : "group-hover:translate-x-2"}`} />
-                </Button>
-              </Link>
-            </div>
-          </div>
-        </section>
-      </main>
-
+{/* CTA Section - Fixed branding and Contact redirect */}
+<section className="cta-section py-20 md:py-32">
+  <div className="container mx-auto px-6 lg:px-8 max-w-4xl text-center">
+    <div className="cta-animate bg-muted/30 rounded-3xl p-8 md:p-16 border border-border/50">
+      <span className="editorial-label mb-4 block text-primary font-bold tracking-[0.2em] uppercase text-xs">
+        2027 Edition
+      </span>
+      
+      <h2 className="text-3xl md:text-5xl font-display text-foreground mb-6">
+        Submit a Nomination
+      </h2>
+      
+      <p className="text-muted-foreground text-lg mb-10 max-w-xl mx-auto leading-relaxed">
+        To submit a nomination for the 2027 edition of the ONE UAE Awards, please contact the Awards Secretariat.
+      </p>
+      
+      <Link to="/contact">
+        <Button 
+            size="lg" 
+            className={`h-14 px-10 text-base rounded-full shadow-lg group transition-all duration-300 gap-3 ${isRTL ? "flex-row-reverse" : ""}`}
+        >
+          Contact Awards Secretariat
+          <ArrowRight className={`w-5 h-5 transition-transform duration-300 ${isRTL ? "rotate-180 group-hover:-translate-x-2" : "group-hover:translate-x-2"}`} />
+        </Button>
+      </Link>
+    </div>
+  </div>
+</section>
       <Footer />
     </div>
   );
