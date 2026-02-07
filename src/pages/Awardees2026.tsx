@@ -56,7 +56,7 @@ const Awardees2026 = () => {
   useLayoutEffect(() => {
     if (prefersReducedMotion() || loading || error) return;
 
-    // Refresh ScrollTrigger after content loads to ensure trigger points are accurate
+    // Failsafe: Refresh ScrollTrigger after content loads for accurate trigger points
     ScrollTrigger.refresh();
 
     const ctx = gsap.context(() => {
@@ -73,7 +73,7 @@ const Awardees2026 = () => {
         }
       );
 
-      // 2. Staggered Grid Batch Animation
+      // 2. Staggered Grid Batch Animation (Mobile-optimized)
       if (gridRef.current) {
         const cards = gsap.utils.toArray<HTMLElement>(".awardee-card");
         if (cards.length > 0) {
@@ -136,7 +136,7 @@ const Awardees2026 = () => {
           <div className="container mx-auto px-6 lg:px-8 max-w-6xl">
             <div className={`${isRTL ? "text-right" : "text-left"}`}>
               <span className="hero-animate editorial-label mb-4 inline-block px-3 py-1 rounded-full border border-primary/20 bg-primary/5 text-primary text-[10px] font-bold tracking-[0.2em] uppercase">
-                {t('awardees.year_badge', 'Class of 2026')}
+                {t('awardees.year_badge', 'ONE UAE Awards 2026')}
               </span>
               
               <h1 className="hero-animate text-4xl sm:text-5xl md:text-7xl font-display text-foreground leading-[1.1] mb-6 tracking-tight">
@@ -146,14 +146,14 @@ const Awardees2026 = () => {
               <p className="hero-animate text-muted-foreground text-base md:text-xl max-w-2xl leading-relaxed">
                 {loading 
                   ? t('common.loading', 'Retrieving honorees…') 
-                  : t('awardees.count_message', `Celebrating ${awardees.length} pioneers and organizations leading the global business landscape.`)}
+                  : t('awardees.count_message', `Celebrating the pioneers and organizations recognized at the ONE UAE Awards 2026.`)}
               </p>
             </div>
           </div>
         </section>
 
-        {/* Grid Section */}
-        <section className="py-16 md:py-32 bg-foreground text-background">
+        {/* Grid Section - Optimized for Desktop and Mobile */}
+        <section className="py-16 md:py-32 bg-foreground text-background relative">
           <div className="container mx-auto px-6 lg:px-8 max-w-7xl">
             {loading ? (
               /* Loading Skeletons */
@@ -224,19 +224,22 @@ const Awardees2026 = () => {
           </div>
         </section>
 
-        {/* CTA Section - Redirected to Contact */}
+        {/* CTA Section - Fixed branding and Contact redirect */}
         <section className="cta-section py-20 md:py-32">
           <div className="container mx-auto px-6 lg:px-8 max-w-4xl text-center">
             <div className="cta-animate bg-muted/30 rounded-3xl p-8 md:p-16 border border-border/50">
               <span className="editorial-label mb-4 block text-primary font-bold tracking-[0.2em] uppercase text-xs">
                 {t('nominations.label_2027', '2027 Edition')}
               </span>
+              
               <h2 className="text-3xl md:text-5xl font-display text-foreground mb-6">
                 {t('nominations.title_2027', 'Submit a Nomination')}
               </h2>
+              
               <p className="text-muted-foreground text-lg mb-10 max-w-xl mx-auto leading-relaxed">
                 {t('nominations.desc_2027', 'To submit a nomination for the 2027 edition of the ONE UAE Awards, please contact the Awards Secretariat.')}
               </p>
+              
               <Link to="/contact">
                 <Button 
                     size="lg" 
