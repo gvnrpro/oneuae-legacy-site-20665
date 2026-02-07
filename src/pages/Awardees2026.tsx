@@ -107,30 +107,33 @@ const Awardees2026 = () => {
             ) : (
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8">
                 {awardees.map((awardee) => (
-                  <article
+                  <Link
                     key={awardee.slug}
-                    className="reveal-up group rounded-xl overflow-hidden border border-background/10 bg-background/5 transition-all duration-500 hover:border-primary/40 hover:-translate-y-1 hover:shadow-[0_20px_40px_-20px_rgba(0,0,0,0.3)]"
+                    to={`/awardees/2026/${awardee.slug}`}
+                    className="reveal-up group rounded-xl overflow-hidden border border-background/10 bg-background/5 transition-all duration-500 hover:border-primary/40 hover:-translate-y-1 hover:shadow-[0_20px_40px_-20px_rgba(0,0,0,0.3)] block"
                   >
-                    <div className="aspect-[3/4] overflow-hidden">
-                      <img
-                        src={`/awardees/2026/${awardee.image}`}
-                        alt={`${awardee.name} – ${awardee.award}`}
-                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                        loading="lazy"
-                      />
-                    </div>
-                    <div className={`p-5 ${isRTL ? "text-right" : ""}`}>
-                      <h3 className="text-lg font-display text-background leading-snug mb-1">
-                        {awardee.name}
-                      </h3>
-                      <p className="text-sm text-primary leading-relaxed mb-2">
-                        {awardee.award}
-                      </p>
-                      <p className="text-xs text-background/50">
-                        {awardee.organization}
-                      </p>
-                    </div>
-                  </article>
+                    <article>
+                      <div className="aspect-[3/4] overflow-hidden">
+                        <img
+                          src={`/awardees/2026/${awardee.image}`}
+                          alt={`${awardee.name} – ${awardee.award}`}
+                          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div className={`p-5 ${isRTL ? "text-right" : ""}`}>
+                        <h3 className="text-lg font-display text-background leading-snug mb-1">
+                          {awardee.name}
+                        </h3>
+                        <p className="text-sm text-primary leading-relaxed mb-2">
+                          {awardee.award}
+                        </p>
+                        <p className="text-xs text-background/50">
+                          {awardee.organization}
+                        </p>
+                      </div>
+                    </article>
+                  </Link>
                 ))}
               </div>
             )}
