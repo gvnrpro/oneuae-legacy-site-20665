@@ -1,91 +1,11 @@
 [
   {
-    "name": "Ahmed Lamraoui",
-    "organization": "Lamraoui Group / IHRDF",
-    "award": "Versatile Personality in Global Investment & Human Rights Advocacy",
-    "year": 2026,
-    "slug": "ahmed-lamraoui-global-investment",
-    "image": "ahmed-lamraoui-global-investment.jpg"
-  },
-  {
-    "name": "Chaima Lounisi",
-    "organization": "Algeria",
-    "award": "Business Excellence in Sustainability & Innovation",
-    "year": 2026,
-    "slug": "chaima-lounisi-sustainability",
-    "image": "chaima-lounisi-sustainability.jpg"
-  },
-  {
-    "name": "Cynthia",
-    "organization": "Aivita Health Group",
-    "award": "Pioneer in Medical Innovation & Wellness Excellence",
-    "year": 2026,
-    "slug": "cynthia-medical-innovation",
-    "image": "cynthia-medical-innovation.jpg"
-  },
-  {
     "name": "Dr Abdullah Belhaif Al Nuaimi",
     "organization": "Sharjah Consultative Council",
     "award": "Excellence in Public Governance & Legislative Leadership",
     "year": 2026,
     "slug": "dr-abdullah-belhaif-al-nuaimi-public-governance",
     "image": "dr-abdullah-belhaif-al-nuaimi-public-governance.jpg"
-  },
-  {
-    "name": "Dr Hasanur Rahman",
-    "organization": "SK CEO",
-    "award": "Excellence in Global Pharmaceutical Quality & Operations",
-    "year": 2026,
-    "slug": "dr-hasanur-rahman-pharmaceutical-quality",
-    "image": "dr-hasanur-rahman-pharmaceutical-quality.jpg"
-  },
-  {
-    "name": "Sheikh Dr Fahd bin Salem Al Maatani Al Hudhali",
-    "organization": "Saudi Arabia",
-    "award": "Distinguished Leadership in Arab Heritage & Cultural Diplomacy",
-    "year": 2026,
-    "slug": "fahd-al-maatani-arab-heritage",
-    "image": "fahd-al-maatani-arab-heritage.jpg"
-  },
-  {
-    "name": "Fayez Ali Mohamed Ali",
-    "organization": "Al Usood Cargo",
-    "award": "Excellence in Jumbo Cargo & Global Freight Services",
-    "year": 2026,
-    "slug": "fayez-ali-mohamed-cargo-services",
-    "image": "fayez-ali-mohamed-cargo-services.jpg"
-  },
-  {
-    "name": "Francis Lapp",
-    "organization": "Sunreef Yachts",
-    "award": "Leadership in Sustainable Luxury Yachting",
-    "year": 2026,
-    "slug": "francis-lapp-sustainable-yachting",
-    "image": "francis-lapp-sustainable-yachting.jpg"
-  },
-  {
-    "name": "GS Murthy",
-    "organization": "ATDXT LLC",
-    "award": "Pioneer in Digital Transformation & Enterprise Technology",
-    "year": 2026,
-    "slug": "gs-murthy-digital-transformation",
-    "image": "gs-murthy-digital-transformation.jpg"
-  },
-  {
-    "name": "Gulf Craft",
-    "organization": "Gulf Craft",
-    "award": "Lifetime Achievement – UAE Yachting Industry Pioneer",
-    "year": 2026,
-    "slug": "gulf-craft-yachting-pioneer",
-    "image": "gulf-craft-yachting-pioneer.jpg"
-  },
-  {
-    "name": "Haitham Al Zarouni",
-    "organization": "UAE Ministry of Sports",
-    "award": "Distinguished Contribution to Sports & Community Vitality",
-    "year": 2026,
-    "slug": "haitham-al-zarouni-sports-community",
-    "image": "haitham-al-zarouni-sports-community.jpg"
   },
   {
     "name": "Jassim Obaid Al Zaabi",
@@ -96,28 +16,20 @@
     "image": "jassim-obaid-al-zaabi-media-literature.jpg"
   },
   {
-    "name": "Jenny Mir",
-    "organization": "The Black Circle",
-    "award": "Excellence in Digital Asset Management & Elite Networking Leadership",
+    "name": "Haitham Al Zarouni",
+    "organization": "UAE Ministry of Sports",
+    "award": "Distinguished Contribution to Sports & Community Vitality",
     "year": 2026,
-    "slug": "jenny-mir-digital-assets",
-    "image": "jenny-mir-digital-assets.jpg"
+    "slug": "haitham-al-zarouni-sports-community",
+    "image": "haitham-al-zarouni-sports-community.jpg"
   },
   {
-    "name": "Khalifat Ali Mustafa Al Ameen Wd Eissa",
-    "organization": "Sudan",
-    "award": "Excellence in International Diplomacy & Humanitarian Leadership",
+    "name": "Sheikh Dr Fahd bin Salem Al Maatani Al Hudhali",
+    "organization": "Saudi Arabia",
+    "award": "Distinguished Leadership in Arab Heritage & Cultural Diplomacy",
     "year": 2026,
-    "slug": "khalifat-ali-mustafa-humanitarian-leadership",
-    "image": "khalifat-ali-mustafa-humanitarian-leadership.jpg"
-  },
-  {
-    "name": "Master Hang Zang",
-    "organization": "Chinese Culture & Education Association",
-    "award": "Global Icon of Chinese Martial Arts & Cultural Heritage",
-    "year": 2026,
-    "slug": "master-hang-zang-martial-arts",
-    "image": "master-hang-zang-martial-arts.jpg"
+    "slug": "fahd-al-maatani-arab-heritage",
+    "image": "fahd-al-maatani-arab-heritage.jpg"
   },
   {
     "name": "Mobarak Bin Dohekl Alsolami",
@@ -128,28 +40,28 @@
     "image": "mobarak-alsolami-hospitality-management.jpg"
   },
   {
-    "name": "PA Muhammed Shafi Ibrahim",
-    "organization": "Pace Group",
-    "award": "Distinguished Leadership in Educational Excellence",
+    "name": "Saeed Ali Saeed Al Kheyli",
+    "organization": "Abu Dhabi Police / Gazprom",
+    "award": "Strategic Excellence in Energy Security & Public Safety",
     "year": 2026,
-    "slug": "muhammed-shafi-ibrahim-education",
-    "image": "muhammed-shafi-ibrahim-education.jpg"
+    "slug": "saeed-al-kheyli-energy-security",
+    "image": "saeed-al-kheyli-energy-security.jpg"
   },
   {
-    "name": "Mujtaba Shaikhani",
-    "organization": "Gulf-O-Flex",
-    "award": "Innovation in Sustainable Engineering & Green Solutions",
+    "name": "Khalifat Ali Mustafa Al Ameen Wd Eissa",
+    "organization": "Sudan (Architect)",
+    "award": "Excellence in International Diplomacy & Humanitarian Leadership",
     "year": 2026,
-    "slug": "mujtaba-shaikhani-sustainable-engineering",
-    "image": "mujtaba-shaikhani-sustainable-engineering.jpg"
+    "slug": "khalifat-ali-mustafa-humanitarian-leadership",
+    "image": "khalifat-ali-mustafa-humanitarian-leadership.jpg"
   },
   {
-    "name": "Ramaswamy Chockalingam",
-    "organization": "Fortius Group",
-    "award": "Excellence in Strategic Financial Advisory & Wealth Management",
+    "name": "Ahmed Lamraoui",
+    "organization": "Lamraoui Group / IHRDF",
+    "award": "Versatile Personality in Global Investment & Human Rights Advocacy",
     "year": 2026,
-    "slug": "ramaswamy-chockalingam-financial-advisory",
-    "image": "ramaswamy-chockalingam-financial-advisory.jpg"
+    "slug": "ahmed-lamraoui-global-investment",
+    "image": "ahmed-lamraoui-global-investment.jpg"
   },
   {
     "name": "Riazul Islam Fihan",
@@ -160,20 +72,20 @@
     "image": "riazul-islam-fihan-real-estate-fintech.jpg"
   },
   {
-    "name": "Saeed Ali Saeed Al Kheyli",
-    "organization": "Abu Dhabi Police / Gazprom",
-    "award": "Strategic Excellence in Energy Security & Public Safety",
+    "name": "PA Muhammed Shafi Ibrahim",
+    "organization": "Pace Group",
+    "award": "Distinguished Leadership in Educational Excellence",
     "year": 2026,
-    "slug": "saeed-al-kheyli-energy-security",
-    "image": "saeed-al-kheyli-energy-security.jpg"
+    "slug": "muhammed-shafi-ibrahim-education",
+    "image": "muhammed-shafi-ibrahim-education.jpg"
   },
   {
-    "name": "Sai Syam Ramachandran",
-    "organization": "ELL Properties",
-    "award": "Visionary Leader in Real Estate Advisory & Digital Influence",
+    "name": "Ramaswamy Chockalingam",
+    "organization": "Fortius Group",
+    "award": "Excellence in Strategic Financial Advisory & Wealth Management",
     "year": 2026,
-    "slug": "sai-syam-ramachandran-real-estate",
-    "image": "sai-syam-ramachandran-real-estate.jpg"
+    "slug": "ramaswamy-chockalingam-financial-advisory",
+    "image": "ramaswamy-chockalingam-financial-advisory.jpg"
   },
   {
     "name": "Salim Moopan",
@@ -184,12 +96,36 @@
     "image": "salim-moopan-global-enterprise.jpg"
   },
   {
-    "name": "Sirajudheen Thottathil Mustafa",
-    "organization": "Aster DM Healthcare",
-    "award": "Excellence in International Healthcare Strategy & Growth",
+    "name": "GS Murthy",
+    "organization": "ATDXT LLC",
+    "award": "Pioneer in Digital Transformation & Enterprise Technology",
     "year": 2026,
-    "slug": "sirajudheen-mustafa-healthcare-strategy",
-    "image": "sirajudheen-mustafa-healthcare-strategy.jpg"
+    "slug": "gs-murthy-digital-transformation",
+    "image": "gs-murthy-digital-transformation.jpg"
+  },
+  {
+    "name": "Sai Syam Ramachandran",
+    "organization": "ELL Properties",
+    "award": "Visionary Leader in Real Estate Advisory & Digital Influence",
+    "year": 2026,
+    "slug": "sai-syam-ramachandran-real-estate",
+    "image": "sai-syam-ramachandran-real-estate.jpg"
+  },
+  {
+    "name": "Fayez Ali Mohamed Ali",
+    "organization": "Al Usood Cargo",
+    "award": "Excellence in Jumbo Cargo & Global Freight Services",
+    "year": 2026,
+    "slug": "fayez-ali-mohamed-cargo-services",
+    "image": "fayez-ali-mohamed-cargo-services.jpg"
+  },
+  {
+    "name": "Mujtaba Shaikhani",
+    "organization": "Gulf-O-Flex",
+    "award": "Innovation in Sustainable Engineering & Green Solutions",
+    "year": 2026,
+    "slug": "mujtaba-shaikhani-sustainable-engineering",
+    "image": "mujtaba-shaikhani-sustainable-engineering.jpg"
   },
   {
     "name": "Sonia G Caballero",
@@ -200,6 +136,14 @@
     "image": "sonia-g-caballero-artistic-innovation.jpg"
   },
   {
+    "name": "Cynthia",
+    "organization": "Aivita Health Group",
+    "award": "Pioneer in Medical Innovation & Wellness Excellence",
+    "year": 2026,
+    "slug": "cynthia-medical-innovation",
+    "image": "cynthia-medical-innovation.jpg"
+  },
+  {
     "name": "T.P. Jamaludeen",
     "organization": "Sharjah Petroleum Department",
     "award": "Lifetime Achievement in Public Service & Corporate Loyalty",
@@ -208,11 +152,67 @@
     "image": "tp-jamaludeen-lifetime-achievement.jpg"
   },
   {
+    "name": "Francis Lapp",
+    "organization": "Sunreef Yachts",
+    "award": "Leadership in Sustainable Luxury Yachting",
+    "year": 2026,
+    "slug": "francis-lapp-sustainable-yachting",
+    "image": "francis-lapp-sustainable-yachting.jpg"
+  },
+  {
     "name": "VistaJet",
     "organization": "VistaJet",
     "award": "Leadership in Global Business Aviation",
     "year": 2026,
     "slug": "vistajet-global-aviation",
     "image": "vistajet-global-aviation.jpg"
+  },
+  {
+    "name": "Gulf Craft",
+    "organization": "Gulf Craft",
+    "award": "Lifetime Achievement – UAE Yachting Industry Pioneer",
+    "year": 2026,
+    "slug": "gulf-craft-yachting-pioneer",
+    "image": "gulf-craft-yachting-pioneer.jpg"
+  },
+  {
+    "name": "Jenny Mir",
+    "organization": "The Black Circle",
+    "award": "Excellence in Digital Asset Management & Elite Networking Leadership",
+    "year": 2026,
+    "slug": "jenny-mir-digital-assets",
+    "image": "jenny-mir-digital-assets.jpg"
+  },
+  {
+    "name": "Sirajudheen Thottathil Mustafa",
+    "organization": "Aster DM Healthcare",
+    "award": "Excellence in International Healthcare Strategy & Growth",
+    "year": 2026,
+    "slug": "sirajudheen-mustafa-healthcare-strategy",
+    "image": "sirajudheen-mustafa-healthcare-strategy.jpg"
+  },
+  {
+    "name": "Master Hang Zang",
+    "organization": "Chinese Culture & Education Association",
+    "award": "Global Icon of Chinese Martial Arts & Cultural Heritage",
+    "year": 2026,
+    "slug": "master-hang-zang-martial-arts",
+    "image": "master-hang-zang-martial-arts.jpg"
+  },
+  {
+    "name": "Dr Hasanur Rahman",
+    "organization": "SK CEO",
+    "award": "Excellence in Global Pharmaceutical Quality & Operations",
+    "year": 2026,
+    "slug": "dr-hasanur-rahman-pharmaceutical-quality",
+    "image": "dr-hasanur-rahman-pharmaceutical-quality.jpg"
+  },
+  {
+    "name": "Chaima Lounisi",
+    "organization": "Algeria",
+    "award": "Business Excellence in Sustainability & Innovation",
+    "year": 2026,
+    "slug": "chaima-lounisi-sustainability",
+    "image": "chaima-lounisi-sustainability.jpg"
   }
 ]
