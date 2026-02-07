@@ -341,8 +341,60 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Audience */}
+      {/* 2026 Awardees Spotlight */}
       <section className="py-20 md:py-28 bg-background">
+        <div className="container mx-auto px-6 lg:px-8 max-w-5xl">
+          <div className="reveal-up mb-12">
+            <div className={`flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 ${isRTL ? 'sm:flex-row-reverse' : ''}`}>
+              <div>
+                <span className="text-xs uppercase tracking-[0.2em] text-muted-foreground mb-4 block">
+                  2026 Honourees
+                </span>
+                <h2 className="text-3xl md:text-4xl lg:text-5xl font-display text-foreground">
+                  Award Recipients
+                </h2>
+              </div>
+              <Link to="/awardees/2026">
+                <Button variant="ghost" className={`group text-muted-foreground hover:text-foreground ${isRTL ? 'flex-row-reverse' : ''}`}>
+                  View All 27 Awardees
+                  <ArrowRight className={`w-4 h-4 group-hover:translate-x-1 transition-transform ${isRTL ? 'mr-2 rotate-180 group-hover:-translate-x-1' : 'ml-2'}`} />
+                </Button>
+              </Link>
+            </div>
+          </div>
+
+          <div className="reveal-stagger grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+            {[
+              { name: "Ahmed Lamraoui", slug: "ahmed-lamraoui-global-investment", image: "ahmed-lamraoui-global-investment.jpg", award: "Global Investment & Human Rights Advocacy" },
+              { name: "Dr Abdullah Belhaif Al Nuaimi", slug: "dr-abdullah-belhaif-al-nuaimi-public-governance", image: "dr-abdullah-belhaif-al-nuaimi-public-governance.jpg", award: "Public Governance & Legislative Leadership" },
+              { name: "Francis Lapp", slug: "francis-lapp-sustainable-yachting", image: "francis-lapp-sustainable-yachting.jpg", award: "Sustainable Luxury Yachting" },
+              { name: "T.P. Jamaludeen", slug: "tp-jamaludeen-lifetime-achievement", image: "tp-jamaludeen-lifetime-achievement.jpg", award: "Lifetime Achievement" },
+            ].map((awardee) => (
+              <Link
+                key={awardee.slug}
+                to={`/awardees/2026/${awardee.slug}`}
+                className="group block rounded-xl overflow-hidden card-premium"
+              >
+                <div className="aspect-[3/4] overflow-hidden">
+                  <img
+                    src={`/awardees/2026/${awardee.image}`}
+                    alt={`${awardee.name} – ${awardee.award}`}
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    loading="lazy"
+                  />
+                </div>
+                <div className={`p-4 ${isRTL ? 'text-right' : ''}`}>
+                  <h3 className="text-sm font-display text-foreground leading-snug mb-1 truncate">{awardee.name}</h3>
+                  <p className="text-xs text-muted-foreground truncate">{awardee.award}</p>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Audience */}
+      <section className="py-20 md:py-28 bg-secondary/50">
         <div className="container mx-auto px-6 lg:px-8 max-w-5xl">
           <div className="reveal-up text-center mb-12">
             <span className="text-xs uppercase tracking-[0.2em] text-muted-foreground mb-4 block">
@@ -355,7 +407,7 @@ const Home = () => {
           
           <div className={`reveal-stagger flex flex-wrap justify-center gap-3 ${isRTL ? 'flex-row-reverse' : ''}`}>
             {(t('audience.list') as unknown as string[]).map((item: string, index: number) => (
-              <span key={index} className="px-5 py-3 bg-secondary text-foreground text-sm rounded-full">
+              <span key={index} className="px-5 py-3 bg-background text-foreground text-sm rounded-full">
                 {item}
               </span>
             ))}
