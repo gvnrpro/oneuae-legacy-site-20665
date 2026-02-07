@@ -11,6 +11,7 @@ import Partnerships from "./pages/Partnerships";
 import Gala from "./pages/Gala";
 import Nominate from "./pages/Nominate";
 import Contact from "./pages/Contact";
+import Awardees2026 from "./pages/Awardees2026";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -30,6 +31,7 @@ const App = () => (
             <Route path="/gala" element={<Gala />} />
             <Route path="/nominate" element={<Nominate />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/awardees/2026" element={<Awardees2026 />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
