@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
-import { useRef, useLayoutEffect } from "react";
+import { useRef, useLayoutEffect, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Calendar, MapPin, Users, Award, Star, Utensils, CalendarPlus } from "lucide-react";
+import { ArrowRight, Calendar, MapPin } from "lucide-react";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
@@ -11,9 +11,14 @@ import oneUaeLogo from "@/assets/one-uae-logo.png";
 import { MarqueeStrip } from "@/components/MarqueeStrip";
 import { gsap, ScrollTrigger } from "@/utils/gsap-config";
 import { prefersReducedMotion } from "@/utils/motion-preference";
-import { generateICSFile } from "@/utils/calendar";
 import SocialShare from "@/components/SocialShare";
 import { useLanguage } from "@/contexts/LanguageContext";
+
+declare global {
+  interface Window {
+    cloudinary?: any;
+  }
+}
 
 const Home = () => {
   const heroRef = useRef<HTMLElement>(null);
@@ -62,6 +67,33 @@ const Home = () => {
     return () => ctx.revert();
   }, []);
 
+  // Cloudinary Gallery Widget
+  useEffect(() => {
+    const initGallery = () => {
+      if (window.cloudinary && document.getElementById('my-gallery')) {
+        window.cloudinary.galleryWidget({
+          container: '#my-gallery',
+          cloudName: 'oneuaeaward',
+          mediaAssets: [{ tag: 'gallery' }],
+        }).render();
+      }
+    };
+
+    // Check if script already loaded
+    if (window.cloudinary) {
+      initGallery();
+    } else {
+      // Wait for script to load
+      const checkInterval = setInterval(() => {
+        if (window.cloudinary) {
+          clearInterval(checkInterval);
+          initGallery();
+        }
+      }, 500);
+      return () => clearInterval(checkInterval);
+    }
+  }, []);
+
   return (
     <div ref={mainRef} className="min-h-screen bg-background" dir={isRTL ? 'rtl' : 'ltr'}>
       <SEOHead />
@@ -81,31 +113,27 @@ const Home = () => {
           <div className="absolute inset-0 bg-cover bg-center bg-no-repeat" style={{ backgroundImage: `url(${heroBg})` }} />
         )}
 
-        {/* Overlay - asymmetric gradient */}
+        {/* Overlay */}
         <div className="absolute inset-0 bg-gradient-to-br from-black/80 via-black/60 to-black/40" />
         <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
         
-        {/* Content - Left-aligned editorial */}
+        {/* Content */}
         <div className="relative z-10 min-h-[100svh] flex items-end pb-20 lg:pb-32">
           <div className="container mx-auto px-6 lg:px-8">
             <div className="max-w-4xl">
-              {/* Logo */}
               <div className="mb-6">
                 <img src={oneUaeLogo} alt="ONE UAE Awards" className="h-14 md:h-16 drop-shadow-lg" />
               </div>
               
-              {/* Main Headline - ONE UAE Awards prominent */}
               <h1 className="text-[clamp(3rem,10vw,7rem)] font-display text-white leading-[0.9] tracking-tight mb-4">
                 {t('hero.title')}<br />
                 <span className="text-primary">{t('hero.titleAccent')}</span>
               </h1>
               
-              {/* Secondary tagline - smaller */}
               <p className="text-white/70 text-xl md:text-2xl font-medium mb-4">
                 {t('hero.tagline')}
               </p>
               
-              {/* Patronage */}
               <p className="text-white/50 text-base md:text-lg max-w-xl mb-4">
                 {t('hero.patronage')}
               </p>
@@ -122,11 +150,11 @@ const Home = () => {
                 </span>
               </div>
               
-              {/* CTAs */}
+              {/* CTAs - Post-event */}
               <div className={`flex flex-wrap gap-4 ${isRTL ? 'flex-row-reverse' : ''}`}>
-                <Link to="/nominate">
+                <Link to="/awardees/2026">
                   <Button size="lg" className={`bg-primary hover:bg-primary/90 text-primary-foreground h-14 px-8 text-base ${isRTL ? 'flex-row-reverse' : ''}`}>
-                    {t('hero.submitNomination')}
+                    {t('hero.viewAwardees')}
                     <ArrowRight className={`w-5 h-5 ${isRTL ? 'mr-2 rotate-180' : 'ml-2'}`} />
                   </Button>
                 </Link>
@@ -135,10 +163,6 @@ const Home = () => {
                     {t('hero.learnMore')}
                   </Button>
                 </Link>
-                <Button size="lg" variant="outline" onClick={generateICSFile} className={`bg-transparent border-white/30 text-white hover:bg-white/10 h-14 px-8 text-base ${isRTL ? 'flex-row-reverse' : ''}`}>
-                  <CalendarPlus className={`w-5 h-5 ${isRTL ? 'ml-2' : 'mr-2'}`} />
-                  {t('hero.addToCalendar')}
-                </Button>
               </div>
               
               {/* Social Share */}
@@ -149,7 +173,7 @@ const Home = () => {
           </div>
         </div>
         
-        {/* Scroll hint - minimal */}
+        {/* Scroll hint */}
         <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-10">
           <div className="w-px h-12 bg-gradient-to-b from-transparent via-white/40 to-transparent" />
         </div>
@@ -158,14 +182,14 @@ const Home = () => {
       {/* Marquee */}
       <MarqueeStrip />
 
-      {/* Stats - Horizontal strip */}
+      {/* Stats */}
       <section className="py-16 md:py-20 bg-card border-b border-border/50">
         <div className="container mx-auto px-6 lg:px-8">
           <div className={`reveal-stagger flex flex-col md:flex-row md:items-baseline md:justify-between gap-8 md:gap-4 ${isRTL ? 'md:flex-row-reverse' : ''}`}>
             {[
               { value: "750+", labelKey: "stats.guests" },
               { value: "18", labelKey: "stats.categories" },
-              { value: "6", labelKey: "stats.dignitaries" },
+              { value: "27", labelKey: "stats.awardees" },
               { value: "1", labelKey: "stats.night" },
             ].map((stat, i) => (
               <div key={i} className={`flex items-baseline gap-3 md:gap-4 ${isRTL ? 'flex-row-reverse' : ''}`}>
@@ -181,18 +205,16 @@ const Home = () => {
         </div>
       </section>
 
-      {/* About - Split layout with large image */}
+      {/* About */}
       <section id="main-content" className="py-24 md:py-32 lg:py-40 bg-background">
         <div className="container mx-auto px-6 lg:px-8">
           <div className={`grid lg:grid-cols-2 gap-12 lg:gap-20 items-start ${isRTL ? 'lg:grid-flow-dense' : ''}`}>
-            {/* Left - Image */}
             <div className={`reveal-up ${isRTL ? 'lg:col-start-2' : ''}`}>
               <div className="aspect-[4/5] rounded-lg overflow-hidden">
                 <img src={trophyGold} alt="ONE UAE Awards Trophy" className="w-full h-full object-cover" />
               </div>
             </div>
             
-            {/* Right - Content */}
             <div className={`reveal-up lg:sticky lg:top-32 ${isRTL ? 'lg:col-start-1 lg:row-start-1' : ''}`}>
               <span className="text-xs uppercase tracking-[0.2em] text-muted-foreground mb-4 block">
                 {t('about.label')}
@@ -234,129 +256,22 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Categories - List style */}
-      <section className="py-24 md:py-32 bg-secondary/50">
-        <div className="container mx-auto px-6 lg:px-8 max-w-5xl">
-          <div className="reveal-up mb-16">
-            <span className="text-xs uppercase tracking-[0.2em] text-muted-foreground mb-4 block">
-              {t('categories.label')}
-            </span>
-            <div className={`flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 ${isRTL ? 'sm:flex-row-reverse' : ''}`}>
-              <h2 className="text-3xl md:text-4xl lg:text-5xl font-display text-foreground">
-                {t('categories.title')}
-              </h2>
-              <Link to="/categories">
-                <Button variant="ghost" className={`group text-muted-foreground hover:text-foreground ${isRTL ? 'flex-row-reverse' : ''}`}>
-                  {t('categories.viewAll')}
-                  <ArrowRight className={`w-4 h-4 group-hover:translate-x-1 transition-transform ${isRTL ? 'mr-2 rotate-180 group-hover:-translate-x-1' : 'ml-2'}`} />
-                </Button>
-              </Link>
-            </div>
-          </div>
-          
-          <div className="reveal-stagger divide-y divide-border">
-            {(t('categories.list') as unknown as string[]).map((category: string, index: number) => (
-              <div key={category} className={`py-6 flex items-center justify-between group cursor-pointer hover:bg-background/50 -mx-4 px-4 transition-colors ${isRTL ? 'flex-row-reverse' : ''}`}>
-                <div className={`flex items-center gap-6 ${isRTL ? 'flex-row-reverse' : ''}`}>
-                  <span className="text-sm text-muted-foreground font-mono w-8">
-                    {String(index + 1).padStart(2, '0')}
-                  </span>
-                  <span className="text-lg md:text-xl font-medium text-foreground group-hover:text-primary transition-colors">
-                    {category}
-                  </span>
-                </div>
-                <ArrowRight className={`w-5 h-5 text-muted-foreground group-hover:text-primary group-hover:translate-x-1 transition-all ${isRTL ? 'rotate-180 group-hover:-translate-x-1' : ''}`} />
-              </div>
-            ))}
-          </div>
-          
-          <p className="text-center text-muted-foreground mt-8">
-            {t('categories.more')}
-          </p>
-        </div>
-      </section>
-
-      {/* Event Program - Dark section */}
-      <section className="py-24 md:py-32 lg:py-40 bg-foreground text-background">
-        <div className="container mx-auto px-6 lg:px-8 max-w-6xl">
-          <div className={`grid lg:grid-cols-2 gap-16 lg:gap-24 ${isRTL ? 'lg:grid-flow-dense' : ''}`}>
-            {/* Left */}
-            <div className={`reveal-up ${isRTL ? 'lg:col-start-2' : ''}`}>
-              <span className="text-xs uppercase tracking-[0.2em] text-background/50 mb-4 block">
-                {t('program.label')}
-              </span>
-              <h2 className="text-3xl md:text-4xl lg:text-5xl font-display text-background mb-8">
-                {t('program.title')}
-              </h2>
-              
-              <div className="reveal-stagger space-y-0">
-                {[
-                  { time: "6:00 PM", eventKey: "program.reception", icon: Users },
-                  { time: "6:45 PM", eventKey: "program.opening", icon: Award },
-                  { time: "7:15 PM", eventKey: "program.awards", icon: Star },
-                  { time: "8:45 PM", eventKey: "program.dinner", icon: Utensils },
-                ].map((item, index) => {
-                  const Icon = item.icon;
-                  return (
-                    <div key={index} className={`flex items-center gap-6 py-5 border-b border-background/10 ${isRTL ? 'flex-row-reverse' : ''}`}>
-                      <span className="text-primary font-mono text-sm w-20">{item.time}</span>
-                      <Icon className="w-5 h-5 text-background/40" />
-                      <span className="text-background/80 text-lg">{t(item.eventKey)}</span>
-                    </div>
-                  );
-                })}
-              </div>
-              
-              <div className="mt-10">
-                <Link to="/gala">
-                  <Button variant="outline" size="lg" className={`border-background/30 text-background hover:bg-background/10 group ${isRTL ? 'flex-row-reverse' : ''}`}>
-                    {t('program.viewDetails')}
-                    <ArrowRight className={`w-4 h-4 group-hover:translate-x-1 transition-transform ${isRTL ? 'mr-2 rotate-180 group-hover:-translate-x-1' : 'ml-2'}`} />
-                  </Button>
-                </Link>
-              </div>
-            </div>
-            
-            {/* Right - Details */}
-            <div className={`reveal-up lg:pt-16 ${isRTL ? 'lg:col-start-1 lg:row-start-1' : ''}`}>
-              <div className="space-y-8">
-                {[
-                  { labelKey: "program.dateLabel", valueKey: "about.date" },
-                  { labelKey: "program.venueLabel", value: t('hero.venue') },
-                  { labelKey: "program.formatLabel", valueKey: "program.format" },
-                  { labelKey: "program.attendeesLabel", valueKey: "program.attendees" },
-                ].map((item, index) => (
-                  <div key={index}>
-                    <span className="text-xs uppercase tracking-[0.15em] text-background/40 block mb-1">
-                      {t(item.labelKey)}
-                    </span>
-                    <span className="text-xl text-background/90">
-                      {item.value || t(item.valueKey!)}
-                    </span>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* 2026 Awardees Spotlight */}
-      <section className="py-20 md:py-28 bg-background">
+      <section className="py-20 md:py-28 bg-foreground text-background">
         <div className="container mx-auto px-6 lg:px-8 max-w-5xl">
           <div className="reveal-up mb-12">
             <div className={`flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 ${isRTL ? 'sm:flex-row-reverse' : ''}`}>
               <div>
-                <span className="text-xs uppercase tracking-[0.2em] text-muted-foreground mb-4 block">
-                  2026 Honourees
+                <span className="text-xs uppercase tracking-[0.2em] text-background/50 mb-4 block">
+                  {t('awardees.label')}
                 </span>
-                <h2 className="text-3xl md:text-4xl lg:text-5xl font-display text-foreground">
-                  Award Recipients
+                <h2 className="text-3xl md:text-4xl lg:text-5xl font-display text-background">
+                  {t('awardees.title')}
                 </h2>
               </div>
               <Link to="/awardees/2026">
-                <Button variant="ghost" className={`group text-muted-foreground hover:text-foreground ${isRTL ? 'flex-row-reverse' : ''}`}>
-                  View All 27 Awardees
+                <Button variant="outline" className={`group border-background/30 text-background hover:bg-background/10 ${isRTL ? 'flex-row-reverse' : ''}`}>
+                  {t('awardees.viewAll')}
                   <ArrowRight className={`w-4 h-4 group-hover:translate-x-1 transition-transform ${isRTL ? 'mr-2 rotate-180 group-hover:-translate-x-1' : 'ml-2'}`} />
                 </Button>
               </Link>
@@ -373,7 +288,7 @@ const Home = () => {
               <Link
                 key={awardee.slug}
                 to={`/awardees/2026/${awardee.slug}`}
-                className="group block rounded-xl overflow-hidden card-premium"
+                className="group block rounded-xl overflow-hidden bg-background/5 border border-background/10 transition-all duration-500 hover:md:border-primary/50 hover:md:-translate-y-2"
               >
                 <div className="aspect-[3/4] overflow-hidden">
                   <img
@@ -384,8 +299,8 @@ const Home = () => {
                   />
                 </div>
                 <div className={`p-4 ${isRTL ? 'text-right' : ''}`}>
-                  <h3 className="text-sm font-display text-foreground leading-snug mb-1 truncate">{awardee.name}</h3>
-                  <p className="text-xs text-muted-foreground truncate">{awardee.award}</p>
+                  <h3 className="text-sm font-display text-background leading-snug mb-1 truncate">{awardee.name}</h3>
+                  <p className="text-xs text-background/50 truncate">{awardee.award}</p>
                 </div>
               </Link>
             ))}
@@ -393,44 +308,40 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Audience */}
-      <section className="py-20 md:py-28 bg-secondary/50">
-        <div className="container mx-auto px-6 lg:px-8 max-w-5xl">
-          <div className="reveal-up text-center mb-12">
+      {/* Photo Gallery - Cloudinary */}
+      <section className="py-20 md:py-28 bg-background">
+        <div className="container mx-auto px-6 lg:px-8 max-w-6xl">
+          <div className="reveal-up mb-12 text-center">
             <span className="text-xs uppercase tracking-[0.2em] text-muted-foreground mb-4 block">
-              {t('audience.label')}
+              {t('gallery.label')}
             </span>
-            <h2 className="text-3xl md:text-4xl font-display text-foreground">
-              {t('audience.title')}
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-display text-foreground">
+              {t('gallery.title')}
             </h2>
           </div>
-          
-          <div className={`reveal-stagger flex flex-wrap justify-center gap-3 ${isRTL ? 'flex-row-reverse' : ''}`}>
-            {(t('audience.list') as unknown as string[]).map((item: string, index: number) => (
-              <span key={index} className="px-5 py-3 bg-background text-foreground text-sm rounded-full">
-                {item}
-              </span>
-            ))}
-          </div>
+          <div id="my-gallery" className="reveal-up min-h-[300px]" />
         </div>
       </section>
 
-      {/* Partnership CTA */}
+      {/* 2027 Edition Teaser */}
       <section className="py-24 md:py-32 bg-primary/5 border-y border-primary/10">
         <div className="container mx-auto px-6 lg:px-8 max-w-3xl text-center">
           <div className="reveal-up">
             <span className="text-xs uppercase tracking-[0.2em] text-primary mb-4 block">
-              {t('partnership.label')}
+              {t('nextEdition.label')}
             </span>
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-display text-foreground mb-6">
-              {t('partnership.title')}
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-display text-foreground mb-4">
+              {t('nextEdition.title')}
             </h2>
-            <p className="text-muted-foreground text-lg mb-10 max-w-xl mx-auto">
-              {t('partnership.description')}
+            <p className="text-2xl text-muted-foreground font-display mb-6">
+              {t('nextEdition.dateTBA')}
             </p>
-            <Link to="/partnerships">
+            <p className="text-muted-foreground text-lg mb-10 max-w-xl mx-auto">
+              {t('nextEdition.description')}
+            </p>
+            <Link to="/contact">
               <Button size="lg" className={`h-14 px-10 text-base ${isRTL ? 'flex-row-reverse' : ''}`}>
-                {t('partnership.explore')}
+                {t('nextEdition.contactUs')}
                 <ArrowRight className={`h-5 w-5 ${isRTL ? 'mr-2 rotate-180' : 'ml-2'}`} />
               </Button>
             </Link>

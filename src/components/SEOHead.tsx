@@ -6,14 +6,16 @@ interface SEOHeadProps {
   keywords?: string;
   path?: string;
   image?: string;
+  imageAlt?: string;
 }
 
 const SEOHead = ({
   title = "ONE UAE International Business Awards 2026 | Celebrating Excellence",
-  description = "ONE UAE International Business Awards celebrates exceptional individuals and organizations shaping the UAE's future. Join us February 5th, 2026 at Zabeel Ladies Club for an evening of national pride and excellence.",
+  description = "ONE UAE International Business Awards celebrates exceptional individuals and organizations shaping the UAE's future. The 2026 edition took place on February 5th, 2026 at Zabeel Ladies Club, Dubai.",
   keywords = "ONE UAE Awards, international business awards, UAE excellence, national recognition, leadership awards, innovation awards, Dubai awards 2026",
   path = "",
   image = "https://oneuaeawards.ae/og-image.png",
+  imageAlt = "ONE UAE International Business Awards 2026 - Celebrating Excellence in the UAE",
 }: SEOHeadProps) => {
   const siteUrl = "https://oneuaeawards.ae";
   const fullUrl = `${siteUrl}${path}`;
@@ -36,7 +38,7 @@ const SEOHead = ({
       <meta property="og:image" content={image} />
       <meta property="og:image:width" content="1200" />
       <meta property="og:image:height" content="630" />
-      <meta property="og:image:alt" content="ONE UAE International Business Awards 2026 - Celebrating Excellence in the UAE" />
+      <meta property="og:image:alt" content={imageAlt} />
       <meta property="og:image:type" content="image/png" />
       <meta property="og:site_name" content="ONE UAE International Business Awards" />
       <meta property="og:locale" content="en_AE" />
@@ -68,7 +70,7 @@ const SEOHead = ({
           },
           contactPoint: {
             "@type": "ContactPoint",
-            email: "info@oneuaeaward.ae",
+            email: "info@oneuaeawards.ae",
             telephone: "+971562555100",
             contactType: "Customer Service",
           },
@@ -76,14 +78,14 @@ const SEOHead = ({
         })}
       </script>
 
-      {/* Structured Data - Event */}
+      {/* Structured Data - Event (past tense) */}
       <script type="application/ld+json">
         {JSON.stringify({
           "@context": "https://schema.org",
           "@type": "Event",
           name: "ONE UAE International Business Awards 2026",
           description:
-            "An exclusive black-tie ceremony celebrating unity, vision, and excellence in the United Arab Emirates.",
+            "The ONE UAE International Business Awards 2026 celebrated unity, vision, and excellence in the United Arab Emirates on February 5, 2026.",
           startDate: "2026-02-05T18:00:00+04:00",
           endDate: "2026-02-05T23:00:00+04:00",
           eventStatus: "https://schema.org/EventScheduled",

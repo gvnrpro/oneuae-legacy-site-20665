@@ -9,6 +9,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { gsap } from "@/utils/gsap-config";
 import { prefersReducedMotion } from "@/utils/motion-preference";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { Helmet } from "react-helmet";
 
 interface Awardee {
   name: string;
@@ -18,6 +19,8 @@ interface Awardee {
   slug: string;
   image: string;
 }
+
+const SITE_URL = "https://oneuaeawards.ae";
 
 const AwardeeDetail = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -106,13 +109,37 @@ const AwardeeDetail = () => {
     );
   }
 
+  const ogImageUrl = `${SITE_URL}/awardees/2026/${awardee.image}`;
+  const pageUrl = `${SITE_URL}/awardees/2026/${awardee.slug}`;
+
   return (
     <div ref={mainRef} className="min-h-screen bg-background" dir={isRTL ? "rtl" : "ltr"}>
       <SEOHead
         title={`${awardee.name} – ONE UAE Awards 2026`}
-        description={`${awardee.name} received the ${awardee.award} at the ONE UAE Awards 2026.`}
+        description={`${awardee.name} received the ${awardee.award} at the ONE UAE International Business Awards 2026.`}
         path={`/awardees/2026/${awardee.slug}`}
+        image={ogImageUrl}
       />
+
+      {/* Additional structured data for the awardee */}
+      <Helmet>
+        <meta property="og:image:alt" content={`${awardee.name} – ${awardee.award}`} />
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Person",
+            name: awardee.name,
+            award: awardee.award,
+            image: ogImageUrl,
+            url: pageUrl,
+            worksFor: {
+              "@type": "Organization",
+              name: awardee.organization,
+            },
+            description: `${awardee.name} received the ${awardee.award} at the ONE UAE International Business Awards 2026.`,
+          })}
+        </script>
+      </Helmet>
 
       <Navigation />
 

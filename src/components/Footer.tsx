@@ -16,12 +16,7 @@ const Footer = () => {
   const footerLinks = {
     main: [
       { labelKey: "nav.about", path: "/about" },
-      { labelKey: "nav.categories", path: "/categories" },
-      { labelKey: "nav.partnerships", path: "/partnerships" },
-      { labelKey: "nav.gala", path: "/gala" },
-    ],
-    actions: [
-      { labelKey: "nav.submitNomination", path: "/nominate" },
+      { labelKey: "nav.awardees", path: "/awardees/2026" },
       { labelKey: "nav.contact", path: "/contact" },
     ],
   };
@@ -29,7 +24,6 @@ const Footer = () => {
   useLayoutEffect(() => {
     if (!footerRef.current || !headingRef.current || prefersReducedMotion()) return;
     const ctx = gsap.context(() => {
-      // Heading scale reveal
       gsap.fromTo(headingRef.current, {
         scale: 0.95,
         autoAlpha: 0
@@ -45,7 +39,6 @@ const Footer = () => {
         }
       });
 
-      // Links stagger reveal
       gsap.fromTo('.footer-link', {
         y: 20,
         autoAlpha: 0
@@ -67,14 +60,12 @@ const Footer = () => {
 
   return (
     <footer ref={footerRef} className="bg-deep-charcoal text-white relative overflow-hidden">
-      {/* Subtle decorative element */}
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
       
       <div className="relative container mx-auto px-6 lg:px-8">
-        {/* Main Footer Content */}
-        <div className={`py-16 lg:py-20 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8 ${isRTL ? 'lg:grid-flow-dense' : ''}`}>
+        <div className={`py-16 lg:py-20 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 lg:gap-8 ${isRTL ? 'lg:grid-flow-dense' : ''}`}>
           {/* Brand Column */}
-          <div ref={headingRef} className={`lg:col-span-2 ${isRTL ? 'lg:col-start-3' : ''}`}>
+          <div ref={headingRef} className={`${isRTL ? 'lg:col-start-3' : ''}`}>
             <Link to="/" className="inline-block mb-6">
               <img src={oneUaeLogo} alt="ONE UAE International Business Awards" className="h-14 w-auto opacity-95 hover:opacity-100 transition-opacity" />
             </Link>
@@ -83,8 +74,6 @@ const Footer = () => {
               <span className="text-white/70">{t('hero.patronage').replace('Under the Patronage of ', '').replace('تحت رعاية ', '')}</span>
             </p>
             <div className={`flex items-center gap-3 text-sm ${isRTL ? 'flex-row-reverse' : ''}`}>
-              <span className="text-white/40">{t('hero.date')}</span>
-              <span className="w-1 h-1 rounded-full bg-primary" />
               <span className="text-white/40">{isRTL ? 'دبي، الإمارات' : 'Dubai, UAE'}</span>
             </div>
           </div>
@@ -133,7 +122,7 @@ const Footer = () => {
               <li className={isRTL ? 'text-right' : ''}>
                 <div className={`footer-link flex items-center gap-3 text-white/60 text-sm ${isRTL ? 'flex-row-reverse' : ''}`}>
                   <MapPin className="w-4 h-4 text-primary/70" />
-                  {t('hero.venue')}
+                  {isRTL ? 'دبي، الإمارات العربية المتحدة' : 'Dubai, United Arab Emirates'}
                 </div>
               </li>
             </ul>

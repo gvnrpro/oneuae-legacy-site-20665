@@ -6,10 +6,6 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { LanguageProvider } from "@/contexts/LanguageContext";
 import Home from "./pages/Home";
 import About from "./pages/About";
-import Categories from "./pages/Categories";
-import Partnerships from "./pages/Partnerships";
-import Gala from "./pages/Gala";
-import Nominate from "./pages/Nominate";
 import Contact from "./pages/Contact";
 import Awardees2026 from "./pages/Awardees2026";
 import AwardeeDetail from "./pages/AwardeeDetail";
@@ -27,10 +23,6 @@ const App = () => (
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
-            <Route path="/categories" element={<Categories />} />
-            <Route path="/partnerships" element={<Partnerships />} />
-            <Route path="/gala" element={<Gala />} />
-            <Route path="/nominate" element={<Nominate />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/awardees/2026" element={<Awardees2026 />} />
             <Route path="/awardees/2026/:slug" element={<AwardeeDetail />} />

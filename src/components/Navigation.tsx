@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Menu, X, ArrowRight } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import oneUaeLogo from "@/assets/one-uae-logo.png";
 import { useLanguage } from "@/contexts/LanguageContext";
 import LanguageToggle from "@/components/LanguageToggle";
@@ -15,8 +15,6 @@ const Navigation = () => {
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
-      
-      // Calculate scroll progress
       const winScroll = document.documentElement.scrollTop;
       const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
       const scrolled = (winScroll / height) * 100;
@@ -29,13 +27,11 @@ const Navigation = () => {
   const navLinks = [
     { path: "/", labelKey: "nav.home" },
     { path: "/about", labelKey: "nav.about" },
-    { path: "/categories", labelKey: "nav.categories" },
-    { path: "/partnerships", labelKey: "nav.partnerships" },
-    { path: "/gala", labelKey: "nav.gala" },
+    { path: "/awardees/2026", labelKey: "nav.awardees" },
     { path: "/contact", labelKey: "nav.contact" },
   ];
 
-  const isActive = (path: string) => location.pathname === path;
+  const isActive = (path: string) => location.pathname === path || (path === "/awardees/2026" && location.pathname.startsWith("/awardees/2026"));
   const isHome = location.pathname === "/";
   const isOverlay = isHome && !scrolled;
 
@@ -96,19 +92,6 @@ const Navigation = () => {
               <div className="mx-2">
                 <LanguageToggle variant={isOverlay ? 'light' : 'dark'} />
               </div>
-              
-              {/* CTA Button */}
-              <Link
-                to="/nominate"
-                className={`inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-300 group ${
-                  isOverlay
-                    ? "bg-white/10 backdrop-blur-sm text-white border border-white/20 hover:bg-white/20"
-                    : "bg-primary text-primary-foreground hover:bg-primary/90"
-                }`}
-              >
-                {t('nav.nominate')}
-                <ArrowRight className={`w-4 h-4 transition-transform ${isRTL ? 'rotate-180 group-hover:-translate-x-0.5' : 'group-hover:translate-x-0.5'}`} />
-              </Link>
             </div>
 
             {/* Mobile Menu Button */}
@@ -153,14 +136,6 @@ const Navigation = () => {
                   {t(link.labelKey)}
                 </Link>
               ))}
-              
-              <Link
-                to="/nominate"
-                onClick={() => setIsOpen(false)}
-                className="block mt-4 mx-4 px-4 py-3 bg-primary text-primary-foreground rounded-lg text-center font-medium"
-              >
-                {t('nav.submitNomination')}
-              </Link>
             </div>
           </div>
         </div>
