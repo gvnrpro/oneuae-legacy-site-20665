@@ -51,14 +51,14 @@ const About = () => {
     <div ref={mainRef} className="min-h-screen bg-background" dir={isRTL ? 'rtl' : 'ltr'}>
       <SEOHead
         title="About - ONE UAE International Business Awards 2026"
-        description="Learn about ONE UAE International Business Awards' mission to celebrate unity, vision, and excellence across the Emirates."
+        description="Learn about the ONE UAE International Business Awards and its mission to celebrate unity, vision, and excellence across the Emirates."
         keywords="about ONE UAE, UAE awards mission, Sheikh Sultan Al Nuaimi, UAE excellence platform"
         path="/about"
       />
       <Navigation />
       
       <main id="main-content">
-        {/* Hero - Full bleed image with offset text */}
+        {/* Hero */}
         <section className="pt-20">
           <div className="relative h-[50vh] min-h-[400px]">
             <img 
@@ -131,7 +131,7 @@ const About = () => {
           </div>
         </section>
 
-        {/* Patronage - Dark section */}
+        {/* Patronage */}
         <section className="py-24 md:py-32 lg:py-40 bg-foreground text-background">
           <div className="container mx-auto px-6 lg:px-8 max-w-5xl">
             <div className={`grid lg:grid-cols-2 gap-16 lg:gap-24 items-center ${isRTL ? 'lg:grid-flow-dense' : ''}`}>
@@ -187,9 +187,9 @@ const About = () => {
             </div>
             
             <div className={`reveal-up mt-12 ${isRTL ? 'text-right' : ''}`}>
-              <Link to="/nominate">
+              <Link to="/contact">
                 <Button size="lg" className={`h-14 px-8 ${isRTL ? 'flex-row-reverse' : ''}`}>
-                  {t('about.submitYourNomination')}
+                  {t('about.contactUs')}
                   <ArrowRight className={`w-5 h-5 ${isRTL ? 'mr-2 rotate-180' : 'ml-2'}`} />
                 </Button>
               </Link>
