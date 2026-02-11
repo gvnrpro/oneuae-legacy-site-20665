@@ -11,7 +11,6 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { prefersReducedMotion } from "@/utils/motion-preference";
 import { useLanguage } from "@/contexts/LanguageContext";
 
-// Register ScrollTrigger for GSAP
 gsap.registerPlugin(ScrollTrigger);
 
 interface Awardee {
@@ -26,7 +25,7 @@ interface Awardee {
 const Awardees2026 = () => {
   const mainRef = useRef<HTMLDivElement>(null);
   const gridRef = useRef<HTMLUListElement>(null);
-  const { isRTL } = useLanguage(); // Removed 't' as we aren't using it for the fixed text
+  const { isRTL } = useLanguage();
   const [awardees, setAwardees] = useState<Awardee[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<boolean>(false);
@@ -35,30 +34,19 @@ const Awardees2026 = () => {
     setLoading(true);
     setError(false);
     fetch("/data/awardees-2026.json")
-      .then((res) => {
-        if (!res.ok) throw new Error("Failed to load");
-        return res.json();
-      })
-      .then((data: Awardee[]) => {
-        setAwardees(data);
-        setLoading(false);
-      })
-      .catch(() => {
-        setError(true);
-        setLoading(false);
-      });
+      .then((res) => { if (!res.ok) throw new Error("Failed to load"); return res.json(); })
+      .then((data: Awardee[]) => { setAwardees(data); setLoading(false); })
+      .catch(() => { setError(true); setLoading(false); });
   };
 
-  useEffect(() => {
-    fetchData();
-  }, []);
+  useEffect(() => { fetchData(); }, []);
 
   useLayoutEffect(() => {
     if (prefersReducedMotion() || loading || error) return;
     ScrollTrigger.refresh();
     const ctx = gsap.context(() => {
       gsap.fromTo(".hero-animate", { y: 40, autoAlpha: 0 }, {
-          y: 0, autoAlpha: 1, duration: 1, stagger: 0.1, ease: "power3.out",
+        y: 0, autoAlpha: 1, duration: 1, stagger: 0.1, ease: "power3.out",
       });
 
       if (gridRef.current) {
@@ -67,7 +55,7 @@ const Awardees2026 = () => {
           start: "top 90%",
           onEnter: (batch) => {
             gsap.fromTo(batch, { y: 50, autoAlpha: 0 }, {
-                y: 0, autoAlpha: 1, duration: 0.7, stagger: 0.1, ease: "power2.out", overwrite: true,
+              y: 0, autoAlpha: 1, duration: 0.7, stagger: 0.1, ease: "power2.out", overwrite: true,
             });
           },
           once: true,
@@ -75,8 +63,8 @@ const Awardees2026 = () => {
       }
 
       gsap.fromTo(".cta-animate", { y: 30, autoAlpha: 0 }, {
-          y: 0, autoAlpha: 1, duration: 0.8,
-          scrollTrigger: { trigger: ".cta-section", start: "top 85%" },
+        y: 0, autoAlpha: 1, duration: 0.8,
+        scrollTrigger: { trigger: ".cta-section", start: "top 85%" },
       });
     }, mainRef);
     return () => ctx.revert();
@@ -93,9 +81,14 @@ const Awardees2026 = () => {
       <Navigation />
 
       <main id="main-content">
-        {/* --- HERO SECTION (HARDCODED) --- */}
+        {/* Hero with subtle pattern */}
         <section className="relative pt-28 pb-16 md:pt-40 md:pb-24 overflow-hidden">
           <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-5xl h-[500px] bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-primary/10 via-background/0 to-transparent pointer-events-none -z-10" />
+          {/* Dot pattern */}
+          <div className="absolute inset-0 -z-10 opacity-[0.03]" style={{
+            backgroundImage: 'radial-gradient(circle, hsl(var(--foreground)) 1px, transparent 1px)',
+            backgroundSize: '24px 24px'
+          }} />
           
           <div className="container mx-auto px-6 lg:px-8 max-w-6xl">
             <div className={`${isRTL ? "text-right" : "text-left"}`}>
@@ -110,15 +103,22 @@ const Awardees2026 = () => {
               <p className="hero-animate text-muted-foreground text-base md:text-xl max-w-2xl leading-relaxed">
                 {loading 
                   ? "Retrieving honorees..." 
-                  : "Celebrating the pioneers and organizations recognized at the ONE UAE Awards 2026."}
+                  : `Celebrating the ${awardees.length} pioneers and organizations recognized at the ONE UAE Awards 2026.`}
               </p>
             </div>
           </div>
         </section>
 
-        {/* --- GRID SECTION --- */}
+        {/* Grid */}
         <section className="py-16 md:py-32 bg-foreground text-background">
           <div className="container mx-auto px-6 lg:px-8 max-w-7xl">
+            {/* Count indicator */}
+            {!loading && !error && awardees.length > 0 && (
+              <div className="mb-8 text-background/30 text-xs uppercase tracking-widest">
+                Showing {awardees.length} of {awardees.length} Honourees
+              </div>
+            )}
+
             {loading ? (
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                 {Array.from({ length: 8 }).map((_, i) => (
@@ -148,16 +148,22 @@ const Awardees2026 = () => {
                   <li key={awardee.slug} className="awardee-card opacity-0">
                     <Link
                       to={`/awardees/2026/${awardee.slug}`}
-                      className="group flex flex-col h-full rounded-xl overflow-hidden bg-white/5 border border-white/10 transition-all duration-500 hover:md:border-primary/50 hover:md:-translate-y-2 hover:shadow-2xl"
+                      className="group flex flex-col h-full rounded-xl overflow-hidden bg-white/5 border border-white/10 transition-all duration-500 hover:md:border-primary/50 hover:md:-translate-y-2 hover:shadow-2xl relative"
                     >
                       <article className="flex flex-col h-full">
-                        <div className="aspect-[3/4] overflow-hidden bg-background/10">
+                        <div className="aspect-[3/4] overflow-hidden bg-background/10 relative">
                           <img
                             src={`/awardees/2026/${awardee.image}`}
                             alt={awardee.name}
                             className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                             loading="lazy"
                           />
+                          {/* Gold glow on hover */}
+                          <div className="absolute inset-0 bg-gradient-to-t from-primary/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                          {/* Arrow reveal */}
+                          <div className="absolute bottom-3 right-3 opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-2 group-hover:translate-y-0">
+                            <ArrowRight className="w-5 h-5 text-primary" />
+                          </div>
                         </div>
                         <div className={`p-6 flex-1 flex flex-col ${isRTL ? "text-right" : "text-left"}`}>
                           <p className="text-[10px] font-bold tracking-widest text-primary mb-2 uppercase">
@@ -181,7 +187,7 @@ const Awardees2026 = () => {
           </div>
         </section>
 
-        {/* --- CTA SECTION (HARDCODED) --- */}
+        {/* CTA */}
         <section className="cta-section py-20 md:py-32">
           <div className="container mx-auto px-6 lg:px-8 max-w-4xl text-center">
             <div className="cta-animate bg-muted/30 rounded-3xl p-8 md:p-16 border border-border/50">
