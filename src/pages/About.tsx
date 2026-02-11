@@ -20,22 +20,21 @@ const About = () => {
 
     const ctx = gsap.context(() => {
       gsap.utils.toArray('.reveal-up').forEach((el: any) => {
-        gsap.fromTo(
-          el,
-          { y: 60, opacity: 0 },
-          {
-            y: 0,
-            opacity: 1,
-            duration: 1,
-            ease: 'power3.out',
-            scrollTrigger: {
-              trigger: el,
-              start: 'top 85%',
-              toggleActions: 'play none none none',
-            },
-          }
-        );
+        gsap.fromTo(el, { y: 60, opacity: 0 }, {
+          y: 0, opacity: 1, duration: 1, ease: 'power3.out',
+          scrollTrigger: { trigger: el, start: 'top 85%', toggleActions: 'play none none none' },
+        });
       });
+
+      // Parallax on patron portrait
+      const patronImg = document.querySelector('.patron-parallax');
+      if (patronImg) {
+        gsap.to(patronImg, {
+          yPercent: -8,
+          ease: 'none',
+          scrollTrigger: { trigger: patronImg, start: 'top bottom', end: 'bottom top', scrub: 1 }
+        });
+      }
     }, mainRef);
 
     return () => ctx.revert();
@@ -60,11 +59,12 @@ const About = () => {
       <main id="main-content">
         {/* Hero */}
         <section className="pt-20">
-          <div className="relative h-[50vh] min-h-[400px]">
+          <div className="relative h-[50vh] min-h-[400px] overflow-hidden">
             <img 
               src={trophySkyline} 
               alt="ONE UAE Awards" 
-              className="w-full h-full object-cover"
+              className="w-full h-full object-cover scale-110"
+              style={{ willChange: 'transform' }}
             />
             <div className={`absolute inset-0 bg-gradient-to-r ${isRTL ? 'from-transparent via-background/70 to-background' : 'from-background via-background/70 to-transparent'}`} />
             <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent" />
@@ -78,6 +78,7 @@ const About = () => {
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-display text-foreground leading-tight">
                 {t('about.title')}
               </h1>
+              <div className="gold-divider-left mt-6" />
             </div>
           </div>
         </section>
@@ -113,14 +114,14 @@ const About = () => {
         <section className="py-20 bg-secondary/50">
           <div className="container mx-auto px-6 lg:px-8 max-w-5xl">
             <div className="grid md:grid-cols-2 gap-8">
-              <div className={`reveal-up p-8 bg-background rounded-lg ${isRTL ? 'text-right' : ''}`}>
+              <div className={`reveal-up p-8 bg-background rounded-lg border border-border/50 hover:border-primary/20 transition-colors duration-500 ${isRTL ? 'text-right' : ''}`}>
                 <Target className={`w-6 h-6 text-primary mb-4 ${isRTL ? 'mr-auto' : ''}`} />
                 <h3 className="text-xl font-display text-foreground mb-3">{t('about.mission')}</h3>
                 <p className="text-muted-foreground leading-relaxed">
                   {t('about.missionText')}
                 </p>
               </div>
-              <div className={`reveal-up p-8 bg-background rounded-lg ${isRTL ? 'text-right' : ''}`}>
+              <div className={`reveal-up p-8 bg-background rounded-lg border border-border/50 hover:border-primary/20 transition-colors duration-500 ${isRTL ? 'text-right' : ''}`}>
                 <Eye className={`w-6 h-6 text-primary mb-4 ${isRTL ? 'mr-auto' : ''}`} />
                 <h3 className="text-xl font-display text-foreground mb-3">{t('about.vision')}</h3>
                 <p className="text-muted-foreground leading-relaxed">
@@ -142,17 +143,20 @@ const About = () => {
                 <h2 className="text-3xl md:text-4xl font-display text-background mb-6 leading-tight">
                   {t('about.patronName')}
                 </h2>
+                <div className="h-px w-12 bg-gradient-to-r from-primary/60 to-transparent mb-6" />
                 <p className="text-background/60 leading-relaxed">
                   {t('about.patronDesc')}
                 </p>
               </div>
               
               <div className={`reveal-up flex ${isRTL ? 'lg:col-start-1 justify-center lg:justify-start' : 'justify-center lg:justify-end'}`}>
-                <div className="w-64 h-80 lg:w-72 lg:h-96 rounded-lg overflow-hidden">
+                <div className="w-64 h-80 lg:w-72 lg:h-96 rounded-lg overflow-hidden relative group">
+                  {/* Gold frame */}
+                  <div className="absolute -inset-2 border border-primary/20 rounded-lg pointer-events-none group-hover:border-primary/40 transition-colors duration-700 z-10" />
                   <img 
                     src={sheikhPortrait} 
                     alt={t('about.patronName')} 
-                    className="w-full h-full object-cover"
+                    className="patron-parallax w-full h-full object-cover scale-110"
                   />
                 </div>
               </div>

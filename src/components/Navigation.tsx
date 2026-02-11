@@ -1,9 +1,11 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef, useLayoutEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import oneUaeLogo from "@/assets/one-uae-logo.png";
 import { useLanguage } from "@/contexts/LanguageContext";
 import LanguageToggle from "@/components/LanguageToggle";
+import { gsap } from "@/utils/gsap-config";
+import { prefersReducedMotion } from "@/utils/motion-preference";
 
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -11,10 +13,13 @@ const Navigation = () => {
   const [scrollProgress, setScrollProgress] = useState(0);
   const location = useLocation();
   const { t, isRTL } = useLanguage();
+  const logoRef = useRef<HTMLImageElement>(null);
+  const mobileMenuRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
+      const isScrolled = window.scrollY > 20;
+      setScrolled(isScrolled);
       const winScroll = document.documentElement.scrollTop;
       const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
       const scrolled = (winScroll / height) * 100;
@@ -23,6 +28,28 @@ const Navigation = () => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  // Logo scale transition on scroll
+  useLayoutEffect(() => {
+    if (prefersReducedMotion() || !logoRef.current) return;
+    gsap.to(logoRef.current, {
+      height: scrolled ? 40 : 56,
+      duration: 0.4,
+      ease: 'power2.out',
+    });
+  }, [scrolled]);
+
+  // Mobile menu stagger animation
+  useEffect(() => {
+    if (!mobileMenuRef.current || prefersReducedMotion()) return;
+    if (isOpen) {
+      const links = mobileMenuRef.current.querySelectorAll('.mobile-nav-link');
+      gsap.fromTo(links, 
+        { x: -20, opacity: 0 },
+        { x: 0, opacity: 1, stagger: 0.06, duration: 0.4, ease: 'power2.out', delay: 0.1 }
+      );
+    }
+  }, [isOpen]);
 
   const navLinks = [
     { path: "/", labelKey: "nav.home" },
@@ -53,17 +80,24 @@ const Navigation = () => {
             : "bg-background/95 backdrop-blur-xl shadow-sm border-b border-border/50"
         }`}
       >
+        {/* Gold accent line when scrolled */}
+        {scrolled && (
+          <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
+        )}
+
         <div className="container mx-auto px-6 lg:px-8">
-          <div className="flex items-center justify-between h-20 lg:h-24">
+          <div className="flex items-center justify-between h-20 lg:h-28">
             {/* Logo */}
             <Link 
               to="/" 
               className="flex items-center group"
             >
               <img 
+                ref={logoRef}
                 src={oneUaeLogo} 
                 alt="ONE UAE International Business Awards" 
-                className="h-12 lg:h-14 w-auto transition-transform duration-300 group-hover:scale-105"
+                className="w-auto transition-transform duration-300 group-hover:scale-105"
+                style={{ height: 56 }}
               />
             </Link>
 
@@ -88,7 +122,6 @@ const Navigation = () => {
                 </Link>
               ))}
               
-              {/* Language Toggle */}
               <div className="mx-2">
                 <LanguageToggle variant={isOverlay ? 'light' : 'dark'} />
               </div>
@@ -117,21 +150,17 @@ const Navigation = () => {
               isOpen ? "max-h-screen opacity-100" : "max-h-0 opacity-0"
             }`}
           >
-            <div className="py-6 space-y-1 border-t border-border/50">
-              {navLinks.map((link, index) => (
+            <div ref={mobileMenuRef} className="py-6 space-y-1 border-t border-border/50">
+              {navLinks.map((link) => (
                 <Link
                   key={link.path}
                   to={link.path}
                   onClick={() => setIsOpen(false)}
-                  className={`block px-4 py-3 rounded-lg text-base font-medium transition-all duration-300 ${
+                  className={`mobile-nav-link block px-4 py-3 rounded-lg text-base font-medium transition-all duration-300 ${
                     isActive(link.path)
                       ? "bg-primary/10 text-primary"
                       : "text-muted-foreground hover:bg-muted hover:text-foreground"
                   }`}
-                  style={{ 
-                    animationDelay: `${index * 50}ms`,
-                    animationFillMode: 'both'
-                  }}
                 >
                   {t(link.labelKey)}
                 </Link>
