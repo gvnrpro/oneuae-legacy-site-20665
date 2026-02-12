@@ -42,32 +42,45 @@ const Awardees2026 = () => {
   useEffect(() => { fetchData(); }, []);
 
   useLayoutEffect(() => {
-    if (prefersReducedMotion() || loading || error) return;
-    ScrollTrigger.refresh();
-    const ctx = gsap.context(() => {
-      gsap.fromTo(".hero-animate", { y: 40, autoAlpha: 0 }, {
-        y: 0, autoAlpha: 1, duration: 1, stagger: 0.1, ease: "power3.out",
-      });
-
-      if (gridRef.current) {
-        const cards = gsap.utils.toArray<HTMLElement>(".awardee-card");
-        ScrollTrigger.batch(cards, {
-          start: "top 90%",
-          onEnter: (batch) => {
-            gsap.fromTo(batch, { y: 50, autoAlpha: 0 }, {
-              y: 0, autoAlpha: 1, duration: 0.7, stagger: 0.1, ease: "power2.out", overwrite: true,
-            });
-          },
-          once: true,
+    if (prefersReducedMotion() || loading || error || awardees.length === 0) return;
+    
+    // Small delay to ensure DOM is ready
+    const timer = setTimeout(() => {
+      ScrollTrigger.refresh();
+      const ctx = gsap.context(() => {
+        // Hero elements
+        gsap.fromTo(".hero-animate", { y: 40, autoAlpha: 0 }, {
+          y: 0, autoAlpha: 1, duration: 1, stagger: 0.1, ease: "power3.out",
         });
-      }
 
-      gsap.fromTo(".cta-animate", { y: 30, autoAlpha: 0 }, {
-        y: 0, autoAlpha: 1, duration: 0.8,
-        scrollTrigger: { trigger: ".cta-section", start: "top 85%" },
-      });
-    }, mainRef);
-    return () => ctx.revert();
+        // Animate cards individually with ScrollTrigger (not batch — more reliable on mobile)
+        if (gridRef.current) {
+          const cards = gridRef.current.querySelectorAll<HTMLElement>(".awardee-card");
+          cards.forEach((card, i) => {
+            gsap.fromTo(card, 
+              { y: 40, autoAlpha: 0 }, 
+              {
+                y: 0, autoAlpha: 1, duration: 0.6, ease: "power2.out",
+                delay: (i % 4) * 0.08,
+                scrollTrigger: {
+                  trigger: card,
+                  start: "top 95%",
+                  once: true,
+                },
+              }
+            );
+          });
+        }
+
+        gsap.fromTo(".cta-animate", { y: 30, autoAlpha: 0 }, {
+          y: 0, autoAlpha: 1, duration: 0.8,
+          scrollTrigger: { trigger: ".cta-section", start: "top 85%" },
+        });
+      }, mainRef);
+      return () => ctx.revert();
+    }, 100);
+
+    return () => clearTimeout(timer);
   }, [loading, error, awardees]);
 
   return (
@@ -81,51 +94,56 @@ const Awardees2026 = () => {
       <Navigation />
 
       <main id="main-content">
-        {/* Hero with subtle pattern */}
-        <section className="relative pt-28 pb-16 md:pt-40 md:pb-24 overflow-hidden">
-          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-5xl h-[500px] bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-primary/10 via-background/0 to-transparent pointer-events-none -z-10" />
-          {/* Dot pattern */}
-          <div className="absolute inset-0 -z-10 opacity-[0.03]" style={{
-            backgroundImage: 'radial-gradient(circle, hsl(var(--foreground)) 1px, transparent 1px)',
-            backgroundSize: '24px 24px'
-          }} />
+        {/* Hero — asymmetric editorial layout */}
+        <section className="relative pt-28 pb-12 md:pt-40 md:pb-20 overflow-hidden">
+          {/* Large decorative year */}
+          <div className="absolute top-20 md:top-16 right-0 pointer-events-none select-none overflow-hidden">
+            <span className="hero-animate text-[8rem] md:text-[14rem] lg:text-[18rem] font-display text-foreground/[0.03] leading-none tracking-tighter block translate-x-[10%]">
+              2026
+            </span>
+          </div>
           
-          <div className="container mx-auto px-6 lg:px-8 max-w-6xl">
-            <div className={`${isRTL ? "text-right" : "text-left"}`}>
-              <span className="hero-animate editorial-label mb-4 inline-block px-3 py-1 rounded-full border border-primary/20 bg-primary/5 text-primary text-[10px] font-bold tracking-[0.2em] uppercase">
-                ONE UAE Awards 2026
-              </span>
+          <div className="container mx-auto px-6 lg:px-8 max-w-7xl relative">
+            <div className={`max-w-3xl ${isRTL ? "text-right ml-auto" : "text-left"}`}>
+              <p className="hero-animate text-primary text-[11px] font-semibold tracking-[0.25em] uppercase mb-6">
+                The ONE UAE Awards
+              </p>
               
-              <h1 className="hero-animate text-4xl sm:text-5xl md:text-7xl font-display text-foreground leading-[1.1] mb-6 tracking-tight">
-                Award Recipients
+              <h1 className="hero-animate text-[clamp(2.5rem,8vw,6rem)] font-display text-foreground leading-[0.95] tracking-tight mb-6">
+                Award<br />Recipients
               </h1>
               
-              <p className="hero-animate text-muted-foreground text-base md:text-xl max-w-2xl leading-relaxed">
+              <div className="hero-animate h-px w-16 bg-primary/50 mb-6" />
+              
+              <p className="hero-animate text-muted-foreground text-lg md:text-xl max-w-lg leading-relaxed">
                 {loading 
-                  ? "Retrieving honorees..." 
-                  : `Celebrating the ${awardees.length} pioneers and organizations recognized at the ONE UAE Awards 2026.`}
+                  ? "Retrieving honourees…" 
+                  : `${awardees.length} pioneers and organisations recognised for outstanding contribution across ${awardees.length > 18 ? '18' : awardees.length} categories.`}
               </p>
             </div>
           </div>
         </section>
 
-        {/* Grid */}
-        <section className="py-16 md:py-32 bg-foreground text-background">
+        {/* Grid — dark section */}
+        <section className="py-16 md:py-24 bg-foreground text-background">
           <div className="container mx-auto px-6 lg:px-8 max-w-7xl">
-            {/* Count indicator */}
+            {/* Count + decorative line */}
             {!loading && !error && awardees.length > 0 && (
-              <div className="mb-8 text-background/30 text-xs uppercase tracking-widest">
-                Showing {awardees.length} of {awardees.length} Honourees
+              <div className={`flex items-center gap-4 mb-12 ${isRTL ? 'flex-row-reverse' : ''}`}>
+                <span className="text-background/25 text-[11px] uppercase tracking-[0.2em] whitespace-nowrap">
+                  {awardees.length} Honourees
+                </span>
+                <div className="flex-1 h-px bg-background/10" />
               </div>
             )}
 
             {loading ? (
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+              <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6">
                 {Array.from({ length: 8 }).map((_, i) => (
-                  <div key={i} className="space-y-4">
-                    <Skeleton className="aspect-[3/4] w-full rounded-xl bg-background/10" />
-                    <Skeleton className="h-4 w-2/3 bg-background/10" />
-                    <Skeleton className="h-3 w-full bg-background/10" />
+                  <div key={i} className="space-y-3">
+                    <Skeleton className="aspect-[3/4] w-full rounded-lg bg-background/10" />
+                    <Skeleton className="h-3 w-2/3 bg-background/10" />
+                    <Skeleton className="h-2 w-full bg-background/10" />
                   </div>
                 ))}
               </div>
@@ -140,43 +158,53 @@ const Awardees2026 = () => {
               <div className="text-center py-24 opacity-60">
                 <Award className="w-12 h-12 mx-auto mb-4 text-background/30" />
                 <h3 className="text-xl font-display">Coming Soon</h3>
-                <p className="text-sm mt-2">The 2026 honorees will be listed here shortly.</p>
+                <p className="text-sm mt-2">The 2026 honourees will be listed here shortly.</p>
               </div>
             ) : (
-              <ul ref={gridRef} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8">
-                {awardees.map((awardee) => (
-                  <li key={awardee.slug} className="awardee-card opacity-0">
+              <ul ref={gridRef} className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 md:gap-5">
+                {awardees.map((awardee, index) => (
+                  <li key={awardee.slug} className="awardee-card" style={{ visibility: 'hidden' }}>
                     <Link
                       to={`/awardees/2026/${awardee.slug}`}
-                      className="group flex flex-col h-full rounded-xl overflow-hidden bg-white/5 border border-white/10 transition-all duration-500 hover:md:border-primary/50 hover:md:-translate-y-2 hover:shadow-2xl relative"
+                      className="group block h-full"
                     >
-                      <article className="flex flex-col h-full">
-                        <div className="aspect-[3/4] overflow-hidden bg-background/10 relative">
+                      <article className="h-full flex flex-col">
+                        <div className="relative aspect-[3/4] overflow-hidden rounded-lg bg-background/5">
                           <img
                             src={`/awardees/2026/${awardee.image}`}
                             alt={awardee.name}
-                            className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                            className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
                             loading="lazy"
                           />
-                          {/* Gold glow on hover */}
-                          <div className="absolute inset-0 bg-gradient-to-t from-primary/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                          {/* Arrow reveal */}
-                          <div className="absolute bottom-3 right-3 opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-2 group-hover:translate-y-0">
-                            <ArrowRight className="w-5 h-5 text-primary" />
-                          </div>
-                        </div>
-                        <div className={`p-6 flex-1 flex flex-col ${isRTL ? "text-right" : "text-left"}`}>
-                          <p className="text-[10px] font-bold tracking-widest text-primary mb-2 uppercase">
-                            {awardee.award}
-                          </p>
-                          <h3 className="text-xl font-display text-background leading-snug mb-4 group-hover:text-primary transition-colors">
-                            {awardee.name}
-                          </h3>
-                          <div className="mt-auto pt-4 border-t border-white/10">
-                            <p className="text-xs text-background/50 italic truncate">
-                              {awardee.organization}
+                          {/* Gradient overlay at bottom */}
+                          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/0 to-transparent" />
+                          
+                          {/* Number */}
+                          <span className="absolute top-3 left-3 text-[10px] font-mono text-white/30 tracking-wider">
+                            {String(index + 1).padStart(2, '0')}
+                          </span>
+                          
+                          {/* Name overlay on image — mobile friendly */}
+                          <div className={`absolute bottom-0 left-0 right-0 p-3 md:p-4 ${isRTL ? 'text-right' : ''}`}>
+                            <h3 className="text-sm md:text-base font-display text-white leading-snug mb-0.5 drop-shadow-lg">
+                              {awardee.name}
+                            </h3>
+                            <p className="text-[10px] md:text-xs text-white/60 leading-tight line-clamp-2">
+                              {awardee.award}
                             </p>
                           </div>
+                          
+                          {/* Hover arrow */}
+                          <div className="absolute top-3 right-3 w-7 h-7 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-1 group-hover:translate-y-0">
+                            <ArrowRight className="w-3 h-3 text-white" />
+                          </div>
+                        </div>
+                        
+                        {/* Minimal text below — organisation only */}
+                        <div className={`pt-2.5 pb-1 ${isRTL ? 'text-right' : ''}`}>
+                          <p className="text-[11px] text-background/35 truncate italic">
+                            {awardee.organization}
+                          </p>
                         </div>
                       </article>
                     </Link>
@@ -187,23 +215,23 @@ const Awardees2026 = () => {
           </div>
         </section>
 
-        {/* CTA */}
-        <section className="cta-section py-20 md:py-32">
-          <div className="container mx-auto px-6 lg:px-8 max-w-4xl text-center">
-            <div className="cta-animate bg-muted/30 rounded-3xl p-8 md:p-16 border border-border/50">
-              <span className="editorial-label mb-4 block text-primary font-bold tracking-[0.2em] uppercase text-xs">
+        {/* CTA — clean, not boxed */}
+        <section className="cta-section py-24 md:py-32">
+          <div className="container mx-auto px-6 lg:px-8 max-w-3xl text-center">
+            <div className="cta-animate">
+              <p className="text-primary text-[11px] font-semibold tracking-[0.25em] uppercase mb-4">
                 2027 Edition
-              </span>
-              <h2 className="text-3xl md:text-5xl font-display text-foreground mb-6">
-                Submit a Nomination
+              </p>
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-display text-foreground mb-5 leading-tight">
+                Nominations for 2027
               </h2>
-              <p className="text-muted-foreground text-lg mb-10 max-w-xl mx-auto leading-relaxed">
-                To submit a nomination for the 2027 edition of the ONE UAE Awards, please contact the Awards Secretariat.
+              <p className="text-muted-foreground text-base md:text-lg mb-10 max-w-md mx-auto leading-relaxed">
+                To submit a nomination for the next edition, please contact the Awards Secretariat.
               </p>
               <Link to="/contact">
-                <Button size="lg" className={`h-14 px-10 text-base rounded-full shadow-lg group gap-3 ${isRTL ? "flex-row-reverse" : ""}`}>
-                  Contact Awards Secretariat
-                  <ArrowRight className={`w-5 h-5 transition-transform duration-300 ${isRTL ? "rotate-180 group-hover:-translate-x-2" : "group-hover:translate-x-2"}`} />
+                <Button size="lg" className={`h-13 px-8 text-sm tracking-wide group ${isRTL ? "flex-row-reverse" : ""}`}>
+                  Contact Secretariat
+                  <ArrowRight className={`w-4 h-4 transition-transform duration-300 ${isRTL ? "rotate-180 group-hover:-translate-x-1" : "group-hover:translate-x-1"}`} />
                 </Button>
               </Link>
             </div>
